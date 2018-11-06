@@ -1,67 +1,30 @@
 <!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns#" lang="en">
+<html lang="en">
 	<head>
+		<meta charset="utf-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 		<meta name="viewport" content="user-scalable=no">
+
 		<title>Quake 1</title>
-		<meta property="og:title" content="Quake"/>
+
+		<meta property="og:title" content="Quake 1"/>
 		<meta property="og:type" content="game"/>
-		<meta property="og:image" content="http://cdn.akamai.steamstatic.com/steam/apps/2310/header.jpg"/>
+		<meta property="og:image" content="images/header.jpg"/>
 		<meta property="og:description" content="Rage through 32 single player levels
 		and 6 deathmatch levels of sheer terror and fully immersive sound and lighting.
 		Arm yourself against the cannibalistic Ogre, fiendish Vore and indestructible
 		Schambler using lethal nails, fierce Thunderbolts and abominable Rocket and
 		Grenade Launchers."/>
-		<link rel="shortcut icon" href="data:image/gif;base64,
-		R0lGODlhMAAwANUAAHNzAFBQAP//1NySALl6AJZiAHNKAFAyAP+qJf+4SP/Ujv/isf/j1FAZAP/Hsf9z
-		SP+Pa/+rjv+Ojra2tp6enpKSkoaGhnp6em5ubmJiYlZWVkpKSj4+PjIyMiYmJhoaGg4ODgAAAAAAAAAA
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAAMAAwAAAG/8CQcEgsGo/IJJJDZCqfUCOn4iF6Ks6o
-		dkk1XrPbsBCzQW4w4nSmk0Guq+ltuX1sl+PaskZ5P4JAeENlaCEVFhYVYyF9QiAfjxscjx+AcRsdE4tC
-		ZRMdfR8eHh0cGxsZGqUcHaEfYmVsF0IXa5ogHqQbqBoZFxYYuqkelXlmIaOlGckZGIeHGMoZqR3DUKVE
-		1iEHptEHBxwaGAW+Ghzd2xsHrWEboYzfEOkd3eDPGhrdHR8HEOTq64wfSnlooC+XqV/RUKVr4KGUPzkA
-		D3h45AkZuAwFopXKBypdGmxC9E0E1UGeKnuRDpQc6cFjoJASQYEKRbMmq4ktH+IRidNAgf8C4X4C/WkA
-		Z86XMDke8PkgwoIIERxEeFDAQLoP8nTG0cex6tICUyFA8OqTosuXM/UV6NaRgNWJ3damRRpCpD4IVKsS
-		gFr15wN4HbWmsWugaQSxEQQ8RTzVQGC6aQ/8VTAWAgMHlSk/SMcKcsyvYw1o+KnBZ2jOZwO1VBWg9M9n
-		yIIuZVdOsJiWZ54ZEI1RaAbRBxDesx2GawaxZCEcfmAVI4YIFmpX64DEUSht9i6s3WBB7IXdBDAgjInE
-		UwgOEDBQygdiwAACcrtxaIgBfgGxyO9HGyXRg0/3BYACggazbAABARPlc4B7A8i12iMciPfAhBQWOFE5
-		ExlAAIBYgXD/HBnQSTRNAQQggIBbRj1ySwYPzMILARlIQhFOJHK4SlMgUqCSMD9t+J5VKqrYgVXyvDXJ
-		JB6QaOJ7onigHBkQSNDfByQSsKGVVdV25JZbfuXekgT0Z0EEZPTy2YYIfOkelrvtFlMDS7UJHoNWpunW
-		Ixdxh0WGX5roJ4NLNthNXAwWmuYAYDr2AUoaQEABOyDU6CcCCZiYwKWYNribkphWiuikP9piwQW5jAqp
-		hlb6OCmlmQpVAKKYgpqqlQbYcgE/4MwyDaprzppqofb5uGavvroFQgcP+CKeeAeAgKqvQlkVF174MdeN
-		T1VemWqtEV7gbTIYSIKqXmwC4Ca2chK1kmmP79FaVUAu6hLNB8/O+qmdXg16rapr9rjtohfcE8k3Gvin
-		7aw1frrWAQwthWaherXrVgcYkNrQKLsY7C+Wr74HoLRf+SisvT9SHE1DouwypFvZIlwVUxRO+LJPVhJ7
-		ogEUa7DKzhnT/J6/uwVwrauuDrrprODh/MzOnmBQVL01A/rjAQFUbbWXhyKsYVGNXhIEADs=">
-		<style type="text/css">
-			canvas {
-				position: fixed;
-				left: 0;
-				top: 0;
-				display: none;
-			}
 
-			#end1, #end2 {
-				background-color: maroon;
-				white-space: pre;
-			}
-
-			canvas:-moz-full-screen {
-				background-color: #000;
-			}
-
-			canvas:-webkit-full-screen {
-				background-color: #000;
-			}
-
-			canvas:fullscreen {
-				background-color: #000;
-			}
-		</style>
+		<link type="text/css" rel="stylesheet" href="css/main.css" />
 	</head>
 	<body>
 		<div>
 			<span id="progress">Starting Quake...</span>
+
 			<div id="end" style="color: white; font-family: monospace; text-align: center;">
+
 			<span id="end1" style="display: none;">                QUAKE: The Doomed Dimension <span
 					style="color: yellow;">by <span style="background-color: navy;">id</span> Software               <span
 					style="color: gray;">v1.09</span>
@@ -112,7 +75,9 @@
 					All rights reserved. NIN logo is a registered trademark licensed
 						 to Nothing Interactive, Inc. All rights reserved.</span>                  </span>
 			</div>
-			<canvas id="mainwindow"></canvas>
+
+			<canvas id="mainwindow" tabindex="1"></canvas>
+
 			<img id="loading" alt="Loading" style="display: none; position: fixed;">
 		</div>
 
@@ -152,7 +117,6 @@
 		<script type="text/javascript" src="js/Vec.js"></script>
 		<script type="text/javascript" src="js/VID.js"></script>
 		<script type="text/javascript" src="js/W.js"></script>
-		<!--<script type="text/javascript" src="js/Store.js"></script>-->
 
 		<script type="x-shader/x-vertex" id="vshAlias">
 			uniform vec3 uOrigin;
@@ -166,6 +130,7 @@
 			attribute vec2 aTexCoord;
 			varying vec2 vTexCoord;
 			varying float vLightDot;
+
 			void main(void)
 			{
 				vec3 position = uViewAngles * (uAngles * aPosition + uOrigin - uViewOrigin);
@@ -173,8 +138,8 @@
 				vTexCoord = aTexCoord;
 				vLightDot = dot(aNormal, uLightVec);
 			}
-
 		</script>
+
 		<script type="x-shader/x-fragment" id="fshAlias">
 			precision mediump float;
 			uniform float uGamma;
@@ -183,6 +148,7 @@
 			uniform sampler2D tTexture;
 			varying vec2 vTexCoord;
 			varying float vLightDot;
+
 			void main(void)
 			{
 				vec4 texture = texture2D(tTexture, vTexCoord);
@@ -191,8 +157,8 @@
 				gl_FragColor.g = pow(gl_FragColor.g, uGamma);
 				gl_FragColor.b = pow(gl_FragColor.b, uGamma);
 			}
-
 		</script>
+
 		<script type="x-shader/x-vertex" id="vshBrush">
 			uniform vec3 uOrigin;
 			uniform mat3 uAngles;
@@ -204,6 +170,7 @@
 			attribute vec4 aLightStyle;
 			varying vec4 vTexCoord;
 			varying vec4 vLightStyle;
+
 			void main(void)
 			{
 				vec3 position = uViewAngles * (uAngles * aPosition + uOrigin - uViewOrigin);
@@ -211,8 +178,8 @@
 				vTexCoord = aTexCoord;
 				vLightStyle = aLightStyle;
 			}
-
 		</script>
+
 		<script type="x-shader/x-fragment" id="fshBrush">
 			precision mediump float;
 			uniform float uGamma;
@@ -222,6 +189,7 @@
 			uniform sampler2D tLightStyle;
 			varying vec4 vTexCoord;
 			varying vec4 vLightStyle;
+
 			void main(void)
 			{
 				vec4 texture = texture2D(tTexture, vTexCoord.xy);
@@ -236,31 +204,33 @@
 				gl_FragColor.g = pow(gl_FragColor.g, uGamma);
 				gl_FragColor.b = pow(gl_FragColor.b, uGamma);
 			}
-
 		</script>
+
 		<script type="x-shader/x-vertex" id="vshCharacter">
 			uniform vec2 uCharacter;
 			uniform vec2 uDest;
 			uniform mat4 uOrtho;
 			attribute vec2 aPosition;
 			varying vec2 vTexCoord;
+
 			void main(void)
 			{
 				gl_Position = uOrtho * vec4(aPosition * 8.0 + uDest, 0.0, 1.0);
 				vTexCoord = (aPosition + uCharacter) * 0.0625;
 			}
-
 		</script>
+
 		<script type="x-shader/x-fragment" id="fshCharacter">
 			precision mediump float;
 			uniform sampler2D tTexture;
 			varying vec2 vTexCoord;
+
 			void main(void)
 			{
 				gl_FragColor = texture2D(tTexture, vTexCoord);
 			}
-
 		</script>
+
 		<script type="x-shader/x-vertex" id="vshDlight">
 			uniform vec3 uOrigin;
 			uniform vec3 uViewOrigin;
@@ -269,45 +239,49 @@
 			uniform float uRadius;
 			attribute vec3 aPosition;
 			varying float vAlpha;
+
 			void main(void)
 			{
 				vec3 position = aPosition * 0.35 * uRadius + uViewAngles * (uOrigin - uViewOrigin);
 				gl_Position = uPerspective * vec4(position.xz, -position.y, 1.0);
 				vAlpha = aPosition.y * -0.2;
 			}
-
 		</script>
+
 		<script type="x-shader/x-fragment" id="fshDlight">
 			precision mediump float;
 			uniform float uGamma;
 			varying float vAlpha;
+
 			void main(void)
 			{
 				gl_FragColor = vec4(pow(1.0, uGamma), pow(0.5, uGamma), 0.0, vAlpha);
 			}
-
 		</script>
+
 		<script type="x-shader/x-vertex" id="vshFill">
 			uniform mat4 uOrtho;
 			attribute vec2 aPosition;
 			attribute vec4 aColor;
 			varying vec4 vColor;
+
 			void main(void)
 			{
 				gl_Position = uOrtho * vec4(aPosition, 0.0, 1.0);
 				vColor = aColor;
 			}
-
 		</script>
+
 		<script type="x-shader/x-fragment" id="fshFill">
 			precision mediump float;
 			varying vec4 vColor;
+
 			void main(void)
 			{
 				gl_FragColor = vColor;
 			}
-
 		</script>
+
 		<script type="x-shader/x-vertex" id="vshParticle">
 			uniform vec3 uViewOrigin;
 			uniform mat3 uViewAngles;
@@ -319,6 +293,7 @@
 			attribute vec3 aColor;
 			varying vec2 vCoord;
 			varying vec3 vColor;
+
 			void main(void)
 			{
 				vec2 point = aCoord * aScale;
@@ -327,13 +302,14 @@
 				vCoord = aCoord;
 				vColor = aColor;
 			}
-
 		</script>
+
 		<script type="x-shader/x-fragment" id="fshParticle">
 			precision mediump float;
 			uniform float uGamma;
 			varying vec2 vCoord;
 			varying vec3 vColor;
+
 			void main(void)
 			{
 				gl_FragColor = vec4(vColor, 1.0 - smoothstep(0.75, 1.0, length(vCoord)));
@@ -341,42 +317,45 @@
 				gl_FragColor.g = pow(gl_FragColor.g, uGamma);
 				gl_FragColor.b = pow(gl_FragColor.b, uGamma);
 			}
-
 		</script>
+
 		<script type="x-shader/x-vertex" id="vshPic">
 			uniform mat4 uOrtho;
 			attribute vec2 aPosition;
 			attribute vec2 aTexCoord;
 			varying vec2 vTexCoord;
+
 			void main(void)
 			{
 				gl_Position = uOrtho * vec4(aPosition, 0.0, 1.0);
 				vTexCoord = aTexCoord;
 			}
-
 		</script>
+
 		<script type="x-shader/x-fragment" id="fshPic">
 			precision mediump float;
 			uniform sampler2D tTexture;
 			varying vec2 vTexCoord;
+
 			void main(void)
 			{
 				gl_FragColor = texture2D(tTexture, vTexCoord);
 			}
-
 		</script>
+
 		<script type="x-shader/x-vertex" id="vshPicTranslate">
 			uniform mat4 uOrtho;
 			attribute vec2 aPosition;
 			attribute vec2 aTexCoord;
 			varying vec2 vTexCoord;
+
 			void main(void)
 			{
 				gl_Position = uOrtho * vec4(aPosition, 0.0, 1.0);
 				vTexCoord = aTexCoord;
 			}
-
 		</script>
+
 		<script type="x-shader/x-fragment" id="fshPicTranslate">
 			precision mediump float;
 			uniform vec3 uTop;
@@ -384,14 +363,15 @@
 			uniform sampler2D tTexture;
 			uniform sampler2D tTrans;
 			varying vec2 vTexCoord;
+
 			void main(void)
 			{
 				vec4 texture = texture2D(tTexture, vTexCoord);
 				vec4 trans = texture2D(tTrans, vTexCoord);
 				gl_FragColor = vec4(mix(mix(texture.rgb, uTop * trans.x, trans.y), uBottom * trans.z, trans.w), texture.a);
 			}
-
 		</script>
+
 		<script type="x-shader/x-vertex" id="vshPlayer">
 			uniform vec3 uOrigin;
 			uniform mat3 uAngles;
@@ -404,6 +384,7 @@
 			attribute vec2 aTexCoord;
 			varying vec2 vTexCoord;
 			varying float vLightDot;
+
 			void main(void)
 			{
 				vec3 position = uViewAngles * (uAngles * aPosition + uOrigin - uViewOrigin);
@@ -411,8 +392,8 @@
 				vTexCoord = aTexCoord;
 				vLightDot = dot(aNormal, uLightVec);
 			}
-
 		</script>
+
 		<script type="x-shader/x-fragment" id="fshPlayer">
 			precision mediump float;
 			uniform float uGamma;
@@ -424,6 +405,7 @@
 			uniform sampler2D tPlayer;
 			varying vec2 vTexCoord;
 			varying float vLightDot;
+
 			void main(void)
 			{
 				vec4 texture = texture2D(tTexture, vTexCoord);
@@ -435,22 +417,23 @@
 				gl_FragColor.g = pow(gl_FragColor.g, uGamma);
 				gl_FragColor.b = pow(gl_FragColor.b, uGamma);
 			}
-
 		</script>
+
 		<script type="x-shader/x-vertex" id="vshSky">
 			uniform mat3 uViewAngles;
 			uniform mat4 uPerspective;
 			uniform vec3 uScale;
 			attribute vec3 aPosition;
 			varying vec2 vTexCoord;
+
 			void main(void)
 			{
 				vec3 position = uViewAngles * (aPosition * uScale * 18918.0);
 				gl_Position = uPerspective * vec4(position.xz, -position.y, 1.0);
 				vTexCoord = aPosition.xy * uScale.xy * 1.5;
 			}
-
 		</script>
+
 		<script type="x-shader/x-fragment" id="fshSky">
 			precision mediump float;
 			uniform float uGamma;
@@ -458,6 +441,7 @@
 			uniform sampler2D tSolid;
 			uniform sampler2D tAlpha;
 			varying vec2 vTexCoord;
+
 			void main(void)
 			{
 				vec4 alpha = texture2D(tAlpha, vTexCoord + uTime.x);
@@ -466,8 +450,8 @@
 				gl_FragColor.g = pow(gl_FragColor.g, uGamma);
 				gl_FragColor.b = pow(gl_FragColor.b, uGamma);
 			}
-
 		</script>
+
 		<script type="x-shader/x-vertex" id="vshSkyChain">
 			uniform vec3 uViewOrigin;
 			uniform mat3 uViewAngles;
@@ -478,15 +462,15 @@
 				vec3 position = uViewAngles * (aPosition - uViewOrigin);
 				gl_Position = uPerspective * vec4(position.xz, -position.y, 1.0);
 			}
-
 		</script>
+
 		<script type="x-shader/x-fragment" id="fshSkyChain">
 			precision mediump float;
 			void main(void)
 			{
 			}
-
 		</script>
+
 		<script type="x-shader/x-vertex" id="vshSprite">
 			uniform vec4 uRect;
 			uniform vec3 uViewOrigin;
@@ -495,19 +479,21 @@
 			attribute vec3 aPosition;
 			attribute vec2 aTexCoord;
 			varying vec2 vTexCoord;
+
 			void main(void)
 			{
 				vec3 position = uViewAngles * (aPosition - uViewOrigin);
 				gl_Position = uPerspective * vec4(position.xz, -position.y, 1.0);
 				vTexCoord = aTexCoord;
 			}
-
 		</script>
+
 		<script type="x-shader/x-fragment" id="fshSprite">
 			precision mediump float;
 			uniform float uGamma;
 			uniform sampler2D tTexture;
 			varying vec2 vTexCoord;
+
 			void main(void)
 			{
 				gl_FragColor = texture2D(tTexture, vTexCoord);
@@ -515,8 +501,8 @@
 				gl_FragColor.g = pow(gl_FragColor.g, uGamma);
 				gl_FragColor.b = pow(gl_FragColor.b, uGamma);
 			}
-
 		</script>
+
 		<script type="x-shader/x-vertex" id="vshTurbulent">
 			uniform vec3 uOrigin;
 			uniform mat3 uAngles;
@@ -526,20 +512,22 @@
 			attribute vec3 aPosition;
 			attribute vec2 aTexCoord;
 			varying vec2 vTexCoord;
+
 			void main(void)
 			{
 				vec3 position = uViewAngles * (uAngles * aPosition + uOrigin - uViewOrigin);
 				gl_Position = uPerspective * vec4(position.xz, -position.y, 1.0);
 				vTexCoord = aTexCoord;
 			}
-
 		</script>
+
 		<script type="x-shader/x-fragment" id="fshTurbulent">
 			precision mediump float;
 			uniform float uGamma;
 			uniform float uTime;
 			uniform sampler2D tTexture;
 			varying vec2 vTexCoord;
+
 			void main(void)
 			{
 				gl_FragColor = vec4(texture2D(tTexture, vTexCoord + vec2(sin(vTexCoord.t * 3.141593 + uTime), sin(vTexCoord.s * 3.141593 + uTime)) * 0.125).rgb, 1.0);
@@ -547,30 +535,31 @@
 				gl_FragColor.g = pow(gl_FragColor.g, uGamma);
 				gl_FragColor.b = pow(gl_FragColor.b, uGamma);
 			}
-
 		</script>
+
 		<script type="x-shader/x-vertex" id="vshWarp">
 			uniform mat4 uOrtho;
 			attribute vec2 aPosition;
 			attribute vec2 aTexCoord;
 			varying vec2 vTexCoord;
+
 			void main(void)
 			{
 				gl_Position = uOrtho * vec4(aPosition, 0.0, 1.0);
 				vTexCoord = aTexCoord;
 			}
-
 		</script>
+
 		<script type="x-shader/x-fragment" id="fshWarp">
 			precision mediump float;
 			uniform float uTime;
 			uniform sampler2D tTexture;
 			varying vec2 vTexCoord;
+
 			void main(void)
 			{
 				gl_FragColor = texture2D(tTexture, vTexCoord + vec2(sin(vTexCoord.t * 15.70796 + uTime) * 0.003125, sin(vTexCoord.s * 9.817477 + uTime) * 0.005));
 			}
-
 		</script>
 	</body>
 </html>

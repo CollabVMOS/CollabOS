@@ -1,0 +1,23 @@
+canvas {
+	position: fixed;
+	left: 0;
+	top: 0;
+	display: none;
+}
+
+#end1, #end2 {
+	background-color: maroon;
+	white-space: pre;
+}
+
+canvas:-moz-full-screen {
+	background-color: #000;
+}
+
+canvas:-webkit-full-screen {
+	background-color: #000;
+}
+
+canvas:fullscreen {
+	background-color: #000;
+}

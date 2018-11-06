@@ -6,13 +6,22 @@ COM.standard_quake = true;
 
 COM.DefaultExtension = function(path, extension) {
 	var i, src;
+
 	for (i = path.length - 1; i >= 0; --i) {
+
 		src = path.charCodeAt(i);
-		if (src === 47)
+
+		// forward slash
+		if (src === 47) {
 			break;
-		if (src === 46)
+		}
+
+		// dot
+		if (src === 46) {
 			return path;
+		}
 	}
+
 	return path + extension;
 };
 
@@ -223,7 +232,7 @@ COM.LoadFile = function(filename) {
 		netpath = search.filename + '/' + filename;
 		data = localStorage.getItem('Quake.' + netpath);
 
-		if (data != null) {
+		if (data !== null) {
 			Sys.Print('FindFile: ' + netpath + '\n');
 			Draw.EndDisc();
 
@@ -252,9 +261,9 @@ COM.LoadFile = function(filename) {
 				if ((xhr.status >= 200) && (xhr.status <= 299) && (xhr.responseText.length === file.filelen)) {
 					Sys.Print('PackFile: ' + search.filename + '/pak' + j + '.zip : ' + filename + '\n');
 					Draw.EndDisc();
+
 					return Q.strmem(xhr.responseText);
 				}
-
 				break;
 			}
 		}

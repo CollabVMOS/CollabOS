@@ -5,36 +5,29 @@ IN.mouse_y = 0.0;
 IN.old_mouse_x = 0.0;
 IN.old_mouse_y = 0.0;
 
-IN.StartupMouse = function()
-{
+IN.StartupMouse = function() {
 	IN.m_filter = Cvar.RegisterVariable('m_filter', '1');
 	if (COM.CheckParm('-nomouse') != null)
 		return;
-	if (VID.mainwindow.requestPointerLock != null)
-	{
+	if (VID.mainwindow.requestPointerLock != null) {
 		IN.movementX = 'movementX';
 		IN.movementY = 'movementY';
 		IN.pointerLockElement = 'pointerLockElement';
 		IN.requestPointerLock = 'requestPointerLock';
 		IN.pointerlockchange = 'onpointerlockchange';
-	}
-	else if (VID.mainwindow.webkitRequestPointerLock != null)
-	{
+	} else if (VID.mainwindow.webkitRequestPointerLock != null) {
 		IN.movementX = 'webkitMovementX';
 		IN.movementY = 'webkitMovementY';
 		IN.pointerLockElement = 'webkitPointerLockElement';
 		IN.requestPointerLock = 'webkitRequestPointerLock';
 		IN.pointerlockchange = 'onwebkitpointerlockchange';
-	}
-	else if (VID.mainwindow.mozRequestPointerLock != null)
-	{
+	} else if (VID.mainwindow.mozRequestPointerLock != null) {
 		IN.movementX = 'mozMovementX';
 		IN.movementY = 'mozMovementY';
 		IN.pointerLockElement = 'mozPointerLockElement';
 		IN.requestPointerLock = 'mozRequestPointerLock';
 		IN.pointerlockchange = 'onmozpointerlockchange';
-	}
-	else
+	} else
 		return;
 	VID.mainwindow.onclick = IN.onclick;
 	document.onmousemove = IN.onmousemove;
@@ -42,34 +35,27 @@ IN.StartupMouse = function()
 	IN.mouse_avail = true;
 };
 
-IN.Init = function()
-{
+IN.Init = function() {
 	IN.StartupMouse();
 };
 
-IN.Shutdown = function()
-{
-	if (IN.mouse_avail === true)
-	{
+IN.Shutdown = function() {
+	if (IN.mouse_avail === true) {
 		VID.mainwindow.onclick = null;
 		document.onmousemove = null;
 		document[IN.pointerlockchange] = null;
 	}
 };
 
-IN.MouseMove = function()
-{
+IN.MouseMove = function() {
 	if (IN.mouse_avail !== true)
 		return;
 
 	var mouse_x, mouse_y;
-	if (IN.m_filter.value !== 0)
-	{
+	if (IN.m_filter.value !== 0) {
 		mouse_x = (IN.mouse_x + IN.old_mouse_x) * 0.5;
 		mouse_y = (IN.mouse_y + IN.old_mouse_y) * 0.5;
-	}
-	else
-	{
+	} else {
 		mouse_x = IN.mouse_x;
 		mouse_y = IN.mouse_y;
 	}
@@ -90,16 +76,13 @@ IN.MouseMove = function()
 	if (mlook !== 0)
 		V.StopPitchDrift();
 
-	if ((mlook !== 0) && (strafe === 0))
-	{
+	if ((mlook !== 0) && (strafe === 0)) {
 		angles[0] += CL.m_pitch.value * mouse_y;
 		if (angles[0] > 80.0)
 			angles[0] = 80.0;
 		else if (angles[0] < -70.0)
 			angles[0] = -70.0;
-	}
-	else
-	{
+	} else {
 		if ((strafe !== 0) && (Host.noclip_anglehack === true))
 			CL.state.cmd.upmove -= CL.m_forward.value * mouse_y;
 		else
@@ -109,13 +92,11 @@ IN.MouseMove = function()
 	IN.mouse_x = IN.mouse_y = 0;
 };
 
-IN.Move = function()
-{
+IN.Move = function() {
 	IN.MouseMove();
 };
 
-IN.onclick = function()
-{
+IN.onclick = function() {
 	VID.mainwindow.focus();
 
 	if (document[IN.pointerLockElement] !== this)
@@ -139,16 +120,14 @@ IN.onclick = function()
 	}
 };
 
-IN.onmousemove = function(e)
-{
+IN.onmousemove = function(e) {
 	if (document[IN.pointerLockElement] !== VID.mainwindow)
 		return;
 	IN.mouse_x += e[IN.movementX];
 	IN.mouse_y += e[IN.movementY];
 };
 
-IN.onpointerlockchange = function()
-{
+IN.onpointerlockchange = function() {
 	if (document[IN.pointerLockElement] === VID.mainwindow)
 		return;
 	// Key.Event(Key.k.escape, true);

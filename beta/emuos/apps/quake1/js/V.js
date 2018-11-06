@@ -2,8 +2,7 @@ V = {};
 
 V.dmg_time = 0.0;
 
-V.CalcRoll = function(angles, velocity)
-{
+V.CalcRoll = function(angles, velocity) {
 	var right = [];
 	Vec.AngleVectors(angles, null, right);
 	var side = velocity[0] * right[0] + velocity[1] * right[1] + velocity[2] * right[2];
@@ -14,8 +13,7 @@ V.CalcRoll = function(angles, velocity)
 	return V.rollangle.value * sign;
 };
 
-V.CalcBob = function()
-{
+V.CalcBob = function() {
 	if ((V.bobcycle.value <= 0.0)
 		|| (V.bobcycle.value >= 1.0)
 		|| (V.bobup.value <= 0.0)
@@ -37,36 +35,30 @@ V.CalcBob = function()
 	return bob;
 };
 
-V.StartPitchDrift = function()
-{
+V.StartPitchDrift = function() {
 	if (CL.state.laststop === CL.state.time)
 		return;
-	if ((CL.state.nodrift === true) || (CL.state.pitchvel === 0.0))
-	{
+	if ((CL.state.nodrift === true) || (CL.state.pitchvel === 0.0)) {
 		CL.state.pitchvel = V.centerspeed.value;
 		CL.state.nodrift = false;
 		CL.state.driftmove = 0.0;
 	}
 };
 
-V.StopPitchDrift = function()
-{
+V.StopPitchDrift = function() {
 	CL.state.laststop = CL.state.time;
 	CL.state.nodrift = true;
 	CL.state.pitchvel = 0.0;
 };
 
-V.DriftPitch = function()
-{
-	if ((Host.noclip_anglehack === true) || (CL.state.onground !== true) || (CL.cls.demoplayback === true))
-	{
+V.DriftPitch = function() {
+	if ((Host.noclip_anglehack === true) || (CL.state.onground !== true) || (CL.cls.demoplayback === true)) {
 		CL.state.driftmove = 0.0;
 		CL.state.pitchvel = 0.0;
 		return;
 	}
 
-	if (CL.state.nodrift === true)
-	{
+	if (CL.state.nodrift === true) {
 		if (Math.abs(CL.state.cmd.forwardmove) < CL.forwardspeed.value)
 			CL.state.driftmove = 0.0;
 		else
@@ -77,8 +69,7 @@ V.DriftPitch = function()
 	}
 
 	var delta = CL.state.idealpitch - CL.state.viewangles[0];
-	if (delta === 0.0)
-	{
+	if (delta === 0.0) {
 		CL.state.pitchvel = 0.0;
 		return;
 	}
@@ -86,19 +77,14 @@ V.DriftPitch = function()
 	var move = Host.frametime * CL.state.pitchvel;
 	CL.state.pitchvel += Host.frametime * V.centerspeed.value;
 
-	if (delta > 0)
-	{
-		if (move > delta)
-		{
+	if (delta > 0) {
+		if (move > delta) {
 			CL.state.pitchvel = 0.0;
 			move = delta;
 		}
 		CL.state.viewangles[0] += move;
-	}
-	else if (delta < 0)
-	{
-		if (move > -delta)
-		{
+	} else if (delta < 0) {
+		if (move > -delta) {
 			CL.state.pitchvel = 0.0;
 			move = -delta;
 		}
@@ -113,8 +99,7 @@ V.cshift_lava = [255.0, 80.0, 0.0, 150.0];
 
 V.blend = [0.0, 0.0, 0.0, 0.0];
 
-V.ParseDamage = function()
-{
+V.ParseDamage = function() {
 	var armor = MSG.ReadByte();
 	var blood = MSG.ReadByte();
 	var ent = CL.entities[CL.state.viewentity];
@@ -132,18 +117,13 @@ V.ParseDamage = function()
 	else if (cshift[3] > 150.0)
 		cshift[3] = 150.0;
 
-	if (armor > blood)
-	{
+	if (armor > blood) {
 		cshift[0] = 200.0;
 		cshift[1] = cshift[2] = 100.0;
-	}
-	else if (armor !== 0)
-	{
+	} else if (armor !== 0) {
 		cshift[0] = 220.0;
 		cshift[1] = cshift[2] = 50.0;
-	}
-	else
-	{
+	} else {
 		cshift[0] = 255.0;
 		cshift[1] = cshift[2] = 0.0;
 	}
@@ -155,8 +135,7 @@ V.ParseDamage = function()
 	V.dmg_time = V.kicktime.value;
 };
 
-V.cshift_f = function()
-{
+V.cshift_f = function() {
 	var cshift = V.cshift_empty;
 	cshift[0] = Q.atoi(Cmd.argv[1]);
 	cshift[1] = Q.atoi(Cmd.argv[2]);
@@ -164,8 +143,7 @@ V.cshift_f = function()
 	cshift[3] = Q.atoi(Cmd.argv[4]);
 };
 
-V.BonusFlash_f = function()
-{
+V.BonusFlash_f = function() {
 	var cshift = CL.state.cshifts[CL.cshift.bonus];
 	cshift[0] = 215.0;
 	cshift[1] = 186.0;
@@ -173,56 +151,45 @@ V.BonusFlash_f = function()
 	cshift[3] = 50.0;
 };
 
-V.SetContentsColor = function(contents)
-{
-	switch (contents)
-	{
-	case Mod.contents.empty:
-	case Mod.contents.solid:
-		CL.state.cshifts[CL.cshift.contents] = V.cshift_empty;
-		return;
-	case Mod.contents.lava:
-		CL.state.cshifts[CL.cshift.contents] = V.cshift_lava;
-		return;
-	case Mod.contents.slime:
-		CL.state.cshifts[CL.cshift.contents] = V.cshift_slime;
-		return;
+V.SetContentsColor = function(contents) {
+	switch (contents) {
+		case Mod.contents.empty:
+		case Mod.contents.solid:
+			CL.state.cshifts[CL.cshift.contents] = V.cshift_empty;
+			return;
+		case Mod.contents.lava:
+			CL.state.cshifts[CL.cshift.contents] = V.cshift_lava;
+			return;
+		case Mod.contents.slime:
+			CL.state.cshifts[CL.cshift.contents] = V.cshift_slime;
+			return;
 	}
 	CL.state.cshifts[CL.cshift.contents] = V.cshift_water;
 };
 
-V.CalcBlend = function()
-{
+V.CalcBlend = function() {
 	var cshift = CL.state.cshifts[CL.cshift.powerup];
-	if ((CL.state.items & Def.it.quad) !== 0)
-	{
+	if ((CL.state.items & Def.it.quad) !== 0) {
 		cshift[0] = 0.0;
 		cshift[1] = 0.0;
 		cshift[2] = 255.0;
 		cshift[3] = 30.0;
-	}
-	else if ((CL.state.items & Def.it.suit) !== 0)
-	{
+	} else if ((CL.state.items & Def.it.suit) !== 0) {
 		cshift[0] = 0.0;
 		cshift[1] = 255.0;
 		cshift[2] = 0.0;
 		cshift[3] = 20.0;
-	}
-	else if ((CL.state.items & Def.it.invisibility) !== 0)
-	{
+	} else if ((CL.state.items & Def.it.invisibility) !== 0) {
 		cshift[0] = 100.0;
 		cshift[1] = 100.0;
 		cshift[2] = 100.0;
 		cshift[3] = 100.0;
-	}
-	else if ((CL.state.items & Def.it.invulnerability) !== 0)
-	{
+	} else if ((CL.state.items & Def.it.invulnerability) !== 0) {
 		cshift[0] = 255.0;
 		cshift[1] = 255.0;
 		cshift[2] = 0.0;
 		cshift[3] = 30.0;
-	}
-	else
+	} else
 		cshift[3] = 0.0;
 
 	CL.state.cshifts[CL.cshift.damage][3] -= Host.frametime * 150.0;
@@ -232,15 +199,13 @@ V.CalcBlend = function()
 	if (CL.state.cshifts[CL.cshift.bonus][3] < 0.0)
 		CL.state.cshifts[CL.cshift.bonus][3] = 0.0;
 
-	if (V.cshiftpercent.value === 0)
-	{
+	if (V.cshiftpercent.value === 0) {
 		V.blend[0] = V.blend[1] = V.blend[2] = V.blend[3] = 0.0;
 		return;
 	}
 
 	var r = 0.0, g = 0.0, b = 0.0, a = 0.0, a2, i, cshift;
-	for (i = 0; i <= 3; ++i)
-	{
+	for (i = 0; i <= 3; ++i) {
 		cshift = CL.state.cshifts[i];
 		a2 = cshift[3] * V.cshiftpercent.value / 25500.0;
 		if (a2 === 0.0)
@@ -265,8 +230,7 @@ V.CalcBlend = function()
 		V.blend[3] = 0.0;
 };
 
-V.CalcIntermissionRefdef = function()
-{
+V.CalcIntermissionRefdef = function() {
 	var ent = CL.entities[CL.state.viewentity];
 	R.refdef.vieworg[0] = ent.origin[0];
 	R.refdef.vieworg[1] = ent.origin[1];
@@ -278,8 +242,7 @@ V.CalcIntermissionRefdef = function()
 };
 
 V.oldz = 0.0;
-V.CalcRefdef = function()
-{
+V.CalcRefdef = function() {
 	V.DriftPitch();
 
 	var ent = CL.entities[CL.state.viewentity];
@@ -295,10 +258,8 @@ V.CalcRefdef = function()
 	R.refdef.viewangles[1] = CL.state.viewangles[1];
 	R.refdef.viewangles[2] = CL.state.viewangles[2] + V.CalcRoll(CL.entities[CL.state.viewentity].angles, CL.state.velocity);
 
-	if (V.dmg_time > 0.0)
-	{
-		if (V.kicktime.value !== 0.0)
-		{
+	if (V.dmg_time > 0.0) {
+		if (V.kicktime.value !== 0.0) {
 			R.refdef.viewangles[2] += (V.dmg_time / V.kicktime.value) * V.dmg_roll;
 			R.refdef.viewangles[0] -= (V.dmg_time / V.kicktime.value) * V.dmg_pitch;
 		}
@@ -340,17 +301,16 @@ V.CalcRefdef = function()
 	view.origin[0] = ent.origin[0] + forward[0] * bob * 0.4;
 	view.origin[1] = ent.origin[1] + forward[1] * bob * 0.4;
 	view.origin[2] = ent.origin[2] + CL.state.viewheight + forward[2] * bob * 0.4 + bob;
-	switch (SCR.viewsize.value)
-	{
-	case 110:
-	case 90:
-		view.origin[2] += 1.0;
-		break;
-	case 100:
-		view.origin[2] += 2.0;
-		break;
-	case 80:
-		view.origin[2] += 0.5;
+	switch (SCR.viewsize.value) {
+		case 110:
+		case 90:
+			view.origin[2] += 1.0;
+			break;
+		case 100:
+			view.origin[2] += 2.0;
+			break;
+		case 80:
+			view.origin[2] += 0.5;
 	}
 	view.model = CL.state.model_precache[CL.state.stats[Def.stat.weapon]];
 	view.frame = CL.state.stats[Def.stat.weaponframe];
@@ -359,8 +319,7 @@ V.CalcRefdef = function()
 	R.refdef.viewangles[1] += CL.state.punchangle[1];
 	R.refdef.viewangles[2] += CL.state.punchangle[2];
 
-	if ((CL.state.onground === true) && ((ent.origin[2] - V.oldz) > 0.0))
-	{
+	if ((CL.state.onground === true) && ((ent.origin[2] - V.oldz) > 0.0)) {
 		var steptime = CL.state.time - CL.state.oldtime;
 		if (steptime < 0.0)
 			steptime = 0.0;
@@ -371,19 +330,16 @@ V.CalcRefdef = function()
 			V.oldz = ent.origin[2] - 12.0;
 		R.refdef.vieworg[2] += V.oldz - ent.origin[2];
 		view.origin[2] += V.oldz - ent.origin[2];
-	}
-	else
+	} else
 		V.oldz = ent.origin[2];
 	if (Chase.active.value !== 0)
 		Chase.Update();
 };
 
-V.RenderView = function()
-{
+V.RenderView = function() {
 	if (Con.forcedup === true)
 		return;
-	if (CL.state.maxclients >= 2)
-	{
+	if (CL.state.maxclients >= 2) {
 		Cvar.Set('scr_ofsx', '0');
 		Cvar.Set('scr_ofsy', '0');
 		Cvar.Set('scr_ofsz', '0');
@@ -396,8 +352,7 @@ V.RenderView = function()
 	R.RenderView();
 };
 
-V.Init = function()
-{
+V.Init = function() {
 	Cmd.AddCommand('v_cshift', V.cshift_f);
 	Cmd.AddCommand('bf', V.BonusFlash_f);
 	Cmd.AddCommand('centerview', V.StartPitchDrift);

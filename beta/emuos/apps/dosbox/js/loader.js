@@ -1195,15 +1195,13 @@ var Module = null;
 		// we don't listen for them then the browser won't tell us about
 		// them.
 		// TODO: add hooks so that some kind of UI can be displayed.
-		window.addEventListener("gamepadconnected",
-			function(e) {
+		window.addEventListener("gamepadconnected", function(e) {
 				console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
 					e.gamepad.index, e.gamepad.id,
 					e.gamepad.buttons.length, e.gamepad.axes.length);
 			});
 
-		window.addEventListener("gamepaddisconnected",
-			function(e) {
+		window.addEventListener("gamepaddisconnected", 	function(e) {
 				console.log("Gamepad disconnected from index %d: %s",
 					e.gamepad.index, e.gamepad.id);
 			});
@@ -1280,13 +1278,17 @@ var Module = null;
 
 		// noinspection UnnecessaryLocalVariableJS
 		var start = function(options) {
+
 			if (has_started)
 				return false;
+
 			has_started = true;
+
 			var defaultOptions = {
 				waitAfterDownloading: false,
 				hasCustomCSS: false
 			};
+
 			if (typeof options !== 'object') {
 				options = defaultOptions;
 			} else {
@@ -1304,6 +1306,7 @@ var Module = null;
 			} else {
 				loading = Promise.resolve(loadFiles);
 			}
+
 			// noinspection JSUnusedLocalSymbols
 			loading.then(function(_game_data) {
 				return new Promise(function(resolve, reject) {
@@ -1317,28 +1320,26 @@ var Module = null;
 						var AsyncMirrorFS = BrowserFS.FileSystem.AsyncMirror,
 							IndexedDB = BrowserFS.FileSystem.IndexedDB;
 						// noinspection JSUndeclaredVariable,JSUnusedLocalSymbols
-						deltaFS = new AsyncMirrorFS(inMemoryFS,
-							new IndexedDB(function(e, fs) {
+						deltaFS = new AsyncMirrorFS(inMemoryFS, new IndexedDB(function(e, fs) {
+							if (e) {
+								// we probably weren't given access;
+								// private window for example.
+								// don't fail completely, just don't
+								// use indexeddb
+								// noinspection JSUndeclaredVariable
+								deltaFS = inMemoryFS;
+								finish();
+							} else {
+								// Initialize deltaFS by copying files from async storage to sync storage.
+								deltaFS.initialize(function(e) {
 									if (e) {
-										// we probably weren't given access;
-										// private window for example.
-										// don't fail completely, just don't
-										// use indexeddb
-										// noinspection JSUndeclaredVariable
-										deltaFS = inMemoryFS;
-										finish();
+										reject(e);
 									} else {
-										// Initialize deltaFS by copying files from async storage to sync storage.
-										deltaFS.initialize(function(e) {
-											if (e) {
-												reject(e);
-											} else {
-												finish();
-											}
-										});
+										finish();
 									}
-								},
-								"fileSystemKey" in _game_data ? _game_data.fileSystemKey : "emupedia"));
+								});
+							}
+						}, "fileSystemKey" in _game_data ? _game_data.fileSystemKey : "emupedia"));
 					} else {
 						finish();
 					}
@@ -1394,17 +1395,16 @@ var Module = null;
 									};
 								}
 
-								var promises = game_data.files
-									.map(function(f) {
-										if (f && f.file) {
-											if (f.drive) {
-												return fetch(f.file).then(mountat(f.drive));
-											} else if (f.mountpoint) {
-												return fetch(f.file).then(saveat(f.mountpoint));
-											}
+								var promises = game_data.files.map(function(f) {
+									if (f && f.file) {
+										if (f.drive) {
+											return fetch(f.file).then(mountat(f.drive));
+										} else if (f.mountpoint) {
+											return fetch(f.file).then(saveat(f.mountpoint));
 										}
-										return null;
-									});
+									}
+									return null;
+								});
 								// this is kinda wrong; it really only applies when we're loading something created by Emscripten
 								if ('emulatorWASM' in game_data && game_data.emulatorWASM && 'WebAssembly' in window) {
 									promises.push(fetch({
@@ -1419,7 +1419,8 @@ var Module = null;
 						});
 					}
 				});
-			}).then(function(game_files) {
+			})
+				.then(function(game_files) {
 						if (!game_data || splash.failed_loading) {
 							return null;
 						}
@@ -1436,8 +1437,7 @@ var Module = null;
 							});
 						}
 						return Promise.resolve();
-					},
-					function() {
+					}, function() {
 						if (splash.failed_loading) {
 							return;
 						}
@@ -1490,8 +1490,7 @@ var Module = null;
 							splash.setTitle("Non-system disk or disk error");
 						}
 						return null;
-					},
-					function() {
+					}, function() {
 						if (!game_data || splash.failed_loading) {
 							return null;
 						}
@@ -1562,13 +1561,16 @@ var Module = null;
 			var row = addRow(splash.table);
 			var titleCell = row[0], statusCell = row[1];
 			titleCell.textContent = title;
+
 			return new Promise(function(resolve, reject) {
 				var xhr = new XMLHttpRequest();
 				xhr.open('GET', url, true);
 				xhr.responseType = rt || 'arraybuffer';
+
 				xhr.onprogress = function(e) {
 					titleCell.innerHTML = title + " <span style=\"font-size: smaller\">" + formatSize(e) + "</span>";
 				};
+
 				xhr.onload = function() {
 					if (xhr.status === 200) {
 						success();
@@ -1581,6 +1583,7 @@ var Module = null;
 						reject();
 					}
 				};
+
 				xhr.onerror = function() {
 					if (optional) {
 						success();
@@ -1595,6 +1598,7 @@ var Module = null;
 					statusCell.textContent = "✔";
 					titleCell.parentNode.classList.add('emularity-download-success');
 					titleCell.textContent = title;
+
 					if (needsCSS) {
 						titleCell.style.fontWeight = 'bold';
 						titleCell.parentNode.style.backgroundColor = splash.getColor('foreground');
@@ -1606,6 +1610,7 @@ var Module = null;
 					statusCell.textContent = "✘";
 					titleCell.parentNode.classList.add('emularity-download-failure');
 					titleCell.textContent = title;
+
 					if (needsCSS) {
 						titleCell.style.fontWeight = 'bold';
 						titleCell.parentNode.style.backgroundColor = splash.getColor('failure');

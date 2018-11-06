@@ -4,14 +4,11 @@ GL.textures = [];
 GL.currenttextures = [];
 GL.programs = [];
 
-GL.Bind = function(target, texnum, flushStream)
-{
-	if (GL.currenttextures[target] !== texnum)
-	{
+GL.Bind = function(target, texnum, flushStream) {
+	if (GL.currenttextures[target] !== texnum) {
 		if (flushStream === true)
 			GL.StreamFlush();
-		if (GL.activetexture !== target)
-		{
+		if (GL.activetexture !== target) {
 			GL.activetexture = target;
 			gl.activeTexture(gl.TEXTURE0 + target);
 		}
@@ -20,15 +17,11 @@ GL.Bind = function(target, texnum, flushStream)
 	}
 };
 
-GL.TextureMode_f = function()
-{
+GL.TextureMode_f = function() {
 	var i;
-	if (Cmd.argv.length <= 1)
-	{
-		for (i = 0; i < GL.modes.length; ++i)
-		{
-			if (GL.filter_min === GL.modes[i][1])
-			{
+	if (Cmd.argv.length <= 1) {
+		for (i = 0; i < GL.modes.length; ++i) {
+			if (GL.filter_min === GL.modes[i][1]) {
 				Con.Print(GL.modes[i][0] + '\n');
 				return;
 			}
@@ -37,20 +30,17 @@ GL.TextureMode_f = function()
 		return;
 	}
 	var name = Cmd.argv[1].toUpperCase();
-	for (i = 0; i < GL.modes.length; ++i)
-	{
+	for (i = 0; i < GL.modes.length; ++i) {
 		if (GL.modes[i][0] === name)
 			break;
 	}
-	if (i === GL.modes.length)
-	{
+	if (i === GL.modes.length) {
 		Con.Print('bad filter name\n');
 		return;
 	}
 	GL.filter_min = GL.modes[i][1];
 	GL.filter_max = GL.modes[i][2];
-	for (i = 0; i < GL.textures.length; ++i)
-	{
+	for (i = 0; i < GL.textures.length; ++i) {
 		GL.Bind(0, GL.textures[i].texnum);
 		gl.texParameterf(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, GL.filter_min);
 		gl.texParameterf(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, GL.filter_max);
@@ -64,13 +54,11 @@ GL.ortho = [
 	-1.0, 1.0, 0.0, 1.0
 ];
 
-GL.Set2D = function()
-{
+GL.Set2D = function() {
 	gl.viewport(0, 0, (VID.width * SCR.devicePixelRatio) >> 0, (VID.height * SCR.devicePixelRatio) >> 0);
 	GL.UnbindProgram();
 	var i, program;
-	for (i = 0; i < GL.programs.length; ++i)
-	{
+	for (i = 0; i < GL.programs.length; ++i) {
 		program = GL.programs[i];
 		// noinspection JSUnresolvedVariable
 		if (program.uOrtho == null)
@@ -83,15 +71,13 @@ GL.Set2D = function()
 	gl.enable(gl.BLEND);
 };
 
-GL.ResampleTexture = function(data, inwidth, inheight, outwidth, outheight)
-{
+GL.ResampleTexture = function(data, inwidth, inheight, outwidth, outheight) {
 	var outdata = new ArrayBuffer(outwidth * outheight);
 	var out = new Uint8Array(outdata);
 	var xstep = inwidth / outwidth, ystep = inheight / outheight;
 	var src, dest = 0;
 	var i, j;
-	for (i = 0; i < outheight; ++i)
-	{
+	for (i = 0; i < outheight; ++i) {
 		src = Math.floor(i * ystep) * inwidth;
 		for (j = 0; j < outwidth; ++j)
 			out[dest + j] = data[src + Math.floor(j * xstep)];
@@ -100,11 +86,9 @@ GL.ResampleTexture = function(data, inwidth, inheight, outwidth, outheight)
 	return out;
 };
 
-GL.Upload = function(data, width, height)
-{
+GL.Upload = function(data, width, height) {
 	var scaled_width = width, scaled_height = height;
-	if (((width & (width - 1)) !== 0) || ((height & (height - 1)) !== 0))
-	{
+	if (((width & (width - 1)) !== 0) || ((height & (height - 1)) !== 0)) {
 		--scaled_width;
 		scaled_width |= (scaled_width >> 1);
 		scaled_width |= (scaled_width >> 2);
@@ -129,8 +113,7 @@ GL.Upload = function(data, width, height)
 	var trans = new ArrayBuffer((scaled_width * scaled_height) << 2);
 	var trans32 = new Uint32Array(trans);
 	var i;
-	for (i = scaled_width * scaled_height - 1; i >= 0; --i)
-	{
+	for (i = scaled_width * scaled_height - 1; i >= 0; --i) {
 		trans32[i] = COM.LittleLong(VID.d_8to24table[data[i]] + 0xff000000);
 		if (data[i] >= 224)
 			trans32[i] &= 0xffffff;
@@ -141,16 +124,12 @@ GL.Upload = function(data, width, height)
 	gl.texParameterf(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, GL.filter_max);
 };
 
-GL.LoadTexture = function(identifier, width, height, data)
-{
+GL.LoadTexture = function(identifier, width, height, data) {
 	var glt, i;
-	if (identifier.length !== 0)
-	{
-		for (i = 0; i < GL.textures.length; ++i)
-		{
+	if (identifier.length !== 0) {
+		for (i = 0; i < GL.textures.length; ++i) {
 			glt = GL.textures[i];
-			if (glt.identifier === identifier)
-			{
+			if (glt.identifier === identifier) {
 				if ((width !== glt.width) || (height !== glt.height))
 					Sys.Error('GL.LoadTexture: cache mismatch');
 				return glt;
@@ -159,8 +138,7 @@ GL.LoadTexture = function(identifier, width, height, data)
 	}
 
 	var scaled_width = width, scaled_height = height;
-	if (((width & (width - 1)) !== 0) || ((height & (height - 1)) !== 0))
-	{
+	if (((width & (width - 1)) !== 0) || ((height & (height - 1)) !== 0)) {
 		--scaled_width;
 		scaled_width |= (scaled_width >> 1);
 		scaled_width |= (scaled_width >> 2);
@@ -196,11 +174,9 @@ GL.LoadTexture = function(identifier, width, height, data)
 	return glt;
 };
 
-GL.LoadPicTexture = function(pic)
-{
+GL.LoadPicTexture = function(pic) {
 	var data = pic.data, scaled_width = pic.width, scaled_height = pic.height;
-	if (((pic.width & (pic.width - 1)) !== 0) || ((pic.height & (pic.height - 1)) !== 0))
-	{
+	if (((pic.width & (pic.width - 1)) !== 0) || ((pic.height & (pic.height - 1)) !== 0)) {
 		--scaled_width;
 		scaled_width |= (scaled_width >> 1);
 		scaled_width |= (scaled_width >> 2);
@@ -228,8 +204,7 @@ GL.LoadPicTexture = function(pic)
 	var trans = new ArrayBuffer((scaled_width * scaled_height) << 2);
 	var trans32 = new Uint32Array(trans);
 	var i;
-	for (i = scaled_width * scaled_height - 1; i >= 0; --i)
-	{
+	for (i = scaled_width * scaled_height - 1; i >= 0; --i) {
 		if (data[i] !== 255)
 			trans32[i] = COM.LittleLong(VID.d_8to24table[data[i]] + 0xff000000);
 	}
@@ -239,15 +214,14 @@ GL.LoadPicTexture = function(pic)
 	return texnum;
 };
 
-GL.CreateProgram = function(identifier, uniforms, attribs, textures)
-{
+GL.CreateProgram = function(identifier, uniforms, attribs, textures) {
 	var p = gl.createProgram();
 	var program =
-	{
-		identifier: identifier,
-		program: p,
-		attribs: []
-	};
+		{
+			identifier: identifier,
+			program: p,
+			attribs: []
+		};
 
 	var vsh = gl.createShader(gl.VERTEX_SHADER);
 	gl.shaderSource(vsh, document.getElementById('vsh' + identifier).text);
@@ -275,18 +249,17 @@ GL.CreateProgram = function(identifier, uniforms, attribs, textures)
 
 	program.vertexSize = 0;
 	program.attribBits = 0;
-	for (var i = 0; i < attribs.length; ++i)
-	{
+	for (var i = 0; i < attribs.length; ++i) {
 		var attribParameters = attribs[i];
 		var attrib =
-		{
-			name: attribParameters[0],
-			location: gl.getAttribLocation(p, attribParameters[0]),
-			type: attribParameters[1],
-			components: attribParameters[2],
-			normalized: (attribParameters[3] === true),
-			offset: program.vertexSize
-		};
+			{
+				name: attribParameters[0],
+				location: gl.getAttribLocation(p, attribParameters[0]),
+				type: attribParameters[1],
+				components: attribParameters[2],
+				normalized: (attribParameters[3] === true),
+				offset: program.vertexSize
+			};
 		program.attribs[i] = attrib;
 		program[attrib.name] = attrib;
 		if (attrib.type === gl.FLOAT)
@@ -298,8 +271,7 @@ GL.CreateProgram = function(identifier, uniforms, attribs, textures)
 		program.attribBits |= 1 << attrib.location;
 	}
 
-	for (var i = 0; i < textures.length; ++i)
-	{
+	for (var i = 0; i < textures.length; ++i) {
 		program[textures[i]] = i;
 		gl.uniform1i(gl.getUniformLocation(p, textures[i]), i);
 	}
@@ -308,11 +280,9 @@ GL.CreateProgram = function(identifier, uniforms, attribs, textures)
 	return program;
 };
 
-GL.UseProgram = function(identifier, flushStream)
-{
+GL.UseProgram = function(identifier, flushStream) {
 	var currentProgram = GL.currentProgram;
-	if (currentProgram != null)
-	{
+	if (currentProgram != null) {
 		if (currentProgram.identifier === identifier)
 			return currentProgram;
 		if (flushStream === true)
@@ -320,10 +290,8 @@ GL.UseProgram = function(identifier, flushStream)
 	}
 
 	var program = null;
-	for (var i = 0; i < GL.programs.length; ++i)
-	{
-		if (GL.programs[i].identifier === identifier)
-		{
+	for (var i = 0; i < GL.programs.length; ++i) {
+		if (GL.programs[i].identifier === identifier) {
 			program = GL.programs[i];
 			break;
 		}
@@ -332,15 +300,13 @@ GL.UseProgram = function(identifier, flushStream)
 		return null;
 
 	var enableAttribs = program.attribBits, disableAttribs = 0;
-	if (currentProgram != null)
-	{
+	if (currentProgram != null) {
 		enableAttribs &= ~currentProgram.attribBits;
 		disableAttribs = currentProgram.attribBits & ~program.attribBits;
 	}
 	GL.currentProgram = program;
 	gl.useProgram(program.program);
-	for (var attrib = 0; enableAttribs !== 0 || disableAttribs !== 0; ++attrib)
-	{
+	for (var attrib = 0; enableAttribs !== 0 || disableAttribs !== 0; ++attrib) {
 		var mask = 1 << attrib;
 		if ((enableAttribs & mask) !== 0)
 			gl.enableVertexAttribArray(attrib);
@@ -353,8 +319,7 @@ GL.UseProgram = function(identifier, flushStream)
 	return program;
 };
 
-GL.UnbindProgram = function()
-{
+GL.UnbindProgram = function() {
 	if (GL.currentProgram == null)
 		return;
 	GL.StreamFlush();
@@ -366,8 +331,7 @@ GL.UnbindProgram = function()
 
 GL.identity = [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0];
 
-GL.RotationMatrix = function(pitch, yaw, roll)
-{
+GL.RotationMatrix = function(pitch, yaw, roll) {
 	pitch *= Math.PI / -180.0;
 	yaw *= Math.PI / 180.0;
 	roll *= Math.PI / 180.0;
@@ -378,25 +342,22 @@ GL.RotationMatrix = function(pitch, yaw, roll)
 	var sr = Math.sin(roll);
 	var cr = Math.cos(roll);
 	return [
-		cy * cp,					sy * cp,					-sp,
-		-sy * cr + cy * sp * sr,	cy * cr + sy * sp * sr,		cp * sr,
-		-sy * -sr + cy * sp * cr,	cy * -sr + sy * sp * cr,	cp * cr
+		cy * cp, sy * cp, -sp,
+		-sy * cr + cy * sp * sr, cy * cr + sy * sp * sr, cp * sr,
+		-sy * -sr + cy * sp * cr, cy * -sr + sy * sp * cr, cp * cr
 	];
 };
 
-GL.StreamFlush = function()
-{
+GL.StreamFlush = function() {
 	if (GL.streamArrayVertexCount === 0)
 		return;
 	var program = GL.currentProgram;
-	if (program != null)
-	{
+	if (program != null) {
 		gl.bindBuffer(gl.ARRAY_BUFFER, GL.streamBuffer);
 		gl.bufferSubData(gl.ARRAY_BUFFER, GL.streamBufferPosition,
 			GL.streamArrayBytes.subarray(0, GL.streamArrayPosition));
 		var attribs = program.attribs;
-		for (var i = 0; i < attribs.length; ++i)
-		{
+		for (var i = 0; i < attribs.length; ++i) {
 			var attrib = attribs[i];
 			gl.vertexAttribPointer(attrib.location,
 				attrib.components, attrib.type, attrib.normalized,
@@ -409,28 +370,24 @@ GL.StreamFlush = function()
 	GL.streamArrayVertexCount = 0;
 };
 
-GL.StreamGetSpace = function(vertexCount)
-{
+GL.StreamGetSpace = function(vertexCount) {
 	var program = GL.currentProgram;
 	if (program == null)
 		return;
 	var length = vertexCount * program.vertexSize;
-	if ((GL.streamBufferPosition + GL.streamArrayPosition + length) > GL.streamArray.byteLength)
-	{
+	if ((GL.streamBufferPosition + GL.streamArrayPosition + length) > GL.streamArray.byteLength) {
 		GL.StreamFlush();
 		GL.streamBufferPosition = 0;
 	}
 	GL.streamArrayVertexCount += vertexCount;
 };
 
-GL.StreamWriteFloat = function(x)
-{
+GL.StreamWriteFloat = function(x) {
 	GL.streamArrayView.setFloat32(GL.streamArrayPosition, x, true);
 	GL.streamArrayPosition += 4;
 };
 
-GL.StreamWriteFloat2 = function(x, y)
-{
+GL.StreamWriteFloat2 = function(x, y) {
 	var view = GL.streamArrayView;
 	var position = GL.streamArrayPosition;
 	view.setFloat32(position, x, true);
@@ -438,8 +395,7 @@ GL.StreamWriteFloat2 = function(x, y)
 	GL.streamArrayPosition += 8;
 };
 
-GL.StreamWriteFloat3 = function(x, y, z)
-{
+GL.StreamWriteFloat3 = function(x, y, z) {
 	var view = GL.streamArrayView;
 	var position = GL.streamArrayPosition;
 	view.setFloat32(position, x, true);
@@ -448,8 +404,7 @@ GL.StreamWriteFloat3 = function(x, y, z)
 	GL.streamArrayPosition += 12;
 };
 
-GL.StreamWriteFloat4 = function(x, y, z, w)
-{
+GL.StreamWriteFloat4 = function(x, y, z, w) {
 	var view = GL.streamArrayView;
 	var position = GL.streamArrayPosition;
 	view.setFloat32(position, x, true);
@@ -459,8 +414,7 @@ GL.StreamWriteFloat4 = function(x, y, z, w)
 	GL.streamArrayPosition += 16;
 };
 
-GL.StreamWriteUByte4 = function(x, y, z, w)
-{
+GL.StreamWriteUByte4 = function(x, y, z, w) {
 	var view = GL.streamArrayView;
 	var position = GL.streamArrayPosition;
 	view.setUint8(position, x);
@@ -470,8 +424,7 @@ GL.StreamWriteUByte4 = function(x, y, z, w)
 	GL.streamArrayPosition += 4;
 };
 
-GL.StreamDrawTexturedQuad = function(x, y, w, h, u, v, u2, v2)
-{
+GL.StreamDrawTexturedQuad = function(x, y, w, h, u, v, u2, v2) {
 	var x2 = x + w, y2 = y + h;
 	GL.StreamGetSpace(6);
 	GL.StreamWriteFloat4(x, y, u, v);
@@ -482,8 +435,7 @@ GL.StreamDrawTexturedQuad = function(x, y, w, h, u, v, u2, v2)
 	GL.StreamWriteFloat4(x2, y2, u2, v2);
 };
 
-GL.StreamDrawColoredQuad = function(x, y, w, h, r, g, b, a)
-{
+GL.StreamDrawColoredQuad = function(x, y, w, h, r, g, b, a) {
 	var x2 = x + w, y2 = y + h;
 	GL.StreamGetSpace(6);
 	GL.StreamWriteFloat2(x, y);
@@ -500,14 +452,12 @@ GL.StreamDrawColoredQuad = function(x, y, w, h, r, g, b, a)
 	GL.StreamWriteUByte4(r, g, b, a);
 };
 
-GL.Init = function()
-{
+GL.Init = function() {
 	VID.mainwindow = document.getElementById('mainwindow');
-	try
-	{
+	try {
 		gl = VID.mainwindow.getContext('webgl') || VID.mainwindow.getContext('experimental-webgl');
+	} catch (e) {
 	}
-	catch (e) {}
 	if (gl == null)
 		Sys.Error('Unable to initialize WebGL. Your browser may not support it.');
 
