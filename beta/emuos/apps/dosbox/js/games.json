@@ -8,6 +8,7 @@
 		"executable": "./ALADDCRK.EXE",
 		"file": "aladdin.zip",
 		"size": 1810235,
+		"drm": ["Manual Lookup"],
 		"hardware": [{
 			"input": ["Keyboard"],
 			"video": {
@@ -32,6 +33,7 @@
 		"executable": "./LOOM.EXE",
 		"file": "loomega.zip",
 		"size": 1201980,
+		"drm": ["Manual Lookup"],
 		"hardware": [{
 			"input": ["Keyboard", "Mouse"],
 			"video": {
@@ -57,6 +59,7 @@
 		"executable": "./DOS32A.EXE MKCRK.EXE",
 		"file": "mk1.zip",
 		"size": 8167485,
+		"drm": ["Manual Lookup"],
 		"hardware": [{
 			"input": ["Keyboard"],
 			"video": {
@@ -130,6 +133,7 @@
 		"executable": "./PRINCE.EXE",
 		"file": "pop114.zip",
 		"size": 1988713,
+		"drm": ["Manual Lookup"],
 		"hardware": [{
 			"input": ["Keyboard"],
 			"video": {
@@ -264,6 +268,7 @@
 		"executable": "./SPEAR.EXE",
 		"file": "wolf3ds.zip",
 		"size": 1542721,
+		"drm": ["Manual Lookup"],
 		"hardware": [{
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
 			"video": {
