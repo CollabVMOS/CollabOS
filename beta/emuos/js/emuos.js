@@ -46,6 +46,10 @@
 				icon: 'apps/dosbox/favicon.ico',
 				link: 'apps/dosbox/index.html'
 			} , {
+				name: 'Wolfenstein 3D',
+				icon: 'apps/wolf3d/favicon.png',
+				link: 'apps/wolf3d/index.html'
+			} , {
 				name: 'Quake 1',
 				icon: 'apps/quake1/favicon.ico',
 				link: 'apps/quake1/index.html'

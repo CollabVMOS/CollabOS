@@ -129,7 +129,7 @@
 		"licence": "Commercial"
 	} , {
 		"id": "pop1",
-		"name": "Prince of Persia",
+		"name": "Prince of Persia 1",
 		"executable": "./PRINCE.EXE",
 		"file": "pop114.zip",
 		"size": 1988713,
