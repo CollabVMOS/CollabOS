@@ -132,6 +132,16 @@
 				return html;
 			}
 
+			function get_file_order(index, file, files) {
+				for (var f in files) {
+					// noinspection JSUnfilteredForInLoop
+					if (files[f]['metadata']['name'] === file[index]) {
+						// noinspection JSUnfilteredForInLoop
+						return files[f]['link'];
+					}
+				}
+			}
+
 			function start(file, executable, args, mode) {
 				if (Array.isArray(file)) {
 					var files = [];
@@ -139,7 +149,8 @@
 					for (var f in file) {
 						// noinspection JSUnfilteredForInLoop
 						dbx.filesGetTemporaryLink({path: '/' + file[f]}).then(function(response) {
-							files.push(response.link);
+							// noinspection JSUnfilteredForInLoop,JSReferencingMutableVariableFromClosure
+							files.push(response);
 						}).catch(function(error) {
 							console.log(error);
 						});
@@ -165,8 +176,8 @@
 										return filename;
 									}),
 									DosBoxLoader.nativeResolution(640, 400),
-									DosBoxLoader.mountZip('a', DosBoxLoader.fetchFile('Game File', files[0])),
-									DosBoxLoader.mountZip('b', DosBoxLoader.fetchFile('Game File', files[1])),
+									DosBoxLoader.mountZip('a', DosBoxLoader.fetchFile('OS File', get_file_order(0, file, files))),
+									DosBoxLoader.mountZip('b', DosBoxLoader.fetchFile('Game File', get_file_order(1, file, files))),
 									DosBoxLoader.extraArgs(args),
 									DosBoxLoader.startExe(executable)));
 							emulator.start({waitAfterDownloading: false});
