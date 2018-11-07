@@ -181,9 +181,6 @@
 									DosBoxLoader.extraArgs(args),
 									DosBoxLoader.startExe(executable)));
 							emulator.start({waitAfterDownloading: false});
-						} else {
-							console.log(file);
-							console.log(files);
 						}
 					}, 100);
 				} else {
