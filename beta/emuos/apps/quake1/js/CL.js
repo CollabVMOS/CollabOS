@@ -45,51 +45,81 @@ CL.GetMessage = function() {
 	if (CL.cls.demoplayback === true) {
 		if (CL.cls.signon === 4) {
 			if (CL.cls.timedemo === true) {
-				if (Host.framecount === CL.cls.td_lastframe)
+				if (Host.framecount === CL.cls.td_lastframe) {
+					// noinspection JSConstructorReturnsPrimitive
 					return 0;
+				}
+
 				CL.cls.td_lastframe = Host.framecount;
-				if (Host.framecount === (CL.cls.td_startframe + 1))
+
+				if (Host.framecount === (CL.cls.td_startframe + 1)) {
 					CL.cls.td_starttime = Host.realtime;
-			} else if (CL.state.time <= CL.state.mtime[0])
+				}
+			} else if (CL.state.time <= CL.state.mtime[0]) {
+				// noinspection JSConstructorReturnsPrimitive
 				return 0;
+			}
 		}
+
 		if ((CL.cls.demoofs + 16) >= CL.cls.demosize) {
 			CL.StopPlayback();
+
+			// noinspection JSConstructorReturnsPrimitive
 			return 0;
 		}
+
 		var view = new DataView(CL.cls.demofile);
 		NET.message.cursize = view.getUint32(CL.cls.demoofs, true);
-		if (NET.message.cursize > 8000)
+
+		if (NET.message.cursize > 8000) {
 			Sys.Error('Demo message > MAX_MSGLEN');
+		}
+
+
 		CL.state.mviewangles[1] = CL.state.mviewangles[0];
 		CL.state.mviewangles[0] = [view.getFloat32(CL.cls.demoofs + 4, true), view.getFloat32(CL.cls.demoofs + 8, true), view.getFloat32(CL.cls.demoofs + 12, true)];
 		CL.cls.demoofs += 16;
+
 		if ((CL.cls.demoofs + NET.message.cursize) > CL.cls.demosize) {
 			CL.StopPlayback();
+
+			// noinspection JSConstructorReturnsPrimitive
 			return 0;
 		}
+
 		var src = new Uint8Array(CL.cls.demofile, CL.cls.demoofs, NET.message.cursize);
 		var dest = new Uint8Array(NET.message.data, 0, NET.message.cursize);
 		var i;
-		for (i = 0; i < NET.message.cursize; ++i)
+
+		for (i = 0; i < NET.message.cursize; ++i) {
 			dest[i] = src[i];
+		}
+
 		CL.cls.demoofs += NET.message.cursize;
+
+		// noinspection JSConstructorReturnsPrimitive
 		return 1;
 	}
 
 	var r;
+
 	for (; ;) {
 		r = NET.GetMessage(CL.cls.netcon);
-		if ((r !== 1) && (r !== 2))
+
+		if ((r !== 1) && (r !== 2)) {
 			return r;
-		if ((NET.message.cursize === 1) && ((new Uint8Array(NET.message.data, 0, 1))[0] === Protocol.svc.nop))
+		}
+
+		if ((NET.message.cursize === 1) && ((new Uint8Array(NET.message.data, 0, 1))[0] === Protocol.svc.nop)) {
 			Con.Print('<-- server to client keepalive\n');
-		else
+		} else {
 			break;
+		}
 	}
 
-	if (CL.cls.demorecording === true)
+	if (CL.cls.demorecording === true) {
 		CL.WriteDemoMessage();
+	}
 
 	return r;
 };
@@ -300,14 +330,21 @@ CL.KeyState = function(key) {
 	key.state &= 1;
 
 	if ((key.state & 2) !== 0) {
-		if ((key.state & 4) !== 0)
+		if ((key.state & 4) !== 0) {
+			// noinspection JSConstructorReturnsPrimitive
 			return (down !== 0) ? 0.75 : 0.25;
+		}
+
+		// noinspection JSConstructorReturnsPrimitive
 		return (down !== 0) ? 0.5 : 0.0;
 	}
 
-	if ((key.state & 4) !== 0)
+	if ((key.state & 4) !== 0) {
+		// noinspection JSConstructorReturnsPrimitive
 		return 0.0;
+	}
 
+	// noinspection JSConstructorReturnsPrimitive
 	return (down !== 0) ? 1.0 : 0.0;
 };
 
@@ -631,17 +668,23 @@ CL.SignonReply = function() {
 };
 
 CL.NextDemo = function() {
-	if (CL.cls.demonum === -1)
+	if (CL.cls.demonum === -1) {
 		return;
+	}
+
 	SCR.BeginLoadingPlaque();
+
 	if (CL.cls.demonum >= CL.cls.demos.length) {
 		if (CL.cls.demos.length === 0) {
 			Con.Print('No demos listed with startdemos\n');
 			CL.cls.demonum = -1;
+
 			return;
 		}
+
 		CL.cls.demonum = 0;
 	}
+
 	Cmd.text = 'playdemo ' + CL.cls.demos[CL.cls.demonum++] + '\n' + Cmd.text;
 };
 
@@ -708,25 +751,40 @@ CL.DecayLights = function() {
 
 CL.LerpPoint = function() {
 	var f = CL.state.mtime[0] - CL.state.mtime[1];
+
 	if ((f === 0.0) || (CL.nolerp.value !== 0) || (CL.cls.timedemo === true) || (SV.server.active === true)) {
 		CL.state.time = CL.state.mtime[0];
+
+		// noinspection JSConstructorReturnsPrimitive
 		return 1.0;
 	}
+
 	if (f > 0.1) {
 		CL.state.mtime[1] = CL.state.mtime[0] - 0.1;
 		f = 0.1;
 	}
+
 	var frac = (CL.state.time - CL.state.mtime[1]) / f;
+
 	if (frac < 0.0) {
-		if (frac < -0.01)
+		if (frac < -0.01) {
 			CL.state.time = CL.state.mtime[1];
+		}
+
+		// noinspection JSConstructorReturnsPrimitive
 		return 0.0;
 	}
+
 	if (frac > 1.0) {
-		if (frac > 1.01)
+		if (frac > 1.01) {
 			CL.state.time = CL.state.mtime[0];
+		}
+
+		// noinspection JSConstructorReturnsPrimitive
 		return 1.0;
 	}
+
+	// noinspection JSConstructorReturnsPrimitive
 	return frac;
 };
 

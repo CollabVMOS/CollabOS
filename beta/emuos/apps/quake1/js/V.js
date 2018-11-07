@@ -106,16 +106,21 @@ V.ParseDamage = function() {
 	var from = [MSG.ReadCoord() - ent.origin[0], MSG.ReadCoord() - ent.origin[1], MSG.ReadCoord() - ent.origin[2]];
 	Vec.Normalize(from);
 	var count = (blood + armor) * 0.5;
-	if (count < 10.0)
+
+	if (count < 10.0) {
 		count = 10.0;
+	}
+
 	CL.state.faceanimtime = CL.state.time + 0.2;
 
 	var cshift = CL.state.cshifts[CL.cshift.damage];
 	cshift[3] += 3.0 * count;
-	if (cshift[3] < 0.0)
+
+	if (cshift[3] < 0.0) {
 		cshift[3] = 0.0;
-	else if (cshift[3] > 150.0)
+	} else if (cshift[3] > 150.0) {
 		cshift[3] = 150.0;
+	}
 
 	if (armor > blood) {
 		cshift[0] = 200.0;
@@ -164,11 +169,13 @@ V.SetContentsColor = function(contents) {
 			CL.state.cshifts[CL.cshift.contents] = V.cshift_slime;
 			return;
 	}
+
 	CL.state.cshifts[CL.cshift.contents] = V.cshift_water;
 };
 
 V.CalcBlend = function() {
 	var cshift = CL.state.cshifts[CL.cshift.powerup];
+
 	if ((CL.state.items & Def.it.quad) !== 0) {
 		cshift[0] = 0.0;
 		cshift[1] = 0.0;
@@ -189,45 +196,61 @@ V.CalcBlend = function() {
 		cshift[1] = 255.0;
 		cshift[2] = 0.0;
 		cshift[3] = 30.0;
-	} else
+	} else {
 		cshift[3] = 0.0;
+	}
 
 	CL.state.cshifts[CL.cshift.damage][3] -= Host.frametime * 150.0;
-	if (CL.state.cshifts[CL.cshift.damage][3] < 0.0)
+
+	if (CL.state.cshifts[CL.cshift.damage][3] < 0.0) {
 		CL.state.cshifts[CL.cshift.damage][3] = 0.0;
+	}
+
 	CL.state.cshifts[CL.cshift.bonus][3] -= Host.frametime * 100.0;
-	if (CL.state.cshifts[CL.cshift.bonus][3] < 0.0)
+
+	if (CL.state.cshifts[CL.cshift.bonus][3] < 0.0) {
 		CL.state.cshifts[CL.cshift.bonus][3] = 0.0;
+	}
 
 	if (V.cshiftpercent.value === 0) {
 		V.blend[0] = V.blend[1] = V.blend[2] = V.blend[3] = 0.0;
+
 		return;
 	}
 
-	var r = 0.0, g = 0.0, b = 0.0, a = 0.0, a2, i, cshift;
+	var r = 0.0, g = 0.0, b = 0.0, a = 0.0, a2, i;
+
 	for (i = 0; i <= 3; ++i) {
 		cshift = CL.state.cshifts[i];
 		a2 = cshift[3] * V.cshiftpercent.value / 25500.0;
-		if (a2 === 0.0)
+
+		if (a2 === 0.0) {
 			continue;
+		}
+
 		a = a + a2 * (1.0 - a);
 		a2 = a2 / a;
 		r = r * (1.0 - a2) + cshift[0] * a2;
 		g = g * (1.0 - a2) + cshift[1] * a2;
 		b = b * (1.0 - a2) + cshift[2] * a2;
 	}
-	if (a > 1.0)
+
+	if (a > 1.0) {
 		a = 1.0;
-	else if (a < 0.0)
+	} else if (a < 0.0) {
 		a = 0.0;
+	}
+
 	V.blend[0] = r;
 	V.blend[1] = g;
 	V.blend[2] = b;
 	V.blend[3] = a;
-	if (V.blend[3] > 1.0)
+
+	if (V.blend[3] > 1.0) {
 		V.blend[3] = 1.0;
-	else if (V.blend[3] < 0.0)
+	} else if (V.blend[3] < 0.0) {
 		V.blend[3] = 0.0;
+	}
 };
 
 V.CalcIntermissionRefdef = function() {
@@ -263,10 +286,13 @@ V.CalcRefdef = function() {
 			R.refdef.viewangles[2] += (V.dmg_time / V.kicktime.value) * V.dmg_roll;
 			R.refdef.viewangles[0] -= (V.dmg_time / V.kicktime.value) * V.dmg_pitch;
 		}
+
 		V.dmg_time -= Host.frametime;
 	}
-	if (CL.state.stats[Def.stat.health] <= 0)
+
+	if (CL.state.stats[Def.stat.health] <= 0) {
 		R.refdef.viewangles[2] = 80.0;
+	}
 
 	var ipitch = V.idlescale.value * Math.sin(CL.state.time * V.ipitch_cycle.value) * V.ipitch_level.value;
 	var iyaw = V.idlescale.value * Math.sin(CL.state.time * V.iyaw_cycle.value) * V.iyaw_level.value;
@@ -281,18 +307,23 @@ V.CalcRefdef = function() {
 	R.refdef.vieworg[1] += V.ofsx.value * forward[1] + V.ofsy.value * right[1] + V.ofsz.value * up[1];
 	R.refdef.vieworg[2] += V.ofsx.value * forward[2] + V.ofsy.value * right[2] + V.ofsz.value * up[2];
 
-	if (R.refdef.vieworg[0] < (ent.origin[0] - 14.0))
+	if (R.refdef.vieworg[0] < (ent.origin[0] - 14.0)) {
 		R.refdef.vieworg[0] = ent.origin[0] - 14.0;
-	else if (R.refdef.vieworg[0] > (ent.origin[0] + 14.0))
+	} else if (R.refdef.vieworg[0] > (ent.origin[0] + 14.0)) {
 		R.refdef.vieworg[0] = ent.origin[0] + 14.0;
-	if (R.refdef.vieworg[1] < (ent.origin[1] - 14.0))
+	}
+
+	if (R.refdef.vieworg[1] < (ent.origin[1] - 14.0)) {
 		R.refdef.vieworg[1] = ent.origin[1] - 14.0;
-	else if (R.refdef.vieworg[1] > (ent.origin[1] + 14.0))
+	} else if (R.refdef.vieworg[1] > (ent.origin[1] + 14.0)) {
 		R.refdef.vieworg[1] = ent.origin[1] + 14.0;
-	if (R.refdef.vieworg[2] < (ent.origin[2] - 22.0))
+	}
+
+	if (R.refdef.vieworg[2] < (ent.origin[2] - 22.0)) {
 		R.refdef.vieworg[2] = ent.origin[2] - 22.0;
-	else if (R.refdef.vieworg[2] > (ent.origin[2] + 30.0))
+	} else if (R.refdef.vieworg[2] > (ent.origin[2] + 30.0)) {
 		R.refdef.vieworg[2] = ent.origin[2] + 30.0;
+	}
 
 	var view = CL.state.viewent;
 	view.angles[0] = -R.refdef.viewangles[0] - ipitch;
@@ -301,6 +332,7 @@ V.CalcRefdef = function() {
 	view.origin[0] = ent.origin[0] + forward[0] * bob * 0.4;
 	view.origin[1] = ent.origin[1] + forward[1] * bob * 0.4;
 	view.origin[2] = ent.origin[2] + CL.state.viewheight + forward[2] * bob * 0.4 + bob;
+
 	switch (SCR.viewsize.value) {
 		case 110:
 		case 90:
@@ -312,6 +344,7 @@ V.CalcRefdef = function() {
 		case 80:
 			view.origin[2] += 0.5;
 	}
+
 	view.model = CL.state.model_precache[CL.state.stats[Def.stat.weapon]];
 	view.frame = CL.state.stats[Def.stat.weaponframe];
 
@@ -321,33 +354,47 @@ V.CalcRefdef = function() {
 
 	if ((CL.state.onground === true) && ((ent.origin[2] - V.oldz) > 0.0)) {
 		var steptime = CL.state.time - CL.state.oldtime;
-		if (steptime < 0.0)
+
+		if (steptime < 0.0) {
 			steptime = 0.0;
+		}
+
 		V.oldz += steptime * 80.0;
-		if (V.oldz > ent.origin[2])
+
+		if (V.oldz > ent.origin[2]) {
 			V.oldz = ent.origin[2];
-		else if ((ent.origin[2] - V.oldz) > 12.0)
+		} else if ((ent.origin[2] - V.oldz) > 12.0) {
 			V.oldz = ent.origin[2] - 12.0;
+		}
+
 		R.refdef.vieworg[2] += V.oldz - ent.origin[2];
 		view.origin[2] += V.oldz - ent.origin[2];
-	} else
+	} else {
 		V.oldz = ent.origin[2];
-	if (Chase.active.value !== 0)
+	}
+
+	if (Chase.active.value !== 0) {
 		Chase.Update();
+	}
 };
 
 V.RenderView = function() {
-	if (Con.forcedup === true)
+	if (Con.forcedup === true) {
 		return;
+	}
+
 	if (CL.state.maxclients >= 2) {
 		Cvar.Set('scr_ofsx', '0');
 		Cvar.Set('scr_ofsy', '0');
 		Cvar.Set('scr_ofsz', '0');
 	}
+
 	if (CL.state.intermission !== 0)
 		V.CalcIntermissionRefdef();
-	else if (CL.state.paused !== true)
+	else if (CL.state.paused !== true) {
 		V.CalcRefdef();
+	}
+
 	R.PushDlights();
 	R.RenderView();
 };

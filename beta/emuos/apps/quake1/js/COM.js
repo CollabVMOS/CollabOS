@@ -78,9 +78,12 @@ COM.Parse = function(data) {
 
 COM.CheckParm = function(parm) {
 	var i;
+
 	for (i = 1; i < COM.argv.length; ++i) {
-		if (COM.argv[i] === parm)
+		if (COM.argv[i] === parm) {
+			// noinspection JSConstructorReturnsPrimitive
 			return i;
+		}
 	}
 };
 
@@ -180,39 +183,56 @@ COM.searchpaths = [];
 
 COM.Path_f = function() {
 	Con.Print('Current search path:\n');
-	var i = COM.searchpaths.length, j, s;
+
+	var i, j, s;
+
 	for (i = COM.searchpaths.length - 1; i >= 0; --i) {
 		s = COM.searchpaths[i];
-		for (j = s.pack.length - 1; j >= 0; --j)
+
+		for (j = s.pack.length - 1; j >= 0; --j) {
 			Con.Print(s.filename + '/' + 'pak' + j + '.pak (' + s.pack[j].length + ' files)\n');
+		}
+
 		Con.Print(s.filename + '\n');
 	}
 };
 
+
 COM.WriteFile = function(filename, data, len) {
 	filename = filename.toLowerCase();
+
 	var dest = [], i;
-	for (i = 0; i < len; ++i)
+
+	for (i = 0; i < len; ++i) {
 		dest[i] = String.fromCharCode(data[i]);
+	}
+
 	try {
 		localStorage.setItem('Quake.' + COM.searchpaths[COM.searchpaths.length - 1].filename + '/' + filename, dest.join(''));
 	} catch (e) {
 		Sys.Print('COM.WriteFile: failed on ' + filename + '\n');
 		return;
 	}
+
 	Sys.Print('COM.WriteFile: ' + filename + '\n');
+
+	// noinspection JSConstructorReturnsPrimitive
 	return true;
 };
 
 COM.WriteTextFile = function(filename, data) {
 	filename = filename.toLowerCase();
+
 	try {
 		localStorage.setItem('Quake.' + COM.searchpaths[COM.searchpaths.length - 1].filename + '/' + filename, data);
 	} catch (e) {
 		Sys.Print('COM.WriteTextFile: failed on ' + filename + '\n');
 		return;
 	}
+
 	Sys.Print('COM.WriteTextFile: ' + filename + '\n');
+
+	// noinspection JSConstructorReturnsPrimitive
 	return true;
 };
 
@@ -274,6 +294,7 @@ COM.LoadFile = function(filename) {
 		if ((xhr.status >= 200) && (xhr.status <= 299)) {
 			Sys.Print('FindFile: ' + netpath + '\n');
 			Draw.EndDisc();
+
 			return Q.strmem(xhr.responseText);
 		}
 	}
@@ -285,8 +306,9 @@ COM.LoadFile = function(filename) {
 COM.LoadTextFile = function(filename) {
 	var buf = COM.LoadFile(filename);
 
-	if (buf == null)
+	if (buf === null) {
 		return;
+	}
 
 	var bufview = new Uint8Array(buf);
 
@@ -295,10 +317,12 @@ COM.LoadTextFile = function(filename) {
 	var i;
 
 	for (i = 0; i < bufview.length; ++i) {
-		if (bufview[i] !== 13)
+		if (bufview[i] !== 13) {
 			f[f.length] = String.fromCharCode(bufview[i]);
+		}
 	}
 
+	// noinspection JSConstructorReturnsPrimitive
 	return f.join('');
 };
 

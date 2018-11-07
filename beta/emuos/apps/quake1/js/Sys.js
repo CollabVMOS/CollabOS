@@ -2,6 +2,7 @@ Sys = {};
 
 Sys.ongamepadpoll = function(e) {
 	Key.gamepadlastaxes = e.axes;
+
 	if (Key.gamepadlastbuttons) {
 		for (var i = 0; i < e.buttons.length; i++) {
 			if (e.buttons[i].value !== Key.gamepadlastbuttons[i]) {
@@ -14,6 +15,7 @@ Sys.ongamepadpoll = function(e) {
 				}
 			}
 		}
+
 		Key.gamepadlastbuttons = e.buttons.map(function(b) {
 			return b.value
 		});
@@ -27,48 +29,62 @@ Sys.ongamepadpoll = function(e) {
 Sys.events = ['onbeforeunload', 'oncontextmenu', 'onfocus', 'onkeydown', 'onkeyup', 'onmousedown', 'onmouseup', 'onmousewheel', 'onunload', 'onwheel'];
 
 Sys.Quit = function() {
-	if (Sys.frame != null)
+	if (Sys.frame !== null) {
 		clearInterval(Sys.frame);
+	}
+
 	var i;
-	for (i = 0; i < Sys.events.length; ++i)
+
+	for (i = 0; i < Sys.events.length; ++i) {
 		window[Sys.events[i]] = null;
+	}
+
 	Host.Shutdown();
 	document.body.style.cursor = 'auto';
 	VID.mainwindow.style.display = 'none';
-	if (COM.registered.value !== 0)
+
+	if (COM.registered.value !== 0) {
 		document.getElementById('end2').style.display = 'inline';
-	else
+	} else {
 		document.getElementById('end1').style.display = 'inline';
+	}
+
 	throw new Error;
 };
 
 Sys.Print = function(text) {
-	if (window.console != null)
+	if (window.console !== null) {
 		console.log(text);
+	}
 };
 
 Sys.Error = function(text) {
-	if (Sys.frame != null)
+	if (Sys.frame != null) {
 		clearInterval(Sys.frame);
+	}
 
 	var i;
 
-	for (i = 0; i < Sys.events.length; ++i)
+	for (i = 0; i < Sys.events.length; ++i) {
 		window[Sys.events[i]] = null;
+	}
 
-	if (Host.initialized === true)
+	if (Host.initialized === true) {
 		Host.Shutdown();
+	}
 
 	document.body.style.cursor = 'auto';
 
 	i = Con.text.length - 25;
 
-	if (i < 0)
+	if (i < 0) {
 		i = 0;
+	}
 
-	if (window.console != null) {
-		for (; i < Con.text.length; ++i)
+	if (window.console !== null) {
+		for (; i < Con.text.length; ++i) {
 			console.log(Con.text[i].text);
+		}
 	}
 
 	alert(text);
@@ -77,6 +93,7 @@ Sys.Error = function(text) {
 };
 
 Sys.FloatTime = function() {
+	// noinspection JSConstructorReturnsPrimitive
 	return Date.now() * 0.001 - Sys.oldtime;
 };
 
