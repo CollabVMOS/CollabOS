@@ -9,7 +9,7 @@
 		"file": "aladdin.zip",
 		"size": 1810235,
 		"drm": ["Manual Lookup"],
-		"hardware": [{
+		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
 				"VGA": {
@@ -20,12 +20,38 @@
 				}
 			},
 			"sound": ["PC Speaker", "Sound Blaster"]
-		}],
+		},
 		"language": "English",
 		"year": 1994,
 		"genre": "Platformer",
 		"developer": "Virgin Interactive",
 		"publisher": "Virgin Interactive",
+		"licence": "Commercial"
+	} , {
+		"id": "dune2",
+		"name": "Dune II: The Building of a Dynasty",
+		"executable": "./DUNE2.EXE",
+		"file": "dune2.zip",
+		"size": 4384799,
+		"hardware": {
+			"input": ["Keyboard", "Mouse"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["PC Speaker", "Sound Blaster"]
+		},
+		"language": "English",
+		"year": 1992,
+		"genre": "Strategy",
+		"developer": "Westwood Studios",
+		"publisher": "Virgin Games",
+		"copyright": "Virgin Interactive",
+		"version": "1.7eu",
 		"licence": "Commercial"
 	} , {
 		"id": "loomega",
@@ -34,7 +60,7 @@
 		"file": "loomega.zip",
 		"size": 1201980,
 		"drm": ["Manual Lookup"],
-		"hardware": [{
+		"hardware": {
 			"input": ["Keyboard", "Mouse"],
 			"video": {
 				"EGA": [{
@@ -45,7 +71,7 @@
 				}]
 			},
 			"sound": ["PC Speaker", "Sound Blaster"]
-		}],
+		},
 		"language": "English",
 		"year": 1990,
 		"genre": "Adventure",
@@ -55,12 +81,12 @@
 		"licence": "Commercial"
 	} , {
 		"id": "mk1",
-		"name": "Mortal Kombat",
+		"name": "Mortal Kombat 1",
 		"executable": "./DOS32A.EXE MKCRK.EXE",
 		"file": "mk1.zip",
 		"size": 8167485,
 		"drm": ["Manual Lookup"],
-		"hardware": [{
+		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
 				"VGA": {
@@ -71,7 +97,7 @@
 				}
 			},
 			"sound": ["PC Speaker", "Sound Blaster"]
-		}],
+		},
 		"language": "English",
 		"year": 1993,
 		"genre": "Fighting",
@@ -85,7 +111,7 @@
 		"executable": "./HISTORIK.EXE",
 		"file": "pre1.zip",
 		"size": 626070,
-		"hardware": [{
+		"hardware": {
 			"input": ["Keyboard", "Gamepad/Joystick"],
 			"video": {
 				"VGA": {
@@ -96,7 +122,7 @@
 				}
 			},
 			"sound": ["PC Speaker", "Adlib", "Sound Blaster", "Roland MT-32"]
-		}],
+		},
 		"language": "English",
 		"year": 1991,
 		"genre": "Platformer",
@@ -109,7 +135,7 @@
 		"executable": "./PRE2.EXE",
 		"file": "pre2.zip",
 		"size": 1080103,
-		"hardware": [{
+		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
 				"VGA": {
@@ -120,7 +146,7 @@
 				}
 			},
 			"sound": ["PC Speaker", "Sound Blaster"]
-		}],
+		},
 		"language": "English",
 		"year": 1993,
 		"genre": "Platformer",
@@ -134,7 +160,7 @@
 		"file": "pop114.zip",
 		"size": 1988713,
 		"drm": ["Manual Lookup"],
-		"hardware": [{
+		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
 				"VGA": {
@@ -145,7 +171,7 @@
 				}
 			},
 			"sound": ["PC Speaker", "Sound Source", "Tandy", "Sound Blaster", "Sound Blaster Pro", "Roland MT-32"]
-		}],
+		},
 		"language": "English",
 		"year": 1990,
 		"genre": "Platformer",
@@ -161,7 +187,7 @@
 		"executable": "./PRINCE.EXE",
 		"file": "pop211.zip",
 		"size": 5129227,
-		"hardware": [{
+		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
 				"VGA": {
@@ -172,7 +198,7 @@
 				}
 			},
 			"sound": ["PC Speaker", "Sound Source", "Tandy", "Sound Blaster", "Sound Blaster Pro", "Roland MT-32"]
-		}],
+		},
 		"language": "English",
 		"year": 1993,
 		"genre": "Platformer",
@@ -188,7 +214,7 @@
 		"mode": "asm",
 		"file": "quake106.zip",
 		"size": 52263942,
-		"hardware": [{
+		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
 			"video": {
 				"VGA": {
@@ -220,7 +246,7 @@
 				}
 			},
 			"sound": ["Sound Blaster", "UltraSound"]
-		}],
+		},
 		"language": "English",
 		"year": 1996,
 		"genre": "FPS",
@@ -237,7 +263,7 @@
 		"mode": "asm",
 		"file": "quake106.zip",
 		"size": 52263942,
-		"hardware": [{
+		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
 			"video": {
 				"VGA": {
@@ -269,7 +295,7 @@
 				}
 			},
 			"sound": ["Sound Blaster", "UltraSound"]
-		}],
+		},
 		"language": "English",
 		"year": 1997,
 		"genre": "FPS",
@@ -286,7 +312,7 @@
 		"mode": "asm",
 		"file": "quake106.zip",
 		"size": 52263942,
-		"hardware": [{
+		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
 			"video": {
 				"VGA": {
@@ -318,7 +344,7 @@
 				}
 			},
 			"sound": ["Sound Blaster", "UltraSound"]
-		}],
+		},
 		"language": "English",
 		"year": 1997,
 		"genre": "FPS",
@@ -334,7 +360,7 @@
 		"args": ["-c", "mount d emulator/c -t cdrom"],
 		"file": "war2.zip",
 		"size": 82020985,
-		"hardware": [{
+		"hardware": {
 			"input": ["Keyboard", "Mouse"],
 			"video": {
 				"VGA": {
@@ -345,7 +371,7 @@
 				}
 			},
 			"sound": ["PC Speaker", "Adlib", "Sound Blaster"]
-		}],
+		},
 		"language": "English",
 		"year": 1995,
 		"genre": "Strategy",
@@ -361,7 +387,7 @@
 		"args": ["-c", "mount d emulator/c -t cdrom"],
 		"file": "war2x.zip",
 		"size": 122526490,
-		"hardware": [{
+		"hardware": {
 			"input": ["Keyboard", "Mouse"],
 			"video": {
 				"VGA": {
@@ -372,7 +398,7 @@
 				}
 			},
 			"sound": ["PC Speaker", "Adlib", "Sound Blaster"]
-		}],
+		},
 		"language": "English",
 		"year": 1996,
 		"genre": "Strategy",
@@ -387,7 +413,7 @@
 		"executable": "./WOLF3D.EXE",
 		"file": "wolf3d.zip",
 		"size": 1075482,
-		"hardware": [{
+		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
 			"video": {
 				"VGA": {
@@ -398,7 +424,7 @@
 				}
 			},
 			"sound": ["PC Speaker", "Sound Source", "Adlib", "Sound Blaster"]
-		}],
+		},
 		"language": "English",
 		"year": 1992,
 		"genre": "FPS",
@@ -415,7 +441,7 @@
 		"file": "wolf3ds.zip",
 		"size": 1542721,
 		"drm": ["Manual Lookup"],
-		"hardware": [{
+		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
 			"video": {
 				"VGA": {
@@ -426,7 +452,7 @@
 				}
 			},
 			"sound": ["PC Speaker", "Sound Source", "Adlib", "Sound Blaster"]
-		}],
+		},
 		"language": "English",
 		"year": 1992,
 		"genre": "FPS",

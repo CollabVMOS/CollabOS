@@ -55,7 +55,7 @@
 				link: 'apps/dosbox/index.html'
 			} , {
 				name: 'Wolfenstein 3D',
-				icon: 'apps/wolf3d/favicon.png',
+				icon: 'apps/wolf3d/favicon.gif',
 				link: 'apps/wolf3d/index.html'
 			} , {
 				name: 'Quake 1',
