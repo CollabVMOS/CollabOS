@@ -27,6 +27,9 @@
 * [Dropbox SDK](https://github.com/dropbox/dropbox-sdk-js) License: MIT
 * [jsrsasign](https://github.com/kjur/jsrsasign) License: BSD/MIT
 * [Firebug Lite](https://github.com/firebug/firebug-lite) License: BSD
+* [WebAmp](https://github.com/captbaritone/webamp) License: MIT
+* [Butterchurn](https://github.com/jberg/butterchurn) License: MIT
+* [WebQuake](https://github.com/Triang3l/WebQuake) License: GPLv1
 
 ## License
 

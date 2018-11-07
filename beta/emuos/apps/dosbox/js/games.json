@@ -12,12 +12,12 @@
 		"hardware": [{
 			"input": ["Keyboard"],
 			"video": {
-				"VGA": [{
+				"VGA": {
 					"resolutions": [
 						"320x200"
 					],
 					"colors": 256
-				}]
+				}
 			},
 			"sound": ["PC Speaker", "Sound Blaster"]
 		}],
@@ -63,12 +63,12 @@
 		"hardware": [{
 			"input": ["Keyboard"],
 			"video": {
-				"VGA": [{
+				"VGA": {
 					"resolutions": [
 						"320x200"
 					],
 					"colors": 256
-				}]
+				}
 			},
 			"sound": ["PC Speaker", "Sound Blaster"]
 		}],
@@ -88,12 +88,12 @@
 		"hardware": [{
 			"input": ["Keyboard", "Gamepad/Joystick"],
 			"video": {
-				"VGA": [{
+				"VGA": {
 					"resolutions": [
 						"320x200"
 					],
 					"colors": 256
-				}]
+				}
 			},
 			"sound": ["PC Speaker", "Adlib", "Sound Blaster", "Roland MT-32"]
 		}],
@@ -112,12 +112,12 @@
 		"hardware": [{
 			"input": ["Keyboard"],
 			"video": {
-				"VGA": [{
+				"VGA": {
 					"resolutions": [
 						"320x200"
 					],
 					"colors": 256
-				}]
+				}
 			},
 			"sound": ["PC Speaker", "Sound Blaster"]
 		}],
@@ -137,12 +137,12 @@
 		"hardware": [{
 			"input": ["Keyboard"],
 			"video": {
-				"VGA": [{
+				"VGA": {
 					"resolutions": [
 						"320x200"
 					],
 					"colors": 256
-				}]
+				}
 			},
 			"sound": ["PC Speaker", "Sound Source", "Tandy", "Sound Blaster", "Sound Blaster Pro", "Roland MT-32"]
 		}],
@@ -164,12 +164,12 @@
 		"hardware": [{
 			"input": ["Keyboard"],
 			"video": {
-				"VGA": [{
+				"VGA": {
 					"resolutions": [
 						"320x200"
 					],
 					"colors": 256
-				}]
+				}
 			},
 			"sound": ["PC Speaker", "Sound Source", "Tandy", "Sound Blaster", "Sound Blaster Pro", "Roland MT-32"]
 		}],
@@ -182,6 +182,152 @@
 		"version": "1.1",
 		"licence": "Commercial"
 	} , {
+		"id": "quake1",
+		"name": "Quake 1",
+		"executable": "./QUAKE.EXE -nocdaudio -stdvid",
+		"mode": "asm",
+		"file": "quake106.zip",
+		"size": 52263942,
+		"hardware": [{
+			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200",
+						"320x240",
+						"320x350",
+						"320x400",
+						"320x480",
+						"360x200",
+						"360x240",
+						"360x350",
+						"360x400",
+						"360x480"
+					],
+					"colors": 256
+				},
+				"SVGA": {
+					"resolutions": [
+						"640x400",
+						"640x480",
+						"848x480",
+						"800x600",
+						"1024x768",
+						"1152x864",
+						"1280x1024"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["Sound Blaster", "UltraSound"]
+		}],
+		"language": "English",
+		"year": 1996,
+		"genre": "FPS",
+		"developer": "id Software",
+		"publisher": "GT Interactive",
+		"copyright": "Bethesda Softworks",
+		"version": "1.06",
+		"licence": "Commercial"
+	} , {
+		"id": "quake1mp1",
+		"name": "Quake 1: Scourge of Armagon",
+		"description": "Mission Pack No. 1",
+		"executable": "./QUAKE.EXE -nocdaudio -stdvid -game hipnotic",
+		"mode": "asm",
+		"file": "quake106.zip",
+		"size": 52263942,
+		"hardware": [{
+			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200",
+						"320x240",
+						"320x350",
+						"320x400",
+						"320x480",
+						"360x200",
+						"360x240",
+						"360x350",
+						"360x400",
+						"360x480"
+					],
+					"colors": 256
+				},
+				"SVGA": {
+					"resolutions": [
+						"640x400",
+						"640x480",
+						"848x480",
+						"800x600",
+						"1024x768",
+						"1152x864",
+						"1280x1024"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["Sound Blaster", "UltraSound"]
+		}],
+		"language": "English",
+		"year": 1997,
+		"genre": "FPS",
+		"developer": "Hipnotic Interactive",
+		"publisher": "id Software",
+		"copyright": "Bethesda Softworks",
+		"version": "1.06",
+		"licence": "Commercial"
+	} , {
+		"id": "quake1mp2",
+		"name": "Quake 1: Dissolution of Eternity",
+		"description": "Mission Pack No. 2",
+		"executable": "./QUAKE.EXE -nocdaudio -stdvid -game rogue",
+		"mode": "asm",
+		"file": "quake106.zip",
+		"size": 52263942,
+		"hardware": [{
+			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200",
+						"320x240",
+						"320x350",
+						"320x400",
+						"320x480",
+						"360x200",
+						"360x240",
+						"360x350",
+						"360x400",
+						"360x480"
+					],
+					"colors": 256
+				},
+				"SVGA": {
+					"resolutions": [
+						"640x400",
+						"640x480",
+						"848x480",
+						"800x600",
+						"1024x768",
+						"1152x864",
+						"1280x1024"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["Sound Blaster", "UltraSound"]
+		}],
+		"language": "English",
+		"year": 1997,
+		"genre": "FPS",
+		"developer": "Rogue Entertainment",
+		"publisher": "id Software",
+		"copyright": "Bethesda Softworks",
+		"version": "1.06",
+		"licence": "Commercial"
+	} , {
 		"id": "war2",
 		"name": "Warcraft II: Tides of Darkness",
 		"executable": "./WAR2.EXE",
@@ -191,12 +337,12 @@
 		"hardware": [{
 			"input": ["Keyboard", "Mouse"],
 			"video": {
-				"VGA": [{
+				"VGA": {
 					"resolutions": [
 						"640x400"
 					],
 					"colors": 256
-				}]
+				}
 			},
 			"sound": ["PC Speaker", "Adlib", "Sound Blaster"]
 		}],
@@ -218,12 +364,12 @@
 		"hardware": [{
 			"input": ["Keyboard", "Mouse"],
 			"video": {
-				"VGA": [{
+				"VGA": {
 					"resolutions": [
 						"640x400"
 					],
 					"colors": 256
-				}]
+				}
 			},
 			"sound": ["PC Speaker", "Adlib", "Sound Blaster"]
 		}],
@@ -244,18 +390,18 @@
 		"hardware": [{
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
 			"video": {
-				"VGA": [{
+				"VGA": {
 					"resolutions": [
 						"320x200"
 					],
 					"colors": 256
-				}]
+				}
 			},
 			"sound": ["PC Speaker", "Sound Source", "Adlib", "Sound Blaster"]
 		}],
 		"language": "English",
 		"year": 1992,
-		"genre": "Action",
+		"genre": "FPS",
 		"developer": "id Software",
 		"publisher": "Apogee Software",
 		"copyright": "Bethesda Softworks",
@@ -272,18 +418,18 @@
 		"hardware": [{
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
 			"video": {
-				"VGA": [{
+				"VGA": {
 					"resolutions": [
 						"320x200"
 					],
 					"colors": 256
-				}]
+				}
 			},
 			"sound": ["PC Speaker", "Sound Source", "Adlib", "Sound Blaster"]
 		}],
 		"language": "English",
 		"year": 1992,
-		"genre": "Action",
+		"genre": "FPS",
 		"developer": "id Software",
 		"publisher": "FormGen Corporation",
 		"version": "1.0",

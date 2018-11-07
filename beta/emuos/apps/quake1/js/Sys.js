@@ -99,7 +99,7 @@ Sys.FloatTime = function() {
 
 window.onload = function() {
 	// IE11 Fix
-	if (Number.isNaN != null)
+	if (Number.isNaN !== null)
 		Q.isNaN = Number.isNaN;
 	else
 		Q.isNaN = isNaN;
@@ -190,8 +190,7 @@ window.onload = function() {
 	Sys.frame = setInterval(Host.Frame, 1000.0 / 60.0);
 };
 
-/*Sys.onbeforeunload = function()
-{
+/*Sys.onbeforeunload = function() {
 	return 'Are you sure you want to quit?';
 };*/
 
