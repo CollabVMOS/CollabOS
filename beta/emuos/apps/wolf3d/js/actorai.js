@@ -24,8 +24,6 @@
 * ===========================================================================
 */
 
-
-
 /**
  * @namespace
  * @description Artificial intelligence
@@ -120,7 +118,6 @@ Wolf.ActorAI = (function() {
 		}
 	}
 
-
 	/**
 	 * @description Play Slurpie sound.
 	 * @memberOf Wolf.ActorAI
@@ -130,7 +127,6 @@ Wolf.ActorAI = (function() {
 	function slurpie(self, game) {
 		Wolf.Sound.startSound(game.player.position, self, 1, Wolf.CHAN_VOICE, "lsfx/061.wav", 1, Wolf.ATTN_NORM, 0);
 	}
-
 
 	/**
 	 * @description Spawn new actor, when Mecha Hitler is dead.
@@ -172,10 +168,8 @@ Wolf.ActorAI = (function() {
 
 	/* Angel of Death */
 
-    
-    // Angel can't shoot more then 3 sparks in a row. It will get tired!
+	// Angel can't shoot more then 3 sparks in a row. It will get tired!
 	var angel_temp = 0;
-
 
 	/**
 	 * @description Play Angel of Death Breathing sound.
@@ -186,7 +180,6 @@ Wolf.ActorAI = (function() {
 		Wolf.Sound.startSound(null, null, 1, Wolf.CHAN_VOICE, "lsfx/080.wav", 1, Wolf.ATTN_NORM, 0);
 	}
 
-
 	/**
 	 * @description Reset Angel of Death attack counter
 	 * @memberOf Wolf.ActorAI
@@ -195,7 +188,6 @@ Wolf.ActorAI = (function() {
 	function startAttack(self) {
 		angel_temp = 0;
 	}
-
 
 	/**
 	 * @description Angel of Death AI.
@@ -222,7 +214,6 @@ Wolf.ActorAI = (function() {
 	function victory(game) {
 		Wolf.Game.startIntermission(game);
 	}
-
 
 	/**
 	 * @description Entity is dormant state.
@@ -281,7 +272,6 @@ Wolf.ActorAI = (function() {
 		Wolf.Actors.stateChange(self, Wolf.st_path1);
 	}
 
-
 	/**
 	 * @description Death cam animation.
 	 *			  Tthe DeathCam feature isn't implimented, but we want to
@@ -296,7 +286,6 @@ Wolf.ActorAI = (function() {
 			Wolf.Game.startIntermission(game);
 		}, 5000);
 	}
-
 
 	/**
 	 * @description Rockets emmit smoke.
@@ -322,8 +311,6 @@ Wolf.ActorAI = (function() {
 		smokeEnt.flags = Wolf.FL_NEVERMARK;
 		smokeEnt.sprite = Wolf.Sprites.getNewSprite(level);
 	}
-
-
 
 	/**
 	 * @description Puts an actor into attack mode and possibly reverses the direction if the player is behind it.
@@ -418,7 +405,6 @@ Wolf.ActorAI = (function() {
 		self.flags |= Wolf.FL_ATTACKMODE | Wolf.FL_FIRSTATTACK;
 	}
 
-
 	/**
 	 * @description Called when the player succesfully hits an enemy.
 	 *			  Does damage points to enemy ob, either putting it into a stun frame or killing it.
@@ -461,7 +447,6 @@ Wolf.ActorAI = (function() {
 			}
 		}
 	}
-
 
 	/**
 	 * @description Actor has been killed, so give points and spawn powerups.
@@ -573,5 +558,4 @@ Wolf.ActorAI = (function() {
 		startDeathCam : startDeathCam,
 		smoke : smoke
 	};
-
 })();

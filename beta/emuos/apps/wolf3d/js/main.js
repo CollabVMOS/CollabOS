@@ -123,14 +123,20 @@
 
 			$body.html(template).promise().done(function() {
 				var $progress = $('<div>');
+
 				$progress.addClass('load-progress').appendTo('#title-screen');
+
 				$('#title-screen').show();
+
 				$progress.animate({
 					width: '100%'
 				}, 1000, function() {
 					$('#title-screen').fadeOut(1500, function() {
+						// noinspection JSUnresolvedVariable
 						Wolf.Input.init();
+						// noinspection JSUnresolvedVariable
 						Wolf.Game.init();
+						// noinspection JSUnresolvedVariable
 						Wolf.Menu.show();
 					});
 				});

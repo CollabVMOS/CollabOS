@@ -29,7 +29,6 @@
  * @description Player management
  */
 Wolf.Player = (function() {
-
 	Wolf.setConsts({
 		PLAYERSIZE		: Wolf.MINDIST, // player radius
 		STOPSPEED		: 0x0D00,
@@ -87,8 +86,6 @@ Wolf.Player = (function() {
 
 	});
 
-
-
 	/*
 	struct atkinf
 	{
@@ -101,7 +98,6 @@ Wolf.Player = (function() {
 		[ {tics:6,attack:0,frame:1},{tics:6,attack:1,frame:2},{tics:6,attack:3,frame:3},{tics:6,attack:-1,frame:0}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} ],
 		[ {tics:6,attack:0,frame:1},{tics:6,attack:1,frame:2},{tics:6,attack:4,frame:3},{tics:6,attack:-1,frame:0}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} ]
 	];
-
 
 	/**
 	 * @description Spawn the player
@@ -195,7 +191,6 @@ Wolf.Player = (function() {
 		return player;
 	}
 
-
 	/**
 	 * @description Copy player variables from another player object
 	 * @private
@@ -234,8 +229,6 @@ Wolf.Player = (function() {
 		player.items = Wolf.ITEM_WEAPON_1 | Wolf.ITEM_WEAPON_2;
 		player.nextExtra = Wolf.EXTRAPOINTS;
 	}
-
-
 
 	/**
 	 * @description Try to move player
@@ -337,7 +330,6 @@ Wolf.Player = (function() {
 		self.position.y = basey;
 	}
 
-
 	/**
 	 * @description Changes player's angle and position
 	 * @memberOf Wolf.Player
@@ -419,7 +411,6 @@ Wolf.Player = (function() {
 			Wolf.Game.victory(game);
 		}
 	}
-
 
 	/**
 	 * @description Called if player pressed USE button
@@ -583,11 +574,9 @@ Wolf.Player = (function() {
 		}
 	}
 
-
 	function giveKey(player, key) {
 		player.items |= Wolf.ITEM_KEY_1 << key;
 	}
-
 
 	function giveWeapon(player, weapon) {
 		var itemflag;
@@ -608,8 +597,6 @@ Wolf.Player = (function() {
 			}
 		}
 	}
-
-
 
 	function giveAmmo(player, type, ammo) {
 		var maxAmmo = 99;
@@ -635,7 +622,6 @@ Wolf.Player = (function() {
 
 		return true;
 	}
-
 
 	/**
 	 * @description Award points to the player
@@ -828,5 +814,4 @@ Wolf.Player = (function() {
 		giveLife : giveLife,
 		giveKey : giveKey
 	};
-
 })();

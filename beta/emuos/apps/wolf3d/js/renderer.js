@@ -37,9 +37,7 @@ Wolf.setConsts({
 	TEXTURERESOLUTION	: Wolf.ISCHROME ? 128	: 64
 });
 
-
 Wolf.Renderer = (function() {
-
 	var slices = [],
 		useBackgroundImage = Wolf.ISWEBKIT,
 		texturePath = "art/walls-shaded/" + Wolf.TEXTURERESOLUTION + "/",
@@ -438,5 +436,4 @@ Wolf.Renderer = (function() {
 		unloadSprite : unloadSprite,
 		reset : reset
 	};
-
 })();

@@ -13,7 +13,6 @@ Wolf.setConsts({
 });
 
 Wolf.Renderer = (function(React) {
-
 	var slices = [],
 		useBackgroundImage = Wolf.ISWEBKIT,
 		texturePath = "art/walls-shaded/" + Wolf.TEXTURERESOLUTION + "/",
@@ -372,5 +371,4 @@ Wolf.Renderer = (function(React) {
 	unloadSprite: unloadSprite,
 	reset: reset
   };
-
 })(React);

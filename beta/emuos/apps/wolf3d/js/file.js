@@ -29,8 +29,6 @@
  * @description Binary file reading
  */
 Wolf.File = (function() {
-
-
 	/**
 	 * @description Open a file from URL
 	 * @memberOf Wolf.File
@@ -57,7 +55,6 @@ Wolf.File = (function() {
 		xhr.overrideMimeType('text/plain; charset=x-user-defined');
 		xhr.send(null);
 	}
-
 
 	if (typeof window.atob == 'undefined') {
 		window['atob'] = function(str) {
@@ -214,5 +211,4 @@ Wolf.File = (function() {
 		readBytes : readBytes,
 		readString : readString
 	};
-
 })();

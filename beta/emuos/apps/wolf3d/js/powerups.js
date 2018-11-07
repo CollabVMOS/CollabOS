@@ -24,9 +24,7 @@
 * ===========================================================================
 */
 
-
 Wolf.Powerups = (function() {
-
 	Wolf.setConsts({
 		pow_gibs		: 0,	//  1% if <=10%; SLURPIESND
 		pow_gibs2	   : 1,	//  1% if <=10%; SLURPIESND
@@ -77,7 +75,6 @@ Wolf.Powerups = (function() {
 		Wolf.SPR_STAT_49,	// pow_25clip
 		Wolf.SPR_STAT_51	// pow_spear
 	];
-
 
 	function remove(level, powerup) {
 		powerup.x = -1;
@@ -130,7 +127,6 @@ Wolf.Powerups = (function() {
 		level.tileMap[x][y] |= Wolf.POWERUP_TILE;
 		// good place to update total treasure count!
 	}
-
 
 	function give(level, player, type) {
 		var keynames = ["Gold", "Silver", "?", "?"];
@@ -299,11 +295,9 @@ Wolf.Powerups = (function() {
 		}
 	}
 
-
 	return {
 		spawn : spawn,
 		reset : reset,
 		pickUp : pickUp
 	};
-
 })();

@@ -29,7 +29,6 @@
  * @description Push wall management
  */
 Wolf.PushWall = (function() {
-
 	var PWall = {};
 	reset();
 
@@ -45,7 +44,6 @@ Wolf.PushWall = (function() {
 		PWall.texX = 0;
 		PWall.texY = 0;
 	}
-
 
 	function push(level, x, y, dir) {
 		var dx, dy;
@@ -96,7 +94,6 @@ Wolf.PushWall = (function() {
 		return true;
 	}
 
-
 	function process(level, tics) {
 		if (!PWall.active) {
 			return; // no active PWall to work with
@@ -142,5 +139,4 @@ Wolf.PushWall = (function() {
 		push : push,
 		get : get
 	};
-
 })();

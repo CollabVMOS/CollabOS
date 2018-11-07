@@ -24,7 +24,6 @@
 * ===========================================================================
 */
 
-
 /**
  * @namespace
  * @description Area management
@@ -61,7 +60,6 @@ Wolf.Areas = (function() {
 		}
 		level.state.areabyplayer[areanumber] = true;
 	}
-
 
 	/**
 	 * @private
@@ -144,5 +142,4 @@ Wolf.Areas = (function() {
 		join : join,
 		disconnect : disconnect
 	};
-
 })();

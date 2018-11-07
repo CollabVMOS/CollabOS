@@ -326,6 +326,7 @@ Wolf.Sprites = (function() {
 	];
 
 	var spriteConsts = {};
+
 	for (var i=0,n=spriteNames.length;i<n;i++) {
 		spriteConsts[spriteNames[i]] = i;
 	}
@@ -997,7 +998,6 @@ Wolf.Sprites = (function() {
 		return sheets[id];
 	}
 
-
 	function createVisList(viewport, level, visibleTiles) {
 		var tx, ty, n, num, numVisible,
 			vislist,
@@ -1085,5 +1085,4 @@ Wolf.Sprites = (function() {
 		remove : remove,
 		clean : clean
 	};
-
 })();

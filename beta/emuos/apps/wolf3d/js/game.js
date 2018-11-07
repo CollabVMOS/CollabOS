@@ -24,7 +24,6 @@
 * ===========================================================================
 */
 
-
 /**
  * @namespace
  * @description Game management
@@ -273,7 +272,6 @@ Wolf.Game = (function() {
 		nextCycle();
 	}
 
-
 	function died(game, tics) {
 		var fangle,
 			dx, dy,
@@ -382,7 +380,6 @@ Wolf.Game = (function() {
 		$(document).on("keydown", progress);
 	}
 
-
 	function victory(game) {
 		if (game.player.playstate == Wolf.ex_victory) {
 			return;
@@ -431,9 +428,6 @@ Wolf.Game = (function() {
 			}
 		}
 	}
-
-
-
 
 	/**
 	 * @description Update the HUD
@@ -493,9 +487,7 @@ Wolf.Game = (function() {
 		Wolf.Renderer.draw(viewport, level, res.tracers, res.visibleTiles);
 	}
 
-
-
-	 /**
+	/**
 	 * @description Update BJ face pic
 	 * @private
 	 * @param {object} player
@@ -545,7 +537,6 @@ Wolf.Game = (function() {
 			backgroundPosition : - (pic * Wolf.HUD_FACE_WIDTH) + "px 0"
 		});
 	}
-
 
 	/**
 	 * @description Update the FPS counter
@@ -598,7 +589,6 @@ Wolf.Game = (function() {
 		rendering = true;
 		nextFrame();
 	}
-
 
 	/**
 	 * @description Start playing the specified level of the specified episode.
@@ -747,7 +737,6 @@ Wolf.Game = (function() {
 			callback();
 		}
 	}
-
 
 	/**
 	 * @description Start a new game with the specified skill level.
@@ -993,7 +982,6 @@ Wolf.Game = (function() {
 		$(document).on("keydown", progress);
 	}
 
-
 	/**
 	 * @description Update an intermission screen stat.
 	 * @private
@@ -1018,7 +1006,6 @@ Wolf.Game = (function() {
 		}
 		digits.show();
 	}
-
 
 	/**
 	 * @description Start red damage flash.
@@ -1113,7 +1100,6 @@ Wolf.Game = (function() {
 		return false;
 	}
 
-
 	/**
 	 * @description Scale the game to fit fullscreen mode
 	 * @private
@@ -1146,7 +1132,6 @@ Wolf.Game = (function() {
 			"-o-transform" : ""
 		}).data("scale", 1);
 	}
-
 
 	/**
 	 * @description Initialize the game module
@@ -1220,7 +1205,6 @@ Wolf.Game = (function() {
 		}
 	}
 
-
 	/**
 	 * @description Query the game state
 	 * @memberOf Wolf.Game
@@ -1229,7 +1213,6 @@ Wolf.Game = (function() {
 	function isPlaying() {
 		return playing;
 	}
-
 
 	/**
 	 * @description Toggle the pause state.
@@ -1246,10 +1229,10 @@ Wolf.Game = (function() {
 		$("#game .renderer div.pause.overlay").toggle(paused);
 	}
 
-
 	function enableMouse(enable) {
 		mouseEnabled = enable;
 	}
+
 	function isMouseEnabled() {
 		return mouseEnabled;
 	}
@@ -1268,7 +1251,6 @@ Wolf.Game = (function() {
 		controls[action] = keys;
 	}
 
-	/**/
 	function dump() {
 		//console.log(currentGame);
 		window.open("data:text/plain," + JSON.stringify(currentGame), "dump");
@@ -1325,7 +1307,6 @@ Wolf.Game = (function() {
 			Wolf.log("Giving keys, weapons, ammo, health and 10000 points");
 		}
 	}
-	/**/
 
 	return {
 		startGame : startGame,
@@ -1356,5 +1337,4 @@ Wolf.Game = (function() {
 		debugEndEpisode : debugEndEpisode
 		/**/
 	};
-
 })();

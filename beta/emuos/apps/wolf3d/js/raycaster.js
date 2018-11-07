@@ -42,7 +42,6 @@ Wolf.setConsts({
 });
 
 Wolf.Raycaster = (function() {
-
 	var x_tile_step = [ 1, -1, -1,  1 ],
 		y_tile_step = [ 1,  1, -1, -1 ];
 
@@ -248,7 +247,6 @@ Wolf.Raycaster = (function() {
 
 	}
 
-
 	function traceRays(viewport, level) {
 		var n, i, j,
 			tracePoint,
@@ -294,10 +292,8 @@ Wolf.Raycaster = (function() {
 		};
 	}
 
-
 	return {
 		traceRays : traceRays,
 		trace : trace
 	};
-
 })();

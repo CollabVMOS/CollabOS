@@ -24,7 +24,6 @@
 * ===========================================================================
 */
 
-
 /**
  * @namespace
  * @description Enemy AI
@@ -35,7 +34,6 @@ Wolf.AI = (function() {
 		RUNSPEED	: 6000,
 		MINSIGHT	: 0x18000
 	});
-
 
 	function checkSight(self, game) {
 		var level = game.level,
@@ -88,7 +86,6 @@ Wolf.AI = (function() {
 		// trace a line to check for blocking tiles (corners)
 		return Wolf.Level.checkLine(self.x, self.y, player.position.x, player.position.y, level);
 	}
-
 
 	/**
 	 * @description Entity is going to move in a new direction.
@@ -218,18 +215,17 @@ Wolf.AI = (function() {
 		}
 	}
 
-
     /*
     -----------------------------------------------------------------------------
-     Function: AI_FindTarget() -Called by entities that ARE NOT chasing the player. 
-     
-     Parameters: 
-     
-     Returns: 
+     Function: AI_FindTarget() -Called by entities that ARE NOT chasing the player.
+
+     Parameters:
+
+     Returns:
         If the player is detected (by sight, noise, or proximity), the entity
         is put into its combat frame and true is returned.
-     
-     Notes: 
+
+     Notes:
         Incorporates a random reaction delay.
     -----------------------------------------------------------------------------
 	 */
@@ -312,8 +308,6 @@ Wolf.AI = (function() {
 
 		return true;
 	}
-
-
 
 	/**
 	 * @description As dodge(), but doesn't try to dodge.
@@ -410,7 +404,6 @@ Wolf.AI = (function() {
 		self.dir = Wolf.Math.dir8_nodir; // can't move
 	}
 
-
 	/**
 	 * @description Run Away from player.
 	 * @private
@@ -459,7 +452,6 @@ Wolf.AI = (function() {
 
 		self.dir = Wolf.Math.dir8_nodir;		// can't move
 	}
-
 
 	/**
 	 * @description Attempts to choose and initiate a movement for entity
@@ -551,7 +543,6 @@ Wolf.AI = (function() {
 		self.dir = Wolf.Math.dir8_nodir;
 	}
 
-
 	/**
 	 * @memberOf Wolf.AI
 	 */
@@ -580,7 +571,6 @@ Wolf.AI = (function() {
 		}
 		T_Advance(self, game, path, tics);
 	}
-
 
 	/**
 	 * @description Try to damage the player.
@@ -656,7 +646,6 @@ Wolf.AI = (function() {
 		}
 	}
 
-
 	/**
 	 * @description
 	 * @memberOf Wolf.AI
@@ -706,7 +695,6 @@ Wolf.AI = (function() {
 
 	}
 
-
 	/**
 	 * @description
 	 * @memberOf Wolf.AI
@@ -738,11 +726,10 @@ Wolf.AI = (function() {
 		T_Advance(self, game, dodge, tics);
 	}
 
-
     /*
     -----------------------------------------------------------------------------
      Function: T_BossChase
-     Notes: 
+     Notes:
         They retreat if too close to player.
     -----------------------------------------------------------------------------
 	 */
@@ -784,7 +771,6 @@ Wolf.AI = (function() {
 		T_Advance(self, game, think, tics);
 	}
 
-
 	/**
 	 * @description
 	 * @memberOf Wolf.AI
@@ -811,7 +797,6 @@ Wolf.AI = (function() {
 
 		T_Advance(self, game, dodge, tics);
 	}
-
 
 	/**
 	 * @description
@@ -860,19 +845,18 @@ Wolf.AI = (function() {
 		}
 	}
 
-
     /*
     -----------------------------------------------------------------------------
-     Function: T_Move() -Moves object for distance in global units, 
-                        in ob->dir direction. 
-     
-     Parameters: 
-     
-     Returns: 
+     Function: T_Move() -Moves object for distance in global units,
+                        in ob->dir direction.
+
+     Parameters:
+
+     Returns:
         If the player is detected (by sight, noise, or proximity), the entity
         is put into its combat frame and true is returned.
-     
-     Notes: 
+
+     Notes:
         ob->x    = adjusted for new position
         ob->y
 
@@ -947,7 +931,6 @@ Wolf.AI = (function() {
 		}
 	}
 
-
     /*
     -----------------------------------------------------------------------------
      Function: T_UShoot -[UberMutant]
@@ -967,7 +950,6 @@ Wolf.AI = (function() {
 			Wolf.Player.damage(player, self, 10);
 		}
 	}
-
 
 	/**
 	 * @description
@@ -1046,7 +1028,6 @@ Wolf.AI = (function() {
 		}
 	}
 
-
 	/**
 	 * @description Called when projectile is airborne.
 	 * @private
@@ -1084,7 +1065,6 @@ Wolf.AI = (function() {
 		// FIXME: Projectile will fly through objects (even guards & columns) - must fix to create rocket launcher!
 		return true;
 	}
-
 
 	/**
 	 * @description Called when projectile is airborne.
@@ -1213,7 +1193,6 @@ Wolf.AI = (function() {
 		Wolf.Game.endEpisode(game);
 	}
 
-
 	return {
 		T_Stand : T_Stand,
 		T_Path : T_Path,
@@ -1232,5 +1211,4 @@ Wolf.AI = (function() {
 		T_BJYell : T_BJYell,
 		T_BJDone : T_BJDone
 	};
-
 })();

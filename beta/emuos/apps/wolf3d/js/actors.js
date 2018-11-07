@@ -230,7 +230,6 @@ Wolf.Actors = (function() {
 		return true;
 	}
 
-
 	/**
 	 * @description Changes guard's state to that defined in newState.
 	 * @memberOf Wolf.Actors
@@ -468,7 +467,6 @@ Wolf.Actors = (function() {
 		level.state.totalMonsters++;
 	}
 
-
 	function spawnGhosts(level, skill, which, x, y) {
 		var self = spawn(level, skill, which, x, y, Wolf.Math.dir4_nodir);
 		if (!self) {
@@ -515,5 +513,4 @@ Wolf.Actors = (function() {
 		spawnBJVictory : spawnBJVictory,
 		stateChange : stateChange
 	};
-
 })();

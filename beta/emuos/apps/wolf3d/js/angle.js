@@ -24,7 +24,6 @@
 * ===========================================================================
 */
 
-
 /**
  * @namespace
  * @description Angle math
@@ -94,7 +93,6 @@ Wolf.Angle = (function() {
 		}
 	}
 
-
 	/**
 	 * @description Normalize angle.
 	 * @memberOf Wolf.Angle
@@ -110,8 +108,6 @@ Wolf.Angle = (function() {
 		}
 		return angle;
 	}
-
-
 
 	/**
 	 * @description Linear interpolate allowing for the Modulo 360 problem.
@@ -139,5 +135,4 @@ Wolf.Angle = (function() {
 		interpolate : interpolate,
 		lerp : lerp
 	}
-
 })();

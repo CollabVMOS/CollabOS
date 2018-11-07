@@ -24,13 +24,11 @@
 * ===========================================================================
 */
 
-
 /**
  * @namespace
  * @description Functions for capturing keyboard/mouse input
  */
 Wolf.Input = (function() {
-
 	var keys,
 		lmbDown = false,
 		rmbDown = false,
@@ -277,7 +275,6 @@ Wolf.Input = (function() {
 		pointer.unlock($("#game")[0]);
 	}
 
-
 	return {
 		init	: init,
 		reset	: reset,
@@ -293,9 +290,7 @@ Wolf.Input = (function() {
 		lockPointer	: lockPointer,
 		unlockPointer	: unlockPointer
 	};
-
 })();
-
 
 Wolf.Keys = {
 	LEFT	: 37,

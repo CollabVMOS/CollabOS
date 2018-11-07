@@ -34,6 +34,10 @@
 				win9x: 'theme-win9x'
 			},
 			icons: [{
+				name: 'Windows 93',
+				icon: 'https://www.windows93.net/favicon.ico',
+				link: 'https://www.windows93.net/'
+			} , {
 				name: 'Visual Studio Code',
 				icon: 'apps/monaco-editor/favicon.ico',
 				link: 'apps/monaco-editor/index.html'

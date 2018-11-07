@@ -480,7 +480,6 @@ Wolf.Menu = (function() {
 
 	}
 
-
 	/**
 	 * @description Show the menu
 	 * @memberOf Wolf.Menu
@@ -623,5 +622,4 @@ Wolf.Menu = (function() {
 		hide : hide,
 		showText : showText
 	};
-
 })();

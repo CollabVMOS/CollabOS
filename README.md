@@ -30,6 +30,7 @@
 * [WebAmp](https://github.com/captbaritone/webamp) License: MIT
 * [Butterchurn](https://github.com/jberg/butterchurn) License: MIT
 * [WebQuake](https://github.com/Triang3l/WebQuake) License: GPLv1
+* [HTML5 Wolfenstein 3D](https://github.com/loadx/html5-wolfenstein3D) License: ?
 
 ## License
 

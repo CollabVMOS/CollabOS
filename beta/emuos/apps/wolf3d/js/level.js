@@ -29,7 +29,6 @@
  * @description Level management
  */
 Wolf.Level = (function() {
-
 	Wolf.setConsts({
 		WALL_TILE			: 1,
 		PUSHWALL_TILE		: (1 << 20),
@@ -124,8 +123,6 @@ Wolf.Level = (function() {
 		};
 		statinfo[i] = info;
 	}
-
-
 
 	 /**
 	 * @description Create a new level object
@@ -379,7 +376,6 @@ Wolf.Level = (function() {
 		return rlewExpand(expandedData.slice(1), 64*64*2, rle);
 	}
 
-
 	/**
 	 * @description Expand RLE data
 	 * @private
@@ -516,7 +512,6 @@ Wolf.Level = (function() {
 		return parseMapData(level.file);
 	}
 
-
 	/**
 	 * @description Spawn an object in the level at the specified position.
 	 * @private
@@ -623,15 +618,12 @@ Wolf.Level = (function() {
 		}
 	}
 
-
-
 	var cachedGuard = 0,
 		cachedOfficer = 0,
 		cachedSS = 0,
 		cachedDog = 0,
 		cachedMutant = 0,
 		progress_bar = 0;
-
 
 	/**
 	 * @description Spawn all actors and mark down special places.
@@ -997,7 +989,6 @@ Wolf.Level = (function() {
 		}
 	}
 
-
 	/**
 	 * @description Check if there is a clear line of sight between 2 points.
 	 * @memberOf Wolf.Level
@@ -1137,5 +1128,4 @@ Wolf.Level = (function() {
 		scanInfoPlane: scanInfoPlane,
 		checkLine: checkLine
 	};
-
 })();

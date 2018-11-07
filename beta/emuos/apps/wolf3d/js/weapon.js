@@ -29,8 +29,6 @@
  * @description Weapons
  */
 Wolf.Weapon = (function() {
-
-
 	function fireHit(game, player) {
 		var level = game.level,
 			closest,
@@ -79,7 +77,6 @@ Wolf.Weapon = (function() {
 
 		Wolf.ActorAI.damageActor(closest, game, player, damage); // hit something
 	}
-
 
 	function fireLead(game, player) {
 		var level = game.level,
@@ -171,5 +168,4 @@ Wolf.Weapon = (function() {
 		fireHit : fireHit,
 		fireLead : fireLead
 	};
-
 })();

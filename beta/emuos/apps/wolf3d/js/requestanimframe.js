@@ -24,10 +24,8 @@
 * ===========================================================================
 */
 
-
 /* requestAnimationFrame polyfill */
 (function() {
-
 	window.requestAnimationFrame = (function() {
 		return window.requestAnimationFrame
 			|| window.webkitRequestAnimationFrame
@@ -51,5 +49,4 @@
 			|| window.msCancelRequestAnimationFrame
 			|| window.clearTimeout;
 	})();
-
 })();

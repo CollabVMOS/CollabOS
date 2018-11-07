@@ -24,13 +24,11 @@
 * ===========================================================================
 */
 
-
 /**
  * @namespace
  * @description Door management
  */
 Wolf.Doors = (function() {
-
 	Wolf.setConsts({
 		CLOSEWALL		: Wolf.MINDIST,	// Space between wall & player
 		MAXDOORS		: 64,		 	// max number of sliding doors
@@ -171,7 +169,6 @@ Wolf.Doors = (function() {
 		return door.action == Wolf.dr_open ? Wolf.DOOR_FULLOPEN	: door.ticcount;
 	}
 
-
 	/**
 	 * @description Process door actions.
 	 * @memberOf Wolf.Doors
@@ -279,7 +276,6 @@ Wolf.Doors = (function() {
 		}
 	}
 
-
 	/**
 	 * @description Open a door
 	 * @memberOf Wolf.Doors
@@ -309,7 +305,6 @@ Wolf.Doors = (function() {
 			// Door->ticcount = DOOR_FULLOPEN;
 		}
 	}
-
 
 	function canCloseDoor(level, player, x, y, vert ) {
 		var n,
@@ -418,5 +413,4 @@ Wolf.Doors = (function() {
 		process		: process,
 		setAreas	: setAreas
 	};
-
 })();

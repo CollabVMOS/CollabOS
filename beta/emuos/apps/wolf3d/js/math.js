@@ -29,7 +29,6 @@
  * @description Math functions and lookup tables
  */
 Wolf.Math = (function() {
-
 		// ------------------------- * LUTs * -------------------------
 	var SinTable = [], // [ ANG_360 + ANG_90 + 1 ],
 		CosTable = [], // SinTable + ANG_90,
@@ -128,7 +127,6 @@ Wolf.Math = (function() {
 		return 1;
 	}
 
-
 	/**
 	 * @description Calculate the field of view.
 	 * @memberOf Wolf.Math
@@ -146,7 +144,6 @@ Wolf.Math = (function() {
 		return Wolf.RAD2DEG(Math.atan(height / (width / Math.tan(fovX / 360 * Math.PI)))) * 2;
 	}
 
-
 	/**
 	 * @description Clips angle to [0..360] bounds.
 	 * @memberOf Wolf.Math
@@ -162,7 +159,6 @@ Wolf.Math = (function() {
 		}
 		return alpha;
 	}
-
 
 	/**
 	 * @description Get quadrant.
@@ -244,8 +240,6 @@ Wolf.Math = (function() {
 		return Math.abs( (x * SinTable[a] - y * CosTable[a]) >> 0);
 	}
 
-
-
 	/**
 	 * @description Calculates line length to the point nearest to (poin).
 	 * @memberOf Wolf.Math
@@ -257,7 +251,6 @@ Wolf.Math = (function() {
 	function lineLen2Point( x, y, a) {
 		return (x * CosTable[a] + y * SinTable[a]) >> 0;
 	}
-
 
 	/*
 				point2 = {x,y}
@@ -280,7 +273,6 @@ Wolf.Math = (function() {
 		var angle = Math.atan2(point1Y - point2Y, point1X - point2X);
 		return Wolf.Angle.normalize(angle);
 	}
-
 
 	buildTables();
 
@@ -326,5 +318,4 @@ Wolf.Math = (function() {
 		opposite8 : opposite8,
 		diagonal : diagonal
 	};
-
 })();

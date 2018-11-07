@@ -25,7 +25,6 @@
 */
 
 Wolf.Sound = (function() {
-
 	Wolf.setConsts({
 		// Sound channels
 		// Channel 0 never willingly overrides
@@ -68,12 +67,12 @@ Wolf.Sound = (function() {
 		ext = 'ogg';
 	} else if (testElement.canPlayType) {
 		var t = testElement.canPlayType('audio/mpeg');
-		if (t == 'maybe') {
+		if (t === 'maybe') {
 			// We need to check if the browser really supports playing MP3s by loading one and seeing if the
 			// loadedmetadata event is triggered... but for now assume it does support it...
 			ext = 'mp3';
 			//console.log('mp3');
-		} else if (t == 'probably') {
+		} else if (t === 'probably') {
 			ext = 'mp3';
 			//console.log('mp3');
 		} else if (!!testElement.canPlayType && testElement.canPlayType('audio/wav; codecs="1"')) {
