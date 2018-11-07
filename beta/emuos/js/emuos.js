@@ -46,6 +46,10 @@
 				icon: 'apps/wing/favicon.ico',
 				link: 'apps/wing/index.html'
 			} , {
+				name: 'Biolab Disaster',
+				icon: 'apps/biolab/favicon.png',
+				link: 'apps/biolab/index.html'
+			} , {
 				name: 'DOSBox 0.74',
 				icon: 'apps/dosbox/favicon.ico',
 				link: 'apps/dosbox/index.html'
