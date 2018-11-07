@@ -30,9 +30,11 @@
 	} , {
 		"id": "diablo1sw",
 		"name": "Diablo I",
-		"executable": "./DIABLO_S.EXE",
-		"file": "diablo1sw.zip",
-		"size": 51006429,
+		"executable": "mem",
+		"args": ["-c", "imgmount c a:\\WIN95.IMG -size 512,63,16,520", "-c", "imgmount c b:\\WIN95.IMG -size 512,63,16,520", "-c", "imgmount d a:\\DIABLO.IMG -size 512,63,16,132", "-c", "imgmount d b:\\DIABLO.IMG -size 512,63,16,132", "-c", "boot -l c"],
+		"files": ["win95.zip", "diablo1sw.zip"],
+		"mode": "asm",
+		"size": 51095535,
 		"hardware": {
 			"input": ["Keyboard", "Mouse"],
 			"video": {
@@ -489,9 +491,10 @@
 		"id": "win95",
 		"name": "Windows 95",
 		"executable": "boot WIN95.IMG",
-		"args": ["-c", "c:", "-c", "imgmount a WIN95.IMG -size 512,63,16,102"],
+		"args": ["-c", "c:", "-c", "imgmount a WIN95.IMG -size 512,63,16,520"],
 		"file": "win95.zip",
-		"size": 24729657,
+		"mode": "asm",
+		"size": 76250887,
 		"hardware": {
 			"input": ["Keyboard", "Mouse"],
 			"video": {
