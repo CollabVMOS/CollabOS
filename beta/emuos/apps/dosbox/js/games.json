@@ -31,7 +31,7 @@
 		"id": "diablo1sw",
 		"name": "Diablo I",
 		"executable": "mem",
-		"args": ["-c", "imgmount c a:\\WIN95.IMG -size 512,63,16,132", "-c", "imgmount d b:\\DIABLO.IMG -size 512,63,16,132", "-c", "boot -l c"],
+		"args": ["-c", "imgmount c a:\\WIN95.IMG -size 512,63,16,101", "-c", "imgmount d b:\\DIABLO.IMG -size 512,63,16,132", "-c", "boot -l c"],
 		"files": ["win95.zip", "diablo1sw.zip"],
 		"size": 51095535,
 		"hardware": {
@@ -490,7 +490,7 @@
 		"id": "win95",
 		"name": "Windows 95",
 		"executable": "boot WIN95.IMG",
-		"args": ["-c", "imgmount a c:\\WIN95.IMG -size 512,63,16,132"],
+		"args": ["-c", "imgmount a c:\\WIN95.IMG -size 512,63,16,101"],
 		"file": "win95.zip",
 		"size": 16958818,
 		"hardware": {
