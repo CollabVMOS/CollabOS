@@ -28,6 +28,31 @@
 		"publisher": "Virgin Interactive",
 		"licence": "Commercial"
 	} , {
+		"id": "diablo1sw",
+		"name": "Diablo I",
+		"executable": "./DIABLO_S.EXE",
+		"file": "diablo1sw.zip",
+		"size": 51006429,
+		"hardware": {
+			"input": ["Keyboard", "Mouse"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["PC Speaker", "Sound Blaster"]
+		},
+		"language": "English",
+		"year": 1996,
+		"genre": "RPG",
+		"developer": "Blizzard North",
+		"publisher": "Blizzard Entertainment",
+		"copyright": "Activision Blizzard",
+		"licence": "Shareware"
+	} , {
 		"id": "dune2",
 		"name": "Dune II: The Building of a Dynasty",
 		"executable": "./DUNE2.EXE",
@@ -459,6 +484,33 @@
 		"developer": "id Software",
 		"publisher": "FormGen Corporation",
 		"version": "1.0",
+		"licence": "Commercial"
+	} , {
+		"id": "win95",
+		"name": "Windows 95",
+		"executable": "boot WIN95.IMG",
+		"args": ["-c", "c:", "-c", "imgmount a WIN95.IMG -size 512,63,16,102"],
+		"file": "win95.zip",
+		"size": 24729657,
+		"hardware": {
+			"input": ["Keyboard", "Mouse"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["PC Speaker", "Sound Blaster"]
+		},
+		"language": "English",
+		"year": 1995,
+		"genre": "OS",
+		"developer": "Microsoft",
+		"publisher": "Microsoft",
+		"copyright": "Microsoft",
+		"version": "4.00.950",
 		"licence": "Commercial"
 	}]
 }
