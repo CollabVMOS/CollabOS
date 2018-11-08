@@ -35,6 +35,7 @@
 		"args": ["-c", "imgmount c a:\\WIN95.IMG -size 512,63,16,101", "-c", "imgmount d b:\\DIABLO.IMG -size 512,63,16,132", "-c", "boot -l c"],
 		"files": ["win95.zip", "diablo1sw.zip"],
 		"size": 51095535,
+		"enabled": false,
 		"hardware": {
 			"input": ["Keyboard", "Mouse"],
 			"video": {

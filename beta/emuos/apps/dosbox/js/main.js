@@ -75,7 +75,19 @@
 
 				for (var game in games['games']) {
 					// noinspection JSUnfilteredForInLoop
-					html += '<option value="' + i + '" data-game="' + games['games'][game]['id'] + '">' + games['games'][game]['name'] + ' (' + games['games'][game]['year'] + ')' + ' (' + games['games'][game]['genre'] + ')'  + ' (' + format_bytes(parseInt(games['games'][game]['size'], 10)) + ')</option>';
+					if (typeof games['games'][game]['enabled'] !== 'undefined') {
+						// noinspection JSUnfilteredForInLoop
+						if (games['games'][game]['enabled'] === true || games['games'][game]['enabled'] === 'true') {
+							// noinspection JSUnfilteredForInLoop
+							html += '<option value="' + i + '" data-game="' + games['games'][game]['id'] + '">' + games['games'][game]['name'] + ' (' + games['games'][game]['year'] + ')' + ' (' + games['games'][game]['genre'] + ')'  + ' (' + format_bytes(parseInt(games['games'][game]['size'], 10)) + ')</option>';
+						}
+					} else { // noinspection JSUnfilteredForInLoop
+						if (typeof games['games'][game]['enabled'] === 'undefined') {
+							// noinspection JSUnfilteredForInLoop
+							html += '<option value="' + i + '" data-game="' + games['games'][game]['id'] + '">' + games['games'][game]['name'] + ' (' + games['games'][game]['year'] + ')' + ' (' + games['games'][game]['genre'] + ')'  + ' (' + format_bytes(parseInt(games['games'][game]['size'], 10)) + ')</option>';
+						}
+					}
+
 					i++;
 				}
 
@@ -103,27 +115,58 @@
 				html += '</thead>';
 				html += '<tbody>';
 
+
 				for (var game in games['games']) {
-					html += '<tr>';
 					// noinspection JSUnfilteredForInLoop
-					// html += '<td>' + games['games'][game]['id'] + '</td>';
-					// noinspection JSUnfilteredForInLoop
-					html += '<td>' + games['games'][game]['name'] + '</td>';
-					// noinspection JSUnfilteredForInLoop
-					html += '<td>' + games['games'][game]['year'] + '</td>';
-					// noinspection JSUnfilteredForInLoop
-					html += '<td>' + games['games'][game]['genre'] + '</td>';
-					// noinspection JSUnfilteredForInLoop
-					html += '<td>' + format_bytes(parseInt(games['games'][game]['size'], 10)) + '</td>';
-					// noinspection JSUnfilteredForInLoop
-					html += '<td>' + games['games'][game]['developer'] + '</td>';
-					// noinspection JSUnfilteredForInLoop
-					html += '<td>' + games['games'][game]['publisher'] + '</td>';
-					// noinspection JSUnfilteredForInLoop
-					html += '<td>' + format_name(games['games'][game]['copyright']) + '</td>';
-					// noinspection JSUnfilteredForInLoop
-					html += '<td>' + games['games'][game]['licence'] + '</td>';
-					html += '</tr>';
+					if (typeof games['games'][game]['enabled'] !== 'undefined') {
+						// noinspection JSUnfilteredForInLoop
+						if (games['games'][game]['enabled'] === true || games['games'][game]['enabled'] === 'true') {
+							html += '<tr>';
+							// noinspection JSUnfilteredForInLoop
+							// html += '<td>' + games['games'][game]['id'] + '</td>';
+							// noinspection JSUnfilteredForInLoop
+							html += '<td>' + games['games'][game]['name'] + '</td>';
+							// noinspection JSUnfilteredForInLoop
+							html += '<td>' + games['games'][game]['year'] + '</td>';
+							// noinspection JSUnfilteredForInLoop
+							html += '<td>' + games['games'][game]['genre'] + '</td>';
+							// noinspection JSUnfilteredForInLoop
+							html += '<td>' + format_bytes(parseInt(games['games'][game]['size'], 10)) + '</td>';
+							// noinspection JSUnfilteredForInLoop
+							html += '<td>' + games['games'][game]['developer'] + '</td>';
+							// noinspection JSUnfilteredForInLoop
+							html += '<td>' + games['games'][game]['publisher'] + '</td>';
+							// noinspection JSUnfilteredForInLoop
+							html += '<td>' + format_name(games['games'][game]['copyright']) + '</td>';
+							// noinspection JSUnfilteredForInLoop
+							html += '<td>' + games['games'][game]['licence'] + '</td>';
+							html += '</tr>';
+						}
+					} else {
+						// noinspection JSUnfilteredForInLoop
+						if (typeof games['games'][game]['enabled'] === 'undefined') {
+							html += '<tr>';
+							// noinspection JSUnfilteredForInLoop
+							// html += '<td>' + games['games'][game]['id'] + '</td>';
+							// noinspection JSUnfilteredForInLoop
+							html += '<td>' + games['games'][game]['name'] + '</td>';
+							// noinspection JSUnfilteredForInLoop
+							html += '<td>' + games['games'][game]['year'] + '</td>';
+							// noinspection JSUnfilteredForInLoop
+							html += '<td>' + games['games'][game]['genre'] + '</td>';
+							// noinspection JSUnfilteredForInLoop
+							html += '<td>' + format_bytes(parseInt(games['games'][game]['size'], 10)) + '</td>';
+							// noinspection JSUnfilteredForInLoop
+							html += '<td>' + games['games'][game]['developer'] + '</td>';
+							// noinspection JSUnfilteredForInLoop
+							html += '<td>' + games['games'][game]['publisher'] + '</td>';
+							// noinspection JSUnfilteredForInLoop
+							html += '<td>' + format_name(games['games'][game]['copyright']) + '</td>';
+							// noinspection JSUnfilteredForInLoop
+							html += '<td>' + games['games'][game]['licence'] + '</td>';
+							html += '</tr>';
+						}
+					}
 				}
 
 				html += '</tbody>';
