@@ -1,3 +1,5 @@
+![Discord](https://img.shields.io/discord/510149138491506688.svg)
+
 ## Libraries used
 
 * [RequireJS](https://github.com/requirejs/requirejs) License: BSD/MIT
