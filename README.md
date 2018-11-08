@@ -24,6 +24,7 @@
 * [Em-DOSBox](https://github.com/dreamlayers/em-dosbox) License: GPLv2
 * [emularity](https://github.com/db48x/emularity) License: GPLv3
 * [BrowserFS](https://github.com/jvilk/BrowserFS) License: MIT
+* [jszip](https://github.com/Stuk/jszip) License: GPLv3/MIT
 * [Dropbox SDK](https://github.com/dropbox/dropbox-sdk-js) License: MIT
 * [jsrsasign](https://github.com/kjur/jsrsasign) License: BSD/MIT
 * [Firebug Lite](https://github.com/firebug/firebug-lite) License: BSD
@@ -32,6 +33,7 @@
 * [WebQuake](https://github.com/Triang3l/WebQuake) License: GPLv1
 * [HTML5 Wolfenstein 3D](https://github.com/loadx/html5-wolfenstein3D) License: ?
 * [Impact](https://github.com/phoboslab/Impact) License: MIT
+* [Phaser](https://github.com/photonstorm/phaser) License: MIT
 
 ## License
 

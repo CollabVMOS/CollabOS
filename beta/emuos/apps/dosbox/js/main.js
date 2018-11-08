@@ -80,15 +80,15 @@
 						if (games['games'][game]['enabled'] === true || games['games'][game]['enabled'] === 'true') {
 							// noinspection JSUnfilteredForInLoop
 							html += '<option value="' + i + '" data-game="' + games['games'][game]['id'] + '">' + games['games'][game]['name'] + ' (' + games['games'][game]['year'] + ')' + ' (' + games['games'][game]['genre'] + ')'  + ' (' + format_bytes(parseInt(games['games'][game]['size'], 10)) + ')</option>';
+							i++;
 						}
 					} else { // noinspection JSUnfilteredForInLoop
 						if (typeof games['games'][game]['enabled'] === 'undefined') {
 							// noinspection JSUnfilteredForInLoop
-							html += '<option value="' + i + '" data-game="' + games['games'][game]['id'] + '">' + games['games'][game]['name'] + ' (' + games['games'][game]['year'] + ')' + ' (' + games['games'][game]['genre'] + ')'  + ' (' + format_bytes(parseInt(games['games'][game]['size'], 10)) + ')</option>';
+							html += '<option value="' + i + '" data-game="' + games['games'][game]['id'] + '">' + games['games'][game]['name'] + ' (' + games['games'][game]['year'] + ')' + ' (' + games['games'][game]['genre'] + ')' + ' (' + format_bytes(parseInt(games['games'][game]['size'], 10)) + ')</option>';
+							i++;
 						}
 					}
-
-					i++;
 				}
 
 				html += '</select>';
@@ -109,7 +109,7 @@
 				html += '<th>Developer</th>';
 				html += '<th>Publisher</th>';
 				html += '<th>Copyright</th>';
-				html += '<th>Licence</th>';
+				html += '<th>License</th>';
 				html += '</tr>';
 
 				html += '</thead>';
@@ -139,7 +139,7 @@
 							// noinspection JSUnfilteredForInLoop
 							html += '<td>' + format_name(games['games'][game]['copyright']) + '</td>';
 							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + games['games'][game]['licence'] + '</td>';
+							html += '<td>' + games['games'][game]['license'] + '</td>';
 							html += '</tr>';
 						}
 					} else {
@@ -163,7 +163,7 @@
 							// noinspection JSUnfilteredForInLoop
 							html += '<td>' + format_name(games['games'][game]['copyright']) + '</td>';
 							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + games['games'][game]['licence'] + '</td>';
+							html += '<td>' + games['games'][game]['license'] + '</td>';
 							html += '</tr>';
 						}
 					}
