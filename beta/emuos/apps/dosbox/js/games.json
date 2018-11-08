@@ -8,6 +8,7 @@
 		"executable": "./ALADDCRK.EXE",
 		"file": "aladdin.zip",
 		"size": 1810235,
+		"sync": false,
 		"drm": ["Manual Lookup"],
 		"hardware": {
 			"input": ["Keyboard"],
@@ -34,7 +35,6 @@
 		"args": ["-c", "imgmount c a:\\WIN95.IMG -size 512,63,16,101", "-c", "imgmount d b:\\DIABLO.IMG -size 512,63,16,132", "-c", "boot -l c"],
 		"files": ["win95.zip", "diablo1sw.zip"],
 		"size": 51095535,
-		"mode": "asm",
 		"hardware": {
 			"input": ["Keyboard", "Mouse"],
 			"video": {
@@ -60,6 +60,7 @@
 		"executable": "./DUNE2.EXE",
 		"file": "dune2.zip",
 		"size": 4384799,
+		"sync": false,
 		"hardware": {
 			"input": ["Keyboard", "Mouse"],
 			"video": {
@@ -86,6 +87,7 @@
 		"executable": "./LOOM.EXE",
 		"file": "loomega.zip",
 		"size": 1201980,
+		"sync": false,
 		"drm": ["Manual Lookup"],
 		"hardware": {
 			"input": ["Keyboard", "Mouse"],
@@ -112,6 +114,7 @@
 		"executable": "./DOS32A.EXE MKCRK.EXE",
 		"file": "mk1.zip",
 		"size": 8167485,
+		"sync": false,
 		"drm": ["Manual Lookup"],
 		"hardware": {
 			"input": ["Keyboard"],
@@ -138,6 +141,7 @@
 		"executable": "./HISTORIK.EXE",
 		"file": "pre1.zip",
 		"size": 626070,
+		"sync": false,
 		"hardware": {
 			"input": ["Keyboard", "Gamepad/Joystick"],
 			"video": {
@@ -162,6 +166,7 @@
 		"executable": "./PRE2.EXE",
 		"file": "pre2.zip",
 		"size": 1080103,
+		"sync": false,
 		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
@@ -186,6 +191,7 @@
 		"executable": "./PRINCE.EXE",
 		"file": "pop114.zip",
 		"size": 1988713,
+		"sync": false,
 		"drm": ["Manual Lookup"],
 		"hardware": {
 			"input": ["Keyboard"],
@@ -214,6 +220,7 @@
 		"executable": "./PRINCE.EXE",
 		"file": "pop211.zip",
 		"size": 5129227,
+		"sync": false,
 		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
@@ -240,7 +247,7 @@
 		"executable": "./QUAKE.EXE -nocdaudio -stdvid",
 		"file": "quake106.zip",
 		"size": 52260267,
-		"mode": "asm",
+		"sync": false,
 		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
 			"video": {
@@ -287,7 +294,7 @@
 		"name": "Quake 1: Scourge of Armagon",
 		"description": "Mission Pack No. 1",
 		"executable": "./QUAKE.EXE -nocdaudio -stdvid -game hipnotic",
-		"mode": "asm",
+		"sync": false,
 		"file": "quake106.zip",
 		"size": 52260267,
 		"hardware": {
@@ -336,7 +343,7 @@
 		"name": "Quake 1: Dissolution of Eternity",
 		"description": "Mission Pack No. 2",
 		"executable": "./QUAKE.EXE -nocdaudio -stdvid -game rogue",
-		"mode": "asm",
+		"sync": false,
 		"file": "quake106.zip",
 		"size": 52260267,
 		"hardware": {
@@ -386,7 +393,7 @@
 		"executable": "./WAR2.EXE",
 		"args": ["-c", "mount d emulator/c -t cdrom"],
 		"file": "war2.zip",
-		"size": 82020985,
+		"size": 82019801,
 		"hardware": {
 			"input": ["Keyboard", "Mouse"],
 			"video": {
@@ -440,6 +447,7 @@
 		"executable": "./WOLF3D.EXE",
 		"file": "wolf3d.zip",
 		"size": 1075482,
+		"sync": false,
 		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
 			"video": {
@@ -467,6 +475,7 @@
 		"executable": "./SPEAR.EXE",
 		"file": "wolf3ds.zip",
 		"size": 1542721,
+		"sync": false,
 		"drm": ["Manual Lookup"],
 		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],

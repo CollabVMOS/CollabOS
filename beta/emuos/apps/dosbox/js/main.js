@@ -142,7 +142,17 @@
 				}
 			}
 
-			function start(file, executable, args, mode) {
+			function start(file, executable, args, mode, sync) {
+				if (typeof sync !== 'undefined') {
+					if (sync === true) {
+						sync = '';
+					} else {
+						sync = 'no';
+					}
+				} else {
+					sync = '';
+				}
+
 				if (Array.isArray(file)) {
 					var files = [];
 
@@ -164,7 +174,7 @@
 							int = null;
 							// noinspection JSUnresolvedFunction,JSUnresolvedVariable,AmdModulesDependencies
 							var emulator = new Emulator(document.getElementById('canvas'), null,
-								new DosBoxLoader(DosBoxLoader.emulatorJS(SYSTEM_FEATURE_WEBASSEMBLY && mode !== 'asm' ? 'js/dosbox-sync-wasm.js' : (SYSTEM_FEATURE_ASMJS ? 'js/dosbox-sync-asm.js' :  alert('DOSBox cannot work because WebAssembly and/or ASM.JS is not supported in your browser!'))),
+								new DosBoxLoader(DosBoxLoader.emulatorJS(SYSTEM_FEATURE_WEBASSEMBLY && mode !== 'asm' ? 'js/dosbox-' + sync + 'sync-wasm.js' : (SYSTEM_FEATURE_ASMJS ? 'js/dosbox-' + sync + 'sync-asm.js' : alert('DOSBox cannot work because WebAssembly and/or ASM.JS is not supported in your browser!'))),
 									DosBoxLoader.locateAdditionalEmulatorJS(function(filename) {
 										if (filename === 'dosbox.html.mem') {
 											return 'js/dosbox-sync.mem';
@@ -188,14 +198,14 @@
 					dbx.filesGetTemporaryLink({path: '/' + file}).then(function(response) {
 						// noinspection JSUnresolvedFunction,JSUnresolvedVariable,AmdModulesDependencies
 						var emulator = new Emulator(document.getElementById('canvas'), null,
-							new DosBoxLoader(DosBoxLoader.emulatorJS(SYSTEM_FEATURE_WEBASSEMBLY && mode !== 'asm' ? 'js/dosbox-sync-wasm.js' : (SYSTEM_FEATURE_ASMJS ? 'js/dosbox-sync-asm.js' :  alert('DOSBox cannot work because WebAssembly and/or ASM.JS is not supported in your browser!'))),
+							new DosBoxLoader(DosBoxLoader.emulatorJS(SYSTEM_FEATURE_WEBASSEMBLY && mode !== 'asm' ? 'js/dosbox-' + sync + 'sync-wasm.js' : (SYSTEM_FEATURE_ASMJS ? 'js/dosbox-' + sync + 'sync-asm.js' : alert('DOSBox cannot work because WebAssembly and/or ASM.JS is not supported in your browser!'))),
 								DosBoxLoader.locateAdditionalEmulatorJS(function(filename) {
 									if (filename === 'dosbox.html.mem') {
-										return 'js/dosbox-sync.mem';
+										return 'js/dosbox-' + sync + 'sync.mem';
 									}
 
 									if (filename === 'dosbox.wasm') {
-										return 'js/dosbox-sync.wasm';
+										return 'js/dosbox-' + sync + 'sync.wasm';
 									}
 									return filename;
 								}),
@@ -234,7 +244,7 @@
 						// noinspection JSUnfilteredForInLoop
 						if (games['games'][game]['id'] === game_selected) {
 							// noinspection JSUnfilteredForInLoop
-							start(typeof games['games'][game]['files'] !== 'undefined' ? games['games'][game]['files'] : games['games'][game]['file'], games['games'][game]['executable'], games['games'][game]['args'], games['games'][game]['mode']);
+							start(typeof games['games'][game]['files'] !== 'undefined' ? games['games'][game]['files'] : games['games'][game]['file'], games['games'][game]['executable'], games['games'][game]['args'], games['games'][game]['mode'], games['games'][game]['sync']);
 							break;
 						}
 					}
@@ -251,7 +261,7 @@
 							// noinspection JSUnfilteredForInLoop
 							if (games['games'][game]['id'] === game_selected) {
 								// noinspection JSUnfilteredForInLoop
-								start(typeof games['games'][game]['files'] !== 'undefined' ? games['games'][game]['files'] : games['games'][game]['file'], games['games'][game]['executable'], games['games'][game]['args'], games['games'][game]['mode']);
+								start(typeof games['games'][game]['files'] !== 'undefined' ? games['games'][game]['files'] : games['games'][game]['file'], games['games'][game]['executable'], games['games'][game]['args'], games['games'][game]['mode'], games['games'][game]['sync']);
 								break;
 							}
 						}
