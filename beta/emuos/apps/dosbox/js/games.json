@@ -168,7 +168,7 @@
 	} , {
 		"id": "mk1",
 		"name": "Mortal Kombat 1",
-		"executable": "./DOS32A.EXE MKCRK.EXE",
+		"executable": "./MK1.EXE",
 		"file": "mk1.zip",
 		"size": 11007547,
 		"sync": false,
