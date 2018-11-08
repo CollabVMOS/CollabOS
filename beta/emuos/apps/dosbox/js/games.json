@@ -7,7 +7,7 @@
 		"name": "Disney's Aladdin",
 		"executable": "./ALADDCRK.EXE",
 		"file": "aladdin.zip",
-		"size": 1810235,
+		"size": 1810424,
 		"sync": false,
 		"drm": ["Manual Lookup"],
 		"hardware": {
@@ -173,6 +173,32 @@
 		"size": 11007547,
 		"sync": false,
 		"drm": ["Manual Lookup"],
+		"hardware": {
+			"input": ["Keyboard"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["PC Speaker", "Sound Blaster"]
+		},
+		"language": "English",
+		"year": 1992,
+		"genre": "Fighting",
+		"developer": "Midway Games",
+		"publisher": "Acclaim Entertainment",
+		"copyright": "NetherRealm Studios, Warner Bros.",
+		"license": "Commercial"
+	} , {
+		"id": "mk2",
+		"name": "Mortal Kombat 2",
+		"executable": "./MK2.EXE",
+		"file": "mk2.zip",
+		"size": 9797146,
+		"sync": false,
 		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
