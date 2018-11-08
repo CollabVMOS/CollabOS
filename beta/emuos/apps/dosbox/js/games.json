@@ -170,7 +170,7 @@
 		"name": "Mortal Kombat 1",
 		"executable": "./DOS32A.EXE MKCRK.EXE",
 		"file": "mk1.zip",
-		"size": 8167485,
+		"size": 11007547,
 		"sync": false,
 		"drm": ["Manual Lookup"],
 		"hardware": {
