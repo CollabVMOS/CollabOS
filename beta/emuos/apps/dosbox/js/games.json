@@ -331,7 +331,7 @@
 		"name": "Quake 1",
 		"executable": "./QUAKE.EXE -nocdaudio -stdvid",
 		"file": "quake106.zip",
-		"size": 52260267,
+		"size": 52260092,
 		"sync": false,
 		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
@@ -381,7 +381,7 @@
 		"executable": "./QUAKE.EXE -nocdaudio -stdvid -game hipnotic",
 		"sync": false,
 		"file": "quake106.zip",
-		"size": 52260267,
+		"size": 52260092,
 		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
 			"video": {
@@ -430,7 +430,7 @@
 		"executable": "./QUAKE.EXE -nocdaudio -stdvid -game rogue",
 		"sync": false,
 		"file": "quake106.zip",
-		"size": 52260267,
+		"size": 52260092,
 		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
 			"video": {
@@ -615,7 +615,7 @@
 		"executable": "boot WIN95.IMG",
 		"args": ["-c", "imgmount a c:\\WIN95.IMG -size 512,63,16,101"],
 		"file": "win95.zip",
-		"size": 16958995,
+		"size": 16960727,
 		"hardware": {
 			"input": ["Keyboard", "Mouse"],
 			"video": {

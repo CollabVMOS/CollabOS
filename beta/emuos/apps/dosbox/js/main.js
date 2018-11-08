@@ -69,7 +69,7 @@
 			}
 
 			function render_game_dropdown(games) {
-				var html = '<select>';
+				var html = '';
 
 				var i = 0;
 
@@ -90,8 +90,6 @@
 						}
 					}
 				}
-
-				html += '</select>';
 
 				return html;
 			}
