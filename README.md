@@ -1,5 +1,7 @@
 [![Discord](https://img.shields.io/discord/510149138491506688.svg)](https://discord.gg/nAXSsRJ)
 
+---
+
 ## Live Demo
 
 [EmuOS](https://emupedia.net/beta/emuos)

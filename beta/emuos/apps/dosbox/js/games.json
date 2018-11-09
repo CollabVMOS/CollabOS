@@ -219,6 +219,32 @@
 		"copyright": "NetherRealm Studios, Warner Bros.",
 		"license": "Commercial"
 	} , {
+		"id": "mk3",
+		"name": "Mortal Kombat 3",
+		"executable": "./MK3CRK.EXE",
+		"file": "mk3.zip",
+		"size": 19720043,
+		"sync": false,
+		"hardware": {
+			"input": ["Keyboard"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["PC Speaker", "Sound Blaster"]
+		},
+		"language": "English",
+		"year": 1995,
+		"genre": "Fighting",
+		"developer": "Midway Games, Atari Games, Williams Entertainment",
+		"publisher": "Midway Games",
+		"copyright": "NetherRealm Studios, Warner Bros.",
+		"license": "Commercial"
+	} , {
 		"id": "pakupaku",
 		"name": "Paku Paku",
 		"executable": "./PAKU.EXE",

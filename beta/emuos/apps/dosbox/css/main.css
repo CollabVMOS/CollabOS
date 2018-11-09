@@ -30,6 +30,7 @@ body {
 	background-color: #fff;
 	color: #000;
 	font-size: 9px;
+	overflow-y: scroll;
 }
 
 .game-list table {
