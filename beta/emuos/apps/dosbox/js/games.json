@@ -3,6 +3,34 @@
 		"version": "1.0"
 	},
 	"games": [{
+		"id": "abuse",
+		"name": "Abuse",
+		"notes": "Music not working",
+		"executable": "./ABUSE.EXE",
+		"file": "abuse.zip",
+		"size": 2855233,
+		"sync": false,
+		"hardware": {
+			"input": ["Keyboard", "Mouse"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["PC Speaker", "Sound Blaster"]
+		},
+		"language": "English",
+		"year": 1996,
+		"genre": "Platformer",
+		"developer": "Crack dot Com",
+		"publisher": "Electronic Arts",
+		"copyright": "Crack dot Com",
+		"version": "2.0",
+		"license": "Public Domain"
+	} , {
 		"id": "aladdin",
 		"name": "Disney's Aladdin",
 		"executable": "./ALADDCRK.EXE",
@@ -30,6 +58,32 @@
 		"copyright": "Walt Disney",
 		"license": "Commercial"
 	} , {
+		"id": "lionking",
+		"name": "Disney's Lion King",
+		"executable": "./LIONKING.EXE",
+		"file": "lionking.zip",
+		"size": 3234052,
+		"sync": false,
+		"hardware": {
+			"input": ["Keyboard"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["PC Speaker", "Sound Blaster"]
+		},
+		"language": "English",
+		"year": 1994,
+		"genre": "Platformer",
+		"developer": "Westwood Studios, East Point Software, Virgin Games",
+		"publisher": "Virgin Interactive",
+		"copyright": "Walt Disney",
+		"license": "Commercial"
+	} , {
 		"id": "jungle",
 		"name": "Disney's The Jungle Book",
 		"executable": "./JUNGLE.EXE",
@@ -51,7 +105,7 @@
 		"language": "English",
 		"year": 1994,
 		"genre": "Platformer",
-		"developer": "Virgin Interactive",
+		"developer": "Eurocom Developments, East Point Software, Virgin Games",
 		"publisher": "Virgin Interactive",
 		"copyright": "Walt Disney",
 		"license": "Commercial"
@@ -218,6 +272,7 @@
 		"developer": "Midway Games",
 		"publisher": "Acclaim Entertainment",
 		"copyright": "NetherRealm Studios, Warner Bros.",
+		"version": "CD",
 		"license": "Commercial"
 	} , {
 		"id": "mk2",
@@ -405,6 +460,32 @@
 		"copyright": "Ubisoft",
 		"version": "1.1",
 		"license": "Commercial"
+	} , {
+		"id": "robbo",
+		"name": "Robbo",
+		"description": "The Adventures of Robbo, License Creative Commons BY-SA 2.5",
+		"executable": "./ROBBO.EXE",
+		"file": "robbo.zip",
+		"size": 2004224,
+		"sync": false,
+		"hardware": {
+			"input": ["Keyboard"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["PC Speaker", "Sound Source", "Tandy", "Sound Blaster", "Sound Blaster Pro", "Roland MT-32"]
+		},
+		"language": "English",
+		"year": 1993,
+		"genre": "Puzzle",
+		"developer": "X LanD Computer Games",
+		"publisher": "Laboratorium Komputerowe Avalon, Epic MegaGames",
+		"license": "Freeware"
 	} , {
 		"id": "quake1",
 		"name": "Quake 1",
