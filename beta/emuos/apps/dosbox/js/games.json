@@ -27,6 +27,33 @@
 		"genre": "Platformer",
 		"developer": "Virgin Interactive",
 		"publisher": "Virgin Interactive",
+		"copyright": "Walt Disney",
+		"license": "Commercial"
+	} , {
+		"id": "jungle",
+		"name": "Disney's The Jungle Book",
+		"executable": "./JUNGLE.EXE",
+		"file": "jungle.zip",
+		"size": 2591699,
+		"sync": false,
+		"hardware": {
+			"input": ["Keyboard"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["PC Speaker", "Sound Blaster"]
+		},
+		"language": "English",
+		"year": 1994,
+		"genre": "Platformer",
+		"developer": "Virgin Interactive",
+		"publisher": "Virgin Interactive",
+		"copyright": "Walt Disney",
 		"license": "Commercial"
 	} , {
 		"id": "diablo1sw",
