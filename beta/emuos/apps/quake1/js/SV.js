@@ -208,16 +208,21 @@ SV.SendServerinfo = function(client) {
 SV.ConnectClient = function(clientnum) {
 	var client = SV.svs.clients[clientnum];
 	var i, spawn_parms;
+
 	if (SV.server.loadgame === true) {
 		spawn_parms = [];
-		if (client.spawn_parms == null) {
-			client.spawn_parms = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+
+		if (client.spawn_parms === null) {
+			client.spawn_parms = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
 		}
-		for (i = 0; i <= 15; ++i)
+
+		for (i = 0; i <= 15; ++i) {
 			spawn_parms[i] = client.spawn_parms[i];
+		}
 	}
+
 	Con.DPrint('Client ' + client.netconnection.address + ' connected\n');
+
 	client.active = true;
 	client.dropasap = false;
 	client.last_message = 0.0;
@@ -226,24 +231,31 @@ SV.ConnectClient = function(clientnum) {
 	client.message.cursize = 0;
 	client.edict = SV.server.edicts[clientnum + 1];
 	client.edict.v_int[PR.entvars.netname] = PR.netnames + (clientnum << 5);
+
 	SV.SetClientName(client, 'unconnected');
+
 	client.colors = 0;
-	client.ping_times = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-		0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+	client.ping_times = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
 	client.num_pings = 0;
+
 	if (SV.server.loadgame !== true) {
-		client.spawn_parms = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-			0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+		client.spawn_parms = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
 	}
+
 	client.old_frags = 0;
+
 	if (SV.server.loadgame === true) {
-		for (i = 0; i <= 15; ++i)
+		for (i = 0; i <= 15; ++i) {
 			client.spawn_parms[i] = spawn_parms[i];
+		}
 	} else {
 		PR.ExecuteProgram(PR.globals_int[PR.globalvars.SetNewParms]);
-		for (i = 0; i <= 15; ++i)
+
+		for (i = 0; i <= 15; ++i) {
 			client.spawn_parms[i] = PR.globals_float[PR.globalvars.parms + i];
+		}
 	}
+
 	SV.SendServerinfo(client);
 };
 
@@ -251,16 +263,24 @@ SV.fatpvs = [];
 
 SV.CheckForNewClients = function() {
 	var ret, i;
+
 	for (; ;) {
 		ret = NET.CheckNewConnections();
-		if (ret == null)
+
+		if (ret === null) {
 			return;
-		for (i = 0; i < SV.svs.maxclients; ++i) {
-			if (SV.svs.clients[i].active !== true)
-				break;
 		}
-		if (i === SV.svs.maxclients)
+
+		for (i = 0; i < SV.svs.maxclients; ++i) {
+			if (SV.svs.clients[i].active !== true) {
+				break;
+			}
+		}
+
+		if (i === SV.svs.maxclients) {
 			Sys.Error('SV.CheckForNewClients: no free clients');
+		}
+
 		SV.svs.clients[i].netconnection = ret;
 		SV.ConnectClient(i);
 		++NET.activeconnections;
@@ -269,22 +289,30 @@ SV.CheckForNewClients = function() {
 
 SV.AddToFatPVS = function(org, node) {
 	var pvs, i, normal, d;
+
 	for (; ;) {
 		if (node.contents < 0) {
 			if (node.contents !== Mod.contents.solid) {
 				pvs = Mod.LeafPVS(node, SV.server.worldmodel);
-				for (i = 0; i < SV.fatbytes; ++i)
+
+				for (i = 0; i < SV.fatbytes; ++i) {
 					SV.fatpvs[i] |= pvs[i];
+				}
 			}
+
 			return;
 		}
+
 		normal = node.plane.normal;
 		d = org[0] * normal[0] + org[1] * normal[1] + org[2] * normal[2] - node.plane.dist;
-		if (d > 8.0)
+
+		if (d > 8.0) {
 			node = node.children[0];
-		else {
-			if (d >= -8.0)
+		} else {
+			if (d >= -8.0) {
 				SV.AddToFatPVS(org, node.children[0]);
+			}
+
 			node = node.children[1];
 		}
 	}
@@ -292,9 +320,13 @@ SV.AddToFatPVS = function(org, node) {
 
 SV.FatPVS = function(org) {
 	SV.fatbytes = (SV.server.worldmodel.leafs.length + 31) >> 3;
+
 	var i;
-	for (i = 0; i < SV.fatbytes; ++i)
+
+	for (i = 0; i < SV.fatbytes; ++i) {
 		SV.fatpvs[i] = 0;
+	}
+
 	SV.AddToFatPVS(org, SV.server.worldmodel.nodes[0]);
 };
 
@@ -304,80 +336,117 @@ SV.WriteEntitiesToClient = function(clent, msg) {
 		clent.v_float[PR.entvars.origin1] + clent.v_float[PR.entvars.view_ofs1],
 		clent.v_float[PR.entvars.origin2] + clent.v_float[PR.entvars.view_ofs2]
 	]);
+
 	var pvs = SV.fatpvs, ent, e, i, bits, miss;
+
 	for (e = 1; e < SV.server.num_edicts; ++e) {
 		ent = SV.server.edicts[e];
+
 		if (ent !== clent) {
-			if ((ent.v_float[PR.entvars.modelindex] === 0.0) || (PR.strings[ent.v_int[PR.entvars.model]] === 0))
+			if ((ent.v_float[PR.entvars.modelindex] === 0.0) || (PR.strings[ent.v_int[PR.entvars.model]] === 0)) {
 				continue;
-			for (i = 0; i < ent.leafnums.length; ++i) {
-				if ((pvs[ent.leafnums[i] >> 3] & (1 << (ent.leafnums[i] & 7))) !== 0)
-					break;
 			}
-			if (i === ent.leafnums.length)
+
+			for (i = 0; i < ent.leafnums.length; ++i) {
+				if ((pvs[ent.leafnums[i] >> 3] & (1 << (ent.leafnums[i] & 7))) !== 0) {
+					break;
+				}
+			}
+
+			if (i === ent.leafnums.length) {
 				continue;
+			}
 		}
+
 		if ((msg.data.byteLength - msg.cursize) < 16) {
 			Con.Print('packet overflow\n');
+
 			return;
 		}
 
 		bits = 0;
+
 		for (i = 0; i <= 2; ++i) {
 			miss = ent.v_float[PR.entvars.origin + i] - ent.baseline.origin[i];
-			if ((miss < -0.1) || (miss > 0.1))
+
+			if ((miss < -0.1) || (miss > 0.1)) {
 				bits += Protocol.u.origin1 << i;
+			}
 		}
+
 		if (ent.v_float[PR.entvars.angles] !== ent.baseline.angles[0])
 			bits += Protocol.u.angle1;
+
 		if (ent.v_float[PR.entvars.angles1] !== ent.baseline.angles[1])
 			bits += Protocol.u.angle2;
+
 		if (ent.v_float[PR.entvars.angles2] !== ent.baseline.angles[2])
 			bits += Protocol.u.angle3;
+
 		if (ent.v_float[PR.entvars.movetype] === SV.movetype.step)
 			bits += Protocol.u.nolerp;
+
 		if (ent.baseline.colormap !== ent.v_float[PR.entvars.colormap])
 			bits += Protocol.u.colormap;
+
 		if (ent.baseline.skin !== ent.v_float[PR.entvars.skin])
 			bits += Protocol.u.skin;
+
 		if (ent.baseline.frame !== ent.v_float[PR.entvars.frame])
 			bits += Protocol.u.frame;
+
 		if (ent.baseline.effects !== ent.v_float[PR.entvars.effects])
 			bits += Protocol.u.effects;
+
 		if (ent.baseline.modelindex !== ent.v_float[PR.entvars.modelindex])
 			bits += Protocol.u.model;
+
 		if (e >= 256)
 			bits += Protocol.u.longentity;
+
 		if (bits >= 256)
 			bits += Protocol.u.morebits;
 
 		MSG.WriteByte(msg, bits + Protocol.u.signal);
+
 		if ((bits & Protocol.u.morebits) !== 0)
 			MSG.WriteByte(msg, bits >> 8);
+
 		if ((bits & Protocol.u.longentity) !== 0)
 			MSG.WriteShort(msg, e);
 		else
 			MSG.WriteByte(msg, e);
+
 		if ((bits & Protocol.u.model) !== 0)
 			MSG.WriteByte(msg, ent.v_float[PR.entvars.modelindex]);
+
 		if ((bits & Protocol.u.frame) !== 0)
 			MSG.WriteByte(msg, ent.v_float[PR.entvars.frame]);
+
 		if ((bits & Protocol.u.colormap) !== 0)
 			MSG.WriteByte(msg, ent.v_float[PR.entvars.colormap]);
+
 		if ((bits & Protocol.u.skin) !== 0)
 			MSG.WriteByte(msg, ent.v_float[PR.entvars.skin]);
+
 		if ((bits & Protocol.u.effects) !== 0)
 			MSG.WriteByte(msg, ent.v_float[PR.entvars.effects]);
+
 		if ((bits & Protocol.u.origin1) !== 0)
 			MSG.WriteCoord(msg, ent.v_float[PR.entvars.origin]);
+
 		if ((bits & Protocol.u.angle1) !== 0)
 			MSG.WriteAngle(msg, ent.v_float[PR.entvars.angles]);
+
 		if ((bits & Protocol.u.origin2) !== 0)
 			MSG.WriteCoord(msg, ent.v_float[PR.entvars.origin1]);
+
 		if ((bits & Protocol.u.angle2) !== 0)
 			MSG.WriteAngle(msg, ent.v_float[PR.entvars.angles1]);
+
 		if ((bits & Protocol.u.origin3) !== 0)
 			MSG.WriteCoord(msg, ent.v_float[PR.entvars.origin2]);
+
 		if ((bits & Protocol.u.angle3) !== 0)
 			MSG.WriteAngle(msg, ent.v_float[PR.entvars.angles2]);
 	}
@@ -386,12 +455,14 @@ SV.WriteEntitiesToClient = function(clent, msg) {
 SV.WriteClientdataToMessage = function(ent, msg) {
 	if ((ent.v_float[PR.entvars.dmg_take] !== 0.0) || (ent.v_float[PR.entvars.dmg_save] !== 0.0)) {
 		var other = SV.server.edicts[ent.v_int[PR.entvars.dmg_inflictor]];
+
 		MSG.WriteByte(msg, Protocol.svc.damage);
 		MSG.WriteByte(msg, ent.v_float[PR.entvars.dmg_save]);
 		MSG.WriteByte(msg, ent.v_float[PR.entvars.dmg_take]);
 		MSG.WriteCoord(msg, other.v_float[PR.entvars.origin] + 0.5 * (other.v_float[PR.entvars.mins] + other.v_float[PR.entvars.maxs]));
 		MSG.WriteCoord(msg, other.v_float[PR.entvars.origin1] + 0.5 * (other.v_float[PR.entvars.mins1] + other.v_float[PR.entvars.maxs1]));
 		MSG.WriteCoord(msg, other.v_float[PR.entvars.origin2] + 0.5 * (other.v_float[PR.entvars.mins2] + other.v_float[PR.entvars.maxs2]));
+
 		ent.v_float[PR.entvars.dmg_take] = 0.0;
 		ent.v_float[PR.entvars.dmg_save] = 0.0;
 	}
@@ -403,17 +474,21 @@ SV.WriteClientdataToMessage = function(ent, msg) {
 		MSG.WriteAngle(msg, ent.v_float[PR.entvars.angles]);
 		MSG.WriteAngle(msg, ent.v_float[PR.entvars.angles1]);
 		MSG.WriteAngle(msg, ent.v_float[PR.entvars.angles2]);
+
 		ent.v_float[PR.entvars.fixangle] = 0.0;
 	}
 
 	var bits = Protocol.su.items + Protocol.su.weapon;
+
 	if (ent.v_float[PR.entvars.view_ofs2] !== Protocol.default_viewheight)
 		bits += Protocol.su.viewheight;
+
 	if (ent.v_float[PR.entvars.idealpitch] !== 0.0)
 		bits += Protocol.su.idealpitch;
 
 	// noinspection JSUnresolvedVariable
 	var val = PR.entvars.items2, items;
+
 	if (val != null) {
 		if (ent.v_float[val] !== 0.0)
 			items = (ent.v_float[PR.entvars.items] >> 0) + ((ent.v_float[val] << 23) >>> 0);
@@ -425,63 +500,86 @@ SV.WriteClientdataToMessage = function(ent, msg) {
 	// noinspection JSBitwiseOperatorUsage
 	if (ent.v_float[PR.entvars.flags] & SV.fl.onground)
 		bits += Protocol.su.onground;
+
 	if (ent.v_float[PR.entvars.waterlevel] >= 2.0)
 		bits += Protocol.su.inwater;
 
 	if (ent.v_float[PR.entvars.punchangle] !== 0.0)
 		bits += Protocol.su.punch1;
+
 	if (ent.v_float[PR.entvars.velocity] !== 0.0)
 		bits += Protocol.su.velocity1;
+
 	if (ent.v_float[PR.entvars.punchangle1] !== 0.0)
 		bits += Protocol.su.punch2;
+
 	if (ent.v_float[PR.entvars.velocity1] !== 0.0)
 		bits += Protocol.su.velocity2;
+
 	if (ent.v_float[PR.entvars.punchangle2] !== 0.0)
 		bits += Protocol.su.punch3;
+
 	if (ent.v_float[PR.entvars.velocity2] !== 0.0)
 		bits += Protocol.su.velocity3;
 
 	if (ent.v_float[PR.entvars.weaponframe] !== 0.0)
 		bits += Protocol.su.weaponframe;
+
 	if (ent.v_float[PR.entvars.armorvalue] !== 0.0)
 		bits += Protocol.su.armor;
 
 	MSG.WriteByte(msg, Protocol.svc.clientdata);
 	MSG.WriteShort(msg, bits);
+
 	if ((bits & Protocol.su.viewheight) !== 0)
 		MSG.WriteChar(msg, ent.v_float[PR.entvars.view_ofs2]);
+
 	if ((bits & Protocol.su.idealpitch) !== 0)
 		MSG.WriteChar(msg, ent.v_float[PR.entvars.idealpitch]);
 
 	if ((bits & Protocol.su.punch1) !== 0)
 		MSG.WriteChar(msg, ent.v_float[PR.entvars.punchangle]);
+
 	if ((bits & Protocol.su.velocity1) !== 0)
 		MSG.WriteChar(msg, ent.v_float[PR.entvars.velocity] * 0.0625);
+
 	if ((bits & Protocol.su.punch2) !== 0)
 		MSG.WriteChar(msg, ent.v_float[PR.entvars.punchangle1]);
+
 	if ((bits & Protocol.su.velocity2) !== 0)
 		MSG.WriteChar(msg, ent.v_float[PR.entvars.velocity1] * 0.0625);
+
 	if ((bits & Protocol.su.punch3) !== 0)
 		MSG.WriteChar(msg, ent.v_float[PR.entvars.punchangle2]);
+
 	if ((bits & Protocol.su.velocity3) !== 0)
 		MSG.WriteChar(msg, ent.v_float[PR.entvars.velocity2] * 0.0625);
 
 	MSG.WriteLong(msg, items);
-	if ((bits & Protocol.su.weaponframe) !== 0)
+
+	if ((bits & Protocol.su.weaponframe) !== 0) {
 		MSG.WriteByte(msg, ent.v_float[PR.entvars.weaponframe]);
-	if ((bits & Protocol.su.armor) !== 0)
+	}
+
+	if ((bits & Protocol.su.armor) !== 0) {
 		MSG.WriteByte(msg, ent.v_float[PR.entvars.armorvalue]);
+	}
+
 	MSG.WriteByte(msg, SV.ModelIndex(PR.GetString(ent.v_int[PR.entvars.weaponmodel])));
+
 	MSG.WriteShort(msg, ent.v_float[PR.entvars.health]);
+
 	MSG.WriteByte(msg, ent.v_float[PR.entvars.currentammo]);
 	MSG.WriteByte(msg, ent.v_float[PR.entvars.ammo_shells]);
 	MSG.WriteByte(msg, ent.v_float[PR.entvars.ammo_nails]);
 	MSG.WriteByte(msg, ent.v_float[PR.entvars.ammo_rockets]);
 	MSG.WriteByte(msg, ent.v_float[PR.entvars.ammo_cells]);
-	if (COM.standard_quake === true)
+
+	if (COM.standard_quake === true) {
 		MSG.WriteByte(msg, ent.v_float[PR.entvars.weapon]);
-	else {
+	} else {
 		var i, weapon = ent.v_float[PR.entvars.weapon];
+
 		for (i = 0; i <= 31; ++i) {
 			if ((weapon & (1 << i)) !== 0) {
 				MSG.WriteByte(msg, i);
@@ -492,20 +590,30 @@ SV.WriteClientdataToMessage = function(ent, msg) {
 };
 
 SV.clientdatagram = {data: new ArrayBuffer(1024), cursize: 0};
+
 SV.SendClientDatagram = function() {
 	var client = Host.client;
 	var msg = SV.clientdatagram;
+
 	msg.cursize = 0;
+
 	MSG.WriteByte(msg, Protocol.svc.time);
 	MSG.WriteFloat(msg, SV.server.time);
+
 	SV.WriteClientdataToMessage(client.edict, msg);
 	SV.WriteEntitiesToClient(client.edict, msg);
-	if ((msg.cursize + SV.server.datagram.cursize) < msg.data.byteLength)
+
+	if ((msg.cursize + SV.server.datagram.cursize) < msg.data.byteLength) {
 		SZ.Write(msg, new Uint8Array(SV.server.datagram.data), SV.server.datagram.cursize);
+	}
+
 	if (NET.SendUnreliableMessage(client.netconnection, msg) === -1) {
 		Host.DropClient(true);
+
 		return;
 	}
+
+	// noinspection JSConstructorReturnsPrimitive
 	return true;
 };
 
@@ -515,24 +623,34 @@ SV.UpdateToReliableMessages = function() {
 	for (i = 0; i < SV.svs.maxclients; ++i) {
 		Host.client = SV.svs.clients[i];
 		Host.client.edict.v_float[PR.entvars.frags] >>= 0;
+
 		frags = Host.client.edict.v_float[PR.entvars.frags];
-		if (Host.client.old_frags === frags)
+
+		if (Host.client.old_frags === frags) {
 			continue;
+		}
+
 		for (j = 0; j < SV.svs.maxclients; ++j) {
 			client = SV.svs.clients[j];
-			if (client.active !== true)
+
+			if (client.active !== true) {
 				continue;
+			}
+
 			MSG.WriteByte(client.message, Protocol.svc.updatefrags);
 			MSG.WriteByte(client.message, i);
 			MSG.WriteShort(client.message, frags);
 		}
+
 		Host.client.old_frags = frags;
 	}
 
 	for (i = 0; i < SV.svs.maxclients; ++i) {
 		client = SV.svs.clients[i];
-		if (client.active === true)
+
+		if (client.active === true) {
 			SZ.Write(client.message, new Uint8Array(SV.server.reliable_datagram.data), SV.server.reliable_datagram.cursize);
+		}
 	}
 
 	SV.server.reliable_datagram.cursize = 0;
@@ -540,7 +658,9 @@ SV.UpdateToReliableMessages = function() {
 
 SV.SendClientMessages = function() {
 	SV.UpdateToReliableMessages();
+
 	var i, client;
+
 	for (i = 0; i < SV.svs.maxclients; ++i) {
 		Host.client = client = SV.svs.clients[i];
 		if (client.active !== true)

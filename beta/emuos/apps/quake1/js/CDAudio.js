@@ -167,8 +167,6 @@ CDAudio.Init = function() {
 	}
 
 	CDAudio.initialized = CDAudio.enabled = true;
-
 	CDAudio.Update();
-
 	Con.Print('CD Audio Initialized\n');
 };

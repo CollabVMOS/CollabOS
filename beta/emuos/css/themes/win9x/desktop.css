@@ -15,8 +15,8 @@
 
 .theme-win9x .emuos-desktop-icon span {
 	display: block;
-	color: #000;
-	background-color: #fff;
+	color: #fff;
+	/*background-color: #fff;*/
 }
 
 .theme-win9x .emuos-desktop-icon.ui-sortable-helper span,

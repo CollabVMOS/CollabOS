@@ -189,33 +189,43 @@ SCR.SetUpToDrawConsole = function() {
 
 	if (Con.forcedup === true) {
 		SCR.con_current = 200;
+
 		return;
 	}
 
 	var conlines;
-	if (Key.dest.value === Key.dest.console)
+
+	if (Key.dest.value === Key.dest.console) {
 		conlines = 100;
-	else
+	} else {
 		conlines = 0;
+	}
 
 	if (conlines < SCR.con_current) {
 		SCR.con_current -= SCR.conspeed.value * Host.frametime;
-		if (conlines > SCR.con_current)
+
+		if (conlines > SCR.con_current) {
 			SCR.con_current = conlines;
+		}
 	} else if (conlines > SCR.con_current) {
 		SCR.con_current += SCR.conspeed.value * Host.frametime;
-		if (conlines < SCR.con_current)
+
+		if (conlines < SCR.con_current) {
 			SCR.con_current = conlines;
+		}
 	}
 };
 
 SCR.DrawConsole = function() {
 	if (SCR.con_current > 0) {
 		Con.DrawConsole(SCR.con_current);
+
 		return;
 	}
-	if ((Key.dest.value === Key.dest.game) || (Key.dest.value === Key.dest.message))
+
+	if ((Key.dest.value === Key.dest.game) || (Key.dest.value === Key.dest.message)) {
 		Con.DrawNotify();
+	}
 };
 
 SCR.ScreenShot_f = function() {
@@ -224,8 +234,11 @@ SCR.ScreenShot_f = function() {
 
 SCR.BeginLoadingPlaque = function() {
 	S.StopAllSounds();
-	if ((CL.cls.state !== CL.active.connected) || (CL.cls.signon !== 4))
+
+	if ((CL.cls.state !== CL.active.connected) || (CL.cls.signon !== 4)) {
 		return;
+	}
+
 	SCR.centertime_off = 0.0;
 	SCR.con_current = 0;
 	SCR.disabled_for_loading = true;
@@ -239,8 +252,10 @@ SCR.EndLoadingPlaque = function() {
 
 SCR.UpdateScreen = function() {
 	if (SCR.disabled_for_loading === true) {
-		if (Host.realtime <= SCR.disabled_time)
+		if (Host.realtime <= SCR.disabled_time) {
 			return;
+		}
+
 		SCR.disabled_for_loading = false;
 		Con.Print('load failed.\n');
 	}
@@ -294,9 +309,9 @@ SCR.UpdateScreen = function() {
 		SCR.DrawCenterString();
 	else {
 		if (V.crosshair.value !== 0) {
-			Draw.Character(R.refdef.vrect.x + (R.refdef.vrect.width >> 1) + V.crossx.value,
-				R.refdef.vrect.y + (R.refdef.vrect.height >> 1) + V.crossy.value, 43);
+			Draw.Character(R.refdef.vrect.x + (R.refdef.vrect.width >> 1) + V.crossx.value, R.refdef.vrect.y + (R.refdef.vrect.height >> 1) + V.crossy.value, 43);
 		}
+
 		SCR.DrawNet();
 		SCR.DrawTurtle();
 		SCR.DrawPause();
@@ -312,6 +327,7 @@ SCR.UpdateScreen = function() {
 
 	if (SCR.screenshot === true) {
 		SCR.screenshot = false;
+		// noinspection NodeModulesDependencies
 		gl.finish();
 		open(VID.mainwindow.toDataURL('image/jpeg'));
 	}

@@ -116,7 +116,7 @@
 		"args": ["-c", "imgmount c a:\\WIN95.IMG -size 512,63,16,101", "-c", "imgmount d b:\\DIABLO.IMG -size 512,63,16,132", "-c", "boot -l c"],
 		"files": ["win95.zip", "diablo1sw.zip"],
 		"size": 51095535,
-		"enabled": false,
+		"enabled": true,
 		"hardware": {
 			"input": ["Keyboard", "Mouse"],
 			"video": {
@@ -849,8 +849,9 @@
 		"language": "English",
 		"year": 1994,
 		"genre": "Strategy",
-		"developer": "Mythos Games, MicroProse",
-		"publisher": "MicroProse",
+		"developer": "Mythos Games",
+		"publisher": "MicroProse, Hasbro Interactive",
+		"copyright": "Take-Two Interactive",
 		"version": "1.2",
 		"license": "Commercial"
 	} , {
@@ -879,6 +880,7 @@
 		"genre": "Strategy",
 		"developer": "MicroProse",
 		"publisher": "MicroProse",
+		"copyright": "Take-Two Interactive",
 		"license": "Commercial"
 	} , {
 		"id": "win95",
