@@ -5,7 +5,7 @@ W.lumps = [];
 W.LoadWadFile = function(filename) {
 	var base = COM.LoadFile(filename);
 
-	if (base == null) {
+	if (base === null) {
 		Sys.Error('W.LoadWadFile: couldn\'t load ' + filename);
 	}
 
@@ -31,7 +31,7 @@ W.LoadWadFile = function(filename) {
 W.GetLumpName = function(name) {
 	var lump = W.lumps[name];
 
-	if (lump == null) {
+	if (lump === null) {
 		Sys.Error('W.GetLumpName: ' + name + ' not found');
 	}
 

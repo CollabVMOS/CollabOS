@@ -8,36 +8,48 @@ V.CalcRoll = function(angles, velocity) {
 	var side = velocity[0] * right[0] + velocity[1] * right[1] + velocity[2] * right[2];
 	var sign = side < 0 ? -1 : 1;
 	side = Math.abs(side);
-	if (side < V.rollspeed.value)
+
+	if (side < V.rollspeed.value) {
+		// noinspection JSConstructorReturnsPrimitive
 		return side * sign * V.rollangle.value / V.rollspeed.value;
+	}
+
+	// noinspection JSConstructorReturnsPrimitive
 	return V.rollangle.value * sign;
 };
 
 V.CalcBob = function() {
-	if ((V.bobcycle.value <= 0.0)
-		|| (V.bobcycle.value >= 1.0)
-		|| (V.bobup.value <= 0.0)
-		|| (V.bobup.value >= 1.0)
-		|| (V.bob.value === 0.0))
+	if ((V.bobcycle.value <= 0.0) || (V.bobcycle.value >= 1.0) || (V.bobup.value <= 0.0) || (V.bobup.value >= 1.0) || (V.bob.value === 0.0)) {
+		// noinspection JSConstructorReturnsPrimitive
 		return 0.0;
+	}
 
 	var cycle = (CL.state.time - Math.floor(CL.state.time / V.bobcycle.value) * V.bobcycle.value) / V.bobcycle.value;
-	if (cycle < V.bobup.value)
+
+	if (cycle < V.bobup.value) {
 		cycle = Math.PI * cycle / V.bobup.value;
-	else
+	} else {
 		cycle = Math.PI + Math.PI * (cycle - V.bobup.value) / (1.0 - V.bobup.value);
+	}
+
 	var bob = Math.sqrt(CL.state.velocity[0] * CL.state.velocity[0] + CL.state.velocity[1] * CL.state.velocity[1]) * V.bob.value;
 	bob = bob * 0.3 + bob * 0.7 * Math.sin(cycle);
-	if (bob > 4.0)
+
+	if (bob > 4.0) {
 		bob = 4.0;
-	else if (bob < -7.0)
+	} else if (bob < -7.0) {
 		bob = -7.0;
+	}
+
+	// noinspection JSConstructorReturnsPrimitive
 	return bob;
 };
 
 V.StartPitchDrift = function() {
-	if (CL.state.laststop === CL.state.time)
+	if (CL.state.laststop === CL.state.time) {
 		return;
+	}
+
 	if ((CL.state.nodrift === true) || (CL.state.pitchvel === 0.0)) {
 		CL.state.pitchvel = V.centerspeed.value;
 		CL.state.nodrift = false;
@@ -55,20 +67,26 @@ V.DriftPitch = function() {
 	if ((Host.noclip_anglehack === true) || (CL.state.onground !== true) || (CL.cls.demoplayback === true)) {
 		CL.state.driftmove = 0.0;
 		CL.state.pitchvel = 0.0;
+
 		return;
 	}
 
 	if (CL.state.nodrift === true) {
-		if (Math.abs(CL.state.cmd.forwardmove) < CL.forwardspeed.value)
+		if (Math.abs(CL.state.cmd.forwardmove) < CL.forwardspeed.value) {
 			CL.state.driftmove = 0.0;
-		else
+		} else {
 			CL.state.driftmove += Host.frametime;
-		if (CL.state.driftmove > V.centermove.value)
+		}
+
+		if (CL.state.driftmove > V.centermove.value) {
 			V.StartPitchDrift();
+		}
+
 		return;
 	}
 
 	var delta = CL.state.idealpitch - CL.state.viewangles[0];
+
 	if (delta === 0.0) {
 		CL.state.pitchvel = 0.0;
 		return;
@@ -82,12 +100,14 @@ V.DriftPitch = function() {
 			CL.state.pitchvel = 0.0;
 			move = delta;
 		}
+
 		CL.state.viewangles[0] += move;
 	} else if (delta < 0) {
 		if (move > -delta) {
 			CL.state.pitchvel = 0.0;
 			move = -delta;
 		}
+
 		CL.state.viewangles[0] -= move;
 	}
 };

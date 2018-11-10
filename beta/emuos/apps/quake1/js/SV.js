@@ -78,71 +78,99 @@ SV.Init = function() {
 
 SV.StartParticle = function(org, dir, color, count) {
 	var datagram = SV.server.datagram;
-	if (datagram.cursize >= 1009)
+
+	if (datagram.cursize >= 1009) {
 		return;
+	}
+
 	MSG.WriteByte(datagram, Protocol.svc.particle);
 	MSG.WriteCoord(datagram, org[0]);
 	MSG.WriteCoord(datagram, org[1]);
 	MSG.WriteCoord(datagram, org[2]);
+
 	var i, v;
+
 	for (i = 0; i <= 2; ++i) {
 		v = (dir[i] * 16.0) >> 0;
-		if (v > 127)
+
+		if (v > 127) {
 			v = 127;
-		else if (v < -128)
+		} else if (v < -128) {
 			v = -128;
+		}
+
 		MSG.WriteChar(datagram, v);
 	}
+
 	MSG.WriteByte(datagram, count);
 	MSG.WriteByte(datagram, color);
 };
 
 SV.StartSound = function(entity, channel, sample, volume, attenuation) {
-	if ((volume < 0) || (volume > 255))
+	if ((volume < 0) || (volume > 255)) {
 		Sys.Error('SV.StartSound: volume = ' + volume);
-	if ((attenuation < 0.0) || (attenuation > 4.0))
+	}
+
+	if ((attenuation < 0.0) || (attenuation > 4.0)) {
 		Sys.Error('SV.StartSound: attenuation = ' + attenuation);
-	if ((channel < 0) || (channel > 7))
+	}
+
+	if ((channel < 0) || (channel > 7)) {
 		Sys.Error('SV.StartSound: channel = ' + channel);
+	}
 
 	var datagram = SV.server.datagram;
-	if (datagram.cursize >= 1009)
+
+	if (datagram.cursize >= 1009) {
 		return;
+	}
 
 	var i;
+
 	for (i = 1; i < SV.server.sound_precache.length; ++i) {
-		if (sample === SV.server.sound_precache[i])
+		if (sample === SV.server.sound_precache[i]) {
 			break;
+		}
 	}
+
 	if (i >= SV.server.sound_precache.length) {
 		Con.Print('SV.StartSound: ' + sample + ' not precached\n');
+
 		return;
 	}
 
 	var field_mask = 0;
-	if (volume !== 255)
+
+	if (volume !== 255) {
 		field_mask += 1;
-	if (attenuation !== 1.0)
+	}
+
+
+	if (attenuation !== 1.0) {
 		field_mask += 2;
+	}
 
 	MSG.WriteByte(datagram, Protocol.svc.sound);
 	MSG.WriteByte(datagram, field_mask);
-	if ((field_mask & 1) !== 0)
+
+	if ((field_mask & 1) !== 0) {
 		MSG.WriteByte(datagram, volume);
-	if ((field_mask & 2) !== 0)
+	}
+
+	if ((field_mask & 2) !== 0) {
 		MSG.WriteByte(datagram, Math.floor(attenuation * 64.0));
+	}
+
 	MSG.WriteShort(datagram, (entity.num << 3) + channel);
 	MSG.WriteByte(datagram, i);
-	MSG.WriteCoord(datagram, entity.v_float[PR.entvars.origin] + 0.5 *
-		(entity.v_float[PR.entvars.mins] + entity.v_float[PR.entvars.maxs]));
-	MSG.WriteCoord(datagram, entity.v_float[PR.entvars.origin1] + 0.5 *
-		(entity.v_float[PR.entvars.mins1] + entity.v_float[PR.entvars.maxs1]));
-	MSG.WriteCoord(datagram, entity.v_float[PR.entvars.origin2] + 0.5 *
-		(entity.v_float[PR.entvars.mins2] + entity.v_float[PR.entvars.maxs2]));
+	MSG.WriteCoord(datagram, entity.v_float[PR.entvars.origin] + 0.5 * (entity.v_float[PR.entvars.mins] + entity.v_float[PR.entvars.maxs]));
+	MSG.WriteCoord(datagram, entity.v_float[PR.entvars.origin1] + 0.5 * (entity.v_float[PR.entvars.mins1] + entity.v_float[PR.entvars.maxs1]));
+	MSG.WriteCoord(datagram, entity.v_float[PR.entvars.origin2] + 0.5 * (entity.v_float[PR.entvars.mins2] + entity.v_float[PR.entvars.maxs2]));
 };
 
 SV.SendServerinfo = function(client) {
 	var message = client.message;
+
 	MSG.WriteByte(message, Protocol.svc.print);
 	MSG.WriteString(message, '\2\nVERSION 1.09 SERVER (' + PR.crc + ' CRC)');
 	MSG.WriteByte(message, Protocol.svc.serverinfo);
@@ -150,12 +178,20 @@ SV.SendServerinfo = function(client) {
 	MSG.WriteByte(message, SV.svs.maxclients);
 	MSG.WriteByte(message, ((Host.coop.value === 0) && (Host.deathmatch.value !== 0)) ? 1 : 0);
 	MSG.WriteString(message, PR.GetString(SV.server.edicts[0].v_int[PR.entvars.message]));
+
 	var i;
-	for (i = 1; i < SV.server.model_precache.length; ++i)
+
+	for (i = 1; i < SV.server.model_precache.length; ++i) {
 		MSG.WriteString(message, SV.server.model_precache[i]);
+	}
+
+
 	MSG.WriteByte(message, 0);
-	for (i = 1; i < SV.server.sound_precache.length; ++i)
+
+	for (i = 1; i < SV.server.sound_precache.length; ++i) {
 		MSG.WriteString(message, SV.server.sound_precache[i]);
+	}
+
 	MSG.WriteByte(message, 0);
 	MSG.WriteByte(message, Protocol.svc.cdtrack);
 	MSG.WriteByte(message, SV.server.edicts[0].v_float[PR.entvars.sounds]);
@@ -164,6 +200,7 @@ SV.SendServerinfo = function(client) {
 	MSG.WriteShort(message, client.edict.num);
 	MSG.WriteByte(message, Protocol.svc.signonnum);
 	MSG.WriteByte(message, 1);
+
 	client.sendsignon = true;
 	client.spawned = false;
 };
