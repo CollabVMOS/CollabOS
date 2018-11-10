@@ -826,6 +826,61 @@
 		"version": "1.0",
 		"license": "Commercial"
 	} , {
+		"id": "xcom1",
+		"name": "X-COM: UFO Defense",
+		"description": "UFO: Enemy Unknown",
+		"executable": "./UFO.BAT",
+		"file": "xcom112.zip",
+		"size": 3274320,
+		"sync": true,
+		"mode": "asm",
+		"hardware": {
+			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["PC Speaker", "Sound Source", "Adlib", "Sound Blaster"]
+		},
+		"language": "English",
+		"year": 1994,
+		"genre": "Strategy",
+		"developer": "Mythos Games, MicroProse",
+		"publisher": "MicroProse",
+		"version": "1.2",
+		"license": "Commercial"
+	} , {
+		"id": "xcom2",
+		"name": "X-COM: Terror from the Deep",
+		"description": "UFO: Enemy Unknown",
+		"executable": "./TERROR.COM",
+		"file": "xcom2.zip",
+		"size": 4586858,
+		"sync": true,
+		"mode": "asm",
+		"hardware": {
+			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["PC Speaker", "Sound Source", "Adlib", "Sound Blaster"]
+		},
+		"language": "English",
+		"year": 1995 ,
+		"genre": "Strategy",
+		"developer": "MicroProse",
+		"publisher": "MicroProse",
+		"license": "Commercial"
+	} , {
 		"id": "win95",
 		"name": "Windows 95",
 		"executable": "boot WIN95.IMG",
