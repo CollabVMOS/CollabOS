@@ -327,6 +327,33 @@
 		"copyright": "NetherRealm Studios, Warner Bros.",
 		"license": "Commercial"
 	} , {
+		"id": "omf2097",
+		"name": "One Must Fall: 2097",
+		"executable": "./FILE0001.EXE",
+		"file": "omf209721.zip",
+		"size": 6417387,
+		"sync": false,
+		"hardware": {
+			"input": ["Keyboard"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["PC Speaker", "Sound Blaster"]
+		},
+		"language": "English",
+		"year": 1994,
+		"genre": "Fighting",
+		"developer": "Diversions Entertainment",
+		"publisher": "Epic MegaGames",
+		"copyright": "Diversions Entertainment",
+		"version": "2.1",
+		"license": "Freeware"
+	} , {
 		"id": "pakupaku",
 		"name": "Paku Paku",
 		"executable": "./PAKU.EXE",
@@ -485,6 +512,7 @@
 		"genre": "Puzzle",
 		"developer": "X LanD Computer Games",
 		"publisher": "Laboratorium Komputerowe Avalon, Epic MegaGames",
+		"copyright": "X LanD Computer Games",
 		"license": "Freeware"
 	} , {
 		"id": "quake1",
@@ -661,6 +689,33 @@
 		"version": "1.5",
 		"license": "Freeware"
 	} , {
+		"id": "tyrian2k",
+		"name": "Tyrian 2000",
+		"executable": "./TYRIAN.EXE",
+		"sync": false,
+		"file": "tyrian2k30.zip",
+		"size": 5180854,
+		"hardware": {
+			"input": ["Keyboard", "Mouse"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["PC Speaker", "Sound Blaster"]
+		},
+		"language": "English",
+		"year": 1999,
+		"genre": "Arcade",
+		"developer": "Eclipse Software",
+		"publisher": "XSIV Games",
+		"copyright": "Eclipse Software",
+		"version": "3.0",
+		"license": "Freeware"
+	} , {
 		"id": "war2",
 		"name": "Warcraft II: Tides of Darkness",
 		"executable": "./WAR2.EXE",
@@ -767,6 +822,7 @@
 		"genre": "FPS",
 		"developer": "id Software",
 		"publisher": "FormGen Corporation",
+		"copyright": "Bethesda Softworks",
 		"version": "1.0",
 		"license": "Commercial"
 	} , {
