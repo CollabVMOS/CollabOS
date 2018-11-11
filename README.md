@@ -1,5 +1,5 @@
-[![Discord](https://img.shields.io/discord/510149138491506688.svg)](https://discord.gg/nAXSsRJ)
-
+`Discord` [![Discord](https://img.shields.io/discord/510149138491506688.svg)](https://discord.gg/nAXSsRJ)
+`Gitter` [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/Emupedia/Lobby)
 ---
 
 ## Live Demo
