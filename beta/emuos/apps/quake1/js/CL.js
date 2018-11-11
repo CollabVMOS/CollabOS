@@ -866,7 +866,7 @@ CL.AllocDlight = function(key) {
 		}
 	}
 
-	if (dl === null) {
+	if (dl == null) {
 		for (i = 0; i <= 31; ++i) {
 			if (CL.dlights[i].die < CL.state.time) {
 				dl = CL.dlights[i];
@@ -874,7 +874,7 @@ CL.AllocDlight = function(key) {
 			}
 		}
 
-		if (dl === null) {
+		if (dl == null) {
 			dl = CL.dlights[0];
 		}
 	}
