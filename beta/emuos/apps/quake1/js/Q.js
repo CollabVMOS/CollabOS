@@ -48,14 +48,14 @@ Q.atoi = function(str) {
 	}
 	if (c === 39) {
 		// noinspection JSUnresolvedFunction
-		if (Q.isNaN(c2) === true)
+		if (isNaN(c2) === true)
 			return 0;
 		return sign * c2;
 	}
 	for (; ;) {
 		c = str.charCodeAt(ptr++);
 		// noinspection JSUnresolvedFunction
-		if ((Q.isNaN(c) === true) || (c <= 47) || (c >= 58))
+		if ((isNaN(c) === true) || (c <= 47) || (c >= 58))
 			return val * sign;
 		val = val * 10 + c - 48;
 	}
