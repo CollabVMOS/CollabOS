@@ -98,13 +98,6 @@ Sys.FloatTime = function() {
 };
 
 window.onload = function() {
-	// IE11 Fix
-	/*if (Number.isNaN !== null) {
-		Q.isNaN = Number.isNaN;
-	} else {
-		Q.isNaN = isNaN;
-	}*/
-
 	var i;
 
 	var cmdline = decodeURIComponent(document.location.search);
