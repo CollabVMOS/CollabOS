@@ -89,7 +89,7 @@ COM.CheckParm = function(parm) {
 
 COM.CheckRegistered = function() {
 	var h = COM.LoadFile('gfx/pop.lmp');
-
+	console.log('var h');
 	console.log(h);
 
 	if (typeof h !== 'undefined') {
@@ -98,11 +98,11 @@ COM.CheckRegistered = function() {
 
 			if (COM.modified === true)
 				Sys.Error('You must have the registered version to use modified games');
-
-			return;
 		}
 	}
 
+	console.log('var h2');
+	console.log(h);
 	var check = new Uint8Array(h);
 
 	var pop = [
@@ -196,7 +196,6 @@ COM.Path_f = function() {
 		Con.Print(s.filename + '\n');
 	}
 };
-
 
 COM.WriteFile = function(filename, data, len) {
 	filename = filename.toLowerCase();

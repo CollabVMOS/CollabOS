@@ -93,13 +93,13 @@ Q.atof = function(str) {
 	}
 	if (c === 39) {
 		// noinspection JSUnresolvedFunction
-		if (Q.isNaN(c2) === true)
+		if (isNaN(c2) === true)
 			return 0.0;
 		return sign * c2;
 	}
 	val = parseFloat(str);
 	// noinspection JSUnresolvedFunction
-	if (Q.isNaN(val) === true)
+	if (isNaN(val) === true)
 		return 0.0;
 	return val;
 };

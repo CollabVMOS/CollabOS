@@ -99,11 +99,11 @@ Sys.FloatTime = function() {
 
 window.onload = function() {
 	// IE11 Fix
-	if (Number.isNaN !== null) {
+	/*if (Number.isNaN !== null) {
 		Q.isNaN = Number.isNaN;
 	} else {
 		Q.isNaN = isNaN;
-	}
+	}*/
 
 	var i;
 
