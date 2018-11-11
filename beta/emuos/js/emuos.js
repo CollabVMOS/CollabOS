@@ -61,6 +61,10 @@
 				name: 'Quake 1',
 				icon: 'apps/quake1/favicon.ico',
 				link: 'apps/quake1/index.html'
+			} , {
+				name: 'Winamp 2.9',
+				icon: 'apps/winamp/favicon.ico',
+				link: 'apps/winamp/index.html'
 			}],
 			start: [{
 				name: 'Item'
