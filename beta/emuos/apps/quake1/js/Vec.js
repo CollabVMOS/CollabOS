@@ -148,19 +148,19 @@ Vec.AngleVectors = function(angles, forward, right, up) {
 	var sr = Math.sin(angle);
 	var cr = Math.cos(angle);
 
-	if (forward !== null) {
+	if (forward != null) {
 		forward[0] = cp * cy;
 		forward[1] = cp * sy;
 		forward[2] = -sp;
 	}
 
-	if (right !== null) {
+	if (right != null) {
 		right[0] = cr * sy - sr * sp * cy;
 		right[1] = -sr * sp * sy - cr * cy;
 		right[2] = -sr * cp;
 	}
 
-	if (up !== null) {
+	if (up != null) {
 		up[0] = cr * sp * cy + sr * sy;
 		up[1] = cr * sp * sy - sr * cy;
 		up[2] = cr * cp;
