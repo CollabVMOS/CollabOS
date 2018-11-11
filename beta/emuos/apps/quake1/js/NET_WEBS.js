@@ -1,13 +1,15 @@
 WEBS = {};
 
-WEBS.Init = function() {
+WEBS.Init = function()
+{
 	if ((window.WebSocket == null) || (document.location.protocol === 'https:'))
 		return;
 	WEBS.available = true;
 	return true;
 };
 
-WEBS.Connect = function(host) {
+WEBS.Connect = function(host)
+{
 	if (host.length <= 5)
 		return;
 	if (host.charCodeAt(5) === 47)
@@ -19,9 +21,12 @@ WEBS.Connect = function(host) {
 	sock.disconnected = true;
 	sock.receiveMessage = [];
 	sock.address = host;
-	try {
+	try
+	{
 		sock.driverdata = new WebSocket(host, 'quake');
-	} catch (e) {
+	}
+	catch (e)
+	{
 		return;
 	}
 	sock.driverdata.data_socket = sock;
@@ -32,10 +37,12 @@ WEBS.Connect = function(host) {
 	return 0;
 };
 
-WEBS.CheckNewConnections = function() {
+WEBS.CheckNewConnections = function()
+{
 };
 
-WEBS.GetMessage = function(sock) {
+WEBS.GetMessage = function(sock)
+{
 	if (sock.driverdata == null)
 		return -1;
 	if (sock.driverdata.readyState !== 1)
@@ -48,7 +55,8 @@ WEBS.GetMessage = function(sock) {
 	return message[0];
 };
 
-WEBS.SendMessage = function(sock, data) {
+WEBS.SendMessage = function(sock, data)
+{
 	if (sock.driverdata == null)
 		return -1;
 	if (sock.driverdata.readyState !== 1)
@@ -60,7 +68,8 @@ WEBS.SendMessage = function(sock, data) {
 	return 1;
 };
 
-WEBS.SendUnreliableMessage = function(sock, data) {
+WEBS.SendUnreliableMessage = function(sock, data)
+{
 	if (sock.driverdata == null)
 		return -1;
 	if (sock.driverdata.readyState !== 1)
@@ -72,32 +81,37 @@ WEBS.SendUnreliableMessage = function(sock, data) {
 	return 1;
 };
 
-WEBS.CanSendMessage = function(sock) {
+WEBS.CanSendMessage = function(sock)
+{
 	if (sock.driverdata == null)
 		return;
 	if (sock.driverdata.readyState === 1)
 		return true;
 };
 
-WEBS.Close = function(sock) {
+WEBS.Close = function(sock)
+{
 	if (sock.driverdata != null)
 		sock.driverdata.close(1000);
 };
 
-WEBS.CheckForResend = function() {
+WEBS.CheckForResend = function()
+{
 	if (NET.newsocket.driverdata.readyState === 1)
 		return 1;
 	if (NET.newsocket.driverdata.readyState !== 0)
 		return -1;
 };
 
-WEBS.OnError = function() {
+WEBS.OnError = function()
+{
 	NET.Close(this.data_socket);
 };
 
-WEBS.OnMessage = function(message) {
+WEBS.OnMessage = function(message)
+{
 	var data = message.data;
-	if (typeof (data) === 'string')
+	if (typeof(data) === 'string')
 		return;
 	if (data.byteLength > 8000)
 		return;

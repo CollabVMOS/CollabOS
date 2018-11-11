@@ -1,10 +1,13 @@
 Draw = {};
 
-Draw.CharToConback = function(num, dest) {
+Draw.CharToConback = function(num, dest)
+{
 	var source = ((num >> 4) << 10) + ((num & 15) << 3);
 	var drawline, x;
-	for (drawline = 0; drawline < 8; ++drawline) {
-		for (x = 0; x < 8; ++x) {
+	for (drawline = 0; drawline < 8; ++drawline)
+	{
+		for (x = 0; x < 8; ++x)
+		{
 			if (Draw.chars[source + x] !== 0)
 				Draw.conback.data[dest + x] = 0x60 + Draw.chars[source + x];
 		}
@@ -13,14 +16,16 @@ Draw.CharToConback = function(num, dest) {
 	}
 };
 
-Draw.Init = function() {
+Draw.Init = function()
+{
 	var i;
 
 	Draw.chars = new Uint8Array(W.GetLumpName('CONCHARS'));
 
 	var trans = new ArrayBuffer(65536);
 	var trans32 = new Uint32Array(trans);
-	for (i = 0; i < 16384; ++i) {
+	for (i = 0; i < 16384; ++i)
+	{
 		if (Draw.chars[i] !== 0)
 			trans32[i] = COM.LittleLong(VID.d_8to24table[Draw.chars[i]] + 0xff000000);
 	}
@@ -62,40 +67,47 @@ Draw.Init = function() {
 		['tTexture', 'tTrans']);
 };
 
-Draw.Char = function(x, y, num) {
+Draw.Char = function(x, y, num)
+{
 	GL.StreamDrawTexturedQuad(x, y, 8, 8,
 		(num & 15) * 0.0625, (num >> 4) * 0.0625,
 		((num & 15) + 1) * 0.0625, ((num >> 4) + 1) * 0.0625);
 };
 
-Draw.Character = function(x, y, num) {
+Draw.Character = function(x, y, num)
+{
 	var program = GL.UseProgram('Pic', true);
 	// noinspection JSUnresolvedVariable
 	GL.Bind(program.tTexture, Draw.char_texture, true);
 	Draw.Char(x, y, num);
 };
 
-Draw.String = function(x, y, str) {
+Draw.String = function(x, y, str)
+{
 	var program = GL.UseProgram('Pic', true);
 	// noinspection JSUnresolvedVariable
 	GL.Bind(program.tTexture, Draw.char_texture, true);
-	for (var i = 0; i < str.length; ++i) {
+	for (var i = 0; i < str.length; ++i)
+	{
 		Draw.Char(x, y, str.charCodeAt(i));
 		x += 8;
 	}
 };
 
-Draw.StringWhite = function(x, y, str) {
+Draw.StringWhite = function(x, y, str)
+{
 	var program = GL.UseProgram('Pic', true);
 	// noinspection JSUnresolvedVariable
 	GL.Bind(program.tTexture, Draw.char_texture, true);
-	for (var i = 0; i < str.length; ++i) {
+	for (var i = 0; i < str.length; ++i)
+	{
 		Draw.Char(x, y, str.charCodeAt(i) + 128);
 		x += 8;
 	}
 };
 
-Draw.PicFromWad = function(name) {
+Draw.PicFromWad = function(name)
+{
 	var buf = W.GetLumpName(name);
 	var p = {};
 	var view = new DataView(buf, 0, 8);
@@ -106,7 +118,8 @@ Draw.PicFromWad = function(name) {
 	return p;
 };
 
-Draw.CachePic = function(path) {
+Draw.CachePic = function(path)
+{
 	path = 'gfx/' + path + '.lmp';
 	var buf = COM.LoadFile(path);
 	if (buf == null)
@@ -120,14 +133,16 @@ Draw.CachePic = function(path) {
 	return dat;
 };
 
-Draw.Pic = function(x, y, pic) {
+Draw.Pic = function(x, y, pic)
+{
 	var program = GL.UseProgram('Pic', true);
 	// noinspection JSUnresolvedVariable
 	GL.Bind(program.tTexture, pic.texnum, true);
 	GL.StreamDrawTexturedQuad(x, y, pic.width, pic.height, 0.0, 0.0, 1.0, 1.0);
 };
 
-Draw.PicTranslate = function(x, y, pic, top, bottom) {
+Draw.PicTranslate = function(x, y, pic, top, bottom)
+{
 	GL.StreamFlush();
 	var program = GL.UseProgram('PicTranslate');
 	// noinspection JSUnresolvedVariable
@@ -148,25 +163,29 @@ Draw.PicTranslate = function(x, y, pic, top, bottom) {
 	GL.StreamFlush();
 };
 
-Draw.ConsoleBackground = function(lines) {
+Draw.ConsoleBackground = function(lines)
+{
 	var program = GL.UseProgram('Pic', true);
 	// noinspection JSUnresolvedVariable
 	GL.Bind(program.tTexture, Draw.conback.texnum, true);
 	GL.StreamDrawTexturedQuad(0, lines - VID.height, VID.width, VID.height, 0.0, 0.0, 1.0, 1.0);
 };
 
-Draw.Fill = function(x, y, w, h, c) {
+Draw.Fill = function(x, y, w, h, c)
+{
 	GL.UseProgram('Fill', true);
 	var color = VID.d_8to24table[c];
 	GL.StreamDrawColoredQuad(x, y, w, h, color & 0xff, (color >> 8) & 0xff, color >> 16, 255);
 };
 
-Draw.FadeScreen = function() {
+Draw.FadeScreen = function()
+{
 	GL.UseProgram('Fill', true);
 	GL.StreamDrawColoredQuad(0, 0, VID.width, VID.height, 0, 0, 0, 204);
 };
 
-Draw.BeginDisc = function() {
+Draw.BeginDisc = function()
+{
 	if (Draw.loadingElem == null)
 		return;
 	Draw.loadingElem.style.left = ((VID.width - Draw.loading.width) >> 1) + 'px';
@@ -174,12 +193,14 @@ Draw.BeginDisc = function() {
 	Draw.loadingElem.style.display = 'inline-block';
 };
 
-Draw.EndDisc = function() {
+Draw.EndDisc = function()
+{
 	if (Draw.loadingElem != null)
 		Draw.loadingElem.style.display = 'none';
 };
 
-Draw.PicToDataURL = function(pic) {
+Draw.PicToDataURL = function(pic)
+{
 	var canvas = document.createElement('canvas');
 	canvas.width = pic.width;
 	canvas.height = pic.height;
