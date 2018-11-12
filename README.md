@@ -2,6 +2,12 @@
 `Gitter` [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/Emupedia/Lobby)
 ---
 
+# Emupedia
+
+The purpose of Emupedia is to serve as a meta-resource, hub and community for those interested in digital preservation and history and aims to digitally collect games and software from a wide variety of systems no longer in production and make them available online.
+
+More about [Video game preservation](https://en.wikipedia.org/wiki/Video_game_preservation) on Wikipedia
+
 ## Live Demo
 
 [EmuOS](https://emupedia.net/beta/emuos)

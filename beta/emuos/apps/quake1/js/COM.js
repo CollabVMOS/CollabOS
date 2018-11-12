@@ -347,6 +347,7 @@ COM.LoadFile = function(filename) {
 
 					return Q.strmem(xhr.responseText);
 				}
+
 				break;
 			}
 		}
