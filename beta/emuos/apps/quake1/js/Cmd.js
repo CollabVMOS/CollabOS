@@ -12,7 +12,7 @@ Cmd.Execute = function() {
 	var c, line = '', quotes = false;
 
 	while (Cmd.text.length !== 0) {
-		c        = Cmd.text.charCodeAt(0);
+		c = Cmd.text.charCodeAt(0);
 		Cmd.text = Cmd.text.substring(1);
 
 		if (c === 34) {
@@ -86,7 +86,7 @@ Cmd.Exec_f = function() {
 
 	var f = COM.LoadTextFile(Cmd.argv[1]);
 
-	if (f === null) {
+	if (f == null) {
 		Con.Print('couldn\'t exec ' + Cmd.argv[1] + '\n');
 		return;
 	}
@@ -137,7 +137,7 @@ Cmd.Alias_f = function() {
 	Cmd.alias[i] = {name: s, value: value + '\n'};
 };
 
-Cmd.argv      = [];
+Cmd.argv = [];
 Cmd.functions = [];
 
 Cmd.Init = function() {
@@ -173,7 +173,7 @@ Cmd.TokenizeString = function(text) {
 
 		text = COM.Parse(text);
 
-		if (text === null) {
+		if (text == null) {
 			return;
 		}
 

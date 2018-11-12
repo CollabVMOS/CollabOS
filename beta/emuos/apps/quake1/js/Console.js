@@ -1,8 +1,8 @@
 Con = {};
 
 Con.backscroll = 0;
-Con.current    = 0;
-Con.text       = [];
+Con.current = 0;
+Con.text = [];
 
 Con.ToggleConsole_f = function() {
 	SCR.EndLoadingPlaque();
@@ -11,8 +11,8 @@ Con.ToggleConsole_f = function() {
 			M.Menu_Main_f();
 			return;
 		}
-		Key.dest.value   = Key.dest.game;
-		Key.edit_line    = '';
+		Key.dest.value = Key.dest.game;
+		Key.edit_line = '';
 		Key.history_line = Key.lines.length;
 		return;
 	}
@@ -21,8 +21,8 @@ Con.ToggleConsole_f = function() {
 
 Con.Clear_f = function() {
 	Con.backscroll = 0;
-	Con.current    = 0;
-	Con.text       = [];
+	Con.current = 0;
+	Con.text = [];
 };
 
 Con.ClearNotify = function() {
@@ -36,17 +36,17 @@ Con.ClearNotify = function() {
 };
 
 Con.MessageMode_f = function() {
-	Key.dest.value   = Key.dest.message;
+	Key.dest.value = Key.dest.message;
 	Key.team_message = false;
 };
 
 Con.MessageMode2_f = function() {
-	Key.dest.value   = Key.dest.message;
+	Key.dest.value = Key.dest.message;
 	Key.team_message = true;
 };
 
 Con.Init = function() {
-	Con.debuglog = (COM.CheckParm('-condebug') !== null);
+	Con.debuglog = (COM.CheckParm('-condebug') != null);
 	if (Con.debuglog === true) {
 		COM.WriteTextFile('qconsole.log', '');
 	}
@@ -62,7 +62,7 @@ Con.Init = function() {
 Con.Print = function(msg) {
 	if (Con.debuglog === true) {
 		var data = COM.LoadTextFile('qconsole.log');
-		if (data !== null) {
+		if (data != null) {
 			data += msg;
 			if (data.length >= 32768) {
 				data = data.substring(data.length - 16384);
@@ -83,12 +83,12 @@ Con.Print = function(msg) {
 	}
 	var i;
 	for (i = 0; i < msg.length; ++i) {
-		if (Con.text[Con.current] === null) {
+		if (Con.text[Con.current] == null) {
 			Con.text[Con.current] = {text: '', time: Host.realtime};
 		}
 		if (msg.charCodeAt(i) === 10) {
 			if (Con.text.length >= 1024) {
-				Con.text    = Con.text.slice(-512);
+				Con.text = Con.text.slice(-512);
 				Con.current = Con.text.length;
 			} else {
 				++Con.current;
@@ -109,7 +109,7 @@ Con.DrawInput = function() {
 	if ((Key.dest.value !== Key.dest.console) && (Con.forcedup !== true)) {
 		return;
 	}
-	var text  = ']' + Key.edit_line + String.fromCharCode(10 + ((Host.realtime * 4.0) & 1));
+	var text = ']' + Key.edit_line + String.fromCharCode(10 + ((Host.realtime * 4.0) & 1));
 	var width = (VID.width >> 3) - 2;
 	if (text.length >= width) {
 		text = text.substring(1 + text.length - width);
@@ -119,7 +119,7 @@ Con.DrawInput = function() {
 
 Con.DrawNotify = function() {
 	var width = (VID.width >> 3) - 2;
-	var i     = Con.text.length - 4, v = 0;
+	var i = Con.text.length - 4, v = 0;
 	if (i < 0) {
 		i = 0;
 	}
@@ -142,9 +142,9 @@ Con.DrawConsole = function(lines) {
 	lines = Math.floor(lines * VID.height * 0.005);
 	Draw.ConsoleBackground(lines);
 	Con.vislines = lines;
-	var width    = (VID.width >> 3) - 2;
+	var width = (VID.width >> 3) - 2;
 	var rows;
-	var y        = lines - 16;
+	var y = lines - 16;
 	var i;
 	for (i = Con.text.length - 1 - Con.backscroll; i >= 0;) {
 		if (Con.text[i].text.length === 0) {

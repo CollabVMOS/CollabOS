@@ -3,29 +3,29 @@ Vec = {};
 Vec.origin = [0.0, 0.0, 0.0];
 
 Vec.Perpendicular = function(v) {
-	var pos     = 0;
+	var pos = 0;
 	var minelem = 1;
 
 	if (Math.abs(v[0]) < minelem) {
-		pos     = 0;
+		pos = 0;
 		minelem = Math.abs(v[0]);
 	}
 
 	if (Math.abs(v[1]) < minelem) {
-		pos     = 1;
+		pos = 1;
 		minelem = Math.abs(v[1]);
 	}
 
 	if (Math.abs(v[2]) < minelem) {
-		pos     = 2;
+		pos = 2;
 		minelem = Math.abs(v[2]);
 	}
 
-	var tempvec   = [0.0, 0.0, 0.0];
-	tempvec[pos]  = 1.0;
+	var tempvec = [0.0, 0.0, 0.0];
+	tempvec[pos] = 1.0;
 	var inv_denom = 1.0 / (v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
-	var d         = (tempvec[0] * v[0] + tempvec[1] * v[1] + tempvec[2] * v[2]) * inv_denom;
-	var dst       = [tempvec[0] - d * v[0] * inv_denom, tempvec[1] - d * v[1] * inv_denom, tempvec[2] - d * v[2] * inv_denom];
+	var d = (tempvec[0] * v[0] + tempvec[1] * v[1] + tempvec[2] * v[2]) * inv_denom;
+	var dst = [tempvec[0] - d * v[0] * inv_denom, tempvec[1] - d * v[1] * inv_denom, tempvec[2] - d * v[2] * inv_denom];
 
 	Vec.Normalize(dst);
 
@@ -33,7 +33,7 @@ Vec.Perpendicular = function(v) {
 };
 
 Vec.RotatePointAroundVector = function(dir, point, degrees) {
-	var r  = Vec.Perpendicular(dir);
+	var r = Vec.Perpendicular(dir);
 	var up = Vec.CrossProduct(r, dir);
 
 	var m = [
@@ -48,10 +48,10 @@ Vec.RotatePointAroundVector = function(dir, point, degrees) {
 		[m[0][2], m[1][2], m[2][2]]
 	];
 
-	var s    = Math.sin(degrees * Math.PI / 180.0);
-	var c    = Math.cos(degrees * Math.PI / 180.0);
+	var s = Math.sin(degrees * Math.PI / 180.0);
+	var c = Math.cos(degrees * Math.PI / 180.0);
 	var zrot = [[c, s, 0], [-s, c, 0], [0, 0, 1]];
-	var rot  = Vec.ConcatRotations(Vec.ConcatRotations(m, zrot), im);
+	var rot = Vec.ConcatRotations(Vec.ConcatRotations(m, zrot), im);
 
 	return [
 		rot[0][0] * point[0] + rot[0][1] * point[1] + rot[0][2] * point[2],
@@ -126,7 +126,6 @@ Vec.BoxOnPlaneSide = function(emins, emaxs, p) {
 		sides = 1;
 	}
 
-
 	if (dist2 < p.dist) {
 		sides += 2;
 	}
@@ -138,29 +137,29 @@ Vec.BoxOnPlaneSide = function(emins, emaxs, p) {
 Vec.AngleVectors = function(angles, forward, right, up) {
 	var angle;
 
-	angle  = angles[0] * Math.PI / 180.0;
+	angle = angles[0] * Math.PI / 180.0;
 	var sp = Math.sin(angle);
 	var cp = Math.cos(angle);
-	angle  = angles[1] * Math.PI / 180.0;
+	angle = angles[1] * Math.PI / 180.0;
 	var sy = Math.sin(angle);
 	var cy = Math.cos(angle);
-	angle  = angles[2] * Math.PI / 180.0;
+	angle = angles[2] * Math.PI / 180.0;
 	var sr = Math.sin(angle);
 	var cr = Math.cos(angle);
 
-	if (forward !== null) {
+	if (forward != null) {
 		forward[0] = cp * cy;
 		forward[1] = cp * sy;
 		forward[2] = -sp;
 	}
 
-	if (right !== null) {
+	if (right != null) {
 		right[0] = cr * sy - sr * sp * cy;
 		right[1] = -sr * sp * sy - cr * cy;
 		right[2] = -sr * cp;
 	}
 
-	if (up !== null) {
+	if (up != null) {
 		up[0] = cr * sp * cy + sr * sy;
 		up[1] = cr * sp * sy - sr * cy;
 		up[2] = cr * cp;

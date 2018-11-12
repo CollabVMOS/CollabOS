@@ -2,12 +2,12 @@ SCR = {};
 
 SCR.con_current = 0;
 
-SCR.centerstring   = [];
+SCR.centerstring = [];
 SCR.centertime_off = 0.0;
 
 SCR.CenterPrint = function(str) {
 	SCR.centerstring = [];
-	var i, start     = 0, next;
+	var i, start = 0, next;
 	for (i = 0; i < str.length; ++i) {
 		if (str.charCodeAt(i) === 10) {
 			next = i + 1;
@@ -17,11 +17,11 @@ SCR.CenterPrint = function(str) {
 			continue;
 		}
 		SCR.centerstring[SCR.centerstring.length] = str.substring(start, i);
-		start                                     = next;
+		start = next;
 	}
 	SCR.centerstring[SCR.centerstring.length] = str.substring(start, i);
-	SCR.centertime_off                        = SCR.centertime.value;
-	SCR.centertime_start                      = CL.state.time;
+	SCR.centertime_off = SCR.centertime.value;
+	SCR.centertime_start = CL.state.time;
 };
 
 SCR.DrawCenterString = function() {
@@ -43,7 +43,7 @@ SCR.DrawCenterString = function() {
 		var str, x, j;
 		for (i = 0; i < SCR.centerstring.length; ++i) {
 			str = SCR.centerstring[i];
-			x   = (VID.width - (str.length << 3)) >> 1;
+			x = (VID.width - (str.length << 3)) >> 1;
 			for (j = 0; j < str.length; ++j) {
 				Draw.Character(x, y, str.charCodeAt(j));
 				if ((remaining--) === 0) {
@@ -73,8 +73,8 @@ SCR.CalcRefdef = function() {
 
 	var size, full;
 	if (CL.state.intermission !== 0) {
-		full       = true;
-		size       = 1.0;
+		full = true;
+		size = 1.0;
 		Sbar.lines = 0;
 	} else {
 		size = SCR.viewsize.value;
@@ -92,10 +92,10 @@ SCR.CalcRefdef = function() {
 		size *= 0.01;
 	}
 
-	var vrect   = R.refdef.vrect;
+	var vrect = R.refdef.vrect;
 	vrect.width = Math.floor(VID.width * size);
 	if (vrect.width < 96) {
-		size        = 96.0 / vrect.width;
+		size = 96.0 / vrect.width;
 		vrect.width = 96;
 	}
 	vrect.height = Math.floor(VID.height * size);
@@ -122,13 +122,13 @@ SCR.CalcRefdef = function() {
 		R.refdef.fov_y = SCR.fov.value * 0.82;
 	}
 
-	var ymax         = 4.0 * Math.tan(R.refdef.fov_y * Math.PI / 360.0);
+	var ymax = 4.0 * Math.tan(R.refdef.fov_y * Math.PI / 360.0);
 	R.perspective[0] = 4.0 / (ymax * R.refdef.vrect.width / R.refdef.vrect.height);
 	R.perspective[5] = 4.0 / ymax;
-	GL.ortho[0]      = 2.0 / VID.width;
-	GL.ortho[5]      = -2.0 / VID.height;
+	GL.ortho[0] = 2.0 / VID.width;
+	GL.ortho[5] = -2.0 / VID.height;
 
-	R.warpwidth  = (vrect.width * SCR.devicePixelRatio) >> 0;
+	R.warpwidth = (vrect.width * SCR.devicePixelRatio) >> 0;
 	R.warpheight = (vrect.height * SCR.devicePixelRatio) >> 0;
 	if (R.warpwidth > 2048) {
 		R.warpwidth = 2048;
@@ -137,7 +137,7 @@ SCR.CalcRefdef = function() {
 		R.warpheight = 2048;
 	}
 	if ((R.oldwarpwidth !== R.warpwidth) || (R.oldwarpheight !== R.warpheight)) {
-		R.oldwarpwidth  = R.warpwidth;
+		R.oldwarpwidth = R.warpwidth;
 		R.oldwarpheight = R.warpheight;
 		GL.Bind(0, R.warptexture);
 		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, R.warpwidth, R.warpheight, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
@@ -158,22 +158,22 @@ SCR.SizeDown_f = function() {
 };
 
 SCR.Init = function() {
-	SCR.fov        = Cvar.RegisterVariable('fov', '90');
-	SCR.viewsize   = Cvar.RegisterVariable('viewsize', '100', true);
-	SCR.conspeed   = Cvar.RegisterVariable('scr_conspeed', '300');
+	SCR.fov = Cvar.RegisterVariable('fov', '90');
+	SCR.viewsize = Cvar.RegisterVariable('viewsize', '100', true);
+	SCR.conspeed = Cvar.RegisterVariable('scr_conspeed', '300');
 	SCR.showturtle = Cvar.RegisterVariable('showturtle', '0');
-	SCR.showpause  = Cvar.RegisterVariable('showpause', '1');
+	SCR.showpause = Cvar.RegisterVariable('showpause', '1');
 	SCR.centertime = Cvar.RegisterVariable('scr_centertime', '2');
 	SCR.printspeed = Cvar.RegisterVariable('scr_printspeed', '8');
 	Cmd.AddCommand('screenshot', SCR.ScreenShot_f);
 	Cmd.AddCommand('sizeup', SCR.SizeUp_f);
 	Cmd.AddCommand('sizedown', SCR.SizeDown_f);
-	SCR.net    = Draw.PicFromWad('NET');
+	SCR.net = Draw.PicFromWad('NET');
 	SCR.turtle = Draw.PicFromWad('TURTLE');
-	SCR.pause  = Draw.CachePic('pause');
+	SCR.pause = Draw.CachePic('pause');
 };
 
-SCR.count      = 0;
+SCR.count = 0;
 SCR.DrawTurtle = function() {
 	if (SCR.showturtle.value === 0) {
 		return;
@@ -200,7 +200,7 @@ SCR.DrawPause = function() {
 };
 
 SCR.SetUpToDrawConsole = function() {
-	Con.forcedup = (CL.state.worldmodel === null) || (CL.cls.signon !== 4);
+	Con.forcedup = (CL.state.worldmodel == null) || (CL.cls.signon !== 4);
 
 	if (Con.forcedup === true) {
 		SCR.con_current = 200;
@@ -254,10 +254,10 @@ SCR.BeginLoadingPlaque = function() {
 		return;
 	}
 
-	SCR.centertime_off       = 0.0;
-	SCR.con_current          = 0;
+	SCR.centertime_off = 0.0;
+	SCR.con_current = 0;
 	SCR.disabled_for_loading = true;
-	SCR.disabled_time        = Host.realtime + 60.0;
+	SCR.disabled_time = Host.realtime + 60.0;
 };
 
 SCR.EndLoadingPlaque = function() {
@@ -275,8 +275,8 @@ SCR.UpdateScreen = function() {
 		Con.Print('load failed.\n');
 	}
 
-	var elem   = document.documentElement;
-	var width  = (elem.clientWidth <= 320) ? 320 : elem.clientWidth;
+	var elem = document.documentElement;
+	var width = (elem.clientWidth <= 320) ? 320 : elem.clientWidth;
 	var height = (elem.clientHeight <= 200) ? 200 : elem.clientHeight;
 	var pixelRatio;
 	if (window.devicePixelRatio >= 1.0) {
@@ -285,18 +285,18 @@ SCR.UpdateScreen = function() {
 		pixelRatio = 1.0;
 	}
 	if ((VID.width !== width) || (VID.height !== height) || (SCR.devicePixelRatio !== pixelRatio) || (Host.framecount === 0)) {
-		VID.width                   = width;
-		VID.height                  = height;
-		VID.mainwindow.width        = (width * pixelRatio) >> 0;
-		VID.mainwindow.height       = (height * pixelRatio) >> 0;
-		VID.mainwindow.style.width  = width + 'px';
+		VID.width = width;
+		VID.height = height;
+		VID.mainwindow.width = (width * pixelRatio) >> 0;
+		VID.mainwindow.height = (height * pixelRatio) >> 0;
+		VID.mainwindow.style.width = width + 'px';
 		VID.mainwindow.style.height = height + 'px';
-		SCR.devicePixelRatio        = pixelRatio;
-		SCR.recalc_refdef           = true;
+		SCR.devicePixelRatio = pixelRatio;
+		SCR.recalc_refdef = true;
 	}
 
 	if (SCR.oldfov !== SCR.fov.value) {
-		SCR.oldfov        = SCR.fov.value;
+		SCR.oldfov = SCR.fov.value;
 		SCR.recalc_refdef = true;
 	}
 	if (SCR.oldscreensize !== SCR.viewsize.value) {

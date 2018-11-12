@@ -21,10 +21,10 @@ MSG.WriteFloat = function(sb, f) {
 };
 
 MSG.WriteString = function(sb, s) {
-	if (s !== null) {
+	if (s != null) {
 		SZ.Write(sb, new Uint8Array(Q.strmem(s)), s.length);
 	}
-	MSG.WriteChar(sb, 0)
+	MSG.WriteChar(sb, 0);
 };
 
 MSG.WriteCoord = function(sb, f) {
@@ -37,7 +37,7 @@ MSG.WriteAngle = function(sb, f) {
 
 MSG.BeginReading = function() {
 	MSG.readcount = 0;
-	MSG.badread   = false;
+	MSG.badread = false;
 };
 
 MSG.ReadChar = function() {

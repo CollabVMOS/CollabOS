@@ -10,7 +10,7 @@ CDAudio.Play = function(track, looping) {
 	track -= 1;
 
 	if (CDAudio.playTrack === track) {
-		if (CDAudio.cd !== null) {
+		if (CDAudio.cd != null) {
 			CDAudio.cd.loop = looping;
 
 			if ((looping === true) && (CDAudio.cd.paused === true)) {
@@ -29,8 +29,8 @@ CDAudio.Play = function(track, looping) {
 
 	CDAudio.Stop();
 	CDAudio.playTrack = track;
-	CDAudio.cd        = new Audio(CDAudio.known[track]);
-	CDAudio.cd.loop   = looping;
+	CDAudio.cd = new Audio(CDAudio.known[track]);
+	CDAudio.cd.loop = looping;
 	CDAudio.cd.volume = CDAudio.cdvolume;
 	CDAudio.cd.play();
 };
@@ -40,12 +40,12 @@ CDAudio.Stop = function() {
 		return;
 	}
 
-	if (CDAudio.cd !== null) {
+	if (CDAudio.cd != null) {
 		CDAudio.cd.pause();
 	}
 
 	CDAudio.playTrack = null;
-	CDAudio.cd        = null;
+	CDAudio.cd = null;
 };
 
 CDAudio.Pause = function() {
@@ -53,7 +53,7 @@ CDAudio.Pause = function() {
 		return;
 	}
 
-	if (CDAudio.cd !== null) {
+	if (CDAudio.cd != null) {
 		CDAudio.cd.pause();
 	}
 };
@@ -63,7 +63,7 @@ CDAudio.Resume = function() {
 		return;
 	}
 
-	if (CDAudio.cd !== null) {
+	if (CDAudio.cd != null) {
 		CDAudio.cd.play();
 	}
 };
@@ -101,7 +101,7 @@ CDAudio.CD_f = function() {
 		case 'info':
 			Con.Print(CDAudio.known.length + ' tracks\n');
 
-			if (CDAudio.cd !== null) {
+			if (CDAudio.cd != null) {
 				if (CDAudio.cd.paused !== true) {
 					Con.Print('Currently ' + (CDAudio.cd.loop === true ? 'looping' : 'playing') + ' track ' + (CDAudio.playTrack + 2) + '\n');
 				}
@@ -129,7 +129,7 @@ CDAudio.Update = function() {
 
 	CDAudio.cdvolume = S.bgmvolume.value;
 
-	if (CDAudio.cd !== null) {
+	if (CDAudio.cd != null) {
 		CDAudio.cd.volume = CDAudio.cdvolume;
 	}
 };
@@ -137,7 +137,7 @@ CDAudio.Update = function() {
 CDAudio.Init = function() {
 	Cmd.AddCommand('cd', CDAudio.CD_f);
 
-	if (COM.CheckParm('-nocdaudio') !== null) {
+	if (COM.CheckParm('-nocdaudio') != null) {
 		return;
 	}
 

@@ -27,27 +27,36 @@ COM.DefaultExtension = function(path, extension) {
 
 COM.Parse = function(data) {
 	COM.token = '';
-	var i     = 0, c;
+
+	var i = 0, c;
+
 	if (data.length === 0) {
 		return;
 	}
 
 	var skipwhite = true;
+
 	for (; ;) {
 		if (skipwhite !== true) {
 			break;
 		}
+
 		skipwhite = false;
+
 		for (; ;) {
 			if (i >= data.length) {
 				return;
 			}
+
 			c = data.charCodeAt(i);
+
 			if (c > 32) {
 				break;
 			}
+
 			++i;
 		}
+
 		if ((c === 47) && (data.charCodeAt(i + 1) === 47)) {
 			for (; ;) {
 				if ((i >= data.length) || (data.charCodeAt(i) === 10)) {
@@ -55,18 +64,22 @@ COM.Parse = function(data) {
 				}
 				++i;
 			}
+
 			skipwhite = true;
 		}
 	}
 
 	if (c === 34) {
 		++i;
+
 		for (; ;) {
 			c = data.charCodeAt(i);
 			++i;
+
 			if ((i >= data.length) || (c === 34)) {
 				return data.substring(i);
 			}
+
 			COM.token += String.fromCharCode(c);
 		}
 	}
@@ -75,6 +88,7 @@ COM.Parse = function(data) {
 		if ((i >= data.length) || (c <= 32)) {
 			break;
 		}
+
 		COM.token += String.fromCharCode(c);
 		++i;
 		c = data.charCodeAt(i);
@@ -84,21 +98,37 @@ COM.Parse = function(data) {
 };
 
 COM.CheckParm = function(parm) {
+	console.log('CheckParm()');
+	console.log(parm);
+
 	var i;
 
 	for (i = 1; i < COM.argv.length; ++i) {
+		console.log('COM.argv[i]');
+		console.log(COM.argv[i]);
+		console.log('parm');
+		console.log(parm);
+		console.log('COM.argv[i] === parm');
+		console.log(COM.argv[i] === parm);
 		if (COM.argv[i] === parm) {
 			// noinspection JSConstructorReturnsPrimitive
 			return i;
 		}
 	}
+
+	// noinspection JSConstructorReturnsPrimitive
+	return null;
 };
 
 COM.CheckRegistered = function() {
+	console.log('CheckRegistered()');
+
 	var h = COM.LoadFile('gfx/pop.lmp');
 
+	console.log(h);
+
 	if (typeof h !== 'undefined') {
-		if (h === null) {
+		if (h == null) {
 			Con.Print('Playing shareware version.\n');
 
 			if (COM.modified === true) {
@@ -144,34 +174,47 @@ COM.CheckRegistered = function() {
 };
 
 COM.InitArgv = function(argv) {
+	console.log('InitArgv()');
+	console.log('argv');
+	console.log(argv);
+
 	COM.cmdline = (argv.join(' ') + ' ').substring(0, 256);
 	var i;
+
 	for (i = 0; i < argv.length; ++i) {
 		COM.argv[i] = argv[i];
 	}
-	if (COM.CheckParm('-safe') !== null) {
+
+	if (COM.CheckParm('-safe') != null) {
+		console.log('CheckParm(-safe)');
 		COM.argv[COM.argv.length] = '-nosound';
 		COM.argv[COM.argv.length] = '-nocdaudio';
 		COM.argv[COM.argv.length] = '-nomouse';
 	}
-	if (COM.CheckParm('-rogue') !== null) {
-		COM.rogue          = true;
+
+	if (COM.CheckParm('-rogue') != null) {
+		console.log('CheckParm(-rogue)');
+		COM.rogue = true;
 		COM.standard_quake = false;
-	} else if (COM.CheckParm('-hipnotic') !== null) {
-		COM.hipnotic       = true;
+	} else if (COM.CheckParm('-hipnotic') != null) {
+		console.log('CheckParm(-hipnotic)');
+		COM.hipnotic = true;
 		COM.standard_quake = false;
 	}
 };
 
 COM.Init = function() {
+	console.log('Init()');
+
 	if ((document.location.protocol !== 'http:') && (document.location.protocol !== 'https:')) {
 		Sys.Error('Protocol is ' + document.location.protocol + ', not http: or https:');
 	}
 
-	var swaptest     = new ArrayBuffer(2);
+	var swaptest = new ArrayBuffer(2);
 	var swaptestview = new Uint8Array(swaptest);
-	swaptestview[0]  = 1;
-	swaptestview[1]  = 0;
+	swaptestview[0] = 1;
+	swaptestview[1] = 0;
+
 	if ((new Uint16Array(swaptest))[0] === 1) {
 		COM.LittleLong = (function(l) {
 			return l;
@@ -246,6 +289,10 @@ COM.WriteTextFile = function(filename, data) {
 };
 
 COM.LoadFile = function(filename) {
+	console.log('LoadFile()');
+	console.log('filename');
+	console.log(filename);
+
 	filename = filename.toLowerCase();
 
 	var xhr = new XMLHttpRequest();
@@ -257,16 +304,22 @@ COM.LoadFile = function(filename) {
 	Draw.BeginDisc();
 
 	for (i = COM.searchpaths.length - 1; i >= 0; --i) {
-		search  = COM.searchpaths[i];
+		search = COM.searchpaths[i];
 		netpath = search.filename + '/' + filename;
-		data    = localStorage.getItem('Quake.' + netpath);
+		data = localStorage.getItem('Quake.' + netpath);
 
-		if (data !== null) {
+		console.log('data');
+		console.log(data);
+
+		if (data != null) {
 			Sys.Print('FindFile: ' + netpath + '\n');
 			Draw.EndDisc();
 
 			return Q.strmem(data);
 		}
+
+		console.log('search');
+		console.log(search);
 
 		for (j = search.pack.length - 1; j >= 0; --j) {
 			pak = search.pack[j];
@@ -316,7 +369,7 @@ COM.LoadFile = function(filename) {
 COM.LoadTextFile = function(filename) {
 	var buf = COM.LoadFile(filename);
 
-	if (buf === null) {
+	if (buf == null) {
 		return;
 	}
 
@@ -337,72 +390,106 @@ COM.LoadTextFile = function(filename) {
 };
 
 COM.LoadPackFile = function(packfile) {
+	console.log('LoadPackFile()');
+	console.log(packfile);
+
 	var xhr = new XMLHttpRequest();
 	xhr.overrideMimeType('text/plain; charset=x-user-defined');
 	xhr.open('GET', packfile, false);
 	xhr.setRequestHeader('Range', 'bytes=0-11');
 	xhr.send();
+
 	if ((xhr.status <= 199) || (xhr.status >= 300) || (xhr.responseText.length !== 12)) {
 		return;
 	}
+
 	var header = new DataView(Q.strmem(xhr.responseText));
+
 	if (header.getUint32(0, true) !== 0x4b434150) {
 		Sys.Error(packfile + ' is not a packfile');
 	}
-	var dirofs       = header.getUint32(4, true);
-	var dirlen       = header.getUint32(8, true);
+
+	var dirofs = header.getUint32(4, true);
+	var dirlen = header.getUint32(8, true);
 	var numpackfiles = dirlen >> 6;
+
 	if (numpackfiles !== 339) {
 		COM.modified = true;
 	}
+
 	var pack = [];
+
 	if (numpackfiles !== 0) {
 		xhr.open('GET', packfile, false);
 		xhr.setRequestHeader('Range', 'bytes=' + dirofs + '-' + (dirofs + dirlen - 1));
 		xhr.send();
+
 		if ((xhr.status <= 199) || (xhr.status >= 300) || (xhr.responseText.length !== dirlen)) {
 			return;
 		}
+
 		var info = Q.strmem(xhr.responseText);
+
 		if (CRC.Block(new Uint8Array(info)) !== 32981) {
 			COM.modified = true;
 		}
+
 		var i;
+
 		for (i = 0; i < numpackfiles; ++i) {
-			pack[pack.length] =
-				{
-					name:    Q.memstr(new Uint8Array(info, i << 6, 56)).toLowerCase(),
-					filepos: (new DataView(info)).getUint32((i << 6) + 56, true),
-					filelen: (new DataView(info)).getUint32((i << 6) + 60, true)
-				}
+			pack[pack.length] = {
+				name: Q.memstr(new Uint8Array(info, i << 6, 56)).toLowerCase(),
+				filepos: (new DataView(info)).getUint32((i << 6) + 56, true),
+				filelen: (new DataView(info)).getUint32((i << 6) + 60, true)
+			};
 		}
 	}
+
 	Con.Print('Added packfile ' + packfile + ' (' + numpackfiles + ' files)\n');
+
+	console.log(pack);
+
 	return pack;
 };
 
 COM.AddGameDirectory = function(dir) {
+	console.log('AddGameDirectory()');
+	console.log(dir);
+
+	if (typeof dir === 'undefined') {
+		return;
+	}
+
 	var search = {filename: dir, pack: []};
 	var pak, i = 0;
+
 	for (; ;) {
 		pak = COM.LoadPackFile(dir + '/' + 'pak' + i + '.zip');
-		if (pak === null) {
+
+		if (pak == null) {
 			break;
 		}
+
 		search.pack[search.pack.length] = pak;
 		++i;
 	}
+
 	COM.searchpaths[COM.searchpaths.length] = search;
 };
 
 COM.InitFilesystem = function() {
+	console.log('InitFilesystem()');
+	console.log(COM);
+
 	var i, search;
 
 	i = COM.CheckParm('-basedir');
-	if (i !== null) {
+
+	if (i != null) {
 		search = COM.argv[i + 1];
 	}
-	if (search !== null) {
+
+	if (search != null) {
 		COM.AddGameDirectory(search);
 	} else {
 		COM.AddGameDirectory('id1');
@@ -415,9 +502,11 @@ COM.InitFilesystem = function() {
 	}
 
 	i = COM.CheckParm('-game');
-	if (i !== null) {
+
+	if (i != null) {
 		search = COM.argv[i + 1];
-		if (search !== null) {
+
+		if (search != null) {
 			COM.modified = true;
 			COM.AddGameDirectory(search);
 		}

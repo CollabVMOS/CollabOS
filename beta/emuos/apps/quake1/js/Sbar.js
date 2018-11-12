@@ -18,8 +18,8 @@ Sbar.Init = function() {
 	}
 	Sbar.nums[0][10] = Draw.PicFromWad('NUM_MINUS');
 	Sbar.nums[1][10] = Draw.PicFromWad('ANUM_MINUS');
-	Sbar.colon       = Draw.PicFromWad('NUM_COLON');
-	Sbar.slash       = Draw.PicFromWad('NUM_SLASH');
+	Sbar.colon = Draw.PicFromWad('NUM_COLON');
+	Sbar.slash = Draw.PicFromWad('NUM_SLASH');
 
 	Sbar.weapons = [
 		[
@@ -89,22 +89,22 @@ Sbar.Init = function() {
 			Draw.PicFromWad('FACE_P' + (5 - i))
 		];
 	}
-	Sbar.face_invis        = Draw.PicFromWad('FACE_INVIS');
-	Sbar.face_invuln       = Draw.PicFromWad('FACE_INVUL2');
+	Sbar.face_invis = Draw.PicFromWad('FACE_INVIS');
+	Sbar.face_invuln = Draw.PicFromWad('FACE_INVUL2');
 	Sbar.face_invis_invuln = Draw.PicFromWad('FACE_INV2');
-	Sbar.face_quad         = Draw.PicFromWad('FACE_QUAD');
+	Sbar.face_quad = Draw.PicFromWad('FACE_QUAD');
 
 	Cmd.AddCommand('+showscores', Sbar.ShowScores);
 	Cmd.AddCommand('-showscores', Sbar.DontShowScores);
 
-	Sbar.sbar     = Draw.PicFromWad('SBAR');
-	Sbar.ibar     = Draw.PicFromWad('IBAR');
+	Sbar.sbar = Draw.PicFromWad('SBAR');
+	Sbar.ibar = Draw.PicFromWad('IBAR');
 	Sbar.scorebar = Draw.PicFromWad('SCOREBAR');
 
-	Sbar.ranking  = Draw.CachePic('ranking');
+	Sbar.ranking = Draw.CachePic('ranking');
 	Sbar.complete = Draw.CachePic('complete');
-	Sbar.inter    = Draw.CachePic('inter');
-	Sbar.finale   = Draw.CachePic('finale');
+	Sbar.inter = Draw.CachePic('inter');
+	Sbar.finale = Draw.CachePic('finale');
 
 	Sbar.disc = Draw.PicFromWad('DISC');
 
@@ -135,28 +135,28 @@ Sbar.Init = function() {
 			];
 		}
 		Sbar.hipweapons = [Def.hit.laser_cannon_bit, Def.hit.mjolnir_bit, 4, Def.hit.proximity_gun_bit];
-		Sbar.h_items    = [
+		Sbar.h_items = [
 			Draw.PicFromWad('SB_WSUIT'),
 			Draw.PicFromWad('SB_ESHLD')
 		];
 	} else if (COM.rogue === true) {
-		Sbar.r_invbar   = [
+		Sbar.r_invbar = [
 			Draw.PicFromWad('R_INVBAR1'),
 			Draw.PicFromWad('R_INVBAR2')
 		];
-		Sbar.r_weapons  = [
+		Sbar.r_weapons = [
 			Draw.PicFromWad('R_LAVA'),
 			Draw.PicFromWad('R_SUPERLAVA'),
 			Draw.PicFromWad('R_GREN'),
 			Draw.PicFromWad('R_MULTIROCK'),
 			Draw.PicFromWad('R_PLASMA')
 		];
-		Sbar.r_items    = [
+		Sbar.r_items = [
 			Draw.PicFromWad('R_SHIELD1'),
 			Draw.PicFromWad('R_AGRAV1')
 		];
 		Sbar.r_teambord = Draw.PicFromWad('R_TEAMBORD');
-		Sbar.r_ammo     = [
+		Sbar.r_ammo = [
 			Draw.PicFromWad('R_AMMOLAVA'),
 			Draw.PicFromWad('R_AMMOMULTI'),
 			Draw.PicFromWad('R_AMMOPLASMA')
@@ -216,8 +216,8 @@ Sbar.SortFrags = function() {
 	for (i = 0; i < Sbar.scoreboardlines; ++i) {
 		for (j = 0; j < (Sbar.scoreboardlines - 1 - i); ++j) {
 			if (CL.state.scores[Sbar.fragsort[j]].frags < CL.state.scores[Sbar.fragsort[j + 1]].frags) {
-				k                    = Sbar.fragsort[j];
-				Sbar.fragsort[j]     = Sbar.fragsort[j + 1];
+				k = Sbar.fragsort[j];
+				Sbar.fragsort[j] = Sbar.fragsort[j + 1];
 				Sbar.fragsort[j + 1] = k;
 			}
 		}
@@ -241,8 +241,8 @@ Sbar.SoloScoreboard = function() {
 
 	var minutes = Math.floor(CL.state.time / 60.0);
 	var seconds = Math.floor(CL.state.time - 60 * minutes);
-	var tens    = Math.floor(seconds / 10.0);
-	str         = (seconds - 10 * tens).toString();
+	var tens = Math.floor(seconds / 10.0);
+	str = (seconds - 10 * tens).toString();
 	Sbar.DrawString(184, 4, 'Time :   :' + tens + str);
 	str = minutes.toString();
 	Sbar.DrawString(256 - (str.length << 3), 4, str);
@@ -365,10 +365,10 @@ Sbar.DrawInventory = function() {
 
 Sbar.DrawFrags = function() {
 	Sbar.SortFrags();
-	var l    = Sbar.scoreboardlines <= 4 ? Sbar.scoreboardlines : 4;
-	var x    = 23;
+	var l = Sbar.scoreboardlines <= 4 ? Sbar.scoreboardlines : 4;
+	var x = 23;
 	var xofs = CL.state.gametype === 1 ? 10 : (VID.width >> 1) - 150;
-	var y    = VID.height - 47;
+	var y = VID.height - 47;
 	var i, k, s, num;
 	for (i = 0; i < l; ++i) {
 		k = Sbar.fragsort[i];
@@ -390,8 +390,8 @@ Sbar.DrawFrags = function() {
 
 Sbar.DrawFace = function() {
 	if ((COM.rogue === true) && (CL.state.maxclients !== 1) && (Host.teamplay.value >= 4) && (Host.teamplay.value <= 6)) {
-		var s    = CL.state.scores[CL.state.viewentity - 1];
-		var top  = (s.colors & 0xf0) + 8;
+		var s = CL.state.scores[CL.state.viewentity - 1];
+		var top = (s.colors & 0xf0) + 8;
 		var xofs = CL.state.gametype === 1 ? 113 : (VID.width >> 1) - 47;
 		Sbar.DrawPic(112, 0, Sbar.r_teambord);
 		Draw.Fill(xofs, VID.height - 21, 22, 9, top);
@@ -551,8 +551,8 @@ Sbar.DeathmatchOverlay = function() {
 
 Sbar.MiniDeathmatchOverlay = function() {
 	Sbar.SortFrags();
-	var l        = Sbar.scoreboardlines;
-	var y        = VID.height - Sbar.lines;
+	var l = Sbar.scoreboardlines;
+	var y = VID.height - Sbar.lines;
 	var numlines = Sbar.lines >> 3;
 	var i;
 

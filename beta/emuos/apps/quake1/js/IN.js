@@ -1,40 +1,40 @@
 IN = {};
 
-IN.mouse_x     = 0.0;
-IN.mouse_y     = 0.0;
+IN.mouse_x = 0.0;
+IN.mouse_y = 0.0;
 IN.old_mouse_x = 0.0;
 IN.old_mouse_y = 0.0;
 
 IN.StartupMouse = function() {
 	IN.m_filter = Cvar.RegisterVariable('m_filter', '1');
-	if (COM.CheckParm('-nomouse') !== null) {
+	if (COM.CheckParm('-nomouse') != null) {
 		return;
 	}
-	if (VID.mainwindow.requestPointerLock !== null) {
-		IN.movementX          = 'movementX';
-		IN.movementY          = 'movementY';
+	if (VID.mainwindow.requestPointerLock != null) {
+		IN.movementX = 'movementX';
+		IN.movementY = 'movementY';
 		IN.pointerLockElement = 'pointerLockElement';
 		IN.requestPointerLock = 'requestPointerLock';
-		IN.pointerlockchange  = 'onpointerlockchange';
-	} else if (VID.mainwindow.webkitRequestPointerLock !== null) {
-		IN.movementX          = 'webkitMovementX';
-		IN.movementY          = 'webkitMovementY';
+		IN.pointerlockchange = 'onpointerlockchange';
+	} else if (VID.mainwindow.webkitRequestPointerLock != null) {
+		IN.movementX = 'webkitMovementX';
+		IN.movementY = 'webkitMovementY';
 		IN.pointerLockElement = 'webkitPointerLockElement';
 		IN.requestPointerLock = 'webkitRequestPointerLock';
-		IN.pointerlockchange  = 'onwebkitpointerlockchange';
-	} else if (VID.mainwindow.mozRequestPointerLock !== null) {
-		IN.movementX          = 'mozMovementX';
-		IN.movementY          = 'mozMovementY';
+		IN.pointerlockchange = 'onwebkitpointerlockchange';
+	} else if (VID.mainwindow.mozRequestPointerLock != null) {
+		IN.movementX = 'mozMovementX';
+		IN.movementY = 'mozMovementY';
 		IN.pointerLockElement = 'mozPointerLockElement';
 		IN.requestPointerLock = 'mozRequestPointerLock';
-		IN.pointerlockchange  = 'onmozpointerlockchange';
+		IN.pointerlockchange = 'onmozpointerlockchange';
 	} else {
 		return;
 	}
-	VID.mainwindow.onclick         = IN.onclick;
-	document.onmousemove           = IN.onmousemove;
+	VID.mainwindow.onclick = IN.onclick;
+	document.onmousemove = IN.onmousemove;
 	document[IN.pointerlockchange] = IN.onpointerlockchange;
-	IN.mouse_avail                 = true;
+	IN.mouse_avail = true;
 };
 
 IN.Init = function() {
@@ -43,8 +43,8 @@ IN.Init = function() {
 
 IN.Shutdown = function() {
 	if (IN.mouse_avail === true) {
-		VID.mainwindow.onclick         = null;
-		document.onmousemove           = null;
+		VID.mainwindow.onclick = null;
+		document.onmousemove = null;
 		document[IN.pointerlockchange] = null;
 	}
 };
@@ -68,7 +68,7 @@ IN.MouseMove = function() {
 	mouse_y *= CL.sensitivity.value;
 
 	var strafe = CL.kbuttons[CL.kbutton.strafe].state & 1;
-	var mlook  = CL.kbuttons[CL.kbutton.mlook].state & 1;
+	var mlook = CL.kbuttons[CL.kbutton.mlook].state & 1;
 	var angles = CL.state.viewangles;
 
 	if ((strafe !== 0) || ((CL.lookstrafe.value !== 0) && (mlook !== 0))) {

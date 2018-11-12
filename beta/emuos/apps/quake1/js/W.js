@@ -5,7 +5,7 @@ W.lumps = [];
 W.LoadWadFile = function(filename) {
 	var base = COM.LoadFile(filename);
 
-	if (base === null) {
+	if (base == null) {
 		Sys.Error('W.LoadWadFile: couldn\'t load ' + filename);
 	}
 
@@ -15,7 +15,7 @@ W.LoadWadFile = function(filename) {
 		Sys.Error('Wad file ' + filename + ' doesn\'t have WAD2 id');
 	}
 
-	var numlumps     = view.getUint32(4, true);
+	var numlumps = view.getUint32(4, true);
 	var infotableofs = view.getUint32(8, true);
 	var i, size, lump;
 
@@ -31,7 +31,7 @@ W.LoadWadFile = function(filename) {
 W.GetLumpName = function(name) {
 	var lump = W.lumps[name];
 
-	if (lump === null) {
+	if (lump == null) {
 		Sys.Error('W.GetLumpName: ' + name + ' not found');
 	}
 

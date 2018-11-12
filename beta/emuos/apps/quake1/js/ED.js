@@ -27,18 +27,18 @@ ED.Alloc = function() {
 
 ED.Free = function(ed) {
 	SV.UnlinkEdict(ed);
-	ed.free                           = true;
-	ed.v_int[PR.entvars.model]        = 0;
+	ed.free = true;
+	ed.v_int[PR.entvars.model] = 0;
 	ed.v_float[PR.entvars.takedamage] = 0.0;
 	ed.v_float[PR.entvars.modelindex] = 0.0;
-	ed.v_float[PR.entvars.colormap]   = 0.0;
-	ed.v_float[PR.entvars.skin]       = 0.0;
-	ed.v_float[PR.entvars.frame]      = 0.0;
+	ed.v_float[PR.entvars.colormap] = 0.0;
+	ed.v_float[PR.entvars.skin] = 0.0;
+	ed.v_float[PR.entvars.frame] = 0.0;
 	ED.SetVector(ed, PR.entvars.origin, Vec.origin);
 	ED.SetVector(ed, PR.entvars.angles, Vec.origin);
 	ed.v_float[PR.entvars.nextthink] = -1.0;
-	ed.v_float[PR.entvars.solid]     = 0.0;
-	ed.freetime                      = SV.server.time;
+	ed.v_float[PR.entvars.solid] = 0.0;
+	ed.freetime = SV.server.time;
 };
 
 ED.GlobalAtOfs = function(ofs) {
@@ -98,7 +98,7 @@ ED.Print = function(ed) {
 	Con.Print('\nEDICT ' + ed.num + ':\n');
 	var i, d, name, v;
 	for (i = 1; i < PR.fielddefs.length; ++i) {
-		d    = PR.fielddefs[i];
+		d = PR.fielddefs[i];
 		name = PR.GetString(d.name);
 		if (name.charCodeAt(name.length - 2) === 95) {
 			continue;
@@ -177,19 +177,19 @@ ED.ParseGlobals = function(data) {
 		if (COM.token.charCodeAt(0) === 125) {
 			return;
 		}
-		if (data === null) {
+		if (data == null) {
 			Sys.Error('ED.ParseGlobals: EOF without closing brace');
 		}
 		keyname = COM.token;
-		data    = COM.Parse(data);
-		if (data === null) {
+		data = COM.Parse(data);
+		if (data == null) {
 			Sys.Error('ED.ParseGlobals: EOF without closing brace');
 		}
 		if (COM.token.charCodeAt(0) === 125) {
 			Sys.Error('ED.ParseGlobals: closing brace without data');
 		}
 		key = ED.FindGlobal(keyname);
-		if (key === null) {
+		if (key == null) {
 			Con.Print('\'' + keyname + '\' is not a global\n');
 			continue;
 		}
@@ -215,7 +215,7 @@ ED.NewString = function(string) {
 
 ED.ParseEpair = function(base, key, s) {
 	var d_float = new Float32Array(base);
-	var d_int   = new Int32Array(base);
+	var d_int = new Int32Array(base);
 	var d, v;
 	switch (key.type & 0x7fff) {
 		case PR.etype.ev_string:
@@ -225,8 +225,8 @@ ED.ParseEpair = function(base, key, s) {
 			d_float[key.ofs] = Q.atof(s);
 			return true;
 		case PR.etype.ev_vector:
-			v                    = s.split(' ');
-			d_float[key.ofs]     = Q.atof(v[0]);
+			v = s.split(' ');
+			d_float[key.ofs] = Q.atof(v[0]);
 			d_float[key.ofs + 1] = Q.atof(v[1]);
 			d_float[key.ofs + 2] = Q.atof(v[2]);
 			return true;
@@ -235,7 +235,7 @@ ED.ParseEpair = function(base, key, s) {
 			return true;
 		case PR.etype.ev_field:
 			d = ED.FindField(s);
-			if (d === null) {
+			if (d == null) {
 				Con.Print('Can\'t find field ' + s + '\n');
 				return;
 			}
@@ -243,7 +243,7 @@ ED.ParseEpair = function(base, key, s) {
 			return true;
 		case PR.etype.ev_function:
 			d = ED.FindFunction(s);
-			if (d === null) {
+			if (d == null) {
 				Con.Print('Can\'t find function ' + s + '\n');
 				return;
 			}
@@ -264,7 +264,7 @@ ED.ParseEdict = function(data, ent) {
 		if (COM.token.charCodeAt(0) === 125) {
 			break;
 		}
-		if (data === null) {
+		if (data == null) {
 			Sys.Error('ED.ParseEdict: EOF without closing brace');
 		}
 		if (COM.token === 'angle') {
@@ -282,8 +282,8 @@ ED.ParseEdict = function(data, ent) {
 			}
 		}
 		keyname = COM.token.substring(0, n);
-		data    = COM.Parse(data);
-		if (data === null) {
+		data = COM.Parse(data);
+		if (data == null) {
 			Sys.Error('ED.ParseEdict: EOF without closing brace');
 		}
 		if (COM.token.charCodeAt(0) === 125) {
@@ -294,7 +294,7 @@ ED.ParseEdict = function(data, ent) {
 			continue;
 		}
 		key = ED.FindField(keyname);
-		if (key === null) {
+		if (key == null) {
 			Con.Print('\'' + keyname + '\' is not a field\n');
 			continue;
 		}
@@ -312,19 +312,19 @@ ED.ParseEdict = function(data, ent) {
 };
 
 ED.LoadFromFile = function(data) {
-	var ent                              = null, spawnflags, inhibit = 0, func;
+	var ent = null, spawnflags, inhibit = 0, func;
 	PR.globals_float[PR.globalvars.time] = SV.server.time;
 
 	for (; ;) {
 		data = COM.Parse(data);
-		if (data === null) {
+		if (data == null) {
 			break;
 		}
 		if (COM.token.charCodeAt(0) !== 123) {
 			Sys.Error('ED.LoadFromFile: found ' + COM.token + ' when expecting {');
 		}
 
-		if (ent === null) {
+		if (ent == null) {
 			ent = SV.server.edicts[0];
 		} else {
 			ent = ED.Alloc();
@@ -354,7 +354,7 @@ ED.LoadFromFile = function(data) {
 		}
 
 		func = ED.FindFunction(PR.GetString(ent.v_int[PR.entvars.classname]));
-		if (func === null) {
+		if (func == null) {
 			Con.Print('No spawn function for:\n');
 			ED.Print(ent);
 			ED.Free(ent);
@@ -373,7 +373,7 @@ ED.Vector = function(e, o) {
 };
 
 ED.SetVector = function(e, o, v) {
-	e.v_float[o]     = v[0];
+	e.v_float[o] = v[0];
 	e.v_float[o + 1] = v[1];
 	e.v_float[o + 2] = v[2];
 };

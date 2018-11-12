@@ -7,21 +7,21 @@ Sys.ongamepadpoll = function(e) {
 		for (var i = 0; i < e.buttons.length; i++) {
 			if (e.buttons[i].value !== Key.gamepadlastbuttons[i]) {
 				if (e.buttons[i].value) {
-					Key.Event(Key.k['joy' + (i + 1)], true)
+					Key.Event(Key.k['joy' + (i + 1)], true);
 					//console.log("JOY"+(i+1), true)
 				} else {
-					Key.Event(Key.k['joy' + (i + 1)])
+					Key.Event(Key.k['joy' + (i + 1)]);
 					//console.log("JOY"+(i+1), false)
 				}
 			}
 		}
 
 		Key.gamepadlastbuttons = e.buttons.map(function(b) {
-			return b.value
+			return b.value;
 		});
 	} else {
 		Key.gamepadlastbuttons = e.buttons.map(function(b) {
-			return b.value
+			return b.value;
 		});
 	}
 };
@@ -29,7 +29,7 @@ Sys.ongamepadpoll = function(e) {
 Sys.events = ['onbeforeunload', 'oncontextmenu', 'onfocus', 'onkeydown', 'onkeyup', 'onmousedown', 'onmouseup', 'onmousewheel', 'onunload', 'onwheel'];
 
 Sys.Quit = function() {
-	if (Sys.frame !== null) {
+	if (Sys.frame != null) {
 		clearInterval(Sys.frame);
 	}
 
@@ -40,7 +40,7 @@ Sys.Quit = function() {
 	}
 
 	Host.Shutdown();
-	document.body.style.cursor   = 'auto';
+	document.body.style.cursor = 'auto';
 	VID.mainwindow.style.display = 'none';
 
 	if (COM.registered.value !== 0) {
@@ -53,13 +53,13 @@ Sys.Quit = function() {
 };
 
 Sys.Print = function(text) {
-	if (window.console !== null) {
+	if (window.console != null) {
 		console.log(text);
 	}
 };
 
 Sys.Error = function(text) {
-	if (Sys.frame !== null) {
+	if (Sys.frame != null) {
 		clearInterval(Sys.frame);
 	}
 
@@ -81,7 +81,7 @@ Sys.Error = function(text) {
 		i = 0;
 	}
 
-	if (window.console !== null) {
+	if (window.console != null) {
 		for (; i < Con.text.length; ++i) {
 			console.log(Con.text[i].text);
 		}
@@ -100,12 +100,12 @@ Sys.FloatTime = function() {
 window.onload = function() {
 	var i;
 
-	var cmdline  = decodeURIComponent(document.location.search);
+	var cmdline = decodeURIComponent(document.location.search);
 	var location = document.location;
-	var argv     = [location.href.substring(0, location.href.length - location.search.length)];
+	var argv = [location.href.substring(0, location.href.length - location.search.length)];
 
 	if (cmdline.charCodeAt(0) === 63) {
-		var text   = '';
+		var text = '';
 		var quotes = false;
 		var c;
 
@@ -127,7 +127,7 @@ window.onload = function() {
 				}
 
 				argv[argv.length] = text;
-				text              = '';
+				text = '';
 
 				continue;
 			}
@@ -142,13 +142,13 @@ window.onload = function() {
 
 	COM.InitArgv(argv);
 
-	var elem   = document.documentElement;
-	VID.width  = (elem.clientWidth <= 320) ? 320 : elem.clientWidth;
+	var elem = document.documentElement;
+	VID.width = (elem.clientWidth <= 320) ? 320 : elem.clientWidth;
 	VID.height = (elem.clientHeight <= 200) ? 200 : elem.clientHeight;
 
-	Sys.scantokey     = [];
-	Sys.scantokey[8]  = Key.k.backspace;
-	Sys.scantokey[9]  = Key.k.tab;
+	Sys.scantokey = [];
+	Sys.scantokey[8] = Key.k.backspace;
+	Sys.scantokey[9] = Key.k.tab;
 	Sys.scantokey[13] = Key.k.enter;
 	Sys.scantokey[16] = Key.k.shift;
 	Sys.scantokey[17] = Key.k.ctrl;
@@ -177,7 +177,6 @@ window.onload = function() {
 	for (i = 65; i <= 90; ++i) {
 		Sys.scantokey[i] = i + 32; // a-z
 	}
-
 
 	Sys.scantokey[106] = 42; // *
 	Sys.scantokey[107] = 43; // +
@@ -228,7 +227,7 @@ Sys.onfocus = function() {
 Sys.onkeydown = function(e) {
 	var key = Sys.scantokey[e.keyCode];
 
-	if (key === null) {
+	if (key == null) {
 		return;
 	}
 
@@ -242,7 +241,7 @@ Sys.onkeydown = function(e) {
 Sys.onkeyup = function(e) {
 	var key = Sys.scantokey[e.keyCode];
 
-	if (key === null) {
+	if (key == null) {
 		return;
 	}
 

@@ -34,7 +34,7 @@ Cvar.Set = function(name, value) {
 			changed = true;
 		}
 		v.string = value;
-		v.value  = Q.atof(value);
+		v.value = Q.atof(value);
 		if ((v.server === true) && (changed === true) && (SV.server.active === true)) {
 			Host.BroadcastPrint('"' + v.name + '" changed to "' + v.string + '"\n');
 		}
@@ -57,18 +57,18 @@ Cvar.RegisterVariable = function(name, value, archive, server) {
 	}
 	Cvar.vars[Cvar.vars.length] =
 		{
-			name:    name,
-			string:  value,
+			name: name,
+			string: value,
 			archive: archive,
-			server:  server,
-			value:   Q.atof(value)
+			server: server,
+			value: Q.atof(value)
 		};
 	return Cvar.vars[Cvar.vars.length - 1];
 };
 
 Cvar.Command = function() {
 	var v = Cvar.FindVar(Cmd.argv[0]);
-	if (v === null) {
+	if (v == null) {
 		return;
 	}
 	if (Cmd.argv.length <= 1) {
