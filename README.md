@@ -32,7 +32,8 @@ More about [Video game preservation](https://en.wikipedia.org/wiki/Video_game_pr
 ##### Games
 
 * WebQuake [Repo](https://github.com/Triang3l/WebQuake) License GPLv1
-* HTML5 Wolfenstein 3D [Repo](https://github.com/loadx/html5-wolfenstein3D) License ?
+* Wolfenstein 3D [Repo](https://github.com/loadx/html5-wolfenstein3D) License ?
+* Wolfenstein 3D Canvas [Website](http://users.atw.hu/wolf3d) License GPLv2
 
 ##### Frontend
 
@@ -60,7 +61,7 @@ More about [Video game preservation](https://en.wikipedia.org/wiki/Video_game_pr
 * Octokat.js [Repo](https://github.com/philschatz/octokat.js) License MIT
 * BrowserFS [Repo](https://github.com/jvilk/BrowserFS) License MIT
 * jszip [Repo](https://github.com/Stuk/jszip) License GPLv3/MIT
-* Dropbox SDK (https://www.dropbox.com) [Repo](https://github.com/dropbox/dropbox-sdk-js) License: MIT
+* Dropbox SDK [Website](https://www.dropbox.com) [Repo](https://github.com/dropbox/dropbox-sdk-js) License: MIT
 
 ##### Crypto
 
