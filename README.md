@@ -97,7 +97,7 @@ Through the Library of Congress, some key exemptions to the DMCA have been grant
 * In the 2015 exemptions, the Library granted permission for preservationists to work around copy-protection in games which required an authentication step with an external server that was no longer online prior to playing the game which otherwise did not require online connectivity; this specifically did not cover games that were based on a server-client mode like most massively-multiplayer online games (MMOs).
 * In the 2018 exemptions, the Library allowed for preservation and fair use of server-based games like MMos, permitting preservationists to offer such games where they have legally obtained the game's code within museums and libraries.
 
-##### DMCA Takedown notices & Removal Requests
+#### DMCA Takedown notices & Removal Requests
 
 Emupedia is aware of intellectual property rights and other proprietary rights of others.
 
