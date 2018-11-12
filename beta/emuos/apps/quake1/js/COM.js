@@ -149,15 +149,15 @@ COM.InitArgv = function(argv) {
 	for (i = 0; i < argv.length; ++i) {
 		COM.argv[i] = argv[i];
 	}
-	if (COM.CheckParm('-safe') != null) {
+	if (COM.CheckParm('-safe') !== null) {
 		COM.argv[COM.argv.length] = '-nosound';
 		COM.argv[COM.argv.length] = '-nocdaudio';
 		COM.argv[COM.argv.length] = '-nomouse';
 	}
-	if (COM.CheckParm('-rogue') != null) {
+	if (COM.CheckParm('-rogue') !== null) {
 		COM.rogue          = true;
 		COM.standard_quake = false;
-	} else if (COM.CheckParm('-hipnotic') != null) {
+	} else if (COM.CheckParm('-hipnotic') !== null) {
 		COM.hipnotic       = true;
 		COM.standard_quake = false;
 	}
@@ -386,7 +386,7 @@ COM.AddGameDirectory = function(dir) {
 	var pak, i = 0;
 	for (; ;) {
 		pak = COM.LoadPackFile(dir + '/' + 'pak' + i + '.zip');
-		if (pak == null) {
+		if (pak === null) {
 			break;
 		}
 		search.pack[search.pack.length] = pak;
@@ -399,10 +399,10 @@ COM.InitFilesystem = function() {
 	var i, search;
 
 	i = COM.CheckParm('-basedir');
-	if (i != null) {
+	if (i !== null) {
 		search = COM.argv[i + 1];
 	}
-	if (search != null) {
+	if (search !== null) {
 		COM.AddGameDirectory(search);
 	} else {
 		COM.AddGameDirectory('id1');
@@ -415,9 +415,9 @@ COM.InitFilesystem = function() {
 	}
 
 	i = COM.CheckParm('-game');
-	if (i != null) {
+	if (i !== null) {
 		search = COM.argv[i + 1];
-		if (search != null) {
+		if (search !== null) {
 			COM.modified = true;
 			COM.AddGameDirectory(search);
 		}

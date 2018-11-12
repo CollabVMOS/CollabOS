@@ -7,22 +7,22 @@ IN.old_mouse_y = 0.0;
 
 IN.StartupMouse = function() {
 	IN.m_filter = Cvar.RegisterVariable('m_filter', '1');
-	if (COM.CheckParm('-nomouse') != null) {
+	if (COM.CheckParm('-nomouse') !== null) {
 		return;
 	}
-	if (VID.mainwindow.requestPointerLock != null) {
+	if (VID.mainwindow.requestPointerLock !== null) {
 		IN.movementX          = 'movementX';
 		IN.movementY          = 'movementY';
 		IN.pointerLockElement = 'pointerLockElement';
 		IN.requestPointerLock = 'requestPointerLock';
 		IN.pointerlockchange  = 'onpointerlockchange';
-	} else if (VID.mainwindow.webkitRequestPointerLock != null) {
+	} else if (VID.mainwindow.webkitRequestPointerLock !== null) {
 		IN.movementX          = 'webkitMovementX';
 		IN.movementY          = 'webkitMovementY';
 		IN.pointerLockElement = 'webkitPointerLockElement';
 		IN.requestPointerLock = 'webkitRequestPointerLock';
 		IN.pointerlockchange  = 'onwebkitpointerlockchange';
-	} else if (VID.mainwindow.mozRequestPointerLock != null) {
+	} else if (VID.mainwindow.mozRequestPointerLock !== null) {
 		IN.movementX          = 'mozMovementX';
 		IN.movementY          = 'mozMovementY';
 		IN.pointerLockElement = 'mozPointerLockElement';

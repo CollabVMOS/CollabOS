@@ -22,7 +22,7 @@ Q.strmem = function(src) {
 };
 
 Q.atoi = function(str) {
-	if (str == null) {
+	if (str === null) {
 		return 0;
 	}
 	var ptr, val = 0, sign, c, c2;
@@ -70,7 +70,7 @@ Q.atoi = function(str) {
 };
 
 Q.atof = function(str) {
-	if (str == null) {
+	if (str === null) {
 		return 0.0;
 	}
 	var ptr, val, sign, c, c2;

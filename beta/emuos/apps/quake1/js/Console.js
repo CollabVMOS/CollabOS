@@ -46,7 +46,7 @@ Con.MessageMode2_f = function() {
 };
 
 Con.Init = function() {
-	Con.debuglog = (COM.CheckParm('-condebug') != null);
+	Con.debuglog = (COM.CheckParm('-condebug') !== null);
 	if (Con.debuglog === true) {
 		COM.WriteTextFile('qconsole.log', '');
 	}
@@ -62,7 +62,7 @@ Con.Init = function() {
 Con.Print = function(msg) {
 	if (Con.debuglog === true) {
 		var data = COM.LoadTextFile('qconsole.log');
-		if (data != null) {
+		if (data !== null) {
 			data += msg;
 			if (data.length >= 32768) {
 				data = data.substring(data.length - 16384);
@@ -83,7 +83,7 @@ Con.Print = function(msg) {
 	}
 	var i;
 	for (i = 0; i < msg.length; ++i) {
-		if (Con.text[Con.current] == null) {
+		if (Con.text[Con.current] === null) {
 			Con.text[Con.current] = {text: '', time: Host.realtime};
 		}
 		if (msg.charCodeAt(i) === 10) {

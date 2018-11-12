@@ -1,7 +1,7 @@
 WEBS = {};
 
 WEBS.Init = function() {
-	if ((window.WebSocket == null) || (document.location.protocol === 'https:')) {
+	if ((window.WebSocket === null) || (document.location.protocol === 'https:')) {
 		return;
 	}
 	WEBS.available = true;
@@ -40,7 +40,7 @@ WEBS.CheckNewConnections = function() {
 };
 
 WEBS.GetMessage = function(sock) {
-	if (sock.driverdata == null) {
+	if (sock.driverdata === null) {
 		return -1;
 	}
 	if (sock.driverdata.readyState !== 1) {
@@ -56,7 +56,7 @@ WEBS.GetMessage = function(sock) {
 };
 
 WEBS.SendMessage = function(sock, data) {
-	if (sock.driverdata == null) {
+	if (sock.driverdata === null) {
 		return -1;
 	}
 	if (sock.driverdata.readyState !== 1) {
@@ -70,7 +70,7 @@ WEBS.SendMessage = function(sock, data) {
 };
 
 WEBS.SendUnreliableMessage = function(sock, data) {
-	if (sock.driverdata == null) {
+	if (sock.driverdata === null) {
 		return -1;
 	}
 	if (sock.driverdata.readyState !== 1) {
@@ -84,7 +84,7 @@ WEBS.SendUnreliableMessage = function(sock, data) {
 };
 
 WEBS.CanSendMessage = function(sock) {
-	if (sock.driverdata == null) {
+	if (sock.driverdata === null) {
 		return;
 	}
 	if (sock.driverdata.readyState === 1) {
@@ -93,7 +93,7 @@ WEBS.CanSendMessage = function(sock) {
 };
 
 WEBS.Close = function(sock) {
-	if (sock.driverdata != null) {
+	if (sock.driverdata !== null) {
 		sock.driverdata.close(1000);
 	}
 };

@@ -17,7 +17,7 @@ S.Init = function() {
 	Cmd.AddCommand('playvol', S.PlayVol);
 	Cmd.AddCommand('stopsound', S.StopAllSounds);
 	Cmd.AddCommand('soundlist', S.SoundList);
-	S.nosound       = Cvar.RegisterVariable('nosound', (COM.CheckParm('-nosound') != null) ? '1' : '0');
+	S.nosound       = Cvar.RegisterVariable('nosound', (COM.CheckParm('-nosound') !== null) ? '1' : '0');
 	S.volume        = Cvar.RegisterVariable('volume', '0.7', true);
 	S.precache      = Cvar.RegisterVariable('precache', '1');
 	S.bgmvolume     = Cvar.RegisterVariable('bgmvolume', '1', true);
@@ -27,9 +27,9 @@ S.Init = function() {
 	S.started = true;
 
 	// createBuffer is broken, disable Web Audio for now.
-	/* if (window.AudioContext != null))
+	/* if (window.AudioContext !== null))
 	 S.context = new AudioContext();
-	 else if (window.webkitAudioContext != null)
+	 else if (window.webkitAudioContext !== null)
 	 S.context = new webkitAudioContext(); */
 
 	var i, ambient_sfx = ['water1', 'wind2'], ch, nodes;
@@ -39,11 +39,11 @@ S.Init = function() {
 		if (S.LoadSound(ch.sfx) !== true) {
 			continue;
 		}
-		if (ch.sfx.cache.loopstart == null) {
+		if (ch.sfx.cache.loopstart === null) {
 			Con.Print('Sound ambience/' + ch.sfx.name + '.wav not looped\n');
 			continue;
 		}
-		if (S.context != null) {
+		if (S.context !== null) {
 			// noinspection JSUnresolvedFunction
 			nodes                  = {
 				source: S.context.createBufferSource(),
@@ -113,15 +113,15 @@ S.PickChannel = function(entnum, entchannel) {
 	if (entchannel !== 0) {
 		for (i = 0; i < S.channels.length; ++i) {
 			channel = S.channels[i];
-			if (channel == null) {
+			if (channel === null) {
 				continue;
 			}
 			if ((channel.entnum === entnum) && ((channel.entchannel === entchannel) || (entchannel === -1))) {
 				channel.sfx = null;
-				if (channel.nodes != null) {
+				if (channel.nodes !== null) {
 					S.NoteOff(channel.nodes.source);
 					channel.nodes = null;
-				} else if (channel.audio != null) {
+				} else if (channel.audio !== null) {
 					channel.audio.pause();
 					channel.audio = null;
 				}
@@ -133,10 +133,10 @@ S.PickChannel = function(entnum, entchannel) {
 	if ((entchannel === 0) || (i === S.channels.length)) {
 		for (i = 0; i < S.channels.length; ++i) {
 			channel = S.channels[i];
-			if (channel == null) {
+			if (channel === null) {
 				break;
 			}
-			if (channel.sfx == null) {
+			if (channel.sfx === null) {
 				break;
 			}
 		}
@@ -183,7 +183,7 @@ S.Spatialize = function(ch) {
 };
 
 S.StartSound = function(entnum, entchannel, sfx, origin, vol, attenuation) {
-	if ((S.nosound.value !== 0) || (sfx == null)) {
+	if ((S.nosound.value !== 0) || (sfx === null)) {
 		return;
 	}
 
@@ -207,7 +207,7 @@ S.StartSound = function(entnum, entchannel, sfx, origin, vol, attenuation) {
 	target_chan.pos = 0.0;
 	target_chan.end = Host.realtime + sfx.cache.length;
 	var volume;
-	if (S.context != null) {
+	if (S.context !== null) {
 		// noinspection JSUnresolvedFunction
 		var nodes           = {
 			source:   S.context.createBufferSource(),
@@ -219,7 +219,7 @@ S.StartSound = function(entnum, entchannel, sfx, origin, vol, attenuation) {
 		};
 		target_chan.nodes   = nodes;
 		nodes.source.buffer = sfx.cache.data;
-		if (sfx.cache.loopstart != null) {
+		if (sfx.cache.loopstart !== null) {
 			nodes.source.loop      = true;
 			nodes.source.loopStart = sfx.cache.loopstart;
 			nodes.source.loopEnd   = nodes.source.buffer.length;
@@ -281,16 +281,16 @@ S.StopSound = function(entnum, entchannel) {
 	var i, ch;
 	for (i = 0; i < S.channels.length; ++i) {
 		ch = S.channels[i];
-		if (ch == null) {
+		if (ch === null) {
 			continue;
 		}
 		if ((ch.entnum === entnum) && (ch.entchannel === entchannel)) {
 			ch.end = 0.0;
 			ch.sfx = null;
-			if (ch.nodes != null) {
+			if (ch.nodes !== null) {
 				S.NoteOff(ch.nodes.source);
 				ch.nodes = null;
-			} else if (ch.audio != null) {
+			} else if (ch.audio !== null) {
 				ch.audio.pause();
 				ch.audio = null;
 			}
@@ -309,27 +309,27 @@ S.StopAllSounds = function() {
 	for (i = 0; i < S.ambient_channels.length; ++i) {
 		ch            = S.ambient_channels[i];
 		ch.master_vol = 0.0;
-		if (ch.nodes != null) {
+		if (ch.nodes !== null) {
 			S.NoteOff(ch.nodes.source);
-		} else if (ch.audio != null) {
+		} else if (ch.audio !== null) {
 			ch.audio.pause();
 		}
 	}
 
 	for (i = 0; i < S.channels.length; ++i) {
 		ch = S.channels[i];
-		if (ch == null) {
+		if (ch === null) {
 			continue;
 		}
-		if (ch.nodes != null) {
+		if (ch.nodes !== null) {
 			S.NoteOff(ch.nodes.source);
-		} else if (ch.audio != null) {
+		} else if (ch.audio !== null) {
 			ch.audio.pause();
 		}
 	}
 	S.channels = [];
 
-	if (S.context != null) {
+	if (S.context !== null) {
 		for (i = 0; i < S.static_channels.length; ++i) {
 			S.NoteOff(S.static_channels[i].nodes.source);
 		}
@@ -342,13 +342,13 @@ S.StopAllSounds = function() {
 };
 
 S.StaticSound = function(sfx, origin, vol, attenuation) {
-	if ((S.nosound.value !== 0) || (sfx == null)) {
+	if ((S.nosound.value !== 0) || (sfx === null)) {
 		return;
 	}
 	if (S.LoadSound(sfx) !== true) {
 		return;
 	}
-	if (sfx.cache.loopstart == null) {
+	if (sfx.cache.loopstart === null) {
 		Con.Print('Sound ' + sfx.name + ' not looped\n');
 		return;
 	}
@@ -360,7 +360,7 @@ S.StaticSound = function(sfx, origin, vol, attenuation) {
 		end:        Host.realtime + sfx.cache.length
 	};
 	S.static_channels[S.static_channels.length] = ss;
-	if (S.context != null) {
+	if (S.context !== null) {
 		// noinspection JSUnresolvedFunction
 		var nodes              = {
 			source:   S.context.createBufferSource(),
@@ -394,7 +394,7 @@ S.SoundList = function() {
 	for (i = 0; i < S.known_sfx.length; ++i) {
 		sfx = S.known_sfx[i];
 		sc  = sfx.cache;
-		if (sc == null) {
+		if (sc === null) {
 			continue;
 		}
 		size = sc.size.toString();
@@ -402,7 +402,7 @@ S.SoundList = function() {
 		for (; size.length <= 5;) {
 			size = ' ' + size;
 		}
-		if (sc.loopstart != null) {
+		if (sc.loopstart !== null) {
 			size = 'L' + size;
 		} else {
 			size = ' ' + size;
@@ -417,20 +417,20 @@ S.LocalSound = function(sound) {
 };
 
 S.UpdateAmbientSounds = function() {
-	if (CL.state.worldmodel == null) {
+	if (CL.state.worldmodel === null) {
 		return;
 	}
 
 	var i, ch, vol, sc;
 
 	var l = Mod.PointInLeaf(S.listener_origin, CL.state.worldmodel);
-	if ((l == null) || (S.ambient_level.value === 0)) {
+	if ((l === null) || (S.ambient_level.value === 0)) {
 		for (i = 0; i < S.ambient_channels.length; ++i) {
 			ch            = S.ambient_channels[i];
 			ch.master_vol = 0.0;
-			if (ch.nodes != null) {
+			if (ch.nodes !== null) {
 				S.NoteOff(ch.nodes.source);
-			} else if (ch.audio != null) {
+			} else if (ch.audio !== null) {
 				if (ch.audio.paused !== true) {
 					ch.audio.pause();
 				}
@@ -441,7 +441,7 @@ S.UpdateAmbientSounds = function() {
 
 	for (i = 0; i < S.ambient_channels.length; ++i) {
 		ch = S.ambient_channels[i];
-		if ((ch.nodes == null) && (ch.audio == null)) {
+		if ((ch.nodes === null) && (ch.audio === null)) {
 			continue;
 		}
 		vol = S.ambient_level.value * l.ambient_level[i];
@@ -462,7 +462,7 @@ S.UpdateAmbientSounds = function() {
 		}
 
 		if (ch.master_vol === 0.0) {
-			if (S.context != null) {
+			if (S.context !== null) {
 				S.NoteOff(ch.nodes.source);
 			} else {
 				if (ch.audio.paused !== true) {
@@ -474,7 +474,7 @@ S.UpdateAmbientSounds = function() {
 		if (ch.master_vol > 1.0) {
 			ch.master_vol = 1.0;
 		}
-		if (S.context != null) {
+		if (S.context !== null) {
 			ch.nodes.gain.gain.value = ch.master_vol * S.volume.value;
 			S.NoteOn(ch.nodes.source);
 		} else {
@@ -506,16 +506,16 @@ S.UpdateDynamicSounds = function() {
 	var i, ch, sc, volume;
 	for (i = 0; i < S.channels.length; ++i) {
 		ch = S.channels[i];
-		if (ch == null) {
+		if (ch === null) {
 			continue;
 		}
-		if (ch.sfx == null) {
+		if (ch.sfx === null) {
 			continue;
 		}
 		if (Host.realtime >= ch.end) {
 			sc = ch.sfx.cache;
-			if (sc.loopstart != null) {
-				if (S.context == null) {
+			if (sc.loopstart !== null) {
+				if (S.context === null) {
 					try {
 						ch.audio.currentTime = sc.loopstart;
 					} catch (e) {
@@ -532,7 +532,7 @@ S.UpdateDynamicSounds = function() {
 			}
 		}
 		S.Spatialize(ch);
-		if (S.context != null) {
+		if (S.context !== null) {
 			if (ch.leftvol > 1.0) {
 				ch.leftvol = 1.0;
 			}
@@ -579,7 +579,7 @@ S.UpdateStaticSounds = function() {
 		}
 	}
 
-	if (S.context != null) {
+	if (S.context !== null) {
 		for (i = 0; i < S.static_channels.length; ++i) {
 			ch = S.static_channels[i];
 			if ((ch.leftvol === 0.0) && (ch.rightvol === 0.0)) {
@@ -669,7 +669,7 @@ S.Play = function() {
 	var i, sfx;
 	for (i = 1; i < Cmd.argv.length; ++i) {
 		sfx = S.PrecacheSound(COM.DefaultExtension(Cmd.argv[i], '.wav'));
-		if (sfx != null) {
+		if (sfx !== null) {
 			S.StartSound(CL.state.viewentity, 0, sfx, S.listener_origin, 1.0, 1.0);
 		}
 	}
@@ -682,7 +682,7 @@ S.PlayVol = function() {
 	var i, sfx;
 	for (i = 1; i < Cmd.argv.length; i += 2) {
 		sfx = S.PrecacheSound(COM.DefaultExtension(Cmd.argv[i], '.wav'));
-		if (sfx != null) {
+		if (sfx !== null) {
 			S.StartSound(CL.state.viewentity, 0, sfx, S.listener_origin, Q.atof(Cmd.argv[i + 1]), 1.0);
 		}
 	}
@@ -692,14 +692,14 @@ S.LoadSound = function(s) {
 	if (S.nosound.value !== 0) {
 		return;
 	}
-	if (s.cache != null) {
+	if (s.cache !== null) {
 		return true;
 	}
 
 	var sc = {};
 
 	var data = COM.LoadFile('sound/' + s.name);
-	if (data == null) {
+	if (data === null) {
 		Con.Print('Couldn\'t load sound/' + s.name + '\n');
 		return;
 	}
@@ -749,18 +749,18 @@ S.LoadSound = function(s) {
 		}
 	}
 
-	if (fmt == null) {
+	if (fmt === null) {
 		Con.Print('Missing fmt chunk\n');
 		return;
 	}
-	if (dataofs == null) {
+	if (dataofs === null) {
 		Con.Print('Missing data chunk\n');
 		return;
 	}
-	if (loopstart != null) {
+	if (loopstart !== null) {
 		sc.loopstart = loopstart * fmt.blockAlign / fmt.samplesPerSec;
 	}
-	if (samples != null) {
+	if (samples !== null) {
 		sc.length = samples / fmt.samplesPerSec;
 	} else {
 		sc.length = datalen / fmt.avgBytesPerSec;
@@ -786,7 +786,7 @@ S.LoadSound = function(s) {
 	view.setUint32(36, 0x61746164, true); // data
 	view.setUint32(40, datalen, true);
 	(new Uint8Array(out, 44, datalen)).set(new Uint8Array(data, dataofs, datalen));
-	if (S.context != null) {
+	if (S.context !== null) {
 		sc.data = S.context.createBuffer(out, true);
 	} else {
 		sc.data = new Audio('data:audio/wav;base64,' + Q.btoa(new Uint8Array(out)));

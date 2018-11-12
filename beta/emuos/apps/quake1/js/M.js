@@ -216,12 +216,12 @@ M.ScanSaves = function() {
 	COM.searchpaths = COM.gamedir;
 	for (i = 0; i < M.max_savegames; ++i) {
 		f = localStorage.getItem(search + i + '.sav');
-		if (f != null) {
+		if (f !== null) {
 			M.removable[i] = true;
 		} else {
 			M.removable[i] = false;
 			f              = COM.LoadTextFile('s' + i + '.sav');
-			if (f == null) {
+			if (f === null) {
 				M.filenames[i] = '--- UNUSED SLOT ---';
 				M.loadable[i]  = false;
 				continue;
@@ -765,11 +765,11 @@ M.Keys_Draw = function() {
 	for (i = 0; i < M.bindnames.length; ++i) {
 		M.Print(16, y, M.bindnames[i][1]);
 		keys = M.FindKeysForCommand(M.bindnames[i][0]);
-		if (keys[0] == null) {
+		if (keys[0] === null) {
 			M.Print(140, y, '???');
 		} else {
 			name = Key.KeynumToString(keys[0]);
-			if (keys[1] != null) {
+			if (keys[1] !== null) {
 				name += ' or ' + Key.KeynumToString(keys[1]);
 			}
 			M.Print(140, y, name);
@@ -808,7 +808,7 @@ M.Keys_Key = function(k) {
 			return;
 		case Key.k.enter:
 			S.LocalSound(M.sfx_menu2);
-			if (M.FindKeysForCommand(M.bindnames[M.keys_cursor][0])[1] != null) {
+			if (M.FindKeysForCommand(M.bindnames[M.keys_cursor][0])[1] !== null) {
 				M.UnbindCommand(M.bindnames[M.keys_cursor][0]);
 			}
 			M.bind_grab = true;

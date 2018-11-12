@@ -34,7 +34,7 @@ Draw.Init = function() {
 
 	Draw.conback = {};
 	var cb       = COM.LoadFile('gfx/conback.lmp');
-	if (cb == null) {
+	if (cb === null) {
 		Sys.Error('Couldn\'t load gfx/conback.lmp');
 	}
 	Draw.conback.width  = 320;
@@ -113,7 +113,7 @@ Draw.PicFromWad = function(name) {
 Draw.CachePic = function(path) {
 	path    = 'gfx/' + path + '.lmp';
 	var buf = COM.LoadFile(path);
-	if (buf == null) {
+	if (buf === null) {
 		Sys.Error('Draw.CachePic: failed to load ' + path);
 	}
 	var dat    = {};
@@ -172,7 +172,7 @@ Draw.FadeScreen = function() {
 };
 
 Draw.BeginDisc = function() {
-	if (Draw.loadingElem == null) {
+	if (Draw.loadingElem === null) {
 		return;
 	}
 	Draw.loadingElem.style.left    = ((VID.width - Draw.loading.width) >> 1) + 'px';
@@ -181,7 +181,7 @@ Draw.BeginDisc = function() {
 };
 
 Draw.EndDisc = function() {
-	if (Draw.loadingElem != null) {
+	if (Draw.loadingElem !== null) {
 		Draw.loadingElem.style.display = 'none';
 	}
 };

@@ -59,7 +59,7 @@ Sys.Print = function(text) {
 };
 
 Sys.Error = function(text) {
-	if (Sys.frame != null) {
+	if (Sys.frame !== null) {
 		clearInterval(Sys.frame);
 	}
 

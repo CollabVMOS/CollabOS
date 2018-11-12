@@ -142,10 +142,10 @@ Key.Console = function(key) {
 
 	if (key === Key.k.tab) {
 		var cmd = Cmd.CompleteCommand(Key.edit_line);
-		if (cmd == null) {
+		if (cmd === null) {
 			cmd = Cvar.CompleteVariable(Key.edit_line);
 		}
-		if (cmd == null) {
+		if (cmd === null) {
 			return;
 		}
 		Key.edit_line = cmd + ' ';
@@ -281,7 +281,7 @@ Key.Unbind_f = function() {
 		return;
 	}
 	var b = Key.StringToKeynum(Cmd.argv[1]);
-	if (b == null) {
+	if (b === null) {
 		Con.Print('"' + Cmd.argv[1] + '" isn\'t a valid key\n');
 		return;
 	}
@@ -299,12 +299,12 @@ Key.Bind_f = function() {
 		return;
 	}
 	var b = Key.StringToKeynum(Cmd.argv[1]);
-	if (b == null) {
+	if (b === null) {
 		Con.Print('"' + Cmd.argv[1] + '" isn\'t a valid key\n');
 		return;
 	}
 	if (c === 2) {
-		if (Key.bindings[b] != null) {
+		if (Key.bindings[b] !== null) {
 			Con.Print('"' + Cmd.argv[1] + '" = "' + Key.bindings[b] + '"\n');
 		} else {
 			Con.Print('"' + Cmd.argv[1] + '" is not bound\n');
@@ -323,7 +323,7 @@ Key.WriteBindings = function() {
 	var f = [];
 	var i;
 	for (i = 0; i < Key.bindings.length; ++i) {
-		if (Key.bindings[i] != null) {
+		if (Key.bindings[i] !== null) {
 			f[f.length] = 'bind "' + Key.KeynumToString(i) + '" "' + Key.bindings[i] + '"\n';
 		}
 	}
@@ -392,7 +392,7 @@ Key.Event = function(key, down) {
 		if ((key !== Key.k.backspace) && (key !== Key.k.pause) && (Key.down[key] === true)) {
 			return;
 		}
-		if ((key >= 200) && (Key.bindings[key] == null)) {
+		if ((key >= 200) && (Key.bindings[key] === null)) {
 			Con.Print(Key.KeynumToString(key) + ' is unbound, hit F4 to set.\n');
 		}
 	}
@@ -420,14 +420,14 @@ Key.Event = function(key, down) {
 
 	if (down !== true) {
 		kb = Key.bindings[key];
-		if (kb != null) {
+		if (kb !== null) {
 			if (kb.charCodeAt(0) === 43) {
 				Cmd.text += '-' + kb.substring(1) + ' ' + key + '\n';
 			}
 		}
 		if (Key.shift[key] !== key) {
 			kb = Key.bindings[Key.shift[key]];
-			if (kb != null) {
+			if (kb !== null) {
 				if (kb.charCodeAt(0) === 43) {
 					Cmd.text += '-' + kb.substring(1) + ' ' + key + '\n';
 				}
@@ -445,7 +445,7 @@ Key.Event = function(key, down) {
 		|| ((Key.dest.value === Key.dest.console) && (Key.consolekeys[key] !== true))
 		|| ((Key.dest.value === Key.dest.game) && ((Con.forcedup !== true) || (Key.consolekeys[key] !== true)))) {
 		kb = Key.bindings[key];
-		if (kb != null) {
+		if (kb !== null) {
 			if (kb.charCodeAt(0) === 43) {
 				Cmd.text += kb + ' ' + key + '\n';
 			} else {

@@ -42,7 +42,7 @@ NET.Connect = function(host) {
 			NET.reps       = 0;
 			throw 'NET.Connect';
 		}
-		if (ret != null) {
+		if (ret !== null) {
 			return ret;
 		}
 	}
@@ -86,14 +86,14 @@ NET.CheckNewConnections = function() {
 			continue;
 		}
 		ret = dfunc.CheckNewConnections();
-		if (ret != null) {
+		if (ret !== null) {
 			return ret;
 		}
 	}
 };
 
 NET.Close = function(sock) {
-	if (sock == null) {
+	if (sock === null) {
 		return;
 	}
 	if (sock.disconnected === true) {
@@ -105,7 +105,7 @@ NET.Close = function(sock) {
 };
 
 NET.GetMessage = function(sock) {
-	if (sock == null) {
+	if (sock === null) {
 		return -1;
 	}
 	if (sock.disconnected === true) {
@@ -128,7 +128,7 @@ NET.GetMessage = function(sock) {
 };
 
 NET.SendMessage = function(sock, data) {
-	if (sock == null) {
+	if (sock === null) {
 		return -1;
 	}
 	if (sock.disconnected === true) {
@@ -140,7 +140,7 @@ NET.SendMessage = function(sock, data) {
 };
 
 NET.SendUnreliableMessage = function(sock, data) {
-	if (sock == null) {
+	if (sock === null) {
 		return -1;
 	}
 	if (sock.disconnected === true) {
@@ -152,7 +152,7 @@ NET.SendUnreliableMessage = function(sock, data) {
 };
 
 NET.CanSendMessage = function(sock) {
-	if (sock == null) {
+	if (sock === null) {
 		return;
 	}
 	if (sock.disconnected === true) {
@@ -166,7 +166,7 @@ NET.SendToAll = function(data) {
 	var i, count = 0, state1 = [], state2 = [];
 	for (i = 0; i < SV.svs.maxclients; ++i) {
 		Host.client = SV.svs.clients[i];
-		if (Host.client.netconnection == null) {
+		if (Host.client.netconnection === null) {
 			continue;
 		}
 		if (Host.client.active !== true) {

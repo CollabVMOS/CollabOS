@@ -10,7 +10,7 @@ CDAudio.Play = function(track, looping) {
 	track -= 1;
 
 	if (CDAudio.playTrack === track) {
-		if (CDAudio.cd != null) {
+		if (CDAudio.cd !== null) {
 			CDAudio.cd.loop = looping;
 
 			if ((looping === true) && (CDAudio.cd.paused === true)) {

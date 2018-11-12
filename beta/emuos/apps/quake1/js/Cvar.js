@@ -68,7 +68,7 @@ Cvar.RegisterVariable = function(name, value, archive, server) {
 
 Cvar.Command = function() {
 	var v = Cvar.FindVar(Cmd.argv[0]);
-	if (v == null) {
+	if (v === null) {
 		return;
 	}
 	if (Cmd.argv.length <= 1) {

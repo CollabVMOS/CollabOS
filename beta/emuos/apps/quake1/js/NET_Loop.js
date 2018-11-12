@@ -11,7 +11,7 @@ Loop.Connect = function(host) {
 
 	Loop.localconnectpending = true;
 
-	if (Loop.client == null) {
+	if (Loop.client === null) {
 		Loop.client                = NET.NewQSocket();
 		Loop.client.receiveMessage = new Uint8Array(new ArrayBuffer(8192));
 		Loop.client.address        = 'localhost';
@@ -19,7 +19,7 @@ Loop.Connect = function(host) {
 	Loop.client.receiveMessageLength = 0;
 	Loop.client.canSend              = true;
 
-	if (Loop.server == null) {
+	if (Loop.server === null) {
 		Loop.server                = NET.NewQSocket();
 		Loop.server.receiveMessage = new Uint8Array(new ArrayBuffer(8192));
 		Loop.server.address        = 'LOCAL';
@@ -64,14 +64,14 @@ Loop.GetMessage = function(sock) {
 		}
 	}
 	sock.receiveMessageLength -= 3;
-	if ((sock.driverdata != null) && (ret === 1)) {
+	if ((sock.driverdata !== null) && (ret === 1)) {
 		sock.driverdata.canSend = true;
 	}
 	return ret;
 };
 
 Loop.SendMessage = function(sock, data) {
-	if (sock.driverdata == null) {
+	if (sock.driverdata === null) {
 		return -1;
 	}
 	var bufferLength = sock.driverdata.receiveMessageLength;
@@ -89,7 +89,7 @@ Loop.SendMessage = function(sock, data) {
 };
 
 Loop.SendUnreliableMessage = function(sock, data) {
-	if (sock.driverdata == null) {
+	if (sock.driverdata === null) {
 		return -1;
 	}
 	var bufferLength = sock.driverdata.receiveMessageLength;
@@ -106,13 +106,13 @@ Loop.SendUnreliableMessage = function(sock, data) {
 };
 
 Loop.CanSendMessage = function(sock) {
-	if (sock.driverdata != null) {
+	if (sock.driverdata !== null) {
 		return sock.canSend;
 	}
 };
 
 Loop.Close = function(sock) {
-	if (sock.driverdata != null) {
+	if (sock.driverdata !== null) {
 		sock.driverdata.driverdata = null;
 	}
 	sock.receiveMessageLength = 0;

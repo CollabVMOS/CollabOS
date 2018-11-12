@@ -21,7 +21,7 @@ MSG.WriteFloat = function(sb, f) {
 };
 
 MSG.WriteString = function(sb, s) {
-	if (s != null) {
+	if (s !== null) {
 		SZ.Write(sb, new Uint8Array(Q.strmem(s)), s.length);
 	}
 	MSG.WriteChar(sb, 0)

@@ -515,7 +515,7 @@ SV.WriteClientdataToMessage = function(ent, msg) {
 	// noinspection JSUnresolvedVariable
 	var val = PR.entvars.items2, items;
 
-	if (val != null) {
+	if (val !== null) {
 		if (ent.v_float[val] !== 0.0) {
 			items = (ent.v_float[PR.entvars.items] >> 0) + ((ent.v_float[val] << 23) >>> 0);
 		} else {
@@ -753,7 +753,7 @@ SV.SendClientMessages = function() {
 };
 
 SV.ModelIndex = function(name) {
-	if (name == null) {
+	if (name === null) {
 		return 0;
 	}
 	if (name.length === 0) {
@@ -897,7 +897,7 @@ SV.SpawnServer = function(server) {
 	SV.server.lastchecktime = 0.0;
 	SV.server.modelname     = 'maps/' + server + '.bsp';
 	SV.server.worldmodel    = Mod.ForName(SV.server.modelname);
-	if (SV.server.worldmodel == null) {
+	if (SV.server.worldmodel === null) {
 		Con.Print('Couldn\'t spawn server ' + SV.server.modelname + '\n');
 		SV.server.active = false;
 		return;
@@ -1333,7 +1333,7 @@ SV.FlyMove = function(ent, time) {
 				break;
 			}
 		}
-		if (trace.ent == null) {
+		if (trace.ent === null) {
 			Sys.Error('SV.FlyMove: !trace.ent');
 		}
 		if (trace.plane.normal[2] > 0.7) {
@@ -1397,7 +1397,7 @@ SV.FlyMove = function(ent, time) {
 
 SV.AddGravity = function(ent) {
 	var val = PR.entvars.gravity, ent_gravity;
-	if (val != null) {
+	if (val !== null) {
 		ent_gravity = (ent.v_float[val] !== 0.0) ? ent.v_float[val] : 1.0;
 	} else {
 		ent_gravity = 1.0;
@@ -1424,7 +1424,7 @@ SV.PushEntity = function(ent, push) {
 		ED.Vector(ent, PR.entvars.maxs), end, nomonsters, ent);
 	ED.SetVector(ent, PR.entvars.origin, trace.endpos);
 	SV.LinkEdict(ent, true);
-	if (trace.ent != null) {
+	if (trace.ent !== null) {
 		SV.Impact(ent, trace.ent);
 	}
 	return trace;
@@ -2300,7 +2300,7 @@ SV.HullForEntity = function(ent, mins, maxs, offset) {
 		Sys.Error('SOLID_BSP without MOVETYPE_PUSH');
 	}
 	var model = SV.server.models[ent.v_float[PR.entvars.modelindex] >> 0];
-	if (model == null) {
+	if (model === null) {
 		Sys.Error('MOVETYPE_PUSH with a non bsp model');
 	}
 	if (model.type !== Mod.type.brush) {
@@ -2347,10 +2347,10 @@ SV.CreateAreaNode = function(depth, mins, maxs) {
 };
 
 SV.UnlinkEdict = function(ent) {
-	if (ent.area.prev != null) {
+	if (ent.area.prev !== null) {
 		ent.area.prev.next = ent.area.next;
 	}
-	if (ent.area.next != null) {
+	if (ent.area.next !== null) {
 		ent.area.next.prev = ent.area.prev;
 	}
 	ent.area.prev = ent.area.next = null;
@@ -2648,7 +2648,7 @@ SV.ClipToLinks = function(node, clip) {
 			(clip.boxmaxs[2] < touch.v_float[PR.entvars.absmin2])) {
 			continue;
 		}
-		if (clip.passedict != null) {
+		if (clip.passedict !== null) {
 			if ((clip.passedict.v_float[PR.entvars.size] !== 0.0) && (touch.v_float[PR.entvars.size] === 0.0)) {
 				continue;
 			}
@@ -2656,7 +2656,7 @@ SV.ClipToLinks = function(node, clip) {
 		if (clip.trace.allsolid === true) {
 			return;
 		}
-		if (clip.passedict != null) {
+		if (clip.passedict !== null) {
 			if (SV.server.edicts[touch.v_int[PR.entvars.owner]] === clip.passedict) {
 				continue;
 			}

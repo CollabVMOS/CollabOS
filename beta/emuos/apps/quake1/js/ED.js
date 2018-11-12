@@ -177,19 +177,19 @@ ED.ParseGlobals = function(data) {
 		if (COM.token.charCodeAt(0) === 125) {
 			return;
 		}
-		if (data == null) {
+		if (data === null) {
 			Sys.Error('ED.ParseGlobals: EOF without closing brace');
 		}
 		keyname = COM.token;
 		data    = COM.Parse(data);
-		if (data == null) {
+		if (data === null) {
 			Sys.Error('ED.ParseGlobals: EOF without closing brace');
 		}
 		if (COM.token.charCodeAt(0) === 125) {
 			Sys.Error('ED.ParseGlobals: closing brace without data');
 		}
 		key = ED.FindGlobal(keyname);
-		if (key == null) {
+		if (key === null) {
 			Con.Print('\'' + keyname + '\' is not a global\n');
 			continue;
 		}
@@ -235,7 +235,7 @@ ED.ParseEpair = function(base, key, s) {
 			return true;
 		case PR.etype.ev_field:
 			d = ED.FindField(s);
-			if (d == null) {
+			if (d === null) {
 				Con.Print('Can\'t find field ' + s + '\n');
 				return;
 			}
@@ -243,7 +243,7 @@ ED.ParseEpair = function(base, key, s) {
 			return true;
 		case PR.etype.ev_function:
 			d = ED.FindFunction(s);
-			if (d == null) {
+			if (d === null) {
 				Con.Print('Can\'t find function ' + s + '\n');
 				return;
 			}
@@ -264,7 +264,7 @@ ED.ParseEdict = function(data, ent) {
 		if (COM.token.charCodeAt(0) === 125) {
 			break;
 		}
-		if (data == null) {
+		if (data === null) {
 			Sys.Error('ED.ParseEdict: EOF without closing brace');
 		}
 		if (COM.token === 'angle') {
@@ -283,7 +283,7 @@ ED.ParseEdict = function(data, ent) {
 		}
 		keyname = COM.token.substring(0, n);
 		data    = COM.Parse(data);
-		if (data == null) {
+		if (data === null) {
 			Sys.Error('ED.ParseEdict: EOF without closing brace');
 		}
 		if (COM.token.charCodeAt(0) === 125) {
@@ -294,7 +294,7 @@ ED.ParseEdict = function(data, ent) {
 			continue;
 		}
 		key = ED.FindField(keyname);
-		if (key == null) {
+		if (key === null) {
 			Con.Print('\'' + keyname + '\' is not a field\n');
 			continue;
 		}
@@ -317,14 +317,14 @@ ED.LoadFromFile = function(data) {
 
 	for (; ;) {
 		data = COM.Parse(data);
-		if (data == null) {
+		if (data === null) {
 			break;
 		}
 		if (COM.token.charCodeAt(0) !== 123) {
 			Sys.Error('ED.LoadFromFile: found ' + COM.token + ' when expecting {');
 		}
 
-		if (ent == null) {
+		if (ent === null) {
 			ent = SV.server.edicts[0];
 		} else {
 			ent = ED.Alloc();
@@ -354,7 +354,7 @@ ED.LoadFromFile = function(data) {
 		}
 
 		func = ED.FindFunction(PR.GetString(ent.v_int[PR.entvars.classname]));
-		if (func == null) {
+		if (func === null) {
 			Con.Print('No spawn function for:\n');
 			ED.Print(ent);
 			ED.Free(ent);

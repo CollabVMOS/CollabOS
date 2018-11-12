@@ -73,7 +73,7 @@ PF.setmodel = function() {
 	e.v_int[PR.entvars.model]        = PR.globals_int[7];
 	e.v_float[PR.entvars.modelindex] = i;
 	var mod                          = SV.server.models[i];
-	if (mod != null) {
+	if (mod !== null) {
 		PF.SetMinMaxSize(e, mod.mins, mod.maxs);
 	} else {
 		PF.SetMinMaxSize(e, Vec.origin, Vec.origin);
@@ -216,7 +216,7 @@ PF.traceline = function() {
 	PR.globals_float[PR.globalvars.trace_plane_normal1] = plane.normal[1];
 	PR.globals_float[PR.globalvars.trace_plane_normal2] = plane.normal[2];
 	PR.globals_float[PR.globalvars.trace_plane_dist]    = plane.dist;
-	PR.globals_int[PR.globalvars.trace_ent]             = (trace.ent != null) ? trace.ent.num : 0;
+	PR.globals_int[PR.globalvars.trace_ent]             = (trace.ent !== null) ? trace.ent.num : 0;
 };
 
 PF.newcheckclient = function(check) {
@@ -293,7 +293,7 @@ PF.localcmd = function() {
 
 PF.cvar = function() {
 	var v               = Cvar.FindVar(PR.GetString(PR.globals_int[4]));
-	PR.globals_float[1] = v != null ? v.value : 0.0;
+	PR.globals_float[1] = v !== null ? v.value : 0.0;
 };
 
 PF.cvar_set = function() {
@@ -529,7 +529,7 @@ PF.aim = function() {
 	var dir   = [PR.globals_float[PR.globalvars.v_forward], PR.globals_float[PR.globalvars.v_forward1], PR.globals_float[PR.globalvars.v_forward2]];
 	var end   = [start[0] + 2048.0 * dir[0], start[1] + 2048.0 * dir[1], start[2] + 2048.0 * dir[2]];
 	var tr    = SV.Move(start, Vec.origin, Vec.origin, end, 0, ent);
-	if (tr.ent != null) {
+	if (tr.ent !== null) {
 		if ((tr.ent.v_float[PR.entvars.takedamage] === SV.damage.aim) &&
 			((Host.teamplay.value === 0) || (ent.v_float[PR.entvars.team] <= 0) ||
 				(ent.v_float[PR.entvars.team] !== tr.ent.v_float[PR.entvars.team]))) {
@@ -570,7 +570,7 @@ PF.aim = function() {
 			bestent  = check;
 		}
 	}
-	if (bestent != null) {
+	if (bestent !== null) {
 		dir[0] = bestent.v_float[PR.entvars.origin] - ent.v_float[PR.entvars.origin];
 		dir[1] = bestent.v_float[PR.entvars.origin1] - ent.v_float[PR.entvars.origin1];
 		dir[2] = bestent.v_float[PR.entvars.origin2] - ent.v_float[PR.entvars.origin2];

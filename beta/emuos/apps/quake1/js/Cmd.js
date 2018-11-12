@@ -173,7 +173,7 @@ Cmd.TokenizeString = function(text) {
 
 		text = COM.Parse(text);
 
-		if (text == null) {
+		if (text === null) {
 			return;
 		}
 

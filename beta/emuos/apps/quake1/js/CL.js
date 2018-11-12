@@ -841,7 +841,7 @@ CL.PrintEntities_f = function() {
 			Con.Print(i + ':');
 		}
 
-		if (ent.model == null) {
+		if (ent.model === null) {
 			Con.Print('EMPTY\n');
 
 			continue;
@@ -866,7 +866,7 @@ CL.AllocDlight = function(key) {
 		}
 	}
 
-	if (dl == null) {
+	if (dl === null) {
 		for (i = 0; i <= 31; ++i) {
 			if (CL.dlights[i].die < CL.state.time) {
 				dl = CL.dlights[i];
@@ -874,7 +874,7 @@ CL.AllocDlight = function(key) {
 			}
 		}
 
-		if (dl == null) {
+		if (dl === null) {
 			dl = CL.dlights[0];
 		}
 	}
@@ -1364,7 +1364,7 @@ CL.ParseServerInfo = function() {
 	CL.state.model_precache = [];
 	for (i = 1; i < nummodels; ++i) {
 		CL.state.model_precache[i] = Mod.ForName(model_precache[i]);
-		if (CL.state.model_precache[i] == null) {
+		if (CL.state.model_precache[i] === null) {
 			Con.Print('Model ' + model_precache[i] + ' not found\n');
 			return;
 		}
@@ -1400,7 +1400,7 @@ CL.ParseUpdate = function(bits) {
 	var model = CL.state.model_precache[((bits & Protocol.u.model) !== 0) ? MSG.ReadByte() : ent.baseline.modelindex];
 	if (model !== ent.model) {
 		ent.model = model;
-		if (model != null) {
+		if (model !== null) {
 			ent.syncbase = (model.random === true) ? Math.random() : 0.0;
 		} else {
 			forcelink = true;
@@ -1763,7 +1763,7 @@ CL.ParseBeam = function(m) {
 	}
 	for (i = 0; i <= 23; ++i) {
 		b = CL.beams[i];
-		if ((b.model != null) && (b.endtime >= CL.state.time)) {
+		if ((b.model !== null) && (b.endtime >= CL.state.time)) {
 			continue;
 		}
 		b.entity  = ent;
@@ -1861,7 +1861,7 @@ CL.UpdateTEnts = function() {
 	var i, b, dist       = [], yaw, pitch, org = [], d, ent;
 	for (i = 0; i <= 23; ++i) {
 		b = CL.beams[i];
-		if ((b.model == null) || (b.endtime < CL.state.time)) {
+		if ((b.model === null) || (b.endtime < CL.state.time)) {
 			continue;
 		}
 		if (b.entity === CL.state.viewentity) {

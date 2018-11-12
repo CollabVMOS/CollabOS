@@ -124,7 +124,7 @@ R.PushDlights = function() {
 			R.MarkLights(l, bit, CL.state.worldmodel.nodes[0]);
 			for (j = 0; j < CL.numvisedicts; ++j) {
 				ent = CL.visedicts[j];
-				if (ent.model == null) {
+				if (ent.model === null) {
 					continue;
 				}
 				if ((ent.model.type !== Mod.type.brush) || (ent.model.submodel !== true)) {
@@ -241,7 +241,7 @@ R.RecursiveLightPoint = function(node, start, end) {
 };
 
 R.LightPoint = function(p) {
-	if (CL.state.worldmodel.lightdata == null) {
+	if (CL.state.worldmodel.lightdata === null) {
 		return 255;
 	}
 	var r = R.RecursiveLightPoint(CL.state.worldmodel.nodes[0], p, [p[0], p[1], p[2] - 2048.0]);
@@ -664,7 +664,7 @@ R.DrawEntitiesOnList = function() {
 	var i, j, leaf;
 	for (i = 0; i < CL.state.num_statics; ++i) {
 		R.currententity = CL.static_entities[i];
-		if (R.currententity.model == null) {
+		if (R.currententity.model === null) {
 			continue;
 		}
 		for (j = 0; j < R.currententity.leafs.length; ++j) {
@@ -686,7 +686,7 @@ R.DrawEntitiesOnList = function() {
 	}
 	for (i = 0; i < CL.numvisedicts; ++i) {
 		R.currententity = CL.visedicts[i];
-		if (R.currententity.model == null) {
+		if (R.currententity.model === null) {
 			continue;
 		}
 		switch (R.currententity.model.type) {
@@ -702,7 +702,7 @@ R.DrawEntitiesOnList = function() {
 	gl.enable(gl.BLEND);
 	for (i = 0; i < CL.state.num_statics; ++i) {
 		R.currententity = CL.static_entities[i];
-		if (R.currententity.model == null) {
+		if (R.currententity.model === null) {
 			continue;
 		}
 		if (R.currententity.model.type === Mod.type.sprite) {
@@ -711,7 +711,7 @@ R.DrawEntitiesOnList = function() {
 	}
 	for (i = 0; i < CL.numvisedicts; ++i) {
 		R.currententity = CL.visedicts[i];
-		if (R.currententity.model == null) {
+		if (R.currententity.model === null) {
 			continue;
 		}
 		if (R.currententity.model.type === Mod.type.sprite) {
@@ -739,7 +739,7 @@ R.DrawViewModel = function() {
 	if (CL.state.stats[Def.stat.health] <= 0) {
 		return;
 	}
-	if (CL.state.viewent.model == null) {
+	if (CL.state.viewent.model === null) {
 		return;
 	}
 
@@ -840,25 +840,25 @@ R.Perspective = function() {
 		program = GL.programs[i];
 		gl.useProgram(program.program);
 		// noinspection JSUnresolvedVariable
-		if (program.uViewOrigin != null)
+		if (program.uViewOrigin !== null)
 		// noinspection JSUnresolvedVariable
 		{
 			gl.uniform3fv(program.uViewOrigin, R.refdef.vieworg);
 		}
 		// noinspection JSUnresolvedVariable
-		if (program.uViewAngles != null)
+		if (program.uViewAngles !== null)
 		// noinspection JSUnresolvedVariable
 		{
 			gl.uniformMatrix3fv(program.uViewAngles, false, viewMatrix);
 		}
 		// noinspection JSUnresolvedVariable
-		if (program.uPerspective != null)
+		if (program.uPerspective !== null)
 		// noinspection JSUnresolvedVariable
 		{
 			gl.uniformMatrix4fv(program.uPerspective, false, R.perspective);
 		}
 		// noinspection JSUnresolvedVariable
-		if (program.uGamma != null)
+		if (program.uGamma !== null)
 		// noinspection JSUnresolvedVariable
 		{
 			gl.uniform1f(program.uGamma, V.gamma.value);
@@ -928,7 +928,7 @@ R.RenderView = function() {
 // mesh
 
 R.MakeBrushModelDisplayLists = function(m) {
-	if (m.cmds != null) {
+	if (m.cmds !== null) {
 		gl.deleteBuffer(m.cmds);
 	}
 	var i, j, k;
@@ -1013,7 +1013,7 @@ R.MakeBrushModelDisplayLists = function(m) {
 };
 
 R.MakeWorldModelDisplayLists = function(m) {
-	if (m.cmds != null) {
+	if (m.cmds !== null) {
 		return;
 	}
 	var i, j, k, l;
@@ -1323,7 +1323,7 @@ R.ramp3 = [0x6d, 0x6b, 6, 5, 4, 3];
 
 R.InitParticles = function() {
 	var i = COM.CheckParm('-particles');
-	if (i != null) {
+	if (i !== null) {
 		R.numparticles = Q.atoi(COM.argv[i + 1]);
 		if (R.numparticles < 512) {
 			R.numparticles = 512;
@@ -1383,7 +1383,7 @@ R.ReadPointFile_f = function() {
 	}
 	var name = 'maps/' + PR.GetString(PR.globals_int[PR.globalvars.mapname]) + '.pts';
 	var f    = COM.LoadTextFile(name);
-	if (f == null) {
+	if (f === null) {
 		Con.Print('couldn\'t open ' + name + '\n');
 		return;
 	}
@@ -1861,12 +1861,12 @@ R.BuildLightMap = function(surf) {
 
 R.TextureAnimation = function(base) {
 	var frame = 0;
-	if (base.anim_base != null) {
+	if (base.anim_base !== null) {
 		frame = base.anim_frame;
 		base  = R.currententity.model.textures[base.anim_base];
 	}
 	var anims = base.anims;
-	if (anims == null) {
+	if (anims === null) {
 		return base;
 	}
 	if ((R.currententity.frame !== 0) && (base.alternate_anims.length !== 0)) {
@@ -1922,7 +1922,7 @@ R.DrawBrushModel = function(e) {
 	gl.vertexAttribPointer(program.aTexCoord.location, 4, gl.FLOAT, false, 44, 12);
 	// noinspection JSUnresolvedVariable
 	gl.vertexAttribPointer(program.aLightStyle.location, 4, gl.FLOAT, false, 44, 28);
-	if ((R.fullbright.value !== 0) || (clmodel.lightdata == null))
+	if ((R.fullbright.value !== 0) || (clmodel.lightdata === null))
 	// noinspection JSUnresolvedVariable
 	{
 		GL.Bind(program.tLightmap, R.fullbright_texture);
@@ -2006,7 +2006,7 @@ R.DrawWorld = function() {
 	gl.vertexAttribPointer(program.aTexCoord.location, 4, gl.FLOAT, false, 44, 12);
 	// noinspection JSUnresolvedVariable
 	gl.vertexAttribPointer(program.aLightStyle.location, 4, gl.FLOAT, false, 44, 28);
-	if ((R.fullbright.value !== 0) || (clmodel.lightdata == null))
+	if ((R.fullbright.value !== 0) || (clmodel.lightdata === null))
 	// noinspection JSUnresolvedVariable
 	{
 		GL.Bind(program.tLightmap, R.fullbright_texture);
@@ -2085,7 +2085,7 @@ R.MarkLeaves = function() {
 		if ((vis[i >> 3] & (1 << (i & 7))) === 0) {
 			continue;
 		}
-		for (node = CL.state.worldmodel.leafs[i + 1]; node != null; node = node.parent) {
+		for (node = CL.state.worldmodel.leafs[i + 1]; node !== null; node = node.parent) {
 			if (node.markvisframe === R.visframecount) {
 				break;
 			}
@@ -2117,7 +2117,7 @@ R.MarkLeaves = function() {
 			if ((vis[i >> 3] & (1 << (i & 7))) === 0) {
 				continue;
 			}
-			for (node = CL.state.worldmodel.leafs[i + 1]; node != null; node = node.parent) {
+			for (node = CL.state.worldmodel.leafs[i + 1]; node !== null; node = node.parent) {
 				if (node.markvisframe === R.visframecount) {
 					break;
 				}
@@ -2212,7 +2212,7 @@ R.BuildLightmaps = function() {
 				surf = R.currentmodel.faces[j];
 				if ((surf.sky !== true) && (surf.turbulent !== true)) {
 					R.AllocBlock(surf);
-					if (R.currentmodel.lightdata != null) {
+					if (R.currentmodel.lightdata !== null) {
 						R.BuildLightMap(surf);
 					}
 				}

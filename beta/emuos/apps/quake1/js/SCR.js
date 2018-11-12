@@ -200,7 +200,7 @@ SCR.DrawPause = function() {
 };
 
 SCR.SetUpToDrawConsole = function() {
-	Con.forcedup = (CL.state.worldmodel == null) || (CL.cls.signon !== 4);
+	Con.forcedup = (CL.state.worldmodel === null) || (CL.cls.signon !== 4);
 
 	if (Con.forcedup === true) {
 		SCR.con_current = 200;

@@ -63,7 +63,7 @@ GL.Set2D = function() {
 	for (i = 0; i < GL.programs.length; ++i) {
 		program = GL.programs[i];
 		// noinspection JSUnresolvedVariable
-		if (program.uOrtho == null) {
+		if (program.uOrtho === null) {
 			continue;
 		}
 		gl.useProgram(program.program);
@@ -305,7 +305,7 @@ GL.CreateProgram = function(identifier, uniforms, attribs, textures) {
 
 GL.UseProgram = function(identifier, flushStream) {
 	var currentProgram = GL.currentProgram;
-	if (currentProgram != null) {
+	if (currentProgram !== null) {
 		if (currentProgram.identifier === identifier) {
 			return currentProgram;
 		}
@@ -321,12 +321,12 @@ GL.UseProgram = function(identifier, flushStream) {
 			break;
 		}
 	}
-	if (program == null) {
+	if (program === null) {
 		return null;
 	}
 
 	var enableAttribs = program.attribBits, disableAttribs = 0;
-	if (currentProgram != null) {
+	if (currentProgram !== null) {
 		enableAttribs &= ~currentProgram.attribBits;
 		disableAttribs = currentProgram.attribBits & ~program.attribBits;
 	}
@@ -347,7 +347,7 @@ GL.UseProgram = function(identifier, flushStream) {
 };
 
 GL.UnbindProgram = function() {
-	if (GL.currentProgram == null) {
+	if (GL.currentProgram === null) {
 		return;
 	}
 	GL.StreamFlush();
@@ -382,7 +382,7 @@ GL.StreamFlush = function() {
 		return;
 	}
 	var program = GL.currentProgram;
-	if (program != null) {
+	if (program !== null) {
 		gl.bindBuffer(gl.ARRAY_BUFFER, GL.streamBuffer);
 		gl.bufferSubData(gl.ARRAY_BUFFER, GL.streamBufferPosition,
 			GL.streamArrayBytes.subarray(0, GL.streamArrayPosition));
@@ -402,7 +402,7 @@ GL.StreamFlush = function() {
 
 GL.StreamGetSpace = function(vertexCount) {
 	var program = GL.currentProgram;
-	if (program == null) {
+	if (program === null) {
 		return;
 	}
 	var length = vertexCount * program.vertexSize;
@@ -489,7 +489,7 @@ GL.Init = function() {
 		gl = VID.mainwindow.getContext('webgl') || VID.mainwindow.getContext('experimental-webgl');
 	} catch (e) {
 	}
-	if (gl == null) {
+	if (gl === null) {
 		Sys.Error('Unable to initialize WebGL. Your browser may not support it.');
 	}
 

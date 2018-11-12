@@ -41,10 +41,10 @@ Mod.Init = function() {
 };
 
 Mod.PointInLeaf = function(p, model) {
-	if (model == null) {
+	if (model === null) {
 		Sys.Error('Mod.PointInLeaf: bad model');
 	}
-	if (model.nodes == null) {
+	if (model.nodes === null) {
 		Sys.Error('Mod.PointInLeaf: bad model');
 	}
 	var node = model.nodes[0];
@@ -64,7 +64,7 @@ Mod.PointInLeaf = function(p, model) {
 
 Mod.DecompressVis = function(i, model) {
 	var decompressed = [], c, out = 0, row = (model.leafs.length + 7) >> 3;
-	if (model.visdata == null) {
+	if (model.visdata === null) {
 		for (; row >= 0; --row) {
 			decompressed[out++] = 0xff;
 		}
@@ -97,7 +97,7 @@ Mod.ClearAll = function() {
 		if (mod.type !== Mod.type.brush) {
 			continue;
 		}
-		if (mod.cmds != null) {
+		if (mod.cmds !== null) {
 			gl.deleteBuffer(mod.cmds);
 		}
 		Mod.known[i] = {
@@ -113,7 +113,7 @@ Mod.FindName = function(name) {
 	}
 	var i;
 	for (i = 0; i < Mod.known.length; ++i) {
-		if (Mod.known[i] == null) {
+		if (Mod.known[i] === null) {
 			continue;
 		}
 		if (Mod.known[i].name === name) {
@@ -121,7 +121,7 @@ Mod.FindName = function(name) {
 		}
 	}
 	for (i = 0; i <= Mod.known.length; ++i) {
-		if (Mod.known[i] != null) {
+		if (Mod.known[i] !== null) {
 			continue;
 		}
 		Mod.known[i] = {name: name, needload: true};
@@ -134,7 +134,7 @@ Mod.LoadModel = function(mod, crash) {
 		return mod;
 	}
 	var buf = COM.LoadFile(mod.name);
-	if (buf == null) {
+	if (buf === null) {
 		if (crash === true) {
 			Sys.Error('Mod.LoadModel: ' + mod.name + ' not found');
 		}
@@ -281,12 +281,12 @@ Mod.LoadTextures = function(buf) {
 			Sys.Error('Bad animating texture ' + tx.name);
 		}
 		for (j = 0; j < tx.anims.length; ++j) {
-			if (tx.anims[j] == null) {
+			if (tx.anims[j] === null) {
 				Sys.Error('Missing frame ' + j + ' of ' + tx.name);
 			}
 		}
 		for (j = 0; j < tx.alternate_anims.length; ++j) {
-			if (tx.alternate_anims[j] == null) {
+			if (tx.alternate_anims[j] === null) {
 				Sys.Error('Missing frame ' + j + ' of ' + tx.name);
 			}
 		}

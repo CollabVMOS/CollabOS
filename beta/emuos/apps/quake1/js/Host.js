@@ -86,7 +86,7 @@ Host.DropClient = function(crash) {
 			MSG.WriteByte(client.message, Protocol.svc.disconnect);
 			NET.SendMessage(client.netconnection, client.message);
 		}
-		if ((client.edict != null) && (client.spawned === true)) {
+		if ((client.edict !== null) && (client.spawned === true)) {
 			var saveSelf                       = PR.globals_int[PR.globalvars.self];
 			PR.globals_int[PR.globalvars.self] = client.edict.num;
 			PR.ExecuteProgram(PR.globals_int[PR.globalvars.ClientDisconnect]);
@@ -689,7 +689,7 @@ Host.Loadgame_f = function() {
 	var name       = COM.DefaultExtension(Cmd.argv[1], '.sav');
 	Con.Print('Loading game from ' + name + '...\n');
 	var f = COM.LoadTextFile(name);
-	if (f == null) {
+	if (f === null) {
 		Con.Print('ERROR: couldn\'t open.\n');
 		return;
 	}
@@ -738,7 +738,7 @@ Host.Loadgame_f = function() {
 		token   = f[i].split('"');
 		keyname = token[1];
 		key     = ED.FindGlobal(keyname);
-		if (key == null) {
+		if (key === null) {
 			Con.Print('\'' + keyname + '\' is not a global\n');
 			continue;
 		}
@@ -752,7 +752,7 @@ Host.Loadgame_f = function() {
 	var data    = f.slice(i).join('\n');
 	for (; ;) {
 		data = COM.Parse(data);
-		if (data == null) {
+		if (data === null) {
 			break;
 		}
 		if (COM.token.charCodeAt(0) !== 123) {
@@ -1114,7 +1114,7 @@ Host.Kick_f = function() {
 	if (Cmd.argv.length >= 3) {
 		message = COM.Parse(Cmd.args);
 	}
-	if (message != null) {
+	if (message !== null) {
 		var p = 0;
 		if (byNumber === true) {
 			++p;
@@ -1200,7 +1200,7 @@ Host.Give_f = function() {
 	switch (t) {
 		case 115:
 			// noinspection JSUnresolvedVariable
-			if (PR.entvars.ammo_shells1 != null)
+			if (PR.entvars.ammo_shells1 !== null)
 			// noinspection JSUnresolvedVariable
 			{
 				ent.v_float[PR.entvars.ammo_shells1] = v;
@@ -1209,7 +1209,7 @@ Host.Give_f = function() {
 			return;
 		case 110:
 			// noinspection JSUnresolvedVariable
-			if (PR.entvars.ammo_nails1 != null) {
+			if (PR.entvars.ammo_nails1 !== null) {
 				// noinspection JSUnresolvedVariable
 				ent.v_float[PR.entvars.ammo_nails1] = v;
 				if (ent.v_float[PR.entvars.weapon] <= Def.it.lightning) {
@@ -1219,7 +1219,7 @@ Host.Give_f = function() {
 			return;
 		case 108:
 			// noinspection JSUnresolvedVariable
-			if (PR.entvars.ammo_lava_nails != null) {
+			if (PR.entvars.ammo_lava_nails !== null) {
 				// noinspection JSUnresolvedVariable
 				ent.v_float[PR.entvars.ammo_lava_nails] = v;
 				if (ent.v_float[PR.entvars.weapon] > Def.it.lightning) {
@@ -1229,7 +1229,7 @@ Host.Give_f = function() {
 			return;
 		case 114:
 			// noinspection JSUnresolvedVariable
-			if (PR.entvars.ammo_rockets1 != null) {
+			if (PR.entvars.ammo_rockets1 !== null) {
 				// noinspection JSUnresolvedVariable
 				ent.v_float[PR.entvars.ammo_rockets1] = v;
 				if (ent.v_float[PR.entvars.weapon] <= Def.it.lightning) {
@@ -1239,7 +1239,7 @@ Host.Give_f = function() {
 			return;
 		case 109:
 			// noinspection JSUnresolvedVariable
-			if (PR.entvars.ammo_multi_rockets != null) {
+			if (PR.entvars.ammo_multi_rockets !== null) {
 				// noinspection JSUnresolvedVariable
 				ent.v_float[PR.entvars.ammo_multi_rockets] = v;
 				if (ent.v_float[PR.entvars.weapon] > Def.it.lightning) {
@@ -1249,7 +1249,7 @@ Host.Give_f = function() {
 			return;
 		case 99:
 			// noinspection JSUnresolvedVariable
-			if (PR.entvars.ammo_cells1 != null) {
+			if (PR.entvars.ammo_cells1 !== null) {
 				// noinspection JSUnresolvedVariable
 				ent.v_float[PR.entvars.ammo_cells1] = v;
 				if (ent.v_float[PR.entvars.weapon] <= Def.it.lightning) {
@@ -1259,7 +1259,7 @@ Host.Give_f = function() {
 			return;
 		case 112:
 			// noinspection JSUnresolvedVariable
-			if (PR.entvars.ammo_plasma != null) {
+			if (PR.entvars.ammo_plasma !== null) {
 				// noinspection JSUnresolvedVariable
 				ent.v_float[PR.entvars.ammo_plasma] = v;
 				if (ent.v_float[PR.entvars.weapon] > Def.it.lightning) {
@@ -1287,11 +1287,11 @@ Host.Viewmodel_f = function() {
 		return;
 	}
 	var e = Host.FindViewthing();
-	if (e == null) {
+	if (e === null) {
 		return;
 	}
 	var m = Mod.ForName(Cmd.argv[1]);
-	if (m == null) {
+	if (m === null) {
 		Con.Print('Can\'t load ' + Cmd.argv[1] + '\n');
 		return;
 	}
@@ -1301,7 +1301,7 @@ Host.Viewmodel_f = function() {
 
 Host.Viewframe_f = function() {
 	var e = Host.FindViewthing();
-	if (e == null) {
+	if (e === null) {
 		return;
 	}
 	var m = CL.state.model_precache[ent.v_float[PR.entvars.modelindex] >> 0];
@@ -1314,7 +1314,7 @@ Host.Viewframe_f = function() {
 
 Host.Viewnext_f = function() {
 	var e = Host.FindViewthing();
-	if (e == null) {
+	if (e === null) {
 		return;
 	}
 	var m = CL.state.model_precache[ent.v_float[PR.entvars.modelindex] >> 0];
@@ -1328,7 +1328,7 @@ Host.Viewnext_f = function() {
 
 Host.Viewprev_f = function() {
 	var e = Host.FindViewthing();
-	if (e == null) {
+	if (e === null) {
 		return;
 	}
 	var m = CL.state.model_precache[ent.v_float[PR.entvars.modelindex] >> 0];

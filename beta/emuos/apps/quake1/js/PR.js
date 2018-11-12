@@ -222,7 +222,7 @@ PR.ValueString = function(type, val, ofs) {
 			return PR.GetString(PR.functions[val_int[ofs]].name) + '()';
 		case PR.etype.ev_field:
 			var def = ED.FieldAtOfs(val_int[ofs]);
-			if (def != null) {
+			if (def !== null) {
 				return '.' + PR.GetString(def.name);
 			}
 			return '.';
@@ -253,7 +253,7 @@ PR.UglyValueString = function(type, val, ofs) {
 			return PR.GetString(PR.functions[val_int[ofs]].name);
 		case PR.etype.ev_field:
 			var def = ED.FieldAtOfs(val_int[ofs]);
-			if (def != null) {
+			if (def !== null) {
 				return PR.GetString(def.name);
 			}
 			return '';
@@ -271,7 +271,7 @@ PR.UglyValueString = function(type, val, ofs) {
 
 PR.GlobalString = function(ofs) {
 	var def = ED.GlobalAtOfs(ofs), line;
-	if (def != null) {
+	if (def !== null) {
 		line = ofs + '(' + PR.GetString(def.name) + ')' + PR.ValueString(def.type, PR.globals, ofs);
 	} else {
 		line = ofs + '(???)';
@@ -284,7 +284,7 @@ PR.GlobalString = function(ofs) {
 
 PR.GlobalStringNoContents = function(ofs) {
 	var def = ED.GlobalAtOfs(ofs), line;
-	if (def != null) {
+	if (def !== null) {
 		line = ofs + '(' + PR.GetString(def.name) + ')';
 	} else {
 		line = ofs + '(???)';
@@ -297,7 +297,7 @@ PR.GlobalStringNoContents = function(ofs) {
 
 PR.LoadProgs = function() {
 	var progs = COM.LoadFile('progs.dat');
-	if (progs == null) {
+	if (progs === null) {
 		Sys.Error('PR.LoadProgs: couldn\'t load progs.dat');
 	}
 	Con.DPrint('Programs occupy ' + (progs.byteLength >> 10) + 'K.\n');
@@ -418,7 +418,7 @@ PR.LoadProgs = function() {
 	for (i = 0; i < fields.length; ++i) {
 		field             = fields[i];
 		def               = ED.FindField(field);
-		PR.entvars[field] = (def != null) ? def.ofs : null;
+		PR.entvars[field] = (def !== null) ? def.ofs : null;
 	}
 };
 
@@ -506,7 +506,7 @@ PR.StackTrace = function() {
 	var f, file;
 	for (; PR.depth >= 0; --PR.depth) {
 		f = PR.stack[PR.depth][1];
-		if (f == null) {
+		if (f === null) {
 			Con.Print('<NO FUNCTION>\n');
 			continue;
 		}
@@ -534,7 +534,7 @@ PR.Profile_f = function() {
 				best = f;
 			}
 		}
-		if (best == null) {
+		if (best === null) {
 			return;
 		}
 		if (num < 10) {
