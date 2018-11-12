@@ -4,13 +4,10 @@ Con.backscroll = 0;
 Con.current = 0;
 Con.text = [];
 
-Con.ToggleConsole_f = function()
-{
+Con.ToggleConsole_f = function() {
 	SCR.EndLoadingPlaque();
-	if (Key.dest.value === Key.dest.console)
-	{
-		if (CL.cls.state !== CL.active.connected)
-		{
+	if (Key.dest.value === Key.dest.console) {
+		if (CL.cls.state !== CL.active.connected) {
 			M.Menu_Main_f();
 			return;
 		}
@@ -22,15 +19,13 @@ Con.ToggleConsole_f = function()
 	Key.dest.value = Key.dest.console;
 };
 
-Con.Clear_f = function()
-{
+Con.Clear_f = function() {
 	Con.backscroll = 0;
 	Con.current = 0;
 	Con.text = [];
 };
 
-Con.ClearNotify = function()
-{
+Con.ClearNotify = function() {
 	var i = Con.text.length - 4;
 	if (i < 0)
 		i = 0;
@@ -38,20 +33,17 @@ Con.ClearNotify = function()
 		Con.text[i].time = 0.0;
 };
 
-Con.MessageMode_f = function()
-{
+Con.MessageMode_f = function() {
 	Key.dest.value = Key.dest.message;
 	Key.team_message = false;
 };
 
-Con.MessageMode2_f = function()
-{
+Con.MessageMode2_f = function() {
 	Key.dest.value = Key.dest.message;
 	Key.team_message = true;
 };
 
-Con.Init = function()
-{
+Con.Init = function() {
 	Con.debuglog = (COM.CheckParm('-condebug') != null);
 	if (Con.debuglog === true)
 		COM.WriteTextFile('qconsole.log', '');
@@ -64,13 +56,10 @@ Con.Init = function()
 	Cmd.AddCommand('clear', Con.Clear_f);
 };
 
-Con.Print = function(msg)
-{
-	if (Con.debuglog === true)
-	{
+Con.Print = function(msg) {
+	if (Con.debuglog === true) {
 		var data = COM.LoadTextFile('qconsole.log');
-		if (data != null)
-		{
+		if (data != null) {
 			data += msg;
 			if (data.length >= 32768)
 				data = data.substring(data.length - 16384);
@@ -81,26 +70,21 @@ Con.Print = function(msg)
 	Con.backscroll = 0;
 
 	var mask = 0;
-	if (msg.charCodeAt(0) <= 2)
-	{
+	if (msg.charCodeAt(0) <= 2) {
 		mask = 128;
 		if (msg.charCodeAt(0) === 1)
 			S.LocalSound(Con.sfx_talk);
 		msg = msg.substring(1);
 	}
 	var i;
-	for (i = 0; i < msg.length; ++i)
-	{
+	for (i = 0; i < msg.length; ++i) {
 		if (Con.text[Con.current] == null)
 			Con.text[Con.current] = {text: '', time: Host.realtime};
-		if (msg.charCodeAt(i) === 10)
-		{
-			if (Con.text.length >= 1024)
-			{
+		if (msg.charCodeAt(i) === 10) {
+			if (Con.text.length >= 1024) {
 				Con.text = Con.text.slice(-512);
 				Con.current = Con.text.length;
-			}
-			else
+			} else
 				++Con.current;
 			continue;
 		}
@@ -108,14 +92,12 @@ Con.Print = function(msg)
 	}
 };
 
-Con.DPrint = function(msg)
-{
+Con.DPrint = function(msg) {
 	if (Host.developer.value !== 0)
 		Con.Print(msg);
 };
 
-Con.DrawInput = function()
-{
+Con.DrawInput = function() {
 	if ((Key.dest.value !== Key.dest.console) && (Con.forcedup !== true))
 		return;
 	var text = ']' + Key.edit_line + String.fromCharCode(10 + ((Host.realtime * 4.0) & 1));
@@ -125,14 +107,12 @@ Con.DrawInput = function()
 	Draw.String(8, Con.vislines - 16, text);
 };
 
-Con.DrawNotify = function()
-{
+Con.DrawNotify = function() {
 	var width = (VID.width >> 3) - 2;
 	var i = Con.text.length - 4, v = 0;
 	if (i < 0)
 		i = 0;
-	for (; i < Con.text.length; ++i)
-	{
+	for (; i < Con.text.length; ++i) {
 		if ((Host.realtime - Con.text[i].time) > Con.notifytime.value)
 			continue;
 		Draw.String(8, v, Con.text[i].text.substring(0, width));
@@ -142,8 +122,7 @@ Con.DrawNotify = function()
 		Draw.String(8, v, 'say: ' + Key.chat_buffer + String.fromCharCode(10 + ((Host.realtime * 4.0) & 1)));
 };
 
-Con.DrawConsole = function(lines)
-{
+Con.DrawConsole = function(lines) {
 	if (lines <= 0)
 		return;
 	lines = Math.floor(lines * VID.height * 0.005);
@@ -153,8 +132,7 @@ Con.DrawConsole = function(lines)
 	var rows;
 	var y = lines - 16;
 	var i;
-	for (i = Con.text.length - 1 - Con.backscroll; i >= 0;)
-	{
+	for (i = Con.text.length - 1 - Con.backscroll; i >= 0;) {
 		if (Con.text[i].text.length === 0)
 			y -= 8;
 		else
@@ -164,17 +142,14 @@ Con.DrawConsole = function(lines)
 			break;
 	}
 	var j, text;
-	for (++i; i < Con.text.length - Con.backscroll; ++i)
-	{
+	for (++i; i < Con.text.length - Con.backscroll; ++i) {
 		text = Con.text[i].text;
 		rows = Math.ceil(text.length / width);
-		if (rows === 0)
-		{
+		if (rows === 0) {
 			y += 8;
 			continue;
 		}
-		for (j = 0; j < rows; ++j)
-		{
+		for (j = 0; j < rows; ++j) {
 			Draw.String(8, y, text.substr(j * width, width));
 			y += 8;
 		}

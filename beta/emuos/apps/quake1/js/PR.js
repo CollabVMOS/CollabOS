@@ -200,103 +200,95 @@ PR.progheader_crc = 5927;
 
 // cmds
 
-PR.CheckEmptyString = function(s)
-{
+PR.CheckEmptyString = function(s) {
 	var c = s.charCodeAt(0);
-	if ((Q.isNaN(c) === true) || (c <= 32))
+	if ((isNaN(c) === true) || (c <= 32))
 		PR.RunError('Bad string');
 };
 
 // edict
 
-PR.ValueString = function(type, val, ofs)
-{
+PR.ValueString = function(type, val, ofs) {
 	var val_float = new Float32Array(val);
 	var val_int = new Int32Array(val);
 	type &= 0x7fff;
-	switch (type)
-	{
-	case PR.etype.ev_string:
-		return PR.GetString(val_int[ofs]);
-	case PR.etype.ev_entity:
-		return 'entity ' + val_int[ofs];
-	case PR.etype.ev_function:
-		return PR.GetString(PR.functions[val_int[ofs]].name) + '()';
-	case PR.etype.ev_field:
-		var def = ED.FieldAtOfs(val_int[ofs]);
-		if (def != null)
-			return '.' + PR.GetString(def.name);
-		return '.';
-	case PR.etype.ev_void:
-		return 'void';
-	case PR.etype.ev_float:
-		return val_float[ofs].toFixed(1);
-	case PR.etype.ev_vector:
-		return '\'' + val_float[ofs].toFixed(1) +
-		' ' + val_float[ofs + 1].toFixed(1) +
-		' ' + val_float[ofs + 2].toFixed(1) + '\'';
-	case PR.etype.ev_pointer:
-		return 'pointer';
+	switch (type) {
+		case PR.etype.ev_string:
+			return PR.GetString(val_int[ofs]);
+		case PR.etype.ev_entity:
+			return 'entity ' + val_int[ofs];
+		case PR.etype.ev_function:
+			return PR.GetString(PR.functions[val_int[ofs]].name) + '()';
+		case PR.etype.ev_field:
+			var def = ED.FieldAtOfs(val_int[ofs]);
+			if (def != null)
+				return '.' + PR.GetString(def.name);
+			return '.';
+		case PR.etype.ev_void:
+			return 'void';
+		case PR.etype.ev_float:
+			return val_float[ofs].toFixed(1);
+		case PR.etype.ev_vector:
+			return '\'' + val_float[ofs].toFixed(1) +
+				' ' + val_float[ofs + 1].toFixed(1) +
+				' ' + val_float[ofs + 2].toFixed(1) + '\'';
+		case PR.etype.ev_pointer:
+			return 'pointer';
 	}
 	return 'bad type ' + type;
 };
 
-PR.UglyValueString = function(type, val, ofs)
-{
+PR.UglyValueString = function(type, val, ofs) {
 	var val_float = new Float32Array(val);
 	var val_int = new Int32Array(val);
 	type &= 0x7fff;
-	switch (type)
-	{
-	case PR.etype.ev_string:
-		return PR.GetString(val_int[ofs]);
-	case PR.etype.ev_entity:
-		return val_int[ofs].toString();
-	case PR.etype.ev_function:
-		return PR.GetString(PR.functions[val_int[ofs]].name);
-	case PR.etype.ev_field:
-		var def = ED.FieldAtOfs(val_int[ofs]);
-		if (def != null)
-			return PR.GetString(def.name);
-		return '';
-	case PR.etype.ev_void:
-		return 'void';
-	case PR.etype.ev_float:
-		return val_float[ofs].toFixed(6);
-	case PR.etype.ev_vector:
-		return val_float[ofs].toFixed(6) +
-		' ' + val_float[ofs + 1].toFixed(6) +
-		' ' + val_float[ofs + 2].toFixed(6);
+	switch (type) {
+		case PR.etype.ev_string:
+			return PR.GetString(val_int[ofs]);
+		case PR.etype.ev_entity:
+			return val_int[ofs].toString();
+		case PR.etype.ev_function:
+			return PR.GetString(PR.functions[val_int[ofs]].name);
+		case PR.etype.ev_field:
+			var def = ED.FieldAtOfs(val_int[ofs]);
+			if (def != null)
+				return PR.GetString(def.name);
+			return '';
+		case PR.etype.ev_void:
+			return 'void';
+		case PR.etype.ev_float:
+			return val_float[ofs].toFixed(6);
+		case PR.etype.ev_vector:
+			return val_float[ofs].toFixed(6) +
+				' ' + val_float[ofs + 1].toFixed(6) +
+				' ' + val_float[ofs + 2].toFixed(6);
 	}
 	return 'bad type ' + type;
 };
 
-PR.GlobalString = function(ofs)
-{
+PR.GlobalString = function(ofs) {
 	var def = ED.GlobalAtOfs(ofs), line;
 	if (def != null)
 		line = ofs + '(' + PR.GetString(def.name) + ')' + PR.ValueString(def.type, PR.globals, ofs);
 	else
 		line = ofs + '(???)';
-	for (; line.length <= 20; )
+	for (; line.length <= 20;)
 		line += ' ';
 	return line;
 };
 
-PR.GlobalStringNoContents = function(ofs)
-{
+PR.GlobalStringNoContents = function(ofs) {
 	var def = ED.GlobalAtOfs(ofs), line;
 	if (def != null)
 		line = ofs + '(' + PR.GetString(def.name) + ')';
 	else
 		line = ofs + '(???)';
-	for (; line.length <= 20; )
+	for (; line.length <= 20;)
 		line += ' ';
 	return line;
 };
 
-PR.LoadProgs = function()
-{
+PR.LoadProgs = function() {
 	var progs = COM.LoadFile('progs.dat');
 	if (progs == null)
 		Sys.Error('PR.LoadProgs: couldn\'t load progs.dat');
@@ -324,8 +316,7 @@ PR.LoadProgs = function()
 	ofs = view.getUint32(8, true);
 	num = view.getUint32(12, true);
 	PR.statements = [];
-	for (i = 0; i < num; ++i)
-	{
+	for (i = 0; i < num; ++i) {
 		PR.statements[i] = {
 			op: view.getUint16(ofs, true),
 			a: view.getInt16(ofs + 2, true),
@@ -338,8 +329,7 @@ PR.LoadProgs = function()
 	ofs = view.getUint32(16, true);
 	num = view.getUint32(20, true);
 	PR.globaldefs = [];
-	for (i = 0; i < num; ++i)
-	{
+	for (i = 0; i < num; ++i) {
 		PR.globaldefs[i] = {
 			type: view.getUint16(ofs, true),
 			ofs: view.getUint16(ofs + 2, true),
@@ -351,8 +341,7 @@ PR.LoadProgs = function()
 	ofs = view.getUint32(24, true);
 	num = view.getUint32(28, true);
 	PR.fielddefs = [];
-	for (i = 0; i < num; ++i)
-	{
+	for (i = 0; i < num; ++i) {
 		PR.fielddefs[i] = {
 			type: view.getUint16(ofs, true),
 			ofs: view.getUint16(ofs + 2, true),
@@ -364,8 +353,7 @@ PR.LoadProgs = function()
 	ofs = view.getUint32(32, true);
 	num = view.getUint32(36, true);
 	PR.functions = [];
-	for (i = 0; i < num; ++i)
-	{
+	for (i = 0; i < num; ++i) {
 		PR.functions[i] = {
 			first_statement: view.getInt32(ofs, true),
 			parm_start: view.getUint32(ofs + 4, true),
@@ -414,16 +402,14 @@ PR.LoadProgs = function()
 		'gravity',
 		'items2'
 	], field, def;
-	for (i = 0; i < fields.length; ++i)
-	{
+	for (i = 0; i < fields.length; ++i) {
 		field = fields[i];
 		def = ED.FindField(field);
 		PR.entvars[field] = (def != null) ? def.ofs : null;
 	}
 };
 
-PR.Init = function()
-{
+PR.Init = function() {
 	Cmd.AddCommand('edict', ED.PrintEdict_f);
 	Cmd.AddCommand('edicts', ED.PrintEdicts);
 	Cmd.AddCommand('edictcount', ED.Count);
@@ -468,16 +454,13 @@ PR.opnames = [
 	'BITAND', 'BITOR'
 ];
 
-PR.PrintStatement = function(s)
-{
+PR.PrintStatement = function(s) {
 	var text;
-	if (s.op < PR.opnames.length)
-	{
+	if (s.op < PR.opnames.length) {
 		text = PR.opnames[s.op] + ' ';
-		for (; text.length <= 9; )
+		for (; text.length <= 9;)
 			text += ' ';
-	}
-	else
+	} else
 		text = '';
 	if ((s.op === PR.op.jnz) || (s.op === PR.op.jz))
 		text += PR.GlobalString(s.a) + 'branch ' + s.b;
@@ -485,8 +468,7 @@ PR.PrintStatement = function(s)
 		text += 'branch ' + s.a;
 	else if ((s.op >= PR.op.store_f) && (s.op <= PR.op.store_fnc))
 		text += PR.GlobalString(s.a) + PR.GlobalStringNoContents(s.b);
-	else
-	{
+	else {
 		if (s.a !== 0)
 			text += PR.GlobalString(s.a);
 		if (s.b !== 0)
@@ -497,55 +479,46 @@ PR.PrintStatement = function(s)
 	Con.Print(text + '\n');
 };
 
-PR.StackTrace = function()
-{
-	if (PR.depth === 0)
-	{
+PR.StackTrace = function() {
+	if (PR.depth === 0) {
 		Con.Print('<NO STACK>\n');
 		return;
 	}
 	PR.stack[PR.depth] = [PR.xstatement, PR.xfunction];
 	var f, file;
-	for (; PR.depth >= 0; --PR.depth)
-	{
+	for (; PR.depth >= 0; --PR.depth) {
 		f = PR.stack[PR.depth][1];
-		if (f == null)
-		{
+		if (f == null) {
 			Con.Print('<NO FUNCTION>\n');
 			continue;
 		}
 		file = PR.GetString(f.file);
-		for (; file.length <= 11; )
+		for (; file.length <= 11;)
 			file += ' ';
 		Con.Print(file + ' : ' + PR.GetString(f.name) + '\n');
 	}
 	PR.depth = 0;
 };
 
-PR.Profile_f = function()
-{
+PR.Profile_f = function() {
 	if (SV.server.active !== true)
 		return;
 	var num = 0, max, best, i, f, profile;
-	for (;;)
-	{
+	for (; ;) {
 		max = 0;
 		best = null;
-		for (i = 0; i < PR.functions.length; ++i)
-		{
+		for (i = 0; i < PR.functions.length; ++i) {
 			f = PR.functions[i];
-			if (f.profile > max)
-			{
+			if (f.profile > max) {
 				max = f.profile;
 				best = f;
 			}
 		}
 		if (best == null)
 			return;
-		if (num < 10)
-		{
+		if (num < 10) {
 			profile = best.profile.toString();
-			for (; profile.length <= 6; )
+			for (; profile.length <= 6;)
 				profile = ' ' + profile;
 			Con.Print(profile + ' ' + PR.GetString(best.name) + '\n');
 		}
@@ -554,16 +527,14 @@ PR.Profile_f = function()
 	}
 };
 
-PR.RunError = function(error)
-{
+PR.RunError = function(error) {
 	PR.PrintStatement(PR.statements[PR.xstatement]);
 	PR.StackTrace();
 	Con.Print(error + '\n');
 	Host.Error('Program error');
 };
 
-PR.EnterFunction = function(f)
-{
+PR.EnterFunction = function(f) {
 	PR.stack[PR.depth++] = [PR.xstatement, PR.xfunction];
 	var c = f.locals;
 	if ((PR.localstack_used + c) > PR.localstack_size)
@@ -573,8 +544,7 @@ PR.EnterFunction = function(f)
 		PR.localstack[PR.localstack_used + i] = PR.globals_int[f.parm_start + i];
 	PR.localstack_used += c;
 	var o = f.parm_start, j;
-	for (i = 0; i < f.numparms; ++i)
-	{
+	for (i = 0; i < f.numparms; ++i) {
 		for (j = 0; j < f.parm_size[i]; ++j)
 			PR.globals_int[o++] = PR.globals_int[4 + i * 3 + j];
 	}
@@ -582,8 +552,7 @@ PR.EnterFunction = function(f)
 	return f.first_statement - 1;
 };
 
-PR.LeaveFunction = function()
-{
+PR.LeaveFunction = function() {
 	if (PR.depth <= 0)
 		Sys.Error('prog stack underflow');
 	var c = PR.xfunction.locals;
@@ -596,10 +565,8 @@ PR.LeaveFunction = function()
 	return PR.stack[PR.depth][0];
 };
 
-PR.ExecuteProgram = function(fnum)
-{
-	if ((fnum === 0) || (fnum >= PR.functions.length))
-	{
+PR.ExecuteProgram = function(fnum) {
+	if ((fnum === 0) || (fnum >= PR.functions.length)) {
 		if (PR.globals_int[PR.globalvars.self] !== 0)
 			ED.Print(SV.server.edicts[PR.globals_int[PR.globalvars.self]]);
 		Host.Error('PR.ExecuteProgram: NULL function');
@@ -610,8 +577,7 @@ PR.ExecuteProgram = function(fnum)
 	var s = PR.EnterFunction(PR.functions[fnum]);
 	var st, ed, ptr, newf;
 
-	for (;;)
-	{
+	for (; ;) {
 		++s;
 		st = PR.statements[s];
 		if (--runaway === 0)
@@ -620,223 +586,219 @@ PR.ExecuteProgram = function(fnum)
 		PR.xstatement = s;
 		if (PR.trace === true)
 			PR.PrintStatement(st);
-		switch (st.op)
-		{
-		case PR.op.add_f:
-			PR.globals_float[st.c] = PR.globals_float[st.a] + PR.globals_float[st.b];
-			continue;
-		case PR.op.add_v:
-			PR.globals_float[st.c] = PR.globals_float[st.a] + PR.globals_float[st.b];
-			PR.globals_float[st.c + 1] = PR.globals_float[st.a + 1] + PR.globals_float[st.b + 1];
-			PR.globals_float[st.c + 2] = PR.globals_float[st.a + 2] + PR.globals_float[st.b + 2];
-			continue;
-		case PR.op.sub_f:
-			PR.globals_float[st.c] = PR.globals_float[st.a] - PR.globals_float[st.b];
-			continue;
-		case PR.op.sub_v:
-			PR.globals_float[st.c] = PR.globals_float[st.a] - PR.globals_float[st.b];
-			PR.globals_float[st.c + 1] = PR.globals_float[st.a + 1] - PR.globals_float[st.b + 1];
-			PR.globals_float[st.c + 2] = PR.globals_float[st.a + 2] - PR.globals_float[st.b + 2];
-			continue;
-		case PR.op.mul_f:
-			PR.globals_float[st.c] = PR.globals_float[st.a] * PR.globals_float[st.b];
-			continue;
-		case PR.op.mul_v:
-			PR.globals_float[st.c] = PR.globals_float[st.a] * PR.globals_float[st.b] +
-				PR.globals_float[st.a + 1] * PR.globals_float[st.b + 1] +
-				PR.globals_float[st.a + 2] * PR.globals_float[st.b + 2];
-			continue;
-		case PR.op.mul_fv:
-			PR.globals_float[st.c] = PR.globals_float[st.a] * PR.globals_float[st.b];
-			PR.globals_float[st.c + 1] = PR.globals_float[st.a] * PR.globals_float[st.b + 1];
-			PR.globals_float[st.c + 2] = PR.globals_float[st.a] * PR.globals_float[st.b + 2];
-			continue;
-		case PR.op.mul_vf:
-			PR.globals_float[st.c] = PR.globals_float[st.b] * PR.globals_float[st.a];
-			PR.globals_float[st.c + 1] = PR.globals_float[st.b] * PR.globals_float[st.a + 1];
-			PR.globals_float[st.c + 2] = PR.globals_float[st.b] * PR.globals_float[st.a + 2];
-			continue;
-		case PR.op.div_f:
-			PR.globals_float[st.c] = PR.globals_float[st.a] / PR.globals_float[st.b];
-			continue;
-		case PR.op.bitand:
-			PR.globals_float[st.c] = PR.globals_float[st.a] & PR.globals_float[st.b];
-			continue;
-		case PR.op.bitor:
-			PR.globals_float[st.c] = PR.globals_float[st.a] | PR.globals_float[st.b];
-			continue;
-		case PR.op.ge:
-			PR.globals_float[st.c] = (PR.globals_float[st.a] >= PR.globals_float[st.b]) ? 1.0 : 0.0;
-			continue;
-		case PR.op.le:
-			PR.globals_float[st.c] = (PR.globals_float[st.a] <= PR.globals_float[st.b]) ? 1.0 : 0.0;
-			continue;
-		case PR.op.gt:
-			PR.globals_float[st.c] = (PR.globals_float[st.a] > PR.globals_float[st.b]) ? 1.0 : 0.0;
-			continue;
-		case PR.op.lt:
-			PR.globals_float[st.c] = (PR.globals_float[st.a] < PR.globals_float[st.b]) ? 1.0 : 0.0;
-			continue;
-		case PR.op.and:
-			PR.globals_float[st.c] = ((PR.globals_float[st.a] !== 0.0) && (PR.globals_float[st.b] !== 0.0)) ? 1.0 : 0.0;
-			continue;
-		case PR.op.or:
-			PR.globals_float[st.c] = ((PR.globals_float[st.a] !== 0.0) || (PR.globals_float[st.b] !== 0.0)) ? 1.0 : 0.0;
-			continue;
-		case PR.op.not_f:
-			PR.globals_float[st.c] = (PR.globals_float[st.a] === 0.0) ? 1.0 : 0.0;
-			continue;
-		case PR.op.not_v:
-			PR.globals_float[st.c] = ((PR.globals_float[st.a] === 0.0) &&
-				(PR.globals_float[st.a + 1] === 0.0) &&
-				(PR.globals_float[st.a + 2] === 0.0)) ? 1.0 : 0.0;
-			continue;
-		case PR.op.not_s:
-			if (PR.globals_int[st.a] !== 0)
-				PR.globals_float[st.c] = (PR.strings[PR.globals_int[st.a]] === 0) ? 1.0 : 0.0;
-			else
-				PR.globals_float[st.c] = 1.0;
-			continue;
-		case PR.op.not_fnc:
-		case PR.op.not_ent:
-			PR.globals_float[st.c] = (PR.globals_int[st.a] === 0) ? 1.0 : 0.0;
-			continue;
-		case PR.op.eq_f:
-			PR.globals_float[st.c] = (PR.globals_float[st.a] === PR.globals_float[st.b]) ? 1.0 : 0.0;
-			continue;
-		case PR.op.eq_v:
-			PR.globals_float[st.c] = ((PR.globals_float[st.a] === PR.globals_float[st.b])
-				&& (PR.globals_float[st.a + 1] === PR.globals_float[st.b + 1])
-				&& (PR.globals_float[st.a + 2] === PR.globals_float[st.b + 2])) ? 1.0 : 0.0;
-			continue;
-		case PR.op.eq_s:
-			PR.globals_float[st.c] = (PR.GetString(PR.globals_int[st.a]) === PR.GetString(PR.globals_int[st.b])) ? 1.0 : 0.0;
-			continue;
-		case PR.op.eq_e:
-		case PR.op.eq_fnc:
-			PR.globals_float[st.c] = (PR.globals_int[st.a] === PR.globals_int[st.b]) ? 1.0 : 0.0;
-			continue;
-		case PR.op.ne_f:
-			PR.globals_float[st.c] = (PR.globals_float[st.a] !== PR.globals_float[st.b]) ? 1.0 : 0.0;
-			continue;
-		case PR.op.ne_v:
-			PR.globals_float[st.c] = ((PR.globals_float[st.a] !== PR.globals_float[st.b])
-				|| (PR.globals_float[st.a + 1] !== PR.globals_float[st.b + 1])
-				|| (PR.globals_float[st.a + 2] !== PR.globals_float[st.b + 2])) ? 1.0 : 0.0;
-			continue;
-		case PR.op.ne_s:
-			PR.globals_float[st.c] = (PR.GetString(PR.globals_int[st.a]) !== PR.GetString(PR.globals_int[st.b])) ? 1.0 : 0.0;
-			continue;
-		case PR.op.ne_e:
-		case PR.op.ne_fnc:
-			PR.globals_float[st.c] = (PR.globals_int[st.a] !== PR.globals_int[st.b]) ? 1.0 : 0.0;
-			continue;
-		case PR.op.store_f:
-		case PR.op.store_ent:
-		case PR.op.store_fld:
-		case PR.op.store_s:
-		case PR.op.store_fnc:
-			PR.globals_int[st.b] = PR.globals_int[st.a];
-			continue;
-		case PR.op.store_v:
-			PR.globals_int[st.b] = PR.globals_int[st.a];
-			PR.globals_int[st.b + 1] = PR.globals_int[st.a + 1];
-			PR.globals_int[st.b + 2] = PR.globals_int[st.a + 2];
-			continue;
-		case PR.op.storep_f:
-		case PR.op.storep_ent:
-		case PR.op.storep_fld:
-		case PR.op.storep_s:
-		case PR.op.storep_fnc:
-			ptr = PR.globals_int[st.b];
-			SV.server.edicts[Math.floor(ptr / PR.edict_size)].v_int[((ptr % PR.edict_size) - 96) >> 2] = PR.globals_int[st.a];
-			continue;
-		case PR.op.storep_v:
-			ed = SV.server.edicts[Math.floor(PR.globals_int[st.b] / PR.edict_size)];
-			ptr = ((PR.globals_int[st.b] % PR.edict_size) - 96) >> 2;
-			ed.v_int[ptr] = PR.globals_int[st.a];
-			ed.v_int[ptr + 1] = PR.globals_int[st.a + 1];
-			ed.v_int[ptr + 2] = PR.globals_int[st.a + 2];
-			continue;
-		case PR.op.address:
-			ed = PR.globals_int[st.a];
-			if ((ed === 0) && (SV.server.loading !== true))
-				PR.RunError('assignment to world entity');
-			PR.globals_int[st.c] = ed * PR.edict_size + 96 + (PR.globals_int[st.b] << 2);
-			continue;
-		case PR.op.load_f:
-		case PR.op.load_fld:
-		case PR.op.load_ent:
-		case PR.op.load_s:
-		case PR.op.load_fnc:
-			PR.globals_int[st.c] = SV.server.edicts[PR.globals_int[st.a]].v_int[PR.globals_int[st.b]];
-			continue;
-		case PR.op.load_v:
-			ed = SV.server.edicts[PR.globals_int[st.a]];
-			ptr = PR.globals_int[st.b];
-			PR.globals_int[st.c] = ed.v_int[ptr];
-			PR.globals_int[st.c + 1] = ed.v_int[ptr + 1];
-			PR.globals_int[st.c + 2] = ed.v_int[ptr + 2];
-			continue;
-		case PR.op.jz:
-			if (PR.globals_int[st.a] === 0)
-				s += st.b - 1;
-			continue;
-		case PR.op.jnz:
-			if (PR.globals_int[st.a] !== 0)
-				s += st.b - 1;
-			continue;
-		case PR.op.jump:
-			s += st.a - 1;
-			continue;
-		case PR.op.call0:
-		case PR.op.call1:
-		case PR.op.call2:
-		case PR.op.call3:
-		case PR.op.call4:
-		case PR.op.call5:
-		case PR.op.call6:
-		case PR.op.call7:
-		case PR.op.call8:
-			PR.argc = st.op - PR.op.call0;
-			if (PR.globals_int[st.a] === 0)
-				PR.RunError('NULL function');
-			newf = PR.functions[PR.globals_int[st.a]];
-			if (newf.first_statement < 0)
-			{
-				ptr = -newf.first_statement;
-				if (ptr >= PF.builtin.length)
-					PR.RunError('Bad builtin call number');
-				PF.builtin[ptr]();
+		switch (st.op) {
+			case PR.op.add_f:
+				PR.globals_float[st.c] = PR.globals_float[st.a] + PR.globals_float[st.b];
 				continue;
-			}
-			s = PR.EnterFunction(newf);
-			continue;
-		case PR.op.done:
-		case PR.op.ret:
-			PR.globals_int[1] = PR.globals_int[st.a];
-			PR.globals_int[2] = PR.globals_int[st.a + 1];
-			PR.globals_int[3] = PR.globals_int[st.a + 2];
-			s = PR.LeaveFunction();
-			if (PR.depth === exitdepth)
-				return;
-			continue;
-		case PR.op.state:
-			ed = SV.server.edicts[PR.globals_int[PR.globalvars.self]];
-			ed.v_float[PR.entvars.nextthink] = PR.globals_float[PR.globalvars.time] + 0.1;
-			ed.v_float[PR.entvars.frame] = PR.globals_float[st.a];
-			ed.v_int[PR.entvars.think] = PR.globals_int[st.b];
-			continue;
+			case PR.op.add_v:
+				PR.globals_float[st.c] = PR.globals_float[st.a] + PR.globals_float[st.b];
+				PR.globals_float[st.c + 1] = PR.globals_float[st.a + 1] + PR.globals_float[st.b + 1];
+				PR.globals_float[st.c + 2] = PR.globals_float[st.a + 2] + PR.globals_float[st.b + 2];
+				continue;
+			case PR.op.sub_f:
+				PR.globals_float[st.c] = PR.globals_float[st.a] - PR.globals_float[st.b];
+				continue;
+			case PR.op.sub_v:
+				PR.globals_float[st.c] = PR.globals_float[st.a] - PR.globals_float[st.b];
+				PR.globals_float[st.c + 1] = PR.globals_float[st.a + 1] - PR.globals_float[st.b + 1];
+				PR.globals_float[st.c + 2] = PR.globals_float[st.a + 2] - PR.globals_float[st.b + 2];
+				continue;
+			case PR.op.mul_f:
+				PR.globals_float[st.c] = PR.globals_float[st.a] * PR.globals_float[st.b];
+				continue;
+			case PR.op.mul_v:
+				PR.globals_float[st.c] = PR.globals_float[st.a] * PR.globals_float[st.b] +
+					PR.globals_float[st.a + 1] * PR.globals_float[st.b + 1] +
+					PR.globals_float[st.a + 2] * PR.globals_float[st.b + 2];
+				continue;
+			case PR.op.mul_fv:
+				PR.globals_float[st.c] = PR.globals_float[st.a] * PR.globals_float[st.b];
+				PR.globals_float[st.c + 1] = PR.globals_float[st.a] * PR.globals_float[st.b + 1];
+				PR.globals_float[st.c + 2] = PR.globals_float[st.a] * PR.globals_float[st.b + 2];
+				continue;
+			case PR.op.mul_vf:
+				PR.globals_float[st.c] = PR.globals_float[st.b] * PR.globals_float[st.a];
+				PR.globals_float[st.c + 1] = PR.globals_float[st.b] * PR.globals_float[st.a + 1];
+				PR.globals_float[st.c + 2] = PR.globals_float[st.b] * PR.globals_float[st.a + 2];
+				continue;
+			case PR.op.div_f:
+				PR.globals_float[st.c] = PR.globals_float[st.a] / PR.globals_float[st.b];
+				continue;
+			case PR.op.bitand:
+				PR.globals_float[st.c] = PR.globals_float[st.a] & PR.globals_float[st.b];
+				continue;
+			case PR.op.bitor:
+				PR.globals_float[st.c] = PR.globals_float[st.a] | PR.globals_float[st.b];
+				continue;
+			case PR.op.ge:
+				PR.globals_float[st.c] = (PR.globals_float[st.a] >= PR.globals_float[st.b]) ? 1.0 : 0.0;
+				continue;
+			case PR.op.le:
+				PR.globals_float[st.c] = (PR.globals_float[st.a] <= PR.globals_float[st.b]) ? 1.0 : 0.0;
+				continue;
+			case PR.op.gt:
+				PR.globals_float[st.c] = (PR.globals_float[st.a] > PR.globals_float[st.b]) ? 1.0 : 0.0;
+				continue;
+			case PR.op.lt:
+				PR.globals_float[st.c] = (PR.globals_float[st.a] < PR.globals_float[st.b]) ? 1.0 : 0.0;
+				continue;
+			case PR.op.and:
+				PR.globals_float[st.c] = ((PR.globals_float[st.a] !== 0.0) && (PR.globals_float[st.b] !== 0.0)) ? 1.0 : 0.0;
+				continue;
+			case PR.op.or:
+				PR.globals_float[st.c] = ((PR.globals_float[st.a] !== 0.0) || (PR.globals_float[st.b] !== 0.0)) ? 1.0 : 0.0;
+				continue;
+			case PR.op.not_f:
+				PR.globals_float[st.c] = (PR.globals_float[st.a] === 0.0) ? 1.0 : 0.0;
+				continue;
+			case PR.op.not_v:
+				PR.globals_float[st.c] = ((PR.globals_float[st.a] === 0.0) &&
+					(PR.globals_float[st.a + 1] === 0.0) &&
+					(PR.globals_float[st.a + 2] === 0.0)) ? 1.0 : 0.0;
+				continue;
+			case PR.op.not_s:
+				if (PR.globals_int[st.a] !== 0)
+					PR.globals_float[st.c] = (PR.strings[PR.globals_int[st.a]] === 0) ? 1.0 : 0.0;
+				else
+					PR.globals_float[st.c] = 1.0;
+				continue;
+			case PR.op.not_fnc:
+			case PR.op.not_ent:
+				PR.globals_float[st.c] = (PR.globals_int[st.a] === 0) ? 1.0 : 0.0;
+				continue;
+			case PR.op.eq_f:
+				PR.globals_float[st.c] = (PR.globals_float[st.a] === PR.globals_float[st.b]) ? 1.0 : 0.0;
+				continue;
+			case PR.op.eq_v:
+				PR.globals_float[st.c] = ((PR.globals_float[st.a] === PR.globals_float[st.b])
+					&& (PR.globals_float[st.a + 1] === PR.globals_float[st.b + 1])
+					&& (PR.globals_float[st.a + 2] === PR.globals_float[st.b + 2])) ? 1.0 : 0.0;
+				continue;
+			case PR.op.eq_s:
+				PR.globals_float[st.c] = (PR.GetString(PR.globals_int[st.a]) === PR.GetString(PR.globals_int[st.b])) ? 1.0 : 0.0;
+				continue;
+			case PR.op.eq_e:
+			case PR.op.eq_fnc:
+				PR.globals_float[st.c] = (PR.globals_int[st.a] === PR.globals_int[st.b]) ? 1.0 : 0.0;
+				continue;
+			case PR.op.ne_f:
+				PR.globals_float[st.c] = (PR.globals_float[st.a] !== PR.globals_float[st.b]) ? 1.0 : 0.0;
+				continue;
+			case PR.op.ne_v:
+				PR.globals_float[st.c] = ((PR.globals_float[st.a] !== PR.globals_float[st.b])
+					|| (PR.globals_float[st.a + 1] !== PR.globals_float[st.b + 1])
+					|| (PR.globals_float[st.a + 2] !== PR.globals_float[st.b + 2])) ? 1.0 : 0.0;
+				continue;
+			case PR.op.ne_s:
+				PR.globals_float[st.c] = (PR.GetString(PR.globals_int[st.a]) !== PR.GetString(PR.globals_int[st.b])) ? 1.0 : 0.0;
+				continue;
+			case PR.op.ne_e:
+			case PR.op.ne_fnc:
+				PR.globals_float[st.c] = (PR.globals_int[st.a] !== PR.globals_int[st.b]) ? 1.0 : 0.0;
+				continue;
+			case PR.op.store_f:
+			case PR.op.store_ent:
+			case PR.op.store_fld:
+			case PR.op.store_s:
+			case PR.op.store_fnc:
+				PR.globals_int[st.b] = PR.globals_int[st.a];
+				continue;
+			case PR.op.store_v:
+				PR.globals_int[st.b] = PR.globals_int[st.a];
+				PR.globals_int[st.b + 1] = PR.globals_int[st.a + 1];
+				PR.globals_int[st.b + 2] = PR.globals_int[st.a + 2];
+				continue;
+			case PR.op.storep_f:
+			case PR.op.storep_ent:
+			case PR.op.storep_fld:
+			case PR.op.storep_s:
+			case PR.op.storep_fnc:
+				ptr = PR.globals_int[st.b];
+				SV.server.edicts[Math.floor(ptr / PR.edict_size)].v_int[((ptr % PR.edict_size) - 96) >> 2] = PR.globals_int[st.a];
+				continue;
+			case PR.op.storep_v:
+				ed = SV.server.edicts[Math.floor(PR.globals_int[st.b] / PR.edict_size)];
+				ptr = ((PR.globals_int[st.b] % PR.edict_size) - 96) >> 2;
+				ed.v_int[ptr] = PR.globals_int[st.a];
+				ed.v_int[ptr + 1] = PR.globals_int[st.a + 1];
+				ed.v_int[ptr + 2] = PR.globals_int[st.a + 2];
+				continue;
+			case PR.op.address:
+				ed = PR.globals_int[st.a];
+				if ((ed === 0) && (SV.server.loading !== true))
+					PR.RunError('assignment to world entity');
+				PR.globals_int[st.c] = ed * PR.edict_size + 96 + (PR.globals_int[st.b] << 2);
+				continue;
+			case PR.op.load_f:
+			case PR.op.load_fld:
+			case PR.op.load_ent:
+			case PR.op.load_s:
+			case PR.op.load_fnc:
+				PR.globals_int[st.c] = SV.server.edicts[PR.globals_int[st.a]].v_int[PR.globals_int[st.b]];
+				continue;
+			case PR.op.load_v:
+				ed = SV.server.edicts[PR.globals_int[st.a]];
+				ptr = PR.globals_int[st.b];
+				PR.globals_int[st.c] = ed.v_int[ptr];
+				PR.globals_int[st.c + 1] = ed.v_int[ptr + 1];
+				PR.globals_int[st.c + 2] = ed.v_int[ptr + 2];
+				continue;
+			case PR.op.jz:
+				if (PR.globals_int[st.a] === 0)
+					s += st.b - 1;
+				continue;
+			case PR.op.jnz:
+				if (PR.globals_int[st.a] !== 0)
+					s += st.b - 1;
+				continue;
+			case PR.op.jump:
+				s += st.a - 1;
+				continue;
+			case PR.op.call0:
+			case PR.op.call1:
+			case PR.op.call2:
+			case PR.op.call3:
+			case PR.op.call4:
+			case PR.op.call5:
+			case PR.op.call6:
+			case PR.op.call7:
+			case PR.op.call8:
+				PR.argc = st.op - PR.op.call0;
+				if (PR.globals_int[st.a] === 0)
+					PR.RunError('NULL function');
+				newf = PR.functions[PR.globals_int[st.a]];
+				if (newf.first_statement < 0) {
+					ptr = -newf.first_statement;
+					if (ptr >= PF.builtin.length)
+						PR.RunError('Bad builtin call number');
+					PF.builtin[ptr]();
+					continue;
+				}
+				s = PR.EnterFunction(newf);
+				continue;
+			case PR.op.done:
+			case PR.op.ret:
+				PR.globals_int[1] = PR.globals_int[st.a];
+				PR.globals_int[2] = PR.globals_int[st.a + 1];
+				PR.globals_int[3] = PR.globals_int[st.a + 2];
+				s = PR.LeaveFunction();
+				if (PR.depth === exitdepth)
+					return;
+				continue;
+			case PR.op.state:
+				ed = SV.server.edicts[PR.globals_int[PR.globalvars.self]];
+				ed.v_float[PR.entvars.nextthink] = PR.globals_float[PR.globalvars.time] + 0.1;
+				ed.v_float[PR.entvars.frame] = PR.globals_float[st.a];
+				ed.v_int[PR.entvars.think] = PR.globals_int[st.b];
+				continue;
 		}
 		PR.RunError('Bad opcode ' + st.op);
 	}
 };
 
-PR.GetString = function(num)
-{
+PR.GetString = function(num) {
 	var string = [], c;
-	for (; num < PR.strings.length; ++num)
-	{
+	for (; num < PR.strings.length; ++num) {
 		if (PR.strings[num] === 0)
 			break;
 		string[string.length] = String.fromCharCode(PR.strings[num]);
@@ -844,12 +806,10 @@ PR.GetString = function(num)
 	return string.join('');
 };
 
-PR.NewString = function(s, length)
-{
+PR.NewString = function(s, length) {
 	var ofs = PR.strings.length;
 	var i;
-	if (s.length >= length)
-	{
+	if (s.length >= length) {
 		for (i = 0; i < (length - 1); ++i)
 			PR.strings[PR.strings.length] = s.charCodeAt(i);
 		PR.strings[PR.strings.length] = 0;
@@ -863,8 +823,7 @@ PR.NewString = function(s, length)
 	return ofs;
 };
 
-PR.TempString = function(string)
-{
+PR.TempString = function(string) {
 	var i;
 	if (string.length > 127)
 		string = string.substring(0, 127);
