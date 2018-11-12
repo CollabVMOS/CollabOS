@@ -21,8 +21,9 @@ MSG.WriteFloat = function(sb, f) {
 };
 
 MSG.WriteString = function(sb, s) {
-	if (s != null)
+	if (s != null) {
 		SZ.Write(sb, new Uint8Array(Q.strmem(s)), s.length);
+	}
 	MSG.WriteChar(sb, 0)
 };
 
@@ -36,7 +37,7 @@ MSG.WriteAngle = function(sb, f) {
 
 MSG.BeginReading = function() {
 	MSG.readcount = 0;
-	MSG.badread = false;
+	MSG.badread   = false;
 };
 
 MSG.ReadChar = function() {
@@ -93,8 +94,9 @@ MSG.ReadString = function() {
 	var string = [], l, c;
 	for (l = 0; l < 2048; ++l) {
 		c = MSG.ReadByte();
-		if (c <= 0)
+		if (c <= 0) {
 			break;
+		}
 		string[l] = String.fromCharCode(c);
 	}
 	return string.join('');

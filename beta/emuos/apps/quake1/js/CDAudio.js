@@ -29,8 +29,8 @@ CDAudio.Play = function(track, looping) {
 
 	CDAudio.Stop();
 	CDAudio.playTrack = track;
-	CDAudio.cd = new Audio(CDAudio.known[track]);
-	CDAudio.cd.loop = looping;
+	CDAudio.cd        = new Audio(CDAudio.known[track]);
+	CDAudio.cd.loop   = looping;
 	CDAudio.cd.volume = CDAudio.cdvolume;
 	CDAudio.cd.play();
 };
@@ -45,7 +45,7 @@ CDAudio.Stop = function() {
 	}
 
 	CDAudio.playTrack = null;
-	CDAudio.cd = null;
+	CDAudio.cd        = null;
 };
 
 CDAudio.Pause = function() {

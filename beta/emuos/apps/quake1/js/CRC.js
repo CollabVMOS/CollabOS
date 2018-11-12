@@ -39,7 +39,8 @@ CRC.table =
 CRC.Block = function(start) {
 	var crcvalue = 0xffff;
 	var i;
-	for (i = 0; i < start.length; ++i)
+	for (i = 0; i < start.length; ++i) {
 		crcvalue = ((crcvalue << 8) & 0xffff) ^ CRC.table[(crcvalue >> 8) ^ start[i]];
+	}
 	return crcvalue;
 };

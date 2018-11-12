@@ -5,8 +5,9 @@ Draw.CharToConback = function(num, dest) {
 	var drawline, x;
 	for (drawline = 0; drawline < 8; ++drawline) {
 		for (x = 0; x < 8; ++x) {
-			if (Draw.chars[source + x] !== 0)
+			if (Draw.chars[source + x] !== 0) {
 				Draw.conback.data[dest + x] = 0x60 + Draw.chars[source + x];
+			}
 		}
 		source += 128;
 		dest += 320;
@@ -18,11 +19,12 @@ Draw.Init = function() {
 
 	Draw.chars = new Uint8Array(W.GetLumpName('CONCHARS'));
 
-	var trans = new ArrayBuffer(65536);
+	var trans   = new ArrayBuffer(65536);
 	var trans32 = new Uint32Array(trans);
 	for (i = 0; i < 16384; ++i) {
-		if (Draw.chars[i] !== 0)
+		if (Draw.chars[i] !== 0) {
 			trans32[i] = COM.LittleLong(VID.d_8to24table[Draw.chars[i]] + 0xff000000);
+		}
 	}
 	Draw.char_texture = gl.createTexture();
 	GL.Bind(0, Draw.char_texture);
@@ -31,19 +33,21 @@ Draw.Init = function() {
 	gl.texParameterf(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
 	Draw.conback = {};
-	var cb = COM.LoadFile('gfx/conback.lmp');
-	if (cb == null)
+	var cb       = COM.LoadFile('gfx/conback.lmp');
+	if (cb == null) {
 		Sys.Error('Couldn\'t load gfx/conback.lmp');
-	Draw.conback.width = 320;
+	}
+	Draw.conback.width  = 320;
 	Draw.conback.height = 200;
-	Draw.conback.data = new Uint8Array(cb, 8, 64000);
-	var ver = location.host.indexOf('dekadence.ro') !== -1 ? '1.09' : '(WebQuake build ' + Def.webquake_version + ') 1.09';
-	for (i = 0; i < ver.length; ++i)
+	Draw.conback.data   = new Uint8Array(cb, 8, 64000);
+	var ver             = location.host.indexOf('dekadence.ro') !== -1 ? '1.09' : '(WebQuake build ' + Def.webquake_version + ') 1.09';
+	for (i = 0; i < ver.length; ++i) {
 		Draw.CharToConback(ver.charCodeAt(i), 59829 - ((ver.length - i) << 3), 186);
+	}
 	Draw.conback.texnum = GL.LoadPicTexture(Draw.conback);
 
-	Draw.loading = Draw.CachePic('loading');
-	Draw.loadingElem = document.getElementById('loading');
+	Draw.loading         = Draw.CachePic('loading');
+	Draw.loadingElem     = document.getElementById('loading');
 	Draw.loadingElem.src = Draw.PicToDataURL(Draw.loading);
 
 	document.body.style.backgroundImage = 'url("' + Draw.PicToDataURL(Draw.PicFromWad('BACKTILE')) + '")';
@@ -96,26 +100,27 @@ Draw.StringWhite = function(x, y, str) {
 };
 
 Draw.PicFromWad = function(name) {
-	var buf = W.GetLumpName(name);
-	var p = {};
+	var buf  = W.GetLumpName(name);
+	var p    = {};
 	var view = new DataView(buf, 0, 8);
-	p.width = view.getUint32(0, true);
+	p.width  = view.getUint32(0, true);
 	p.height = view.getUint32(4, true);
-	p.data = new Uint8Array(buf, 8, p.width * p.height);
+	p.data   = new Uint8Array(buf, 8, p.width * p.height);
 	p.texnum = GL.LoadPicTexture(p);
 	return p;
 };
 
 Draw.CachePic = function(path) {
-	path = 'gfx/' + path + '.lmp';
+	path    = 'gfx/' + path + '.lmp';
 	var buf = COM.LoadFile(path);
-	if (buf == null)
+	if (buf == null) {
 		Sys.Error('Draw.CachePic: failed to load ' + path);
-	var dat = {};
-	var view = new DataView(buf, 0, 8);
-	dat.width = view.getUint32(0, true);
+	}
+	var dat    = {};
+	var view   = new DataView(buf, 0, 8);
+	dat.width  = view.getUint32(0, true);
 	dat.height = view.getUint32(4, true);
-	dat.data = new Uint8Array(buf, 8, dat.width * dat.height);
+	dat.data   = new Uint8Array(buf, 8, dat.width * dat.height);
 	dat.texnum = GL.LoadPicTexture(dat);
 	return dat;
 };
@@ -135,7 +140,7 @@ Draw.PicTranslate = function(x, y, pic, top, bottom) {
 	// noinspection JSUnresolvedVariable
 	GL.Bind(program.tTrans, pic.translate);
 
-	var p = VID.d_8to24table[top];
+	var p     = VID.d_8to24table[top];
 	var scale = 1.0 / 191.25;
 	// noinspection JSUnresolvedVariable
 	gl.uniform3f(program.uTop, (p & 0xff) * scale, ((p >> 8) & 0xff) * scale, (p >> 16) * scale);
@@ -167,29 +172,32 @@ Draw.FadeScreen = function() {
 };
 
 Draw.BeginDisc = function() {
-	if (Draw.loadingElem == null)
+	if (Draw.loadingElem == null) {
 		return;
-	Draw.loadingElem.style.left = ((VID.width - Draw.loading.width) >> 1) + 'px';
-	Draw.loadingElem.style.top = ((VID.height - Draw.loading.height) >> 1) + 'px';
+	}
+	Draw.loadingElem.style.left    = ((VID.width - Draw.loading.width) >> 1) + 'px';
+	Draw.loadingElem.style.top     = ((VID.height - Draw.loading.height) >> 1) + 'px';
 	Draw.loadingElem.style.display = 'inline-block';
 };
 
 Draw.EndDisc = function() {
-	if (Draw.loadingElem != null)
+	if (Draw.loadingElem != null) {
 		Draw.loadingElem.style.display = 'none';
+	}
 };
 
 Draw.PicToDataURL = function(pic) {
-	var canvas = document.createElement('canvas');
-	canvas.width = pic.width;
+	var canvas    = document.createElement('canvas');
+	canvas.width  = pic.width;
 	canvas.height = pic.height;
-	var ctx = canvas.getContext('2d');
-	var data = ctx.createImageData(pic.width, pic.height);
-	var trans = new ArrayBuffer(data.data.length);
-	var trans32 = new Uint32Array(trans);
+	var ctx       = canvas.getContext('2d');
+	var data      = ctx.createImageData(pic.width, pic.height);
+	var trans     = new ArrayBuffer(data.data.length);
+	var trans32   = new Uint32Array(trans);
 	var i;
-	for (i = 0; i < pic.data.length; ++i)
+	for (i = 0; i < pic.data.length; ++i) {
 		trans32[i] = COM.LittleLong(VID.d_8to24table[pic.data[i]] + 0xff000000);
+	}
 	data.data.set(new Uint8Array(trans));
 	ctx.putImageData(data, 0, 0);
 	return canvas.toDataURL();

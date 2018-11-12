@@ -1,13 +1,14 @@
 GL = {};
 
-GL.textures = [];
+GL.textures        = [];
 GL.currenttextures = [];
-GL.programs = [];
+GL.programs        = [];
 
 GL.Bind = function(target, texnum, flushStream) {
 	if (GL.currenttextures[target] !== texnum) {
-		if (flushStream === true)
+		if (flushStream === true) {
 			GL.StreamFlush();
+		}
 		if (GL.activetexture !== target) {
 			GL.activetexture = target;
 			gl.activeTexture(gl.TEXTURE0 + target);
@@ -31,8 +32,9 @@ GL.TextureMode_f = function() {
 	}
 	var name = Cmd.argv[1].toUpperCase();
 	for (i = 0; i < GL.modes.length; ++i) {
-		if (GL.modes[i][0] === name)
+		if (GL.modes[i][0] === name) {
 			break;
+		}
 	}
 	if (i === GL.modes.length) {
 		Con.Print('bad filter name\n');
@@ -61,8 +63,9 @@ GL.Set2D = function() {
 	for (i = 0; i < GL.programs.length; ++i) {
 		program = GL.programs[i];
 		// noinspection JSUnresolvedVariable
-		if (program.uOrtho == null)
+		if (program.uOrtho == null) {
 			continue;
+		}
 		gl.useProgram(program.program);
 		// noinspection JSUnresolvedVariable
 		gl.uniformMatrix4fv(program.uOrtho, false, GL.ortho);
@@ -72,15 +75,16 @@ GL.Set2D = function() {
 };
 
 GL.ResampleTexture = function(data, inwidth, inheight, outwidth, outheight) {
-	var outdata = new ArrayBuffer(outwidth * outheight);
-	var out = new Uint8Array(outdata);
-	var xstep = inwidth / outwidth, ystep = inheight / outheight;
+	var outdata   = new ArrayBuffer(outwidth * outheight);
+	var out       = new Uint8Array(outdata);
+	var xstep     = inwidth / outwidth, ystep = inheight / outheight;
 	var src, dest = 0;
 	var i, j;
 	for (i = 0; i < outheight; ++i) {
 		src = Math.floor(i * ystep) * inwidth;
-		for (j = 0; j < outwidth; ++j)
+		for (j = 0; j < outwidth; ++j) {
 			out[dest + j] = data[src + Math.floor(j * xstep)];
+		}
 		dest += outwidth;
 	}
 	return out;
@@ -104,19 +108,23 @@ GL.Upload = function(data, width, height) {
 		scaled_height |= (scaled_height >> 16);
 		++scaled_height;
 	}
-	if (scaled_width > GL.maxtexturesize)
+	if (scaled_width > GL.maxtexturesize) {
 		scaled_width = GL.maxtexturesize;
-	if (scaled_height > GL.maxtexturesize)
+	}
+	if (scaled_height > GL.maxtexturesize) {
 		scaled_height = GL.maxtexturesize;
-	if ((scaled_width !== width) || (scaled_height !== height))
+	}
+	if ((scaled_width !== width) || (scaled_height !== height)) {
 		data = GL.ResampleTexture(data, width, height, scaled_width, scaled_height);
-	var trans = new ArrayBuffer((scaled_width * scaled_height) << 2);
+	}
+	var trans   = new ArrayBuffer((scaled_width * scaled_height) << 2);
 	var trans32 = new Uint32Array(trans);
 	var i;
 	for (i = scaled_width * scaled_height - 1; i >= 0; --i) {
 		trans32[i] = COM.LittleLong(VID.d_8to24table[data[i]] + 0xff000000);
-		if (data[i] >= 224)
+		if (data[i] >= 224) {
 			trans32[i] &= 0xffffff;
+		}
 	}
 	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, scaled_width, scaled_height, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(trans));
 	gl.generateMipmap(gl.TEXTURE_2D);
@@ -130,8 +138,9 @@ GL.LoadTexture = function(identifier, width, height, data) {
 		for (i = 0; i < GL.textures.length; ++i) {
 			glt = GL.textures[i];
 			if (glt.identifier === identifier) {
-				if ((width !== glt.width) || (height !== glt.height))
+				if ((width !== glt.width) || (height !== glt.height)) {
 					Sys.Error('GL.LoadTexture: cache mismatch');
+				}
 				return glt;
 			}
 		}
@@ -154,18 +163,23 @@ GL.LoadTexture = function(identifier, width, height, data) {
 		scaled_height |= (scaled_height >> 16);
 		++scaled_height;
 	}
-	if (scaled_width > GL.maxtexturesize)
+	if (scaled_width > GL.maxtexturesize) {
 		scaled_width = GL.maxtexturesize;
-	if (scaled_height > GL.maxtexturesize)
+	}
+	if (scaled_height > GL.maxtexturesize) {
 		scaled_height = GL.maxtexturesize;
+	}
 	scaled_width >>= GL.picmip.value;
-	if (scaled_width === 0)
+	if (scaled_width === 0) {
 		scaled_width = 1;
+	}
 	scaled_height >>= GL.picmip.value;
-	if (scaled_height === 0)
+	if (scaled_height === 0) {
 		scaled_height = 1;
-	if ((scaled_width !== width) || (scaled_height !== height))
+	}
+	if ((scaled_width !== width) || (scaled_height !== height)) {
 		data = GL.ResampleTexture(data, width, height, scaled_width, scaled_height);
+	}
 
 	glt = {texnum: gl.createTexture(), identifier: identifier, width: width, height: height};
 	GL.Bind(0, glt.texnum);
@@ -192,21 +206,25 @@ GL.LoadPicTexture = function(pic) {
 		scaled_height |= (scaled_height >> 16);
 		++scaled_height;
 	}
-	if (scaled_width > GL.maxtexturesize)
+	if (scaled_width > GL.maxtexturesize) {
 		scaled_width = GL.maxtexturesize;
-	if (scaled_height > GL.maxtexturesize)
+	}
+	if (scaled_height > GL.maxtexturesize) {
 		scaled_height = GL.maxtexturesize;
-	if ((scaled_width !== pic.width) || (scaled_height !== pic.height))
+	}
+	if ((scaled_width !== pic.width) || (scaled_height !== pic.height)) {
 		data = GL.ResampleTexture(data, pic.width, pic.height, scaled_width, scaled_height);
+	}
 
 	var texnum = gl.createTexture();
 	GL.Bind(0, texnum);
-	var trans = new ArrayBuffer((scaled_width * scaled_height) << 2);
+	var trans   = new ArrayBuffer((scaled_width * scaled_height) << 2);
 	var trans32 = new Uint32Array(trans);
 	var i;
 	for (i = scaled_width * scaled_height - 1; i >= 0; --i) {
-		if (data[i] !== 255)
+		if (data[i] !== 255) {
 			trans32[i] = COM.LittleLong(VID.d_8to24table[data[i]] + 0xff000000);
+		}
 	}
 	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, scaled_width, scaled_height, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(trans));
 	gl.texParameterf(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
@@ -215,59 +233,64 @@ GL.LoadPicTexture = function(pic) {
 };
 
 GL.CreateProgram = function(identifier, uniforms, attribs, textures) {
-	var p = gl.createProgram();
+	var p       = gl.createProgram();
 	var program =
-		{
-			identifier: identifier,
-			program: p,
-			attribs: []
-		};
+			{
+				identifier: identifier,
+				program:    p,
+				attribs:    []
+			};
 
 	var vsh = gl.createShader(gl.VERTEX_SHADER);
 	gl.shaderSource(vsh, document.getElementById('vsh' + identifier).text);
 	gl.compileShader(vsh);
-	if (gl.getShaderParameter(vsh, gl.COMPILE_STATUS) !== true)
+	if (gl.getShaderParameter(vsh, gl.COMPILE_STATUS) !== true) {
 		Sys.Error('Error compiling shader: ' + gl.getShaderInfoLog(vsh));
+	}
 
 	var fsh = gl.createShader(gl.FRAGMENT_SHADER);
 	gl.shaderSource(fsh, document.getElementById('fsh' + identifier).text);
 	gl.compileShader(fsh);
-	if (gl.getShaderParameter(fsh, gl.COMPILE_STATUS) !== true)
+	if (gl.getShaderParameter(fsh, gl.COMPILE_STATUS) !== true) {
 		Sys.Error('Error compiling shader: ' + gl.getShaderInfoLog(fsh));
+	}
 
 	gl.attachShader(p, vsh);
 	gl.attachShader(p, fsh);
 
 	gl.linkProgram(p);
-	if (gl.getProgramParameter(p, gl.LINK_STATUS) !== true)
+	if (gl.getProgramParameter(p, gl.LINK_STATUS) !== true) {
 		Sys.Error('Error linking program: ' + gl.getProgramInfoLog(p));
+	}
 
 	gl.useProgram(p);
 
-	for (var i = 0; i < uniforms.length; ++i)
+	for (var i = 0; i < uniforms.length; ++i) {
 		program[uniforms[i]] = gl.getUniformLocation(p, uniforms[i]);
+	}
 
 	program.vertexSize = 0;
 	program.attribBits = 0;
 	for (var i = 0; i < attribs.length; ++i) {
 		var attribParameters = attribs[i];
-		var attrib =
-			{
-				name: attribParameters[0],
-				location: gl.getAttribLocation(p, attribParameters[0]),
-				type: attribParameters[1],
-				components: attribParameters[2],
-				normalized: (attribParameters[3] === true),
-				offset: program.vertexSize
-			};
-		program.attribs[i] = attrib;
+		var attrib           =
+				{
+					name:       attribParameters[0],
+					location:   gl.getAttribLocation(p, attribParameters[0]),
+					type:       attribParameters[1],
+					components: attribParameters[2],
+					normalized: (attribParameters[3] === true),
+					offset:     program.vertexSize
+				};
+		program.attribs[i]   = attrib;
 		program[attrib.name] = attrib;
-		if (attrib.type === gl.FLOAT)
+		if (attrib.type === gl.FLOAT) {
 			program.vertexSize += attrib.components * 4;
-		else if (attrib.type === gl.BYTE || attrib.type === gl.UNSIGNED_BYTE)
+		} else if (attrib.type === gl.BYTE || attrib.type === gl.UNSIGNED_BYTE) {
 			program.vertexSize += 4;
-		else
+		} else {
 			Sys.Error('Unknown vertex attribute type');
+		}
 		program.attribBits |= 1 << attrib.location;
 	}
 
@@ -283,10 +306,12 @@ GL.CreateProgram = function(identifier, uniforms, attribs, textures) {
 GL.UseProgram = function(identifier, flushStream) {
 	var currentProgram = GL.currentProgram;
 	if (currentProgram != null) {
-		if (currentProgram.identifier === identifier)
+		if (currentProgram.identifier === identifier) {
 			return currentProgram;
-		if (flushStream === true)
+		}
+		if (flushStream === true) {
 			GL.StreamFlush();
+		}
 	}
 
 	var program = null;
@@ -296,8 +321,9 @@ GL.UseProgram = function(identifier, flushStream) {
 			break;
 		}
 	}
-	if (program == null)
+	if (program == null) {
 		return null;
+	}
 
 	var enableAttribs = program.attribBits, disableAttribs = 0;
 	if (currentProgram != null) {
@@ -308,10 +334,11 @@ GL.UseProgram = function(identifier, flushStream) {
 	gl.useProgram(program.program);
 	for (var attrib = 0; enableAttribs !== 0 || disableAttribs !== 0; ++attrib) {
 		var mask = 1 << attrib;
-		if ((enableAttribs & mask) !== 0)
+		if ((enableAttribs & mask) !== 0) {
 			gl.enableVertexAttribArray(attrib);
-		else if ((disableAttribs & mask) !== 0)
+		} else if ((disableAttribs & mask) !== 0) {
 			gl.disableVertexAttribArray(attrib);
+		}
 		enableAttribs &= ~mask;
 		disableAttribs &= ~mask;
 	}
@@ -320,12 +347,14 @@ GL.UseProgram = function(identifier, flushStream) {
 };
 
 GL.UnbindProgram = function() {
-	if (GL.currentProgram == null)
+	if (GL.currentProgram == null) {
 		return;
+	}
 	GL.StreamFlush();
 	var i;
-	for (i = 0; i < GL.currentProgram.attribs.length; ++i)
+	for (i = 0; i < GL.currentProgram.attribs.length; ++i) {
 		gl.disableVertexAttribArray(GL.currentProgram.attribs[i].location);
+	}
 	GL.currentProgram = null;
 };
 
@@ -349,8 +378,9 @@ GL.RotationMatrix = function(pitch, yaw, roll) {
 };
 
 GL.StreamFlush = function() {
-	if (GL.streamArrayVertexCount === 0)
+	if (GL.streamArrayVertexCount === 0) {
 		return;
+	}
 	var program = GL.currentProgram;
 	if (program != null) {
 		gl.bindBuffer(gl.ARRAY_BUFFER, GL.streamBuffer);
@@ -366,14 +396,15 @@ GL.StreamFlush = function() {
 		gl.drawArrays(gl.TRIANGLES, 0, GL.streamArrayVertexCount);
 		GL.streamBufferPosition += GL.streamArrayPosition;
 	}
-	GL.streamArrayPosition = 0;
+	GL.streamArrayPosition    = 0;
 	GL.streamArrayVertexCount = 0;
 };
 
 GL.StreamGetSpace = function(vertexCount) {
 	var program = GL.currentProgram;
-	if (program == null)
+	if (program == null) {
 		return;
+	}
 	var length = vertexCount * program.vertexSize;
 	if ((GL.streamBufferPosition + GL.streamArrayPosition + length) > GL.streamArray.byteLength) {
 		GL.StreamFlush();
@@ -388,7 +419,7 @@ GL.StreamWriteFloat = function(x) {
 };
 
 GL.StreamWriteFloat2 = function(x, y) {
-	var view = GL.streamArrayView;
+	var view     = GL.streamArrayView;
 	var position = GL.streamArrayPosition;
 	view.setFloat32(position, x, true);
 	view.setFloat32(position + 4, y, true);
@@ -396,7 +427,7 @@ GL.StreamWriteFloat2 = function(x, y) {
 };
 
 GL.StreamWriteFloat3 = function(x, y, z) {
-	var view = GL.streamArrayView;
+	var view     = GL.streamArrayView;
 	var position = GL.streamArrayPosition;
 	view.setFloat32(position, x, true);
 	view.setFloat32(position + 4, y, true);
@@ -405,7 +436,7 @@ GL.StreamWriteFloat3 = function(x, y, z) {
 };
 
 GL.StreamWriteFloat4 = function(x, y, z, w) {
-	var view = GL.streamArrayView;
+	var view     = GL.streamArrayView;
 	var position = GL.streamArrayPosition;
 	view.setFloat32(position, x, true);
 	view.setFloat32(position + 4, y, true);
@@ -415,7 +446,7 @@ GL.StreamWriteFloat4 = function(x, y, z, w) {
 };
 
 GL.StreamWriteUByte4 = function(x, y, z, w) {
-	var view = GL.streamArrayView;
+	var view     = GL.streamArrayView;
 	var position = GL.streamArrayPosition;
 	view.setUint8(position, x);
 	view.setUint8(position + 1, y);
@@ -458,8 +489,9 @@ GL.Init = function() {
 		gl = VID.mainwindow.getContext('webgl') || VID.mainwindow.getContext('experimental-webgl');
 	} catch (e) {
 	}
-	if (gl == null)
+	if (gl == null) {
 		Sys.Error('Unable to initialize WebGL. Your browser may not support it.');
+	}
 
 	GL.maxtexturesize = gl.getParameter(gl.MAX_TEXTURE_SIZE);
 
@@ -467,7 +499,7 @@ GL.Init = function() {
 	gl.cullFace(gl.FRONT);
 	gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE);
 
-	GL.modes = [
+	GL.modes      = [
 		['GL_NEAREST', gl.NEAREST, gl.NEAREST],
 		['GL_LINEAR', gl.LINEAR, gl.LINEAR],
 		['GL_NEAREST_MIPMAP_NEAREST', gl.NEAREST_MIPMAP_NEAREST, gl.NEAREST],
@@ -481,12 +513,12 @@ GL.Init = function() {
 	GL.picmip = Cvar.RegisterVariable('gl_picmip', '0');
 	Cmd.AddCommand('gl_texturemode', GL.TextureMode_f);
 
-	GL.streamArray = new ArrayBuffer(8192); // Increasing even a little bit ruins all performance on Mali.
-	GL.streamArrayBytes = new Uint8Array(GL.streamArray);
-	GL.streamArrayPosition = 0;
+	GL.streamArray            = new ArrayBuffer(8192); // Increasing even a little bit ruins all performance on Mali.
+	GL.streamArrayBytes       = new Uint8Array(GL.streamArray);
+	GL.streamArrayPosition    = 0;
 	GL.streamArrayVertexCount = 0;
-	GL.streamArrayView = new DataView(GL.streamArray);
-	GL.streamBuffer = gl.createBuffer();
+	GL.streamArrayView        = new DataView(GL.streamArray);
+	GL.streamBuffer           = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, GL.streamBuffer);
 	gl.bufferData(gl.ARRAY_BUFFER, GL.streamArray.byteLength, gl.DYNAMIC_DRAW);
 	GL.streamBufferPosition = 0;

@@ -40,7 +40,7 @@ Sys.Quit = function() {
 	}
 
 	Host.Shutdown();
-	document.body.style.cursor = 'auto';
+	document.body.style.cursor   = 'auto';
 	VID.mainwindow.style.display = 'none';
 
 	if (COM.registered.value !== 0) {
@@ -100,12 +100,12 @@ Sys.FloatTime = function() {
 window.onload = function() {
 	var i;
 
-	var cmdline = decodeURIComponent(document.location.search);
+	var cmdline  = decodeURIComponent(document.location.search);
 	var location = document.location;
-	var argv = [location.href.substring(0, location.href.length - location.search.length)];
+	var argv     = [location.href.substring(0, location.href.length - location.search.length)];
 
 	if (cmdline.charCodeAt(0) === 63) {
-		var text = '';
+		var text   = '';
 		var quotes = false;
 		var c;
 
@@ -127,7 +127,7 @@ window.onload = function() {
 				}
 
 				argv[argv.length] = text;
-				text = '';
+				text              = '';
 
 				continue;
 			}
@@ -142,13 +142,13 @@ window.onload = function() {
 
 	COM.InitArgv(argv);
 
-	var elem = document.documentElement;
-	VID.width = (elem.clientWidth <= 320) ? 320 : elem.clientWidth;
+	var elem   = document.documentElement;
+	VID.width  = (elem.clientWidth <= 320) ? 320 : elem.clientWidth;
 	VID.height = (elem.clientHeight <= 200) ? 200 : elem.clientHeight;
 
-	Sys.scantokey = [];
-	Sys.scantokey[8] = Key.k.backspace;
-	Sys.scantokey[9] = Key.k.tab;
+	Sys.scantokey     = [];
+	Sys.scantokey[8]  = Key.k.backspace;
+	Sys.scantokey[9]  = Key.k.tab;
 	Sys.scantokey[13] = Key.k.enter;
 	Sys.scantokey[16] = Key.k.shift;
 	Sys.scantokey[17] = Key.k.ctrl;
@@ -209,8 +209,8 @@ window.onload = function() {
 };
 
 /*Sys.onbeforeunload = function() {
-	return 'Are you sure you want to quit?';
-};*/
+ return 'Are you sure you want to quit?';
+ };*/
 
 Sys.oncontextmenu = function(e) {
 	e.preventDefault();

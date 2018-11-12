@@ -12,7 +12,7 @@ Cmd.Execute = function() {
 	var c, line = '', quotes = false;
 
 	while (Cmd.text.length !== 0) {
-		c = Cmd.text.charCodeAt(0);
+		c        = Cmd.text.charCodeAt(0);
 		Cmd.text = Cmd.text.substring(1);
 
 		if (c === 34) {
@@ -137,7 +137,7 @@ Cmd.Alias_f = function() {
 	Cmd.alias[i] = {name: s, value: value + '\n'};
 };
 
-Cmd.argv = [];
+Cmd.argv      = [];
 Cmd.functions = [];
 
 Cmd.Init = function() {

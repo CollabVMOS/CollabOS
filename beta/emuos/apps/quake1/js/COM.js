@@ -27,27 +27,32 @@ COM.DefaultExtension = function(path, extension) {
 
 COM.Parse = function(data) {
 	COM.token = '';
-	var i = 0, c;
-	if (data.length === 0)
+	var i     = 0, c;
+	if (data.length === 0) {
 		return;
+	}
 
 	var skipwhite = true;
 	for (; ;) {
-		if (skipwhite !== true)
+		if (skipwhite !== true) {
 			break;
+		}
 		skipwhite = false;
 		for (; ;) {
-			if (i >= data.length)
+			if (i >= data.length) {
 				return;
+			}
 			c = data.charCodeAt(i);
-			if (c > 32)
+			if (c > 32) {
 				break;
+			}
 			++i;
 		}
 		if ((c === 47) && (data.charCodeAt(i + 1) === 47)) {
 			for (; ;) {
-				if ((i >= data.length) || (data.charCodeAt(i) === 10))
+				if ((i >= data.length) || (data.charCodeAt(i) === 10)) {
 					break;
+				}
 				++i;
 			}
 			skipwhite = true;
@@ -59,15 +64,17 @@ COM.Parse = function(data) {
 		for (; ;) {
 			c = data.charCodeAt(i);
 			++i;
-			if ((i >= data.length) || (c === 34))
+			if ((i >= data.length) || (c === 34)) {
 				return data.substring(i);
+			}
 			COM.token += String.fromCharCode(c);
 		}
 	}
 
 	for (; ;) {
-		if ((i >= data.length) || (c <= 32))
+		if ((i >= data.length) || (c <= 32)) {
 			break;
+		}
 		COM.token += String.fromCharCode(c);
 		++i;
 		c = data.charCodeAt(i);
@@ -94,8 +101,9 @@ COM.CheckRegistered = function() {
 		if (h === null) {
 			Con.Print('Playing shareware version.\n');
 
-			if (COM.modified === true)
+			if (COM.modified === true) {
 				Sys.Error('You must have the registered version to use modified games');
+			}
 		}
 	} else {
 		Sys.Error('Corrupted data file.');
@@ -125,8 +133,9 @@ COM.CheckRegistered = function() {
 	var i;
 
 	for (i = 0; i < 256; ++i) {
-		if (check[i] !== pop[i])
+		if (check[i] !== pop[i]) {
 			Sys.Error('Corrupted data file.');
+		}
 	}
 
 	Cvar.Set('registered', '1');
@@ -137,38 +146,41 @@ COM.CheckRegistered = function() {
 COM.InitArgv = function(argv) {
 	COM.cmdline = (argv.join(' ') + ' ').substring(0, 256);
 	var i;
-	for (i = 0; i < argv.length; ++i)
+	for (i = 0; i < argv.length; ++i) {
 		COM.argv[i] = argv[i];
+	}
 	if (COM.CheckParm('-safe') != null) {
 		COM.argv[COM.argv.length] = '-nosound';
 		COM.argv[COM.argv.length] = '-nocdaudio';
 		COM.argv[COM.argv.length] = '-nomouse';
 	}
 	if (COM.CheckParm('-rogue') != null) {
-		COM.rogue = true;
+		COM.rogue          = true;
 		COM.standard_quake = false;
 	} else if (COM.CheckParm('-hipnotic') != null) {
-		COM.hipnotic = true;
+		COM.hipnotic       = true;
 		COM.standard_quake = false;
 	}
 };
 
 COM.Init = function() {
-	if ((document.location.protocol !== 'http:') && (document.location.protocol !== 'https:'))
+	if ((document.location.protocol !== 'http:') && (document.location.protocol !== 'https:')) {
 		Sys.Error('Protocol is ' + document.location.protocol + ', not http: or https:');
+	}
 
-	var swaptest = new ArrayBuffer(2);
+	var swaptest     = new ArrayBuffer(2);
 	var swaptestview = new Uint8Array(swaptest);
-	swaptestview[0] = 1;
-	swaptestview[1] = 0;
-	if ((new Uint16Array(swaptest))[0] === 1)
+	swaptestview[0]  = 1;
+	swaptestview[1]  = 0;
+	if ((new Uint16Array(swaptest))[0] === 1) {
 		COM.LittleLong = (function(l) {
 			return l;
 		});
-	else
+	} else {
 		COM.LittleLong = (function(l) {
 			return (l >>> 24) + ((l & 0xff0000) >>> 8) + (((l & 0xff00) << 8) >>> 0) + ((l << 24) >>> 0);
 		});
+	}
 
 	COM.registered = Cvar.RegisterVariable('registered', '0');
 	Cvar.RegisterVariable('cmdline', COM.cmdline, false, true);
@@ -245,9 +257,9 @@ COM.LoadFile = function(filename) {
 	Draw.BeginDisc();
 
 	for (i = COM.searchpaths.length - 1; i >= 0; --i) {
-		search = COM.searchpaths[i];
+		search  = COM.searchpaths[i];
 		netpath = search.filename + '/' + filename;
-		data = localStorage.getItem('Quake.' + netpath);
+		data    = localStorage.getItem('Quake.' + netpath);
 
 		if (data !== null) {
 			Sys.Print('FindFile: ' + netpath + '\n');
@@ -262,8 +274,9 @@ COM.LoadFile = function(filename) {
 			for (k = 0; k < pak.length; ++k) {
 				file = pak[k];
 
-				if (file.name !== filename)
+				if (file.name !== filename) {
 					continue;
+				}
 
 				if (file.filelen === 0) {
 					Draw.EndDisc();
@@ -329,31 +342,36 @@ COM.LoadPackFile = function(packfile) {
 	xhr.open('GET', packfile, false);
 	xhr.setRequestHeader('Range', 'bytes=0-11');
 	xhr.send();
-	if ((xhr.status <= 199) || (xhr.status >= 300) || (xhr.responseText.length !== 12))
+	if ((xhr.status <= 199) || (xhr.status >= 300) || (xhr.responseText.length !== 12)) {
 		return;
+	}
 	var header = new DataView(Q.strmem(xhr.responseText));
-	if (header.getUint32(0, true) !== 0x4b434150)
+	if (header.getUint32(0, true) !== 0x4b434150) {
 		Sys.Error(packfile + ' is not a packfile');
-	var dirofs = header.getUint32(4, true);
-	var dirlen = header.getUint32(8, true);
+	}
+	var dirofs       = header.getUint32(4, true);
+	var dirlen       = header.getUint32(8, true);
 	var numpackfiles = dirlen >> 6;
-	if (numpackfiles !== 339)
+	if (numpackfiles !== 339) {
 		COM.modified = true;
+	}
 	var pack = [];
 	if (numpackfiles !== 0) {
 		xhr.open('GET', packfile, false);
 		xhr.setRequestHeader('Range', 'bytes=' + dirofs + '-' + (dirofs + dirlen - 1));
 		xhr.send();
-		if ((xhr.status <= 199) || (xhr.status >= 300) || (xhr.responseText.length !== dirlen))
+		if ((xhr.status <= 199) || (xhr.status >= 300) || (xhr.responseText.length !== dirlen)) {
 			return;
+		}
 		var info = Q.strmem(xhr.responseText);
-		if (CRC.Block(new Uint8Array(info)) !== 32981)
+		if (CRC.Block(new Uint8Array(info)) !== 32981) {
 			COM.modified = true;
+		}
 		var i;
 		for (i = 0; i < numpackfiles; ++i) {
 			pack[pack.length] =
 				{
-					name: Q.memstr(new Uint8Array(info, i << 6, 56)).toLowerCase(),
+					name:    Q.memstr(new Uint8Array(info, i << 6, 56)).toLowerCase(),
 					filepos: (new DataView(info)).getUint32((i << 6) + 56, true),
 					filelen: (new DataView(info)).getUint32((i << 6) + 60, true)
 				}
@@ -368,8 +386,9 @@ COM.AddGameDirectory = function(dir) {
 	var pak, i = 0;
 	for (; ;) {
 		pak = COM.LoadPackFile(dir + '/' + 'pak' + i + '.zip');
-		if (pak == null)
+		if (pak == null) {
 			break;
+		}
 		search.pack[search.pack.length] = pak;
 		++i;
 	}
@@ -380,17 +399,20 @@ COM.InitFilesystem = function() {
 	var i, search;
 
 	i = COM.CheckParm('-basedir');
-	if (i != null)
+	if (i != null) {
 		search = COM.argv[i + 1];
-	if (search != null)
+	}
+	if (search != null) {
 		COM.AddGameDirectory(search);
-	else
+	} else {
 		COM.AddGameDirectory('id1');
+	}
 
-	if (COM.rogue === true)
+	if (COM.rogue === true) {
 		COM.AddGameDirectory('rogue');
-	else if (COM.hipnotic === true)
+	} else if (COM.hipnotic === true) {
 		COM.AddGameDirectory('hipnotic');
+	}
 
 	i = COM.CheckParm('-game');
 	if (i != null) {

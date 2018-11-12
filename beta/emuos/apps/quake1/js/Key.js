@@ -1,38 +1,38 @@
 Key = {};
 
 Key.k = {
-	tab: 9,
-	enter: 13,
+	tab:    9,
+	enter:  13,
 	escape: 27,
-	space: 32,
+	space:  32,
 
-	backspace: 127,
-	uparrow: 128,
-	downarrow: 129,
-	leftarrow: 130,
+	backspace:  127,
+	uparrow:    128,
+	downarrow:  129,
+	leftarrow:  130,
 	rightarrow: 131,
 
-	alt: 132,
-	ctrl: 133,
+	alt:   132,
+	ctrl:  133,
 	shift: 134,
-	f1: 135,
-	f2: 136,
-	f3: 137,
-	f4: 138,
-	f5: 139,
-	f6: 140,
-	f7: 141,
-	f8: 142,
-	f9: 143,
-	f10: 144,
-	f11: 145,
-	f12: 146,
-	ins: 147,
-	del: 148,
-	pgdn: 149,
-	pgup: 150,
-	home: 151,
-	end: 152,
+	f1:    135,
+	f2:    136,
+	f3:    137,
+	f4:    138,
+	f5:    139,
+	f6:    140,
+	f7:    141,
+	f8:    142,
+	f9:    143,
+	f10:   144,
+	f11:   145,
+	f12:   146,
+	ins:   147,
+	del:   148,
+	pgdn:  149,
+	pgup:  150,
+	home:  151,
+	end:   152,
 
 	pause: 255,
 
@@ -40,43 +40,43 @@ Key.k = {
 	mouse2: 201,
 	mouse3: 202,
 
-	joy1: 205,
-	joy2: 206,
-	joy3: 207,
-	joy4: 208,
-	joy5: 209,
-	joy6: 210,
-	joy7: 211,
-	joy8: 212,
-	joy9: 213,
+	joy1:  205,
+	joy2:  206,
+	joy3:  207,
+	joy4:  208,
+	joy5:  209,
+	joy6:  210,
+	joy7:  211,
+	joy8:  212,
+	joy9:  213,
 	joy10: 214,
 	joy11: 215,
 	joy12: 216,
 
-	mwheelup: 239,
+	mwheelup:   239,
 	mwheeldown: 240
 };
 
-Key.lines = [''];
-Key.edit_line = '';
+Key.lines        = [''];
+Key.edit_line    = '';
 Key.history_line = 1;
 
 Key.dest = {
-	game: 0,
+	game:    0,
 	console: 1,
 	message: 2,
-	menu: 3,
+	menu:    3,
 
 	value: 0
 };
 
-Key.bindings = [];
+Key.bindings    = [];
 Key.consolekeys = [];
-Key.shift = [];
-Key.down = [];
+Key.shift       = [];
+Key.down        = [];
 
 Key.gamepadlastbuttons = null; // last gamepad state
-Key.gamepadlastaxes = null; // last gamepad state (axes)
+Key.gamepadlastaxes    = null; // last gamepad state (axes)
 
 Key.names = [
 	{name: 'TAB', keynum: Key.k.tab},
@@ -135,40 +135,45 @@ Key.Console = function(key) {
 		Cmd.text += Key.edit_line + '\n';
 		Con.Print(']' + Key.edit_line + '\n');
 		Key.lines[Key.lines.length] = Key.edit_line;
-		Key.edit_line = '';
-		Key.history_line = Key.lines.length;
+		Key.edit_line               = '';
+		Key.history_line            = Key.lines.length;
 		return;
 	}
 
 	if (key === Key.k.tab) {
 		var cmd = Cmd.CompleteCommand(Key.edit_line);
-		if (cmd == null)
+		if (cmd == null) {
 			cmd = Cvar.CompleteVariable(Key.edit_line);
-		if (cmd == null)
+		}
+		if (cmd == null) {
 			return;
+		}
 		Key.edit_line = cmd + ' ';
 		return;
 	}
 
 	if ((key === Key.k.backspace) || (key === Key.k.leftarrow)) {
-		if (Key.edit_line.length > 0)
+		if (Key.edit_line.length > 0) {
 			Key.edit_line = Key.edit_line.substring(0, Key.edit_line.length - 1);
+		}
 		return;
 	}
 
 	if (key === Key.k.uparrow) {
-		if (--Key.history_line < 0)
+		if (--Key.history_line < 0) {
 			Key.history_line = 0;
+		}
 		Key.edit_line = Key.lines[Key.history_line];
 		return;
 	}
 
 	if (key === Key.k.downarrow) {
-		if (Key.history_line >= Key.lines.length)
+		if (Key.history_line >= Key.lines.length) {
 			return;
+		}
 		if (++Key.history_line >= Key.lines.length) {
 			Key.history_line = Key.lines.length;
-			Key.edit_line = '';
+			Key.edit_line    = '';
 			return;
 		}
 		Key.edit_line = Key.lines[Key.history_line];
@@ -177,22 +182,25 @@ Key.Console = function(key) {
 
 	if (key === Key.k.pgup) {
 		Con.backscroll += 2;
-		if (Con.backscroll > Con.text.length)
+		if (Con.backscroll > Con.text.length) {
 			Con.backscroll = Con.text.length;
+		}
 		return;
 	}
 
 	if (key === Key.k.pgdn) {
 		Con.backscroll -= 2;
-		if (Con.backscroll < 0)
+		if (Con.backscroll < 0) {
 			Con.backscroll = 0;
+		}
 		return;
 	}
 
 	if (key === Key.k.home) {
 		Con.backscroll = Con.text.length - 10;
-		if (Con.backscroll < 0)
+		if (Con.backscroll < 0) {
 			Con.backscroll = 0;
+		}
 		return;
 	}
 
@@ -201,8 +209,9 @@ Key.Console = function(key) {
 		return;
 	}
 
-	if ((key < 32) || (key > 127))
+	if ((key < 32) || (key > 127)) {
 		return;
+	}
 
 	Key.edit_line += String.fromCharCode(key);
 };
@@ -211,49 +220,57 @@ Key.chat_buffer = '';
 
 Key.Message = function(key) {
 	if (key === Key.k.enter) {
-		if (Key.team_message === true)
+		if (Key.team_message === true) {
 			Cmd.text += 'say_team "' + Key.chat_buffer + '"\n';
-		else
+		} else {
 			Cmd.text += 'say "' + Key.chat_buffer + '"\n';
-		Key.dest.value = Key.dest.game;
+		}
+		Key.dest.value  = Key.dest.game;
 		Key.chat_buffer = '';
 		return;
 	}
 	if (key === Key.k.escape) {
-		Key.dest.value = Key.dest.game;
+		Key.dest.value  = Key.dest.game;
 		Key.chat_buffer = '';
 		return;
 	}
-	if ((key < 32) || (key > 127))
-		return;
-	if (key === Key.k.backspace) {
-		if (Key.chat_buffer.length !== 0)
-			Key.chat_buffer = Key.chat_buffer.substring(0, Key.chat_buffer.length - 1);
+	if ((key < 32) || (key > 127)) {
 		return;
 	}
-	if (Key.chat_buffer.length >= 31)
+	if (key === Key.k.backspace) {
+		if (Key.chat_buffer.length !== 0) {
+			Key.chat_buffer = Key.chat_buffer.substring(0, Key.chat_buffer.length - 1);
+		}
 		return;
+	}
+	if (Key.chat_buffer.length >= 31) {
+		return;
+	}
 	Key.chat_buffer = Key.chat_buffer + String.fromCharCode(key);
 };
 
 Key.StringToKeynum = function(str) {
-	if (str.length === 1)
+	if (str.length === 1) {
 		return str.charCodeAt(0);
+	}
 	str = str.toUpperCase();
 	var i;
 	for (i = 0; i < Key.names.length; ++i) {
-		if (Key.names[i].name === str)
+		if (Key.names[i].name === str) {
 			return Key.names[i].keynum;
+		}
 	}
 };
 
 Key.KeynumToString = function(keynum) {
-	if ((keynum > 32) && (keynum < 127))
+	if ((keynum > 32) && (keynum < 127)) {
 		return String.fromCharCode(keynum);
+	}
 	var i;
 	for (i = 0; i < Key.names.length; ++i) {
-		if (Key.names[i].keynum === keynum)
+		if (Key.names[i].keynum === keynum) {
 			return Key.names[i].name;
+		}
 	}
 	return '<UNKNOWN KEYNUM>';
 };
@@ -287,10 +304,11 @@ Key.Bind_f = function() {
 		return;
 	}
 	if (c === 2) {
-		if (Key.bindings[b] != null)
+		if (Key.bindings[b] != null) {
 			Con.Print('"' + Cmd.argv[1] + '" = "' + Key.bindings[b] + '"\n');
-		else
+		} else {
 			Con.Print('"' + Cmd.argv[1] + '" is not bound\n');
+		}
 		return;
 	}
 
@@ -305,8 +323,9 @@ Key.WriteBindings = function() {
 	var f = [];
 	var i;
 	for (i = 0; i < Key.bindings.length; ++i) {
-		if (Key.bindings[i] != null)
+		if (Key.bindings[i] != null) {
 			f[f.length] = 'bind "' + Key.KeynumToString(i) + '" "' + Key.bindings[i] + '"\n';
+		}
 	}
 	return f.join('');
 };
@@ -314,27 +333,30 @@ Key.WriteBindings = function() {
 Key.Init = function() {
 	var i;
 
-	for (i = 32; i < 128; ++i)
+	for (i = 32; i < 128; ++i) {
 		Key.consolekeys[i] = true;
-	Key.consolekeys[Key.k.enter] = true;
-	Key.consolekeys[Key.k.tab] = true;
-	Key.consolekeys[Key.k.leftarrow] = true;
+	}
+	Key.consolekeys[Key.k.enter]      = true;
+	Key.consolekeys[Key.k.tab]        = true;
+	Key.consolekeys[Key.k.leftarrow]  = true;
 	Key.consolekeys[Key.k.rightarrow] = true;
-	Key.consolekeys[Key.k.uparrow] = true;
-	Key.consolekeys[Key.k.downarrow] = true;
-	Key.consolekeys[Key.k.backspace] = true;
-	Key.consolekeys[Key.k.home] = true;
-	Key.consolekeys[Key.k.end] = true;
-	Key.consolekeys[Key.k.pgup] = true;
-	Key.consolekeys[Key.k.pgdn] = true;
-	Key.consolekeys[Key.k.shift] = true;
-	Key.consolekeys[96] = false;
-	Key.consolekeys[126] = false;
+	Key.consolekeys[Key.k.uparrow]    = true;
+	Key.consolekeys[Key.k.downarrow]  = true;
+	Key.consolekeys[Key.k.backspace]  = true;
+	Key.consolekeys[Key.k.home]       = true;
+	Key.consolekeys[Key.k.end]        = true;
+	Key.consolekeys[Key.k.pgup]       = true;
+	Key.consolekeys[Key.k.pgdn]       = true;
+	Key.consolekeys[Key.k.shift]      = true;
+	Key.consolekeys[96]               = false;
+	Key.consolekeys[126]              = false;
 
-	for (i = 0; i < 256; ++i)
+	for (i = 0; i < 256; ++i) {
 		Key.shift[i] = i;
-	for (i = 97; i <= 122; ++i)
+	}
+	for (i = 97; i <= 122; ++i) {
 		Key.shift[i] = i - 32;
+	}
 	Key.shift[49] = 33;
 	Key.shift[50] = 64;
 	Key.shift[51] = 35;
@@ -363,28 +385,34 @@ Key.Init = function() {
 };
 
 Key.Event = function(key, down) {
-	if (CL.cls.state === CL.active.connecting)
+	if (CL.cls.state === CL.active.connecting) {
 		return;
+	}
 	if (down === true) {
-		if ((key !== Key.k.backspace) && (key !== Key.k.pause) && (Key.down[key] === true))
+		if ((key !== Key.k.backspace) && (key !== Key.k.pause) && (Key.down[key] === true)) {
 			return;
-		if ((key >= 200) && (Key.bindings[key] == null))
+		}
+		if ((key >= 200) && (Key.bindings[key] == null)) {
 			Con.Print(Key.KeynumToString(key) + ' is unbound, hit F4 to set.\n');
+		}
 	}
 	Key.down[key] = down;
 
-	if (key === Key.k.shift)
+	if (key === Key.k.shift) {
 		Key.shift_down = down;
+	}
 
 	if (key === Key.k.escape) {
-		if (down !== true)
+		if (down !== true) {
 			return;
-		if (Key.dest.value === Key.dest.message)
+		}
+		if (Key.dest.value === Key.dest.message) {
 			Key.Message(key);
-		else if (Key.dest.value === Key.dest.menu)
+		} else if (Key.dest.value === Key.dest.menu) {
 			M.Keydown(key);
-		else
+		} else {
 			M.ToggleMenu_f();
+		}
 		return;
 	}
 
@@ -393,14 +421,16 @@ Key.Event = function(key, down) {
 	if (down !== true) {
 		kb = Key.bindings[key];
 		if (kb != null) {
-			if (kb.charCodeAt(0) === 43)
+			if (kb.charCodeAt(0) === 43) {
 				Cmd.text += '-' + kb.substring(1) + ' ' + key + '\n';
+			}
 		}
 		if (Key.shift[key] !== key) {
 			kb = Key.bindings[Key.shift[key]];
 			if (kb != null) {
-				if (kb.charCodeAt(0) === 43)
+				if (kb.charCodeAt(0) === 43) {
 					Cmd.text += '-' + kb.substring(1) + ' ' + key + '\n';
+				}
 			}
 		}
 		return;
@@ -416,21 +446,24 @@ Key.Event = function(key, down) {
 		|| ((Key.dest.value === Key.dest.game) && ((Con.forcedup !== true) || (Key.consolekeys[key] !== true)))) {
 		kb = Key.bindings[key];
 		if (kb != null) {
-			if (kb.charCodeAt(0) === 43)
+			if (kb.charCodeAt(0) === 43) {
 				Cmd.text += kb + ' ' + key + '\n';
-			else
+			} else {
 				Cmd.text += kb + '\n';
+			}
 		}
 		return;
 	}
 
-	if (Key.shift_down === true)
+	if (Key.shift_down === true) {
 		key = Key.shift[key];
+	}
 
-	if (Key.dest.value === Key.dest.message)
+	if (Key.dest.value === Key.dest.message) {
 		Key.Message(key);
-	else if (Key.dest.value === Key.dest.menu)
+	} else if (Key.dest.value === Key.dest.menu) {
 		M.Keydown(key);
-	else
+	} else {
 		Key.Console(key);
+	}
 };
