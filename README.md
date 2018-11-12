@@ -87,6 +87,35 @@ More about [Video game preservation](https://en.wikipedia.org/wiki/Video_game_pr
 * Rahul.io [Website](https://rahul.io) [Repo](https://github.com/lolstring/window98-html-css-js) License MIT
 * OS.js [Website](https://www.os-js.org/) [Repo](https://github.com/os-js/OS.js) License BSD
 
+## Legal issues
+
+In general, the copying and distribution of video games that are under copyright without authorization is considered a copyright violation (often called as software piracy).
+
+Through the Library of Congress, some key exemptions to the DMCA have been granted to allow for video game preservation. 
+
+* In the 2003 set of exemptions, the Library disallowed enforcement of the DMCA for "computer programs protected by dongles that prevent access due to malfunction or damage and which are obsolete" and for "computer programs and video games distributed in formats that have become obsolete and which require the original media or hardware as a condition of access".
+* In the 2015 exemptions, the Library granted permission for preservationists to work around copy-protection in games which required an authentication step with an external server that was no longer online prior to playing the game which otherwise did not require online connectivity; this specifically did not cover games that were based on a server-client mode like most massively-multiplayer online games (MMOs).
+* In the 2018 exemptions, the Library allowed for preservation and fair use of server-based games like MMos, permitting preservationists to offer such games where they have legally obtained the game's code within museums and libraries.
+
+##### DMCA Takedown notices & Removal Requests
+
+Emupedia is aware of intellectual property rights and other proprietary rights of others.
+
+If you own the copyrights to a title on Emupedia and would like to request removal please note that we process all correct and complete removal requests within 5 working days.
+
+Please include the following information in your claim request:
+
+* Identification of the copyrighted work that you claim has been infringed;
+* An exact description of where the material is located;
+* Your full address, phone number, and email address;
+* A statement by you that you have a good-faith belief that the disputed use is not authorized by the copyright owner, its agent, or the law;
+* A statement by you, made under penalty of perjury, that the above information in your notice is accurate and that you are the owner of the copyright interest involved or are authorized to act on behalf of that owner;
+* Your electronic or physical signature.
+
+You may send an email to dmca [at] emupedia.net for all DMCA Takedown notices / Removal Requests.
+
+You will receive a confirmation once your request has been processed.
+
 ## License
 
 Copyright (c) 2016 - 2018, Emupedia
