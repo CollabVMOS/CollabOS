@@ -25,13 +25,13 @@ More about [Video game preservation](https://en.wikipedia.org/wiki/Video_game_pr
 * WebAmp [Website](https://webamp.org/) [Repo](https://github.com/captbaritone/webamp) License MIT
 * Butterchurn [Website](https://butterchurnviz.com/) [Repo](https://github.com/jberg/butterchurn) License MIT
 * minesweeper [Website](http://jonziebell.com/minesweeper) [Repo](https://github.com/ziebelje/minesweeper) License ?
-* js-solitaire [Website](http://radovanjanjic.com/js-solitaire/) [Repo](https://github.com/uzi88/js-solitaire) 
+* js-solitaire [Website](http://radovanjanjic.com/js-solitaire/) [Repo](https://github.com/uzi88/js-solitaire) License ?
 * JS Paint [Website](https://jspaint.app/) [Repo](https://github.com/1j01/jspaint) License ?
 * Pipes [Website](https://1j01.github.io/pipes/) [Repo](https://github.com/1j01/pipes) License MIT
 
 ##### Games
 
-* WebQuake [Repo](https://github.com/Triang3l/WebQuake) License GPLv1
+* WebQuake [Website](https://webquake.quaddicted.com/Client/index.htm) [Repo](https://github.com/Triang3l/WebQuake) License GPLv1
 * Wolfenstein 3D [Repo](https://github.com/loadx/html5-wolfenstein3D) License ?
 * Wolfenstein 3D Canvas [Website](http://users.atw.hu/wolf3d) License GPLv2
 
