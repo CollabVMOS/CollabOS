@@ -5,6 +5,8 @@ COM.argv = [];
 COM.standard_quake = true;
 
 COM.DefaultExtension = function(path, extension) {
+	Sys.Print('COM.DefaultExtension(' + path + ', ' + extension + ')');
+
 	var i, src;
 
 	for (i = path.length - 1; i >= 0; --i) {
@@ -26,6 +28,8 @@ COM.DefaultExtension = function(path, extension) {
 };
 
 COM.Parse = function(data) {
+	Sys.Print('COM.Parse(' + data + ')');
+
 	COM.token = '';
 
 	var i = 0, c;
@@ -62,6 +66,7 @@ COM.Parse = function(data) {
 				if ((i >= data.length) || (data.charCodeAt(i) === 10)) {
 					break;
 				}
+
 				++i;
 			}
 
@@ -98,8 +103,7 @@ COM.Parse = function(data) {
 };
 
 COM.CheckParm = function(parm) {
-	console.log('CheckParm()');
-	console.log(parm);
+	Sys.Print('COM.CheckParm(' + parm + ')');
 
 	var i;
 
@@ -121,14 +125,13 @@ COM.CheckParm = function(parm) {
 };
 
 COM.CheckRegistered = function() {
-	console.log('CheckRegistered()');
+	Sys.Print('CheckRegistered()');
 
 	var h = COM.LoadFile('gfx/pop.lmp');
 
-	console.log(h);
-
 	if (typeof h !== 'undefined') {
 		if (h == null) {
+			Sys.Print('Playing shareware version.\n');
 			Con.Print('Playing shareware version.\n');
 
 			if (COM.modified === true) {
@@ -170,13 +173,12 @@ COM.CheckRegistered = function() {
 
 	Cvar.Set('registered', '1');
 
+	Sys.Print('Playing registered version.\n');
 	Con.Print('Playing registered version.\n');
 };
 
 COM.InitArgv = function(argv) {
-	console.log('InitArgv()');
-	console.log('argv');
-	console.log(argv);
+	Sys.Print('COM.InitArgv(' + argv + ')');
 
 	COM.cmdline = (argv.join(' ') + ' ').substring(0, 256);
 	var i;
@@ -204,7 +206,7 @@ COM.InitArgv = function(argv) {
 };
 
 COM.Init = function() {
-	console.log('Init()');
+	Sys.Print('COM.Init()');
 
 	if ((document.location.protocol !== 'http:') && (document.location.protocol !== 'https:')) {
 		Sys.Error('Protocol is ' + document.location.protocol + ', not http: or https:');
@@ -235,6 +237,9 @@ COM.Init = function() {
 COM.searchpaths = [];
 
 COM.Path_f = function() {
+	Sys.Print('COM.Path_f()');
+
+	Sys.Print('Current search path:\n');
 	Con.Print('Current search path:\n');
 
 	var i, j, s;
@@ -243,14 +248,18 @@ COM.Path_f = function() {
 		s = COM.searchpaths[i];
 
 		for (j = s.pack.length - 1; j >= 0; --j) {
+			Sys.Print(s.filename + '/' + 'pak' + j + '.pak (' + s.pack[j].length + ' files)\n');
 			Con.Print(s.filename + '/' + 'pak' + j + '.pak (' + s.pack[j].length + ' files)\n');
 		}
 
+		Sys.Print(s.filename + '\n');
 		Con.Print(s.filename + '\n');
 	}
 };
 
 COM.WriteFile = function(filename, data, len) {
+	Sys.Print('COM.WriteFile(' + filename + ', ' +  data + ', ' + len + ')');
+
 	filename = filename.toLowerCase();
 
 	var dest = [], i;
@@ -273,6 +282,8 @@ COM.WriteFile = function(filename, data, len) {
 };
 
 COM.WriteTextFile = function(filename, data) {
+	Sys.Print('COM.WriteTextFile('+ filename + ', ' + data +')');
+
 	filename = filename.toLowerCase();
 
 	try {
@@ -289,9 +300,7 @@ COM.WriteTextFile = function(filename, data) {
 };
 
 COM.LoadFile = function(filename) {
-	console.log('LoadFile()');
-	console.log('filename');
-	console.log(filename);
+	Sys.Print('COM.LoadFile('+ filename +')');
 
 	filename = filename.toLowerCase();
 
@@ -368,6 +377,8 @@ COM.LoadFile = function(filename) {
 };
 
 COM.LoadTextFile = function(filename) {
+	Sys.Print('COM.LoadTextFile('+ filename +')');
+
 	var buf = COM.LoadFile(filename);
 
 	if (buf == null) {
@@ -391,8 +402,7 @@ COM.LoadTextFile = function(filename) {
 };
 
 COM.LoadPackFile = function(packfile) {
-	console.log('LoadPackFile()');
-	console.log(packfile);
+	Sys.Print('COM.LoadTextFile('+ packfile +')');
 
 	var xhr = new XMLHttpRequest();
 	xhr.overrideMimeType('text/plain; charset=x-user-defined');
@@ -446,6 +456,7 @@ COM.LoadPackFile = function(packfile) {
 		}
 	}
 
+	Sys.Print('Added packfile ' + packfile + ' (' + numpackfiles + ' files)\n');
 	Con.Print('Added packfile ' + packfile + ' (' + numpackfiles + ' files)\n');
 
 	console.log(pack);
@@ -454,8 +465,7 @@ COM.LoadPackFile = function(packfile) {
 };
 
 COM.AddGameDirectory = function(dir) {
-	console.log('AddGameDirectory()');
-	console.log(dir);
+	Sys.Print('COM.AddGameDirectory('+ dir +')');
 
 	if (typeof dir === 'undefined') {
 		return;
@@ -479,8 +489,7 @@ COM.AddGameDirectory = function(dir) {
 };
 
 COM.InitFilesystem = function() {
-	console.log('InitFilesystem()');
-	console.log(COM);
+	Sys.Print('COM.InitFilesystem()');
 
 	var i, search;
 

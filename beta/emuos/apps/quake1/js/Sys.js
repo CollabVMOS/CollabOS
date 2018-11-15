@@ -207,9 +207,9 @@ window.onload = function() {
 	Sys.frame = setInterval(Host.Frame, 1000.0 / 60.0);
 };
 
-/*Sys.onbeforeunload = function() {
- return 'Are you sure you want to quit?';
- };*/
+// Sys.onbeforeunload = function() {
+// 	return 'Are you sure you want to quit?';
+// };
 
 Sys.oncontextmenu = function(e) {
 	e.preventDefault();

@@ -47,12 +47,15 @@ Con.MessageMode2_f = function() {
 
 Con.Init = function() {
 	Con.debuglog = (COM.CheckParm('-condebug') != null);
+
 	if (Con.debuglog === true) {
 		COM.WriteTextFile('qconsole.log', '');
 	}
+
 	Con.Print('Console initialized.\n');
 
 	Con.notifytime = Cvar.RegisterVariable('con_notifytime', '3');
+
 	Cmd.AddCommand('toggleconsole', Con.ToggleConsole_f);
 	Cmd.AddCommand('messagemode', Con.MessageMode_f);
 	Cmd.AddCommand('messagemode2', Con.MessageMode2_f);
@@ -62,11 +65,14 @@ Con.Init = function() {
 Con.Print = function(msg) {
 	if (Con.debuglog === true) {
 		var data = COM.LoadTextFile('qconsole.log');
+
 		if (data != null) {
 			data += msg;
+
 			if (data.length >= 32768) {
 				data = data.substring(data.length - 16384);
 			}
+
 			COM.WriteTextFile('qconsole.log', data);
 		}
 	}
@@ -74,6 +80,7 @@ Con.Print = function(msg) {
 	Con.backscroll = 0;
 
 	var mask = 0;
+
 	if (msg.charCodeAt(0) <= 2) {
 		mask = 128;
 		if (msg.charCodeAt(0) === 1) {
@@ -81,11 +88,14 @@ Con.Print = function(msg) {
 		}
 		msg = msg.substring(1);
 	}
+
 	var i;
+
 	for (i = 0; i < msg.length; ++i) {
 		if (Con.text[Con.current] == null) {
 			Con.text[Con.current] = {text: '', time: Host.realtime};
 		}
+
 		if (msg.charCodeAt(i) === 10) {
 			if (Con.text.length >= 1024) {
 				Con.text = Con.text.slice(-512);
@@ -93,8 +103,10 @@ Con.Print = function(msg) {
 			} else {
 				++Con.current;
 			}
+
 			continue;
 		}
+
 		Con.text[Con.current].text += String.fromCharCode(msg.charCodeAt(i) + mask);
 	}
 };
