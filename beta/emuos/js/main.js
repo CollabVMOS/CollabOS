@@ -75,7 +75,6 @@
 			desktop: 'desktop',
 			taskbar: 'taskbar',
 			window: 'window',
-			winamp: 'apps/winamp/winamp',
 			lang: 'lang-en'
 		}
 	});
@@ -86,9 +85,9 @@
 		'jquery',
 		'filesystem',
 		'emuos',
-		'apps/winamp/winamp',
-		'text!apps/winamp/winamp.html',
-		'text!apps/tree/tree.html',
+		'../apps/winamp/js/main',
+		'text!../apps/winamp/index.html',
+		'text!../apps/github-tree/index.html',
 		'desktop',
 		'taskbar',
 		'window',

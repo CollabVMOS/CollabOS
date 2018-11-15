@@ -1,7 +1,7 @@
-@import "winamp/context-menu.css";
-@import "winamp/base-font.css";
-@import "winamp/base-skin.css";
-@import "winamp/milkdrop-skin.css";
+@import 'components/context-menu.css';
+@import 'components/base-font.css';
+@import 'components/base-skin.css';
+@import 'components/milkdrop-skin.css';
 
 /* Styles */
 .webamp #main-window {
