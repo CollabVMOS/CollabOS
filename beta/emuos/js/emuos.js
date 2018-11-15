@@ -185,6 +185,8 @@
 								icon :$(this).data('icon'),
 								content: winamp_content
 							});
+
+							self.options.apps.winamp.events();
 							break;
 						default:
 					}

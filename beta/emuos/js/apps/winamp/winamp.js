@@ -29,6 +29,11 @@
 		return self.render();
 	};
 
+	Winamp.prototype.events = function() {
+		// noinspection JSValidateTypes
+		$('.draggable').draggable();
+	};
+
 	Winamp.prototype.render = function(template) {
 		var self = this;
 
