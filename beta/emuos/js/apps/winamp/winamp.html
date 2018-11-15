@@ -1,0 +1,389 @@
+<div id="webamp" style="z-index: 0; overflow: visible;">
+	<div class="gen-window window" style="display: none; width: 450px; height: 464px;" tabindex="-1">
+		<div class="gen-top draggable">
+			<div class="gen-top-left draggable"></div>
+			<div class="gen-top-left-fill draggable"></div>
+			<div class="gen-top-left-end draggable"></div>
+			<div class="gen-top-title draggable">
+				<div class="draggable gen-text-letter gen-text-m"></div><div class="draggable gen-text-letter gen-text-i"></div><div class="draggable gen-text-letter gen-text-l"></div><div class="draggable gen-text-letter gen-text-k"></div><div class="draggable gen-text-letter gen-text-d"></div><div class="draggable gen-text-letter gen-text-r"></div><div class="draggable gen-text-letter gen-text-o"></div><div class="draggable gen-text-letter gen-text-p"></div>
+			</div>
+			<div class="gen-top-right-end draggable"></div>
+			<div class="gen-top-right-fill draggable"></div>
+			<div class="gen-top-right draggable">
+				<div class="gen-close selected"></div>
+			</div>
+		</div>
+		<div class="gen-middle">
+			<div class="gen-middle-left draggable">
+				<div class="gen-middle-left-bottom draggable"></div>
+			</div>
+			<div class="gen-middle-center">
+				<div style="width: 100%; height: 100%;">
+					<div class="draggable"
+						 style="background-color: rgb(0, 0, 0); position: absolute; top: 0; bottom: 0; left: 0; right: 0; height: 100%; width: 100%;"
+						 tabindex="0">
+						<div id="milkdrop-window">
+							<canvas height="430" width="431" style="height: 100%; width: 100%; display: block;"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="gen-middle-right draggable">
+				<div class="gen-middle-right-bottom draggable"></div>
+			</div>
+		</div>
+		<div class="gen-bottom draggable">
+			<div class="gen-bottom-left draggable"></div>
+			<div class="gen-bottom-right draggable">
+				<div id="gen-resize-target"></div>
+			</div>
+		</div>
+	</div>
+
+	<div id="equalizer-window" class="window draggable" style="display: none;" tabindex="-1">
+		<div>
+			<div class="equalizer-top title-bar draggable">
+				<div id="equalizer-shade"></div>
+				<div id="equalizer-close"></div>
+			</div>
+			<div id="on" class="selected"></div>
+			<div id="auto" class=""></div>
+			<canvas id="eqGraph" width="113" height="19"></canvas>
+			<div id="presets-context">
+				<div class="handle" style="width: 100%; height: 100%;">
+					<div id="presets"></div>
+				</div>
+			</div>
+			<div id="preamp" class="band" style="background-position: 0 -65px;">
+				<div class="rc-slider rc-slider-vertical">
+					<div class="rc-slider-rail"></div>
+					<div class="rc-slider-track"
+						 style="visibility: visible; bottom: 0; height: 50%;"></div>
+					<div class="rc-slider-step"></div>
+					<div class="rc-slider-handle"></div>
+					<div class="rc-slider-mark"></div>
+				</div>
+			</div>
+			<div id="plus12db"></div>
+			<div id="zerodb"></div>
+			<div id="minus12db"></div>
+			<div id="band-60" class="band" style="background-position: 0 -65px;">
+				<div class="rc-slider rc-slider-vertical">
+					<div class="rc-slider-rail"></div>
+					<div class="rc-slider-track"
+						 style="visibility: visible; bottom: 0; height: 50%;"></div>
+					<div class="rc-slider-step"></div>
+					<div class="rc-slider-handle"></div>
+					<div class="rc-slider-mark"></div>
+				</div>
+			</div>
+			<div id="band-170" class="band" style="background-position: 0 -65px;">
+				<div class="rc-slider rc-slider-vertical">
+					<div class="rc-slider-rail"></div>
+					<div class="rc-slider-track"
+						 style="visibility: visible; bottom: 0; height: 50%;"></div>
+					<div class="rc-slider-step"></div>
+					<div class="rc-slider-handle"></div>
+					<div class="rc-slider-mark"></div>
+				</div>
+			</div>
+			<div id="band-310" class="band" style="background-position: 0 -65px;">
+				<div class="rc-slider rc-slider-vertical">
+					<div class="rc-slider-rail"></div>
+					<div class="rc-slider-track"
+						 style="visibility: visible; bottom: 0; height: 50%;"></div>
+					<div class="rc-slider-step"></div>
+					<div class="rc-slider-handle"></div>
+					<div class="rc-slider-mark"></div>
+				</div>
+			</div>
+			<div id="band-600" class="band" style="background-position: 0 -65px;">
+				<div class="rc-slider rc-slider-vertical">
+					<div class="rc-slider-rail"></div>
+					<div class="rc-slider-track"
+						 style="visibility: visible; bottom: 0; height: 50%;"></div>
+					<div class="rc-slider-step"></div>
+					<div class="rc-slider-handle"></div>
+					<div class="rc-slider-mark"></div>
+				</div>
+			</div>
+			<div id="band-1000" class="band" style="background-position: 0 -65px;">
+				<div class="rc-slider rc-slider-vertical">
+					<div class="rc-slider-rail"></div>
+					<div class="rc-slider-track"
+						 style="visibility: visible; bottom: 0; height: 50%;"></div>
+					<div class="rc-slider-step"></div>
+					<div class="rc-slider-handle"></div>
+					<div class="rc-slider-mark"></div>
+				</div>
+			</div>
+			<div id="band-3000" class="band" style="background-position: 0 -65px;">
+				<div class="rc-slider rc-slider-vertical">
+					<div class="rc-slider-rail"></div>
+					<div class="rc-slider-track"
+						 style="visibility: visible; bottom: 0; height: 50%;"></div>
+					<div class="rc-slider-step"></div>
+					<div class="rc-slider-handle"></div>
+					<div class="rc-slider-mark"></div>
+				</div>
+			</div>
+			<div id="band-6000" class="band" style="background-position: 0 -65px;">
+				<div class="rc-slider rc-slider-vertical">
+					<div class="rc-slider-rail"></div>
+					<div class="rc-slider-track"
+						 style="visibility: visible; bottom: 0; height: 50%;"></div>
+					<div class="rc-slider-step"></div>
+					<div class="rc-slider-handle"></div>
+					<div class="rc-slider-mark"></div>
+				</div>
+			</div>
+			<div id="band-12000" class="band" style="background-position: 0 -65px;">
+				<div class="rc-slider rc-slider-vertical">
+					<div class="rc-slider-rail"></div>
+					<div class="rc-slider-track"
+						 style="visibility: visible; bottom: 0; height: 50%;"></div>
+					<div class="rc-slider-step"></div>
+					<div class="rc-slider-handle"></div>
+					<div class="rc-slider-mark"></div>
+				</div>
+			</div>
+			<div id="band-14000" class="band" style="background-position: 0 -65px;">
+				<div class="rc-slider rc-slider-vertical">
+					<div class="rc-slider-rail"></div>
+					<div class="rc-slider-track"
+						 style="visibility: visible; bottom: 0; height: 50%;"></div>
+					<div class="rc-slider-step"></div>
+					<div class="rc-slider-handle"></div>
+					<div class="rc-slider-mark"></div>
+				</div>
+			</div>
+			<div id="band-16000" class="band" style="background-position: 0 -65px;">
+				<div class="rc-slider rc-slider-vertical">
+					<div class="rc-slider-rail"></div>
+					<div class="rc-slider-track"
+						 style="visibility: visible; bottom: 0; height: 50%;"></div>
+					<div class="rc-slider-step"></div>
+					<div class="rc-slider-handle"></div>
+					<div class="rc-slider-mark"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="playlist-window" class="window draggable" style="display: none; color: rgb(0, 255, 0); background-color: rgb(0, 0, 0); font-family: Arial, Arial, sans-serif; height: 232px; width: 275px;" tabindex="-1">
+		<div class="playlist-top draggable">
+			<div class="playlist-top-left draggable"></div>
+			<div class="playlist-top-left-spacer draggable"></div>
+			<div class="playlist-top-left-fill draggable"></div>
+			<div class="playlist-top-title draggable"></div>
+			<div class="playlist-top-right-spacer draggable"></div>
+			<div class="playlist-top-right-fill draggable"></div>
+			<div class="playlist-top-right draggable">
+				<div id="playlist-shade-button"></div>
+				<div id="playlist-close-button"></div>
+			</div>
+		</div>
+		<div class="playlist-middle draggable">
+			<div class="playlist-middle-left draggable"></div>
+			<div class="playlist-middle-center">
+				<div class="playlist-tracks" style="height: 100%;">
+					<div class="playlist-track-titles">
+						<div class="track-cell current" style="color: rgb(255, 255, 255);"><span>&nbsp;1. DJ Mike Llama - Llama Whippin' Intro</span>
+						</div>
+						<div class="track-cell"><span>&nbsp;2. Diablo Swing Orchestra - Heroines</span>
+						</div>
+						<div class="track-cell">
+							<span>&nbsp;3. Eclectek - We Are Going To Eclecfunk Your Ass</span></div>
+						<div class="track-cell"><span>&nbsp;4. Auto-Pilot - Seventeen</span></div>
+						<div class="track-cell"><span>&nbsp;5. Muha - Microphone</span></div>
+						<div class="track-cell"><span>&nbsp;6. Just Plain Ant - Stumble</span></div>
+						<div class="track-cell"><span>&nbsp;7. Sleaze - God Damn</span></div>
+						<div class="track-cell"><span>&nbsp;8. Juanitos - Hola Hola Bossa Nova</span></div>
+						<div class="track-cell"><span>&nbsp;9. Entertainment for the Braindead - Resolutions (Chris Summer Remix)</span>
+						</div>
+						<div class="track-cell"><span>10. Nobara Hayakawa - Trail</span></div>
+						<div class="track-cell"><span>11. Paper Navy - Tongue Tied</span></div>
+						<div class="track-cell"><span>12. 60 Tigres - Garage</span></div>
+						<div class="track-cell"><span>13. CM aka Creative - The Cycle (Featuring Mista Mista)</span>
+						</div>
+					</div>
+					<div class="playlist-track-durations">
+						<div class="track-cell current" style="color: rgb(255, 255, 255);">0:05</div>
+						<div class="track-cell">5:22</div>
+						<div class="track-cell">3:10</div>
+						<div class="track-cell">3:34</div>
+						<div class="track-cell">3:01</div>
+						<div class="track-cell">1:26</div>
+						<div class="track-cell">3:46</div>
+						<div class="track-cell">3:27</div>
+						<div class="track-cell">5:14</div>
+						<div class="track-cell">3:24</div>
+						<div class="track-cell">3:21</div>
+						<div class="track-cell">4:05</div>
+						<div class="track-cell">3:41</div>
+					</div>
+				</div>
+			</div>
+			<div class="playlist-middle-right draggable">
+				<div class="rc-slider rc-slider-vertical playlist-scrollbar">
+					<div class="rc-slider-rail"></div>
+					<div class="rc-slider-track" style="visibility: visible; bottom: 0; height: 0;"></div>
+					<div class="rc-slider-step"></div>
+					<div class="playlist-scrollbar-handle"></div>
+					<div class="rc-slider-mark"></div>
+				</div>
+			</div>
+		</div>
+		<div class="playlist-bottom draggable">
+			<div class="playlist-bottom-left draggable">
+				<div id="playlist-add-menu" class="playlist-menu">
+					<div class="bar"></div>
+				</div>
+				<div id="playlist-remove-menu" class="playlist-menu">
+					<div class="bar"></div>
+				</div>
+				<div id="playlist-selection-menu" class="playlist-menu">
+					<div class="bar"></div>
+				</div>
+				<div id="playlist-misc-menu" class="playlist-menu">
+					<div class="bar"></div>
+				</div>
+			</div>
+			<div class="playlist-bottom-center draggable"></div>
+			<div class="playlist-bottom-right draggable">
+				<div class="playlist-visualizer"></div>
+				<div class="playlist-running-time-display draggable">
+					<div><span class=" character character-48">0</span><span
+							class=" character character-58">:</span><span
+							class=" character character-48">0</span><span
+							class=" character character-48">0</span><span
+							class=" character character-47">/</span><span
+							class=" character character-52">4</span><span
+							class=" character character-51">3</span><span
+							class=" character character-58">:</span><span
+							class=" character character-52">4</span><span
+							class=" character character-48">0</span><span
+							class=" character character-32"> </span><span
+							class=" character character-32"> </span><span
+							class=" character character-32"> </span><span
+							class=" character character-32"> </span><span
+							class=" character character-32"> </span><span
+							class=" character character-32"> </span><span
+							class=" character character-32"> </span><span
+							class=" character character-32"> </span></div>
+				</div>
+				<div class="playlist-action-buttons">
+					<div class="playlist-previous-button"></div>
+					<div class="playlist-play-button"></div>
+					<div class="playlist-pause-button"></div>
+					<div class="playlist-stop-button"></div>
+					<div class="playlist-next-button"></div>
+					<div class="playlist-eject-button"></div>
+				</div>
+				<div class="mini-time countdown"><span style="left: 1px;"
+													   class="background-character character character-32"> </span><span
+						style="left: 7px;" class="background-character character character-32"> </span><span
+						style="left: 12px;"
+						class="background-character character character-32"> </span><span
+						style="left: 20px;"
+						class="background-character character character-32"> </span><span
+						style="left: 25px;"
+						class="background-character character character-32"> </span><span style="left: 1px;"
+																						  class=" character character-32"> </span><span
+						style="left: 7px;" class=" character character-32"> </span><span style="left: 12px;"
+																						 class=" character character-32"> </span><span
+						style="left: 20px;" class=" character character-32"> </span><span
+						style="left: 25px;" class=" character character-32"> </span></div>
+				<div id="playlist-list-menu" class="playlist-menu">
+					<div class="bar"></div>
+				</div>
+				<div id="playlist-scroll-up-button"></div>
+				<div id="playlist-scroll-down-button"></div>
+				<div id="playlist-resize-target"></div>
+			</div>
+		</div>
+	</div>
+
+	<div id="main-window" class="window draggable" tabindex="-1">
+
+		<div id="title-bar" class="selected draggable">
+			<div id="option-context">
+				<div class="handle" style="width: 100%; height: 100%;">
+					<div id="option" title="Winamp Menu" class=""></div>
+				</div>
+			</div>
+			<div id="minimize" title="Minimize" class=""></div>
+			<div id="shade" title="Toggle Windowshade Mode" class=""></div>
+			<div id="close" title="Close" class=""></div>
+		</div>
+
+		<div class="status">
+			<div id="clutter-bar">
+				<div>
+					<div class="handle" style="width: 100%; height: 100%;">
+						<div id="button-o"></div>
+					</div>
+				</div>
+				<div id="button-a"></div>
+				<div id="button-i"></div>
+				<div title="Toggle Doublesize Mode" id="button-d" class=""></div>
+				<div id="button-v"></div>
+			</div>
+			<div id="play-pause"></div>
+			<div id="work-indicator" class=""></div>
+			<div id="time" class="countdown">
+				<div id="minute-first-digit" class="digit digit-0"></div>
+				<div id="minute-second-digit" class="digit digit-0"></div>
+				<div id="second-first-digit" class="digit digit-0"></div>
+				<div id="second-second-digit" class="digit digit-0"></div>
+			</div>
+		</div>
+
+		<canvas id="visualizer" style="width: 76px; height: 16px;" width="152" height="32"></canvas>
+
+		<div class="media-info">
+			<div id="marquee" class="text" title="Song Title">
+				<div style="white-space: nowrap; will-change: transform; transform: translateX(-195px);">
+					<span class="character character-49">1</span><span class="character character-46">.</span><span class="character character-32"></span><span class="character character-100">D</span><span class="character character-106">J</span><span class="character character-32"></span><span class="character character-109">M</span><span class="character character-105">i</span><span class="character character-107">k</span><span class="character character-101">e</span><span class="character character-32"></span><span class="character character-108">L</span><span class="character character-108">l</span><span class="character character-97">a</span><span class="character character-109">m</span><span class="character character-97">a</span><span class="character character-32"></span><span class="character character-45">-</span><span class="character character-32"></span><span class="character character-108">L</span><span class="character character-108">l</span><span class="character character-97">a</span><span class="character character-109">m</span><span class="character character-97">a</span><span class="character character-32"></span><span class="character character-119">W</span><span class="character character-104">h</span><span class="character character-105">i</span><span class="character character-112">p</span><span class="character character-112">p</span><span class="character character-105">i</span><span class="character character-110">n</span><span class="character character-39">'</span><span class="character character-32"></span><span class="character character-105">I</span><span class="character character-110">n</span><span class="character character-116">t</span><span class="character character-114">r</span><span class="character character-111">o</span><span class="character character-32"></span><span class="character character-40">(</span><span class="character character-48">0</span><span class="character character-58">:</span><span class="character character-48">0</span><span class="character character-53">5</span><span class="character character-41">)</span><span class="character character-32"></span><span class="character character-32"></span><span class="character character-42">*</span><span class="character character-42">*</span><span class="character character-42">*</span><span class="character character-32"></span><span class="character character-32"></span><span class="character character-49">1</span><span class="character character-46">.</span><span class="character character-32"></span><span class="character character-100">D</span><span class="character character-106">J</span><span class="character character-32"></span><span class="character character-109">M</span><span class="character character-105">i</span><span class="character character-107">k</span><span class="character character-101">e</span><span class="character character-32"></span><span class="character character-108">L</span><span class="character character-108">l</span><span class="character character-97">a</span><span class="character character-109">m</span><span class="character character-97">a</span><span class="character character-32"></span><span class="character character-45">-</span><span class="character character-32"></span><span class="character character-108">L</span><span class="character character-108">l</span><span class="character character-97">a</span><span class="character character-109">m</span><span class="character character-97">a</span><span class="character character-32"></span><span class="character character-119">W</span><span class="character character-104">h</span><span class="character character-105">i</span><span class="character character-112">p</span><span class="character character-112">p</span><span class="character character-105">i</span><span class="character character-110">n</span><span class="character character-39">'</span><span class="character character-32"></span><span class="character character-105">I</span><span class="character character-110">n</span><span class="character character-116">t</span><span class="character character-114">r</span><span class="character character-111">o</span><span class="character character-32"></span><span class="character character-40">(</span><span class="character character-48">0</span><span class="character character-58">:</span><span class="character character-48">0</span><span class="character character-53">5</span><span class="character character-41">)</span><span class="character character-32"></span><span class="character character-32"></span><span class="character character-42">*</span><span class="character character-42">*</span><span class="character character-42">*</span><span class="character character-32"></span><span class="character character-32"></span>
+				</div>
+			</div>
+			<div id="kbps"><span class=" character character-49">1</span><span
+					class=" character character-50">2</span><span class=" character character-56">8</span>
+			</div>
+			<div id="khz"><span class=" character character-52">4</span><span
+					class=" character character-56">8</span></div>
+			<div class="mono-stereo">
+				<div id="stereo" class="selected"></div>
+				<div id="mono" class=""></div>
+			</div>
+		</div>
+		<div id="volume" style="background-position: 0 -315px;">
+			<!--suppress HtmlFormInputWithoutLabel -->
+			<input type="range" min="0" max="100" step="1" title="Volume Bar" value="78">
+		</div>
+		<!--suppress HtmlFormInputWithoutLabel -->
+		<input id="balance" type="range" min="-100" max="100" step="1" style="background-position: 0 0;" title="Balance" value="0">
+		<div class="windows">
+			<div id="equalizer-button" class="selected" title="Toggle Graphical Equalizer"></div>
+			<div id="playlist-button" class="selected" title="Toggle Playlist Editor"></div>
+		</div>
+		<!--suppress HtmlFormInputWithoutLabel -->
+		<input id="position" class="left" type="range" min="0" max="100" step="1" title="Seeking Bar" value="0">
+		<div class="actions">
+			<div id="previous" title="Previous Track"></div>
+			<div id="play" title="Play"></div>
+			<div id="pause" title="Pause"></div>
+			<div id="stop" title="Stop"></div>
+			<div id="next" title="Next Track"></div>
+		</div>
+		<div id="eject" title="Open File(s)"></div>
+		<div class="shuffle-repeat">
+			<div style="width: 100%; height: 100%;">
+				<div id="shuffle" class="" title="Toggle Shuffle"></div>
+			</div>
+			<div style="width: 100%; height: 100%;">
+				<div id="repeat" class="" title="Toggle Repeat"></div>
+			</div>
+		</div>
+		<a id="about" target="blank" href="https://github.com/captbaritone/webamp" title="About"></a></div>
+</div>

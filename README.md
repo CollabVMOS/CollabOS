@@ -80,7 +80,7 @@ More about [Video game preservation](https://en.wikipedia.org/wiki/Video_game_pr
 * ES6 Promise Polyfill [Repo](https://github.com/stefanpenner/es6-promise) License MIT
 * ES6 Fetch Polyfill [Repo](https://github.com/github/fetch) License MIT
 
-## Similar Desktop simulations projects
+## Similar recommended projects
 
 * window93.net [Website](https://windows93.net) License ?
 * 98.js [Website](https://98.js.org/) [Repo](https://github.com/1j01/98) License ?

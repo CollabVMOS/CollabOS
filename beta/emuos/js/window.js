@@ -4747,8 +4747,7 @@
 	$.emuos.windowSetup = function (propagateToInstances, options) {
 		options = arguments.length === 1 ? propagateToInstances : options;
 		if (propagateToInstances === true && arguments.length > 1) {
-			$("." + $.emuos.window.prototype.classes.windowContent)
-				.window("option", options);
+			$("." + $.emuos.window.prototype.classes.windowContent).window("option", options);
 		}
 		var o = $.emuos.window.prototype.options;
 		return options ? $.extend(true, o, options) : o;

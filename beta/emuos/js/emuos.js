@@ -63,8 +63,7 @@
 				link: 'apps/quake1/index.html'
 			} , {
 				name: 'Winamp 2.9',
-				icon: 'apps/winamp/favicon.ico',
-				link: 'apps/winamp/index.html'
+				icon: 'apps/winamp/favicon.ico'
 			}],
 			start: [{
 				name: 'Item'
@@ -143,7 +142,6 @@
 		this.$taskbar = $('.taskbar').first();
 
 		for (var j in self.options.icons) {
-
 			// noinspection JSUnfilteredForInLoop
 			var $icon = $('<a class="icon" href="javascript:">' +
 							'<img src="' + self.options.icons[j]['icon'] + '" alt="' + self.options.icons[j]['name'] + '" />' +
@@ -154,8 +152,12 @@
 			$icon.data('name', self.options.icons[j]['name']);
 			// noinspection JSUnfilteredForInLoop
 			$icon.data('icon', self.options.icons[j]['icon']);
+
 			// noinspection JSUnfilteredForInLoop
-			$icon.data('link', self.options.icons[j]['link']);
+			if (typeof self.options.icons[j]['link'] !== 'undefined') {
+				// noinspection JSUnfilteredForInLoop
+				$icon.data('link', self.options.icons[j]['link']);
+			}
 
 			// noinspection JSUnfilteredForInLoop
 			self.$desktop.append($icon);
@@ -164,11 +166,29 @@
 				e.preventDefault();
 			}).off('dblclick').on('dblclick', function() {
 				// noinspection JSUnfilteredForInLoop,JSReferencingMutableVariableFromClosure
-				self.iframe({
-					title: $(this).data('name'),
-					icon :$(this).data('icon'),
-					src: $(this).data('link')
-				});
+				if (typeof $(this).data('link') !== 'undefined') {
+					// noinspection JSUnfilteredForInLoop,JSReferencingMutableVariableFromClosure
+					self.iframe({
+						title: $(this).data('name'),
+						icon :$(this).data('icon'),
+						src: $(this).data('link')
+					});
+				} else {
+					switch ($(this).data('name')) {
+						case 'Winamp 2.9':
+							// noinspection JSUnresolvedFunction
+							var winamp_content = self.options.apps.winamp.render();
+
+							// noinspection JSUnfilteredForInLoop,JSReferencingMutableVariableFromClosure
+							self.widget({
+								title: $(this).data('name'),
+								icon :$(this).data('icon'),
+								content: winamp_content
+							});
+							break;
+						default:
+					}
+				}
 			});
 		}
 
@@ -263,6 +283,20 @@
 				return true;
 			}
 		});
+	};
+
+	EmuOS.prototype.widget = function (options) {
+		var self = this;
+
+		var title	= typeof options.title		!== 'undefined'	? options.title		: '';
+		// var icon	= typeof options.icon		!== 'undefined'	? options.icon		: '';
+		var content	= typeof options.content	!== 'undefined'	? options.content	: '';
+
+		var widget	= $('<div class="widget" title="'+ title +'">' + content + '</div>');
+
+		self.$body.append(widget);
+
+		return widget;
 	};
 
 	EmuOS.prototype.window = function (options) {

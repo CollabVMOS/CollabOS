@@ -42,6 +42,9 @@
 			window: {
 				deps: ['taskbar']
 			},
+			winamp: {
+				deps: ['jquery']
+			},
 			lang: {
 				deps: ['taskbar']
 			}
@@ -72,16 +75,20 @@
 			desktop: 'desktop',
 			taskbar: 'taskbar',
 			window: 'window',
+			winamp: 'apps/winamp/winamp',
 			lang: 'lang-en'
 		}
 	});
 
 	// noinspection JSCheckFunctionSignatures,JSUnusedLocalSymbols
 	require([
-		'jquery',
-		'emuos',
-		'filesystem',
 		'text!../certs/emudisk.pem',
+		'jquery',
+		'filesystem',
+		'emuos',
+		'apps/winamp/winamp',
+		'text!apps/winamp/winamp.html',
+		'text!apps/tree/tree.html',
 		'desktop',
 		'taskbar',
 		'window',
@@ -92,7 +99,7 @@
 		'jqueryuitree',
 		'jquerycustomscrollbar',
 		'jqyeryajaxretry'
-	], function($, EmuOS, FileSystem, github_private_key) {
+	], function(github_private_key, $, FileSystem, EmuOS, AppWinamp, winamp_template, tree_template) {
 		$(function() {
 			var filesystem = new FileSystem({
 				github: {
@@ -100,90 +107,22 @@
 				}
 			});
 
+			var winamp = new AppWinamp({template: winamp_template});
+
 			// noinspection JSUnusedLocalSymbols
 			var desktop = new EmuOS({
 				filesystem: filesystem,
-				theme: 'theme-win9x'
+				theme: 'theme-win9x',
+				apps: {
+					winamp: winamp
+				}
 			});
 
 			// noinspection JSUnresolvedFunction
 			/*desktop.window({
-				title: 'Simple Window with Text',
-				icon: 'apps/wing/favicon.ico',
-				content: 'this is how the world ends thisdnosifvoibdfo dfuvbdf difubfd' +
-					'<p>another paragraph</p>' +
-					'<p>another paragraph</p>' +
-					'<p>another paragraph</p>' +
-					'<p>another paragraph</p>' +
-					'<p>another paragraph</p>' +
-					'<p>another paragraph</p>' +
-					'<p>another paragraph</p>' +
-					'<p>another paragraph</p>' +
-					'<p>another paragraph</p>'
-			});
-
-			// noinspection JSUnresolvedFunction
-			desktop.window({
 				title: 'Tree Component',
 				icon: 'apps/wing/favicon.ico',
-				content:'<ul class="tree theme-classic">' +
-							'<li class="tree-leaf tree-has-children">' +
-								'<a class="tree-leaf-label" href="javascript:">Label A</a>' +
-								'<input type="checkbox" />' +
-								'<span class="tree-toggle"></span>' +
-								'<ul class="tree-subtree">' +
-									'<li class="tree-leaf tree-has-children">' +
-										'<a class="tree-leaf-label" href="javascript:">Label A.A</a>' +
-										'<input type="checkbox" />' +
-										'<span class="tree-toggle"></span>' +
-										'<ul class="tree-subtree">' +
-											'<li class="tree-leaf">' +
-												'<a class="tree-leaf-label" href="javascript:">Label A.A.A</a>' +
-											'</li>' +
-											'<li class="tree-leaf">' +
-												'<a class="tree-leaf-label" href="javascript:">Label A.A.B</a>' +
-											'</li>' +
-										'</ul>' +
-									'</li>' +
-									'<li class="tree-leaf">' +
-										'<a class="tree-leaf-label" href="javascript:">Label A.A.A</a>' +
-									'</li>' +
-									'<li class="tree-leaf">' +
-										'<a class="tree-leaf-label" href="javascript:">Label A.A.B</a>' +
-									'</li>' +
-									'<li class="tree-leaf tree-has-children">' +
-										'<a class="tree-leaf-label" href="javascript:">Label A.A</a>' +
-										'<input type="checkbox" />' +
-										'<span class="tree-toggle"></span>' +
-										'<ul class="tree-subtree">' +
-											'<li class="tree-leaf">' +
-												'<a class="tree-leaf-label" href="javascript:">Label A.A.A</a>' +
-											'</li>' +
-											'<li class="tree-leaf">' +
-												'<a class="tree-leaf-label" href="javascript:">Label A.A.B</a>' +
-											'</li>' +
-										'</ul>' +
-									'</li>' +
-								'</ul>' +
-							'</li>' +
-							'<li class="tree-leaf tree-has-children">' +
-								'<a class="tree-leaf-label" href="javascript:">Label B</a>' +
-								'<input type="checkbox" />' +
-								'<span class="tree-toggle"></span>' +
-								'<ul class="tree-subtree">' +
-									'<li class="tree-leaf">' +
-										'<a class="tree-leaf-label" href="javascript:">Label B.A</a>' +
-									'</li>' +
-								'</ul>' +
-							'</li>' +
-						'</ul>'
-			});
-
-			// noinspection JSUnresolvedFunction
-			desktop.window({
-				title: 'FileTree Component',
-				icon: 'apps/wing/favicon.ico',
-				content: '<div id="treeview"></div>'
+				content: tree_template
 			});
 
 			// noinspection JSUnresolvedFunction
@@ -208,20 +147,6 @@
 					show_button_remove: false,
 					node_remove_message: 'Are you sure?'
 				});
-			});
-
-			// noinspection JSUnresolvedFunction
-			desktop.iframe({
-				title: 'Visual Studio Code',
-				icon: 'apps/monaco-editor/favicon.ico',
-				src: 'apps/monaco-editor/index.html'
-			});
-
-			// noinspection JSUnresolvedFunction
-			desktop.iframe({
-				title: 'DOSBox 0.74',
-				icon: 'apps/dosbox/favicon.ico',
-				src: 'apps/dosbox/index.html'
 			});*/
 		});
 	});
