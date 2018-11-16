@@ -129,6 +129,11 @@
 }
 
 /*noinspection CssReplaceWithShorthandSafely*/
+.theme-win9x .emuos-taskbar .emuos-taskbar-window-button.ui-button.ui-state-active .ui-button-text {
+	background-image: url(../../../images/themes/win9x/taskbar/bg.png);
+}
+
+/*noinspection CssReplaceWithShorthandSafely*/
 .theme-win9x .emuos-taskbar .ui-button.ui-button-text-icon-primary .ui-button-text {
 	padding-top: 1px;
 	padding-right: 2px;
