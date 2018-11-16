@@ -1,6 +1,6 @@
 # Emupedia
-Discord [![Discord](https://img.shields.io/discord/510149138491506688.svg)](https://discord.gg/nAXSsRJ)
-Gitter [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/Emupedia/Lobby)
+[![Discord](https://img.shields.io/discord/510149138491506688.svg)](https://discord.gg/nAXSsRJ)
+[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/Emupedia/Lobby)
 ---
 
 The purpose of Emupedia is to serve as a meta-resource, hub and community for those interested in digital preservation and computer history and aims to digitally collect games and software from a wide variety of systems no longer in production and make them available online.
