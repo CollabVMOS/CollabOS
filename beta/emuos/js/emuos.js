@@ -35,7 +35,7 @@
 			},
 			icons: [{
 				name: 'Windows 93',
-				icon: 'https://www.windows93.net/favicon.ico',
+				icon: 'https://windows93.net/favicon.ico',
 				link: 'https://v1.windows93.net/'
 			} , {
 				name: 'Visual Studio Code',

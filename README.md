@@ -1,8 +1,7 @@
-`Discord` [![Discord](https://img.shields.io/discord/510149138491506688.svg)](https://discord.gg/nAXSsRJ)
-`Gitter` [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/Emupedia/Lobby)
----
-
 # Emupedia
+Discord [![Discord](https://img.shields.io/discord/510149138491506688.svg)](https://discord.gg/nAXSsRJ)
+Gitter [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/Emupedia/Lobby)
+---
 
 The purpose of Emupedia is to serve as a meta-resource, hub and community for those interested in digital preservation and computer history and aims to digitally collect games and software from a wide variety of systems no longer in production and make them available online.
 
@@ -82,7 +81,7 @@ More about [Video game preservation](https://en.wikipedia.org/wiki/Video_game_pr
 
 ## Similar recommended projects
 
-* window93.net [Website](https://windows93.net) License ?
+* window93.net [Website](https://windows93.net) License [CC BY-NC 4.0](https://windows93.net/#!/c/TOS.html)
 * 98.js [Website](https://98.js.org) [Repo](https://github.com/1j01/98) License ?
 * Rahul.io [Website](https://rahul.io) [Repo](https://github.com/lolstring/window98-html-css-js) License [MIT](https://github.com/lolstring/window98-html-css-js/blob/master/LICENSE)
 * OS.js [Website](https://www.os-js.org) [Repo](https://github.com/os-js/OS.js) License [BSD](https://github.com/os-js/OS.js/blob/master/LICENSE)
