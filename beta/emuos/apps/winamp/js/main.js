@@ -31,7 +31,9 @@
 
 	Winamp.prototype.events = function() {
 		// noinspection JSValidateTypes
-		$('.draggable').draggable();
+		$('.draggable').draggable({
+			cancel: '.window .marquee, .window .windows, .window .actions, .window .eject, .window .shuffle-repeat, .window .about, input'
+		});
 	};
 
 	Winamp.prototype.render = function(template) {

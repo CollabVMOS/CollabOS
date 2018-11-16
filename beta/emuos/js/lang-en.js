@@ -29,6 +29,7 @@
 			restore: "Restore",
 			slug: "EN",
 			"startButton:start": "Start",
+			"startButton:title": "Click here to begin",
 			toggleFullscreenEnter: "Enter fullscreen mode",
 			toggleFullscreenLeave: "Leave fullscreen mode"
 		});

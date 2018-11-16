@@ -176,7 +176,7 @@
 	display: none;
 }
 
-.webamp #marquee {
+.webamp .marquee {
 	position: absolute;
 	left: 111px;
 	top: 24px;
@@ -372,7 +372,7 @@
 	width: 22px;
 }
 
-.webamp #eject {
+.webamp .eject {
 	position: absolute;
 	top: 89px;
 	left: 136px;
@@ -392,16 +392,16 @@
 	height: 15px;
 }
 
-.webamp .shuffle-repeat #shuffle {
+.webamp .shuffle-repeat .shuffle {
 	width: 47px;
 }
 
-.webamp .shuffle-repeat #repeat {
+.webamp .shuffle-repeat .repeat {
 	left: 46px;
 	width: 28px;
 }
 
-.webamp #about {
+.webamp .about {
 	position: absolute;
 	top: 91px;
 	left: 253px;
@@ -477,8 +477,8 @@
 	top: 2px;
 	left: 204px;
 }
-.webamp .shade #eject,
-.webamp .shade #eject:active {
+.webamp .shade .eject,
+.webamp .shade .eject:active {
 	height: 10px;
 	width: 10px;
 	top: 2px;

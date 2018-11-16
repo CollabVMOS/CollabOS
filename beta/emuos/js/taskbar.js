@@ -2780,13 +2780,9 @@
 		_hideMenus: function (options) {
 			var self = this,
 				// hide all menus or only the one from the current taskbar
-				$elem = options && options.own
-					? this.$elem
-					: $("." + this.classes.taskbar),
-				$menus = $elem
-					.find("[data-menu-type], ." + this.classes.windowGroupMenu),
-				$startButtons = $elem
-					.find("." + this.classes.startButton);
+				$elem = options && options.own ? this.$elem : $("." + this.classes.taskbar),
+				$menus = $elem.find("[data-menu-type], ." + this.classes.windowGroupMenu),
+				$startButtons = $elem.find("." + this.classes.startButton);
 
 			if (options && options.not) {
 				self._openedElements(true);
@@ -2968,22 +2964,14 @@
 				$elem = this.$elem,
 				horizontal = o.orientation === "horizontal";
 
-			this.$startButtonsContainer = $elem
-				.find("." + c.startButtonsContainer);
-			this.$buttonsContainer = $elem
-				.find("." + c.buttonsContainer);
-			this.$windowButtonsContainer = $elem
-				.find("." + c.windowButtonsContainer);
+			this.$startButtonsContainer = $elem.find("." + c.startButtonsContainer);
+			this.$buttonsContainer = $elem.find("." + c.buttonsContainer);
+			this.$windowButtonsContainer = $elem.find("." + c.windowButtonsContainer);
 
-			this.$elem
-				.children("[data-separator-for]")
-				.not("[data-separator-for=systemButtonsContainer]")
-				.remove();
+			this.$elem.children("[data-separator-for]").not("[data-separator-for=systemButtonsContainer]").remove();
 
 			this.$startButtonsContainer.remove();
-			this.$buttonsContainer
-				.children(":not(." + c.buttonUserDefined + ")")
-				.remove();
+			this.$buttonsContainer.children(":not(." + c.buttonUserDefined + ")").remove();
 
 			// act as a part of "destroy" method - destroy containers
 			// and don't create anything
@@ -3580,14 +3568,13 @@
 			var self = this,
 				$elem = this.$elem,
 				// find menus that should be treated as start menus
-				$menus = $elem
-					.find(
-						"[data-menu-type=start]" +
-						"[data-menu-lang=" + this.options.language + "]" +
-						":not(." + this.classes.menuHidden + "), " +
-						"[data-menu-type=start][data-menu-lang=\"\*\"]" +
-						":not(." + this.classes.menuHidden + ")"
-					);
+				$menus = $elem.find(
+					"[data-menu-type=start]" +
+					"[data-menu-lang=" + this.options.language + "]" +
+					":not(." + this.classes.menuHidden + "), " +
+					"[data-menu-type=start][data-menu-lang=\"\*\"]" +
+					":not(." + this.classes.menuHidden + ")"
+				);
 
 			// destroy menus and return is there should be no menus or destoy
 			// is in progress
@@ -3604,9 +3591,7 @@
 
 			this.$startButtonsContainer = this._factory("startButtonsContainer");
 
-			this.$buttonsContainer.length
-				? this.$startButtonsContainer.insertBefore(this.$buttonsContainer)
-				: this.$startButtonsContainer.appendTo($elem);
+			this.$buttonsContainer.length ? this.$startButtonsContainer.insertBefore(this.$buttonsContainer) : this.$startButtonsContainer.appendTo($elem);
 
 			var positioned = false;
 
@@ -3619,14 +3604,12 @@
 					return true;
 				}
 
-				var title = self._i18n("startButton:" + name);
+				var title = self._i18n("startButton:title");
 
 				// create button
 				var $start = self._factory("startButton", {
 					name: name
-				})
-					.attr("title", title !== "undefined" ? title : name)
-					.appendTo(self.$startButtonsContainer);
+				}).attr("data-title", typeof title !== "undefined" ? title : name).appendTo(self.$startButtonsContainer);
 
 				// debug for missing translations
 				if (title === "undefined") {
@@ -3931,9 +3914,7 @@
 					}
 				};
 
-				$menu
-					.show()
-					.menu({
+				$menu.show().menu({
 						focus: startFocusSelect,
 						select: startFocusSelect,
 						blur: function (event, ui) {
@@ -3945,9 +3926,7 @@
 								event: event
 							});
 						}
-					})
-					.position(startPosition)
-					.hide();
+					}).position(startPosition).hide();
 
 				$start.on("click." + self._cache.uep, function (event) {
 					self._hideMenus({
@@ -3986,9 +3965,7 @@
 
 				self._bindMenuAutoOpen($start, $menu);
 
-				$start.on(
-					"mouseup." + self._cache.uep
-					+ " mouseleave." + self._cache.uep, function () {
+				$start.on("mouseup." + self._cache.uep + " mouseleave." + self._cache.uep, function () {
 						self._setConnectedButtonState.apply(this, [self]);
 					});
 			});

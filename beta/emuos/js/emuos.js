@@ -66,7 +66,23 @@
 				icon: 'apps/winamp/favicon.ico'
 			}],
 			start: [{
-				name: 'Item'
+				name: 'Windows Update'
+			} , {
+				name: 'Programs'
+			} , {
+				name: 'Documents'
+			} , {
+				name: 'Settings'
+			} , {
+				name: 'Search'
+			} , {
+				name: 'Help'
+			} , {
+				name: 'Run...'
+			} , {
+				name: 'Log Off...'
+			} , {
+				name: 'Shut Down...'
 			}]
 		};
 
@@ -104,6 +120,26 @@
 					importStyles('css/themes/win3x/cursors.css');
 					importStyles('css/themes/win9x/cursors.css');
 				}
+
+				self.options.start = [{
+					name: 'Windows Update'
+				} , {
+					name: 'Programs'
+				} , {
+					name: 'Documents'
+				} , {
+					name: 'Settings'
+				} , {
+					name: 'Search'
+				} , {
+					name: 'Help'
+				} , {
+					name: 'Run...'
+				} , {
+					name: 'Log Off...'
+				} , {
+					name: 'Shut Down...'
+				}];
 				break;
 		}
 
