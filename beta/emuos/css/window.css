@@ -72,10 +72,11 @@
 
 .emuos-window .emuos-window-icon {
 	position: absolute;
-	left: .3em;
-	display: inline-block;
-	top: 50%;
-	margin-top: -8px;
+	/*left: .3em;*/
+	left: 0;
+	/*display: inline-block;*/
+	/*top: 50%;*/
+	/*margin-top: -8px;*/
 	cursor: default;
 }
 

@@ -21,8 +21,8 @@
 /*noinspection CssOptimizeSimilarProperties,CssReplaceWithShorthandSafely*/
 .theme-win9x .emuos-window .ui-dialog-titlebar {
 	background-color: #808080;
-	background: -webkit-gradient(linear, left top, right top, color-stop(0, #808080), color-stop(100%, #cccccc)) !important;
-	background: -webkit-linear-gradient(left, #808080, #cccccc) !important;
+	background: -webkit-gradient(linear, left top, right top, color-stop(0, #808080), color-stop(100%, #c0c0c0)) !important;
+	background: -webkit-linear-gradient(left, #808080, #c0c0c0) !important;
 	border-radius: 0;
 	font-size: 13px;
 	font-weight: bold;
@@ -32,11 +32,7 @@
 	padding: 0;
 	padding-left: 19px;
 	height: 18px;
-}
-
-.theme-win9x .emuos-window .ui-dialog-titlebar .ui-dialog-title {
-	line-height: 21px;
-	margin: -2px 0 0;
+	color: #d4d0c8;
 }
 
 .theme-win9x .emuos-window .ui-dialog-titlebar.ui-state-active {
@@ -46,6 +42,12 @@
 	background: -webkit-linear-gradient(left, #0a246a, #a6caf0) !important;
 	border: none;
 	border-bottom: 1px solid #c0c0c0;
+	color: #fff;
+}
+
+.theme-win9x .emuos-window .ui-dialog-titlebar .ui-dialog-title {
+	line-height: 19px;
+	/*margin: -2px 0 0;*/
 }
 
 .theme-win9x .emuos-window .emuos-window-content {
