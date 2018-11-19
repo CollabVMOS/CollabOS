@@ -10,11 +10,19 @@
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAALBAMAAAC9q6FRAAAAFVBMVEUAAAALDxYvL0RKWmt7hJStvMTa5+opTTwbAAAAMUlEQVQI12NQFAQBIQaxNBBIZGALBYIQAyAtKiqKlwapM2RgcwEBQwZhYxAwZICaBwCdgQ6Jd297uQAAAABJRU5ErkJggg==)
 }
 
-.webamp #balance::-webkit-slider-thumb:active {
+.webamp #balance::-ms-thumb {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAALBAMAAAC9q6FRAAAAFVBMVEUAAAALDxYvL0RKWmt7hJStvMTa5+opTTwbAAAAMUlEQVQI12NQFAQBIQaxNBBIZGALBYIQAyAtKiqKlwapM2RgcwEBQwZhYxAwZICaBwCdgQ6Jd297uQAAAABJRU5ErkJggg==)
+}
+
+.webamp #balance:active::-webkit-slider-thumb {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAALBAMAAAC9q6FRAAAAFVBMVEUAAAALDxYZICovL0RKWmva5+r///+U4Y9MAAAAMUlEQVQI12MwFAQBYQbRUBAQZGBlAAIWBiQ6ISEBKw2SV4TTIi4gIMhgJKQopCgoDAB2aAh/NddRQgAAAABJRU5ErkJggg==)
 }
 
-.webamp #balance::-moz-range-thumb:active {
+.webamp #balance:active::-moz-range-thumb {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAALBAMAAAC9q6FRAAAAFVBMVEUAAAALDxYZICovL0RKWmva5+r///+U4Y9MAAAAMUlEQVQI12MwFAQBYQbRUBAQZGBlAAIWBiQ6ISEBKw2SV4TTIi4gIMhgJKQopCgoDAB2aAh/NddRQgAAAABJRU5ErkJggg==)
+}
+
+.webamp #balance:active::-ms-thumb {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAALBAMAAAC9q6FRAAAAFVBMVEUAAAALDxYZICovL0RKWmva5+r///+U4Y9MAAAAMUlEQVQI12MwFAQBYQbRUBAQZGBlAAIWBiQ6ISEBKw2SV4TTIi4gIMhgJKQopCgoDAB2aAh/NddRQgAAAABJRU5ErkJggg==)
 }
 
@@ -582,11 +590,19 @@
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAKBAMAAAC6bkgfAAAAJ1BMVEUJAgJlZXNlZnN1WyKDaTCNdTqcgkqvmGHFsn7by57u4rv06sf19fW6wGFFAAAARElEQVQI12PQnIkMAhgkXZDAUQYGSY/dcLCnFMj3PgMHp8F8YziwBvPL4aAaxPdB6N8G4p9CyJebAvmhyICBQYABBQAALnc7YhsUgeUAAAAASUVORK5CYII=)
 }
 
+.webamp #position::-ms-thumb {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAKBAMAAAC6bkgfAAAAJ1BMVEUJAgJlZXNlZnN1WyKDaTCNdTqcgkqvmGHFsn7by57u4rv06sf19fW6wGFFAAAARElEQVQI12PQnIkMAhgkXZDAUQYGSY/dcLCnFMj3PgMHp8F8YziwBvPL4aAaxPdB6N8G4p9CyJebAvmhyICBQYABBQAALnc7YhsUgeUAAAAASUVORK5CYII=)
+}
+
 .webamp #position:active::-webkit-slider-thumb {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAKBAMAAAC6bkgfAAAAJ1BMVEUgDABhRhBmSxNsUBdwVRt4XSGBZyqPdTmhhkuwmF6+qG/DrnXYxZOv4MtwAAAAR0lEQVQI12PwnIkMAhg8XZDAUQYGT4/dcLCnlIHB0vsMHJwG85XgQBvML4eDaiBf0wehfxuIfwohX67KwCAZigwYGAQYUAAAXWI7mESGeYIAAAAASUVORK5CYII=)
 }
 
 .webamp #position:active::-moz-range-thumb {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAKBAMAAAC6bkgfAAAAJ1BMVEUgDABhRhBmSxNsUBdwVRt4XSGBZyqPdTmhhkuwmF6+qG/DrnXYxZOv4MtwAAAAR0lEQVQI12PwnIkMAhg8XZDAUQYGT4/dcLCnlIHB0vsMHJwG85XgQBvML4eDaiBf0wehfxuIfwohX67KwCAZigwYGAQYUAAAXWI7mESGeYIAAAAASUVORK5CYII=)
+}
+
+.webamp #position:active::-ms-thumb {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAKBAMAAAC6bkgfAAAAJ1BMVEUgDABhRhBmSxNsUBdwVRt4XSGBZyqPdTmhhkuwmF6+qG/DrnXYxZOv4MtwAAAAR0lEQVQI12PwnIkMAhg8XZDAUQYGT4/dcLCnlIHB0vsMHJwG85XgQBvML4eDaiBf0wehfxuIfwohX67KwCAZigwYGAQYUAAAXWI7mESGeYIAAAAASUVORK5CYII=)
 }
 
@@ -812,11 +828,19 @@
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAALBAMAAAC9q6FRAAAAFVBMVEUAAAALDxYvL0RKWmt7hJStvMTa5+opTTwbAAAAMUlEQVQI12NQFAQBIQaxNBBIZGALBYIQAyAtKiqKlwapM2RgcwEBQwZhYxAwZICaBwCdgQ6Jd297uQAAAABJRU5ErkJggg==)
 }
 
-.webamp #volume input::-webkit-slider-thumb:active {
+.webamp #volume input::-ms-thumb {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAALBAMAAAC9q6FRAAAAFVBMVEUAAAALDxYvL0RKWmt7hJStvMTa5+opTTwbAAAAMUlEQVQI12NQFAQBIQaxNBBIZGALBYIQAyAtKiqKlwapM2RgcwEBQwZhYxAwZICaBwCdgQ6Jd297uQAAAABJRU5ErkJggg==)
+}
+
+.webamp #volume input:active::-webkit-slider-thumb {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAALBAMAAAC9q6FRAAAAFVBMVEUAAAALDxYZICovL0RKWmva5+r///+U4Y9MAAAAMUlEQVQI12MwFAQBYQbRUBAQZGBlAAIWBiQ6ISEBKw2SV4TTIi4gIMhgJKQopCgoDAB2aAh/NddRQgAAAABJRU5ErkJggg==)
 }
 
-.webamp #volume input::-moz-range-thumb:active {
+.webamp #volume input:active::-moz-range-thumb {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAALBAMAAAC9q6FRAAAAFVBMVEUAAAALDxYZICovL0RKWmva5+r///+U4Y9MAAAAMUlEQVQI12MwFAQBYQbRUBAQZGBlAAIWBiQ6ISEBKw2SV4TTIi4gIMhgJKQopCgoDAB2aAh/NddRQgAAAABJRU5ErkJggg==)
+}
+
+.webamp #volume input:active::-ms-thumb {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAALBAMAAAC9q6FRAAAAFVBMVEUAAAALDxYZICovL0RKWmva5+r///+U4Y9MAAAAMUlEQVQI12MwFAQBYQbRUBAQZGBlAAIWBiQ6ISEBKw2SV4TTIi4gIMhgJKQopCgoDAB2aAh/NddRQgAAAABJRU5ErkJggg==)
 }
 

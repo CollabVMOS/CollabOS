@@ -253,12 +253,20 @@
 	width: 65px;
 	display: block;
 }
+
 .webamp #volume input::-webkit-slider-thumb {
 	top: 1px;
 	height: 11px;
 	width: 14px;
 }
+
 .webamp #volume input::-moz-range-thumb {
+	top: 1px;
+	height: 11px;
+	width: 14px;
+}
+
+.webamp #volume input::-ms-thumb {
 	top: 1px;
 	height: 11px;
 	width: 14px;
@@ -278,7 +286,14 @@
 	height: 11px;
 	width: 14px;
 }
+
 .webamp #balance::-moz-range-thumb {
+	top: 1px;
+	height: 11px;
+	width: 14px;
+}
+
+.webamp #balance::-ms-thumb {
 	top: 1px;
 	height: 11px;
 	width: 14px;
@@ -326,6 +341,11 @@
 }
 
 .webamp #position::-moz-range-thumb {
+	height: 10px;
+	width: 29px;
+}
+
+.webamp #position::-ms-thumb {
 	height: 10px;
 	width: 29px;
 }
@@ -1183,24 +1203,51 @@
 	background: none;
 	border: none;
 }
+
 .webamp input[type="range"]::-webkit-slider-thumb {
 	-webkit-appearance: none;
 	border: none;
 	border-radius: 0;
 	background: none;
 }
+
 .webamp input[type="range"]::-moz-range-thumb {
 	border: none;
 	border-radius: 0;
 	background: none;
 }
+
+.webamp input[type="range"]::-ms-thumb {
+	border: none;
+	border-radius: 0;
+	background: none;
+}
+
 .webamp input[type="range"]::-moz-range-track {
 	border: none;
 	background: none;
 }
+
+.webamp input[type="range"]::-ms-track {
+	border: none;
+	background: none;
+	color: transparent;
+}
+
+.webamp input[type="range"]::-ms-fill-lower {
+	background: none;
+	border-radius: 0;
+}
+
+.webamp input[type="range"]::-ms-fill-upper {
+	background: none;
+	border-radius: 0;
+}
+
 .webamp input[type="range"]:focus {
 	outline: none;
 }
+
 .webamp input[type="range"]::-moz-focus-outer {
 	border: 0;
 }
