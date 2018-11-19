@@ -47,7 +47,7 @@
 				<div id="equalizer-close"></div>
 			</div>
 			<div id="on" class="selected"></div>
-			<div id="auto" class=""></div>
+			<div id="auto"></div>
 			<canvas id="eqGraph" width="113" height="19"></canvas>
 			<div id="presets-context">
 				<div class="handle" style="width: 100%; height: 100%;">
@@ -253,24 +253,7 @@
 			<div class="playlist-bottom-right draggable">
 				<div class="playlist-visualizer"></div>
 				<div class="playlist-running-time-display draggable">
-					<div><span class=" character character-48">0</span><span
-							class=" character character-58">:</span><span
-							class=" character character-48">0</span><span
-							class=" character character-48">0</span><span
-							class=" character character-47">/</span><span
-							class=" character character-52">4</span><span
-							class=" character character-51">3</span><span
-							class=" character character-58">:</span><span
-							class=" character character-52">4</span><span
-							class=" character character-48">0</span><span
-							class=" character character-32"> </span><span
-							class=" character character-32"> </span><span
-							class=" character character-32"> </span><span
-							class=" character character-32"> </span><span
-							class=" character character-32"> </span><span
-							class=" character character-32"> </span><span
-							class=" character character-32"> </span><span
-							class=" character character-32"> </span></div>
+					<div><span class=" character character-48">0</span><span class=" character character-58">:</span><span class=" character character-48">0</span><span class=" character character-48">0</span><span class=" character character-47">/</span><span class=" character character-52">4</span><span class=" character character-51">3</span><span class=" character character-58">:</span><span class=" character character-52">4</span><span class=" character character-48">0</span><span class=" character character-32"> </span><span class=" character character-32"> </span><span class=" character character-32"> </span><span class=" character character-32"> </span><span class=" character character-32"> </span><span class=" character character-32"> </span><span class=" character character-32"> </span><span class=" character character-32"> </span></div>
 				</div>
 				<div class="playlist-action-buttons">
 					<div class="playlist-previous-button"></div>
@@ -280,20 +263,7 @@
 					<div class="playlist-next-button"></div>
 					<div class="playlist-eject-button"></div>
 				</div>
-				<div class="mini-time countdown"><span style="left: 1px;"
-													   class="background-character character character-32"> </span><span
-						style="left: 7px;" class="background-character character character-32"> </span><span
-						style="left: 12px;"
-						class="background-character character character-32"> </span><span
-						style="left: 20px;"
-						class="background-character character character-32"> </span><span
-						style="left: 25px;"
-						class="background-character character character-32"> </span><span style="left: 1px;"
-																						  class=" character character-32"> </span><span
-						style="left: 7px;" class=" character character-32"> </span><span style="left: 12px;"
-																						 class=" character character-32"> </span><span
-						style="left: 20px;" class=" character character-32"> </span><span
-						style="left: 25px;" class=" character character-32"> </span></div>
+				<div class="mini-time countdown"><span style="left: 1px;" class="background-character character character-32"> </span><span style="left: 7px;" class="background-character character character-32"> </span><span style="left: 12px;" class="background-character character character-32"> </span><span style="left: 20px;" class="background-character character character-32"> </span><span style="left: 25px;" class="background-character character character-32"> </span><span style="left: 1px;"  class=" character character-32"> </span><span style="left: 7px;" class=" character character-32"> </span><span style="left: 12px;" class=" character character-32"> </span><span style="left: 20px;" class=" character character-32"> </span><span style="left: 25px;" class=" character character-32"> </span></div>
 				<div id="playlist-list-menu" class="playlist-menu">
 					<div class="bar"></div>
 				</div>
@@ -304,17 +274,17 @@
 		</div>
 	</div>
 
-	<div id="main-window" class="window draggable" tabindex="-1">
+	<div class="window main-window draggable" tabindex="-1">
 
-		<div id="title-bar" class="selected">
+		<div class="title-bar selected">
 			<div id="option-context">
 				<div class="handle" style="width: 100%; height: 100%;">
-					<div id="option" title="Winamp Menu" class=""></div>
+					<div class="option" title="Winamp Menu"></div>
 				</div>
 			</div>
-			<div id="minimize" title="Minimize" class=""></div>
-			<div id="shade" title="Toggle Windowshade Mode" class=""></div>
-			<div id="close" title="Close" class=""></div>
+			<div class="minimize" title="Minimize"></div>
+			<a class="shade" title="Toggle Windowshade Mode"></a>
+			<div class="close" title="Close"></div>
 		</div>
 
 		<div class="status">
@@ -326,11 +296,11 @@
 				</div>
 				<div id="button-a"></div>
 				<div id="button-i"></div>
-				<div title="Toggle Doublesize Mode" id="button-d" class=""></div>
+				<div title="Toggle Doublesize Mode" id="button-d"></div>
 				<div id="button-v"></div>
 			</div>
 			<div id="play-pause"></div>
-			<div id="work-indicator" class=""></div>
+			<div id="work-indicator"></div>
 			<div id="time" class="countdown">
 				<div id="minute-first-digit" class="digit digit-0"></div>
 				<div id="minute-second-digit" class="digit digit-0"></div>
@@ -347,28 +317,30 @@
 					<span class="character character-49">1</span><span class="character character-46">.</span><span class="character character-32"></span><span class="character character-100">D</span><span class="character character-106">J</span><span class="character character-32"></span><span class="character character-109">M</span><span class="character character-105">i</span><span class="character character-107">k</span><span class="character character-101">e</span><span class="character character-32"></span><span class="character character-108">L</span><span class="character character-108">l</span><span class="character character-97">a</span><span class="character character-109">m</span><span class="character character-97">a</span><span class="character character-32"></span><span class="character character-45">-</span><span class="character character-32"></span><span class="character character-108">L</span><span class="character character-108">l</span><span class="character character-97">a</span><span class="character character-109">m</span><span class="character character-97">a</span><span class="character character-32"></span><span class="character character-119">W</span><span class="character character-104">h</span><span class="character character-105">i</span><span class="character character-112">p</span><span class="character character-112">p</span><span class="character character-105">i</span><span class="character character-110">n</span><span class="character character-39">'</span><span class="character character-32"></span><span class="character character-105">I</span><span class="character character-110">n</span><span class="character character-116">t</span><span class="character character-114">r</span><span class="character character-111">o</span><span class="character character-32"></span><span class="character character-40">(</span><span class="character character-48">0</span><span class="character character-58">:</span><span class="character character-48">0</span><span class="character character-53">5</span><span class="character character-41">)</span><span class="character character-32"></span><span class="character character-32"></span><span class="character character-42">*</span><span class="character character-42">*</span><span class="character character-42">*</span><span class="character character-32"></span><span class="character character-32"></span><span class="character character-49">1</span><span class="character character-46">.</span><span class="character character-32"></span><span class="character character-100">D</span><span class="character character-106">J</span><span class="character character-32"></span><span class="character character-109">M</span><span class="character character-105">i</span><span class="character character-107">k</span><span class="character character-101">e</span><span class="character character-32"></span><span class="character character-108">L</span><span class="character character-108">l</span><span class="character character-97">a</span><span class="character character-109">m</span><span class="character character-97">a</span><span class="character character-32"></span><span class="character character-45">-</span><span class="character character-32"></span><span class="character character-108">L</span><span class="character character-108">l</span><span class="character character-97">a</span><span class="character character-109">m</span><span class="character character-97">a</span><span class="character character-32"></span><span class="character character-119">W</span><span class="character character-104">h</span><span class="character character-105">i</span><span class="character character-112">p</span><span class="character character-112">p</span><span class="character character-105">i</span><span class="character character-110">n</span><span class="character character-39">'</span><span class="character character-32"></span><span class="character character-105">I</span><span class="character character-110">n</span><span class="character character-116">t</span><span class="character character-114">r</span><span class="character character-111">o</span><span class="character character-32"></span><span class="character character-40">(</span><span class="character character-48">0</span><span class="character character-58">:</span><span class="character character-48">0</span><span class="character character-53">5</span><span class="character character-41">)</span><span class="character character-32"></span><span class="character character-32"></span><span class="character character-42">*</span><span class="character character-42">*</span><span class="character character-42">*</span><span class="character character-32"></span><span class="character character-32"></span>
 				</div>
 			</div>
-			<div id="kbps"><span class=" character character-49">1</span><span
-					class=" character character-50">2</span><span class=" character character-56">8</span>
-			</div>
-			<div id="khz"><span class=" character character-52">4</span><span
-					class=" character character-56">8</span></div>
+			<div id="kbps"><span class=" character character-49">1</span><span class=" character character-50">2</span><span class=" character character-56">8</span></div>
+			<div id="khz"><span class=" character character-52">4</span><span class=" character character-56">8</span></div>
 			<div class="mono-stereo">
 				<div id="stereo" class="selected"></div>
-				<div id="mono" class=""></div>
+				<div id="mono"></div>
 			</div>
 		</div>
+
 		<div id="volume" style="background-position: 0 -315px;">
 			<!--suppress HtmlFormInputWithoutLabel -->
 			<input type="range" min="0" max="100" step="1" title="Volume Bar" value="78">
 		</div>
+
 		<!--suppress HtmlFormInputWithoutLabel -->
 		<input id="balance" type="range" min="-100" max="100" step="1" style="background-position: 0 0;" title="Balance" value="0">
+
 		<div class="windows">
 			<div id="equalizer-button" class="selected" title="Toggle Graphical Equalizer"></div>
 			<div id="playlist-button" class="selected" title="Toggle Playlist Editor"></div>
 		</div>
 		<!--suppress HtmlFormInputWithoutLabel -->
+
 		<input id="position" class="left" type="range" min="0" max="100" step="1" title="Seeking Bar" value="0">
+
 		<div class="actions">
 			<div id="previous" title="Previous Track"></div>
 			<div id="play" title="Play"></div>
@@ -376,7 +348,9 @@
 			<div id="stop" title="Stop"></div>
 			<div id="next" title="Next Track"></div>
 		</div>
+
 		<div class="eject" title="Open File(s)"></div>
+
 		<div class="shuffle-repeat">
 			<div style="width: 100%; height: 100%;">
 				<div class="shuffle" title="Toggle Shuffle"></div>
@@ -385,5 +359,7 @@
 				<div class="repeat" title="Toggle Repeat"></div>
 			</div>
 		</div>
-		<a class="about" href="javascript:" title="About"></a></div>
+
+		<a class="about" href="javascript:" title="About"></a>
+	</div>
 </div>

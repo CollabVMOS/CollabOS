@@ -1011,7 +1011,7 @@ if (typeof console !== 'undefined') {
 	// noinspection JSUnusedGlobalSymbols
 	global.SYSTEM_INFO_CPU_ENDIANNESS			= typeof SYSTEM_INFO_CPU_LITTLE_ENDIAN !== 'undefined' ? (SYSTEM_INFO_CPU_LITTLE_ENDIAN ? 'Little-endian' : 'Big-endian') : 'Little-endian';
 	// noinspection JSUnusedGlobalSymbols
-	global.SYSTEM_INFO_CPU_CORES				= !navigator.hardwareConcurrency ? 1 : navigator.hardwareConcurrency;
+	global.SYSTEM_INFO_CPU_CORES				= !navigator.hardwareConcurrency ? '≥ 1' : navigator.hardwareConcurrency;
 	// noinspection JSUnresolvedVariable
 	global.SYSTEM_INFO_RAM						= !navigator.deviceMemory ? '≤ 1GB' : '≥' + navigator.deviceMemory + 'GB';
 	// noinspection JSUnusedGlobalSymbols

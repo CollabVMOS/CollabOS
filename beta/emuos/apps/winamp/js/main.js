@@ -32,7 +32,7 @@
 	Winamp.prototype.events = function() {
 		// noinspection JSValidateTypes
 		$('.draggable').draggable({
-			cancel: '.window .marquee, .window .windows, .window .actions, .window .eject, .window .shuffle-repeat, .window .about, input'
+			cancel: '.window .marquee, .window .windows, .window .actions, .window .eject, .window .shuffle-repeat, .window .about, input, #option, #minimize, #shade, #close'
 		});
 	};
 

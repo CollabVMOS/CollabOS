@@ -1,10 +1,5 @@
-@import 'components/context-menu.css';
-@import 'components/base-font.css';
-@import 'components/base-skin.css';
-@import 'components/milkdrop-skin.css';
-
 /* Styles */
-.webamp #main-window {
+.webamp .main-window {
 	position: absolute;
 	height: 116px;
 	width: 275px;
@@ -17,7 +12,7 @@
 	-ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
 }
 
-.webamp #title-bar {
+.webamp .title-bar {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -26,30 +21,36 @@
 }
 
 .webamp #option-context,
-.webamp #minimize,
-.webamp #shade,
-.webamp #close {
+.webamp .minimize,
+.webamp .shade,
+.webamp .close {
 	position: absolute;
 	height: 9px;
 	width: 9px;
 	top: 3px;
 }
 
-.webamp #title-bar #option {
+.webamp .title-bar .option {
 	width: 100%;
 	height: 100%;
 }
 
-.webamp #title-bar #option-context {
+.webamp .title-bar #option-context {
 	left: 6px;
 }
-.webamp #title-bar #minimize {
+.webamp .title-bar .minimize {
 	left: 244px;
 }
-.webamp #title-bar #shade {
+.webamp .title-bar .shade {
 	left: 254px;
 }
-.webamp #title-bar #close {
+.webamp .shade:hover,
+.webamp .shade:focus,
+.webamp .shade:active,
+.webamp .shade:visited {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJBAMAAAASvxsjAAAAD1BMVEVFQTxSSj1rXUOjlGq/uX5Idn/CAAAAM0lEQVQIHQXBwRGAIAwAsLT07Z2zsP8qbuDBAliTmDjl1m8Gob6HK5uWti27V6uxDDFxfn1PDx8P0VYSAAAAAElFTkSuQmCC);
+}
+.webamp .title-bar .close {
 	left: 264px;
 }
 .webamp #clutter-bar {
@@ -157,18 +158,18 @@
 	width: 9px;
 }
 
-.webamp #main-window #visualizer {
+.webamp .main-window #visualizer {
 	position: absolute;
 	top: 43px;
 	left: 24px;
 }
 
-.webamp #main-window.shade #visualizer {
+.webamp .main-window.shade #visualizer {
 	top: 5px;
 	left: 79px;
 }
 
-.webamp #main-window.stop #visualizer {
+.webamp .main-window.stop #visualizer {
 	display: none;
 }
 
@@ -419,7 +420,7 @@
 }
 
 /* Shade View */
-.webamp #main-window.shade {
+.webamp .main-window.shade {
 	height: 14px;
 }
 
@@ -430,8 +431,6 @@
 .webamp .shade .shuffle-repeat,
 .webamp .shade .status {
 	display: none;
-}
-.webamp .shade #title-bar {
 }
 
 .webamp .shade .actions div {
@@ -508,7 +507,7 @@
 	background: none;
 }
 
-.webamp #main-window .mini-time {
+.webamp .main-window .mini-time {
 	position: absolute;
 	top: 4px;
 	left: 127px;
@@ -1168,8 +1167,8 @@
 
 .webamp * {
 	/* Some environments globably change the box-sizing */
-	box-sizing: content-box;
 	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
 }
 
 .webamp *:focus {

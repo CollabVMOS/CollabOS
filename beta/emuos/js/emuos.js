@@ -35,7 +35,7 @@
 			},
 			icons: [{
 				name: 'Windows 93',
-				icon: 'https://windows93.net/favicon.ico',
+				icon: 'https://www.windows93.net/favicon.ico',
 				link: 'https://v1.windows93.net/'
 			} , {
 				name: 'Visual Studio Code',
@@ -55,8 +55,8 @@
 				link: 'apps/dosbox/index.html'
 			} , {
 				name: 'Wolfenstein 3D',
-				icon: SYSTEM_FEATURE_CANVAS ? 'apps/wolf3d-canvas/favicon.gif' : 'apps/wolf3d/favicon.gif',
-				link: SYSTEM_FEATURE_CANVAS ? 'apps/wolf3d-canvas/index.html' : 'apps/wolf3d/index.html'
+				icon: 'apps/wolf3d-' + (SYSTEM_FEATURE_CANVAS ? 'canvas' : '') + '/favicon.gif',
+				link: 'apps/wolf3d-' + (SYSTEM_FEATURE_CANVAS ? 'canvas' : '') + '/index.html'
 			} , {
 				name: 'Quake 1',
 				icon: 'apps/quake1/favicon.ico',
@@ -64,25 +64,6 @@
 			} , {
 				name: 'Winamp 2.9',
 				icon: 'apps/winamp/favicon.ico'
-			}],
-			start: [{
-				name: 'Windows Update'
-			} , {
-				name: 'Programs'
-			} , {
-				name: 'Documents'
-			} , {
-				name: 'Settings'
-			} , {
-				name: 'Search'
-			} , {
-				name: 'Help'
-			} , {
-				name: 'Run...'
-			} , {
-				name: 'Log Off...'
-			} , {
-				name: 'Shut Down...'
 			}]
 		};
 
@@ -115,12 +96,6 @@
 					live: true
 				});
 			case 'theme-win9x':
-				if (!(isIE || isEdge)) {
-					// TODO: Performance problem on window drag and resize caused by custom cursors
-					importStyles('css/themes/win3x/cursors.css');
-					importStyles('css/themes/win9x/cursors.css');
-				}
-
 				self.options.start = [{
 					name: 'Windows Update'
 				} , {
