@@ -1,4 +1,4 @@
-<div class="webamp" style="z-index: 0; overflow: visible;">
+<div class="winamp" style="z-index: 0; overflow: visible;">
 	<div class="gen-window window" style="display: none; width: 450px; height: 464px;" tabindex="-1">
 		<div class="gen-top draggable">
 			<div class="gen-top-left draggable"></div>
@@ -279,87 +279,87 @@
 		<div class="title-bar selected">
 			<div id="option-context">
 				<div class="handle" style="width: 100%; height: 100%;">
-					<div class="option" title="Winamp Menu"></div>
+					<div class="option" data-title="Winamp Menu"></div>
 				</div>
 			</div>
-			<div class="minimize" title="Minimize"></div>
-			<a class="shade" title="Toggle Windowshade Mode"></a>
-			<div class="close" title="Close"></div>
+			<a class="minimize" data-title="Minimize"></a>
+			<a class="shade" data-title="Toggle Windowshade Mode"></a>
+			<a class="close" data-title="Close"></a>
 		</div>
 
 		<div class="status">
-			<div id="clutter-bar">
+			<div class="clutter-bar">
 				<div>
 					<div class="handle" style="width: 100%; height: 100%;">
-						<div id="button-o"></div>
+						<div class="button-o" data-title="Options Menu"></div>
 					</div>
 				</div>
-				<div id="button-a"></div>
-				<div id="button-i"></div>
-				<div title="Toggle Doublesize Mode" id="button-d"></div>
-				<div id="button-v"></div>
+				<div class="button-a" data-title="Toggle Always-On-Top"></div>
+				<div class="button-i" data-title="File Info Box"></div>
+				<div class="button-d" data-title="Toggle Doublesize Mode"></div>
+				<div class="button-v" data-title="Visualization Menu"></div>
 			</div>
 			<div id="play-pause"></div>
 			<div id="work-indicator"></div>
-			<div id="time" class="countdown">
-				<div id="minute-first-digit" class="digit digit-0"></div>
-				<div id="minute-second-digit" class="digit digit-0"></div>
-				<div id="second-first-digit" class="digit digit-0"></div>
-				<div id="second-second-digit" class="digit digit-0"></div>
+			<div class="time countdown">
+				<div class="minute-first-digit digit digit-0"></div>
+				<div class="minute-second-digit digit digit-0"></div>
+				<div class="second-first-digit digit digit-0"></div>
+				<div class="second-second-digit digit digit-0"></div>
 			</div>
 		</div>
 
-		<canvas id="visualizer" style="width: 76px; height: 16px;" width="152" height="32"></canvas>
+		<canvas class="visualizer" style="width: 76px; height: 16px;" width="152" height="32"></canvas>
 
 		<div class="media-info">
-			<div class="marquee text" title="Song Title">
+			<div class="marquee text" data-title="Song Title">
 				<div style="white-space: nowrap; will-change: transform; transform: translateX(-195px);">
 					<span class="character character-49">1</span><span class="character character-46">.</span><span class="character character-32"></span><span class="character character-100">D</span><span class="character character-106">J</span><span class="character character-32"></span><span class="character character-109">M</span><span class="character character-105">i</span><span class="character character-107">k</span><span class="character character-101">e</span><span class="character character-32"></span><span class="character character-108">L</span><span class="character character-108">l</span><span class="character character-97">a</span><span class="character character-109">m</span><span class="character character-97">a</span><span class="character character-32"></span><span class="character character-45">-</span><span class="character character-32"></span><span class="character character-108">L</span><span class="character character-108">l</span><span class="character character-97">a</span><span class="character character-109">m</span><span class="character character-97">a</span><span class="character character-32"></span><span class="character character-119">W</span><span class="character character-104">h</span><span class="character character-105">i</span><span class="character character-112">p</span><span class="character character-112">p</span><span class="character character-105">i</span><span class="character character-110">n</span><span class="character character-39">'</span><span class="character character-32"></span><span class="character character-105">I</span><span class="character character-110">n</span><span class="character character-116">t</span><span class="character character-114">r</span><span class="character character-111">o</span><span class="character character-32"></span><span class="character character-40">(</span><span class="character character-48">0</span><span class="character character-58">:</span><span class="character character-48">0</span><span class="character character-53">5</span><span class="character character-41">)</span><span class="character character-32"></span><span class="character character-32"></span><span class="character character-42">*</span><span class="character character-42">*</span><span class="character character-42">*</span><span class="character character-32"></span><span class="character character-32"></span><span class="character character-49">1</span><span class="character character-46">.</span><span class="character character-32"></span><span class="character character-100">D</span><span class="character character-106">J</span><span class="character character-32"></span><span class="character character-109">M</span><span class="character character-105">i</span><span class="character character-107">k</span><span class="character character-101">e</span><span class="character character-32"></span><span class="character character-108">L</span><span class="character character-108">l</span><span class="character character-97">a</span><span class="character character-109">m</span><span class="character character-97">a</span><span class="character character-32"></span><span class="character character-45">-</span><span class="character character-32"></span><span class="character character-108">L</span><span class="character character-108">l</span><span class="character character-97">a</span><span class="character character-109">m</span><span class="character character-97">a</span><span class="character character-32"></span><span class="character character-119">W</span><span class="character character-104">h</span><span class="character character-105">i</span><span class="character character-112">p</span><span class="character character-112">p</span><span class="character character-105">i</span><span class="character character-110">n</span><span class="character character-39">'</span><span class="character character-32"></span><span class="character character-105">I</span><span class="character character-110">n</span><span class="character character-116">t</span><span class="character character-114">r</span><span class="character character-111">o</span><span class="character character-32"></span><span class="character character-40">(</span><span class="character character-48">0</span><span class="character character-58">:</span><span class="character character-48">0</span><span class="character character-53">5</span><span class="character character-41">)</span><span class="character character-32"></span><span class="character character-32"></span><span class="character character-42">*</span><span class="character character-42">*</span><span class="character character-42">*</span><span class="character character-32"></span><span class="character character-32"></span>
 				</div>
 			</div>
-			<div id="kbps"><span class=" character character-49">1</span><span class=" character character-50">2</span><span class=" character character-56">8</span></div>
-			<div id="khz"><span class=" character character-52">4</span><span class=" character character-56">8</span></div>
+			<div class="kbps"><span class="character character-49">1</span><span class="character character-50">2</span><span class=" character character-56">8</span></div>
+			<div class="khz"><span class="character character-52">4</span><span class="character character-56">8</span></div>
 			<div class="mono-stereo">
-				<div id="stereo" class="selected"></div>
-				<div id="mono"></div>
+				<div class="stereo selected"></div>
+				<div class="mono"></div>
 			</div>
 		</div>
 
-		<div id="volume" style="background-position: 0 -315px;">
+		<div class="volume" style="background-position: 0 -315px;">
 			<!--suppress HtmlFormInputWithoutLabel -->
-			<input type="range" min="0" max="100" step="1" title="Volume Bar" value="78">
+			<input type="range" min="0" max="100" step="1" data-title="Volume Bar" value="78">
 		</div>
 
 		<!--suppress HtmlFormInputWithoutLabel -->
-		<input id="balance" type="range" min="-100" max="100" step="1" style="background-position: 0 0;" title="Balance" value="0">
+		<input class="balance" type="range" min="-100" max="100" step="1" style="background-position: 0 0;" data-title="Panning Bar" value="0">
 
 		<div class="windows">
-			<div id="equalizer-button" class="selected" title="Toggle Graphical Equalizer"></div>
-			<div id="playlist-button" class="selected" title="Toggle Playlist Editor"></div>
+			<div id="equalizer-button" class="selected" data-title="Toggle Graphical Equalizer"></div>
+			<div id="playlist-button" class="selected" data-title="Toggle Playlist Editor"></div>
 		</div>
 		<!--suppress HtmlFormInputWithoutLabel -->
 
-		<input id="position" class="left" type="range" min="0" max="100" step="1" title="Seeking Bar" value="0">
+		<input class="position left" type="range" min="0" max="100" step="1" data-title="Seeking Bar" value="0">
 
 		<div class="actions">
-			<div id="previous" title="Previous Track"></div>
-			<div id="play" title="Play"></div>
-			<div id="pause" title="Pause"></div>
-			<div id="stop" title="Stop"></div>
-			<div id="next" title="Next Track"></div>
+			<div id="previous" data-title="Previous Track"></div>
+			<div id="play" data-title="Play"></div>
+			<div id="pause" data-title="Pause"></div>
+			<div id="stop" data-title="Stop"></div>
+			<div id="next" data-title="Next Track"></div>
 		</div>
 
-		<div class="eject" title="Open File(s)"></div>
+		<div class="eject" data-title="Open File(s)"></div>
 
 		<div class="shuffle-repeat">
 			<div style="width: 100%; height: 100%;">
-				<div class="shuffle" title="Toggle Shuffle"></div>
+				<div class="shuffle" data-title="Toggle Shuffle"></div>
 			</div>
 			<div style="width: 100%; height: 100%;">
-				<div class="repeat" title="Toggle Repeat"></div>
+				<div class="repeat" data-title="Toggle Repeat"></div>
 			</div>
 		</div>
 
-		<a class="about" href="javascript:" title="About"></a>
+		<a class="about" href="javascript:" data-title="About Winamp"></a>
 	</div>
 </div>

@@ -1,5 +1,5 @@
 /* Styles */
-.webamp .main-window {
+.winamp .main-window {
 	position: absolute;
 	height: 116px;
 	width: 275px;
@@ -12,7 +12,7 @@
 	-ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
 }
 
-.webamp .title-bar {
+.winamp .title-bar {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -20,40 +20,35 @@
 	width: 275px;
 }
 
-.webamp #option-context,
-.webamp .minimize,
-.webamp .shade,
-.webamp .close {
+.winamp #option-context,
+.winamp .minimize,
+.winamp .shade,
+.winamp .close {
 	position: absolute;
 	height: 9px;
 	width: 9px;
 	top: 3px;
 }
 
-.webamp .title-bar .option {
+.winamp .title-bar .option {
 	width: 100%;
 	height: 100%;
 }
 
-.webamp .title-bar #option-context {
+.winamp .title-bar #option-context {
 	left: 6px;
 }
-.webamp .title-bar .minimize {
+.winamp .title-bar .minimize {
 	left: 244px;
 }
-.webamp .title-bar .shade {
+.winamp .title-bar .shade {
 	left: 254px;
 }
-.webamp .shade:hover,
-.webamp .shade:focus,
-.webamp .shade:active,
-.webamp .shade:visited {
-	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJBAMAAAASvxsjAAAAD1BMVEVFQTxSSj1rXUOjlGq/uX5Idn/CAAAAM0lEQVQIHQXBwRGAIAwAsLT07Z2zsP8qbuDBAliTmDjl1m8Gob6HK5uWti27V6uxDDFxfn1PDx8P0VYSAAAAAElFTkSuQmCC);
-}
-.webamp .title-bar .close {
+
+.winamp .title-bar .close {
 	left: 264px;
 }
-.webamp #clutter-bar {
+.winamp .clutter-bar {
 	position: absolute;
 	top: 22px;
 	left: 10px;
@@ -61,32 +56,32 @@
 	width: 8px;
 }
 
-.webamp #clutter-bar div {
+.winamp .clutter-bar div {
 	position: absolute;
 	height: 7px;
 	width: 8px;
 	left: 0;
 }
 
-.webamp #clutter-bar #button-o {
+.winamp .clutter-bar .button-o {
 	top: 3px;
 	height: 8px;
 }
-.webamp #clutter-bar #button-a {
+.winamp .clutter-bar .button-a {
 	top: 11px;
 }
-.webamp #clutter-bar #button-i {
+.winamp .clutter-bar .button-i {
 	top: 18px;
 }
-.webamp #clutter-bar #button-d {
+.winamp .clutter-bar .button-d {
 	top: 25px;
 	height: 8px;
 }
-.webamp #clutter-bar #button-v {
+.winamp .clutter-bar .button-v {
 	top: 33px;
 }
 
-.webamp #play-pause {
+.winamp #play-pause {
 	position: absolute;
 	top: 28px;
 	left: 26px;
@@ -95,15 +90,15 @@
 	background-repeat: no-repeat;
 }
 
-.webamp .play #work-indicator,
-.webamp #work-indicator.selected {
+.winamp .play #work-indicator,
+.winamp #work-indicator.selected {
 	position: absolute;
 	top: 28px;
 	left: 24px;
 	height: 9px;
 	width: 3px;
 }
-.webamp .status #time {
+.winamp .status .time {
 	position: absolute;
 	left: 39px;
 	top: 26px;
@@ -112,15 +107,15 @@
 	width: 59px;
 }
 
-.webamp .stop .status #time {
+.winamp .stop .status .time {
 	display: none;
 }
-.webamp .pause .status #time {
+.winamp .pause .status .time {
 	animation: blink 2s step-start 1s infinite;
 	-webkit-animation: blink 2s step-start 1s infinite;
 }
 
-.webamp .status #time #minus-sign {
+.winamp .status .time .minus-sign {
 	/* Note that this get's augmented by the skin CSS if NUM_EX.BMP is present */
 	position: absolute;
 	top: 6px;
@@ -129,28 +124,28 @@
 	height: 1px;
 }
 
-.webamp .status #time #minute-first-digit {
+.winamp .status .time .minute-first-digit {
 	position: absolute;
 	pointer-events: none;
 	left: 9px;
 	height: 13px;
 	width: 9px;
 }
-.webamp .status #time #minute-second-digit {
+.winamp .status .time .minute-second-digit {
 	position: absolute;
 	pointer-events: none;
 	left: 21px;
 	height: 13px;
 	width: 9px;
 }
-.webamp .status #time #second-first-digit {
+.winamp .status .time .second-first-digit {
 	position: absolute;
 	pointer-events: none;
 	left: 39px;
 	height: 13px;
 	width: 9px;
 }
-.webamp .status #time #second-second-digit {
+.winamp .status .time .second-second-digit {
 	position: absolute;
 	pointer-events: none;
 	left: 51px;
@@ -158,26 +153,26 @@
 	width: 9px;
 }
 
-.webamp .main-window #visualizer {
+.winamp .main-window .visualizer {
 	position: absolute;
 	top: 43px;
 	left: 24px;
 }
 
-.webamp .main-window.shade #visualizer {
+.winamp .main-window.shade .visualizer {
 	top: 5px;
 	left: 79px;
 }
 
-.webamp .main-window.stop #visualizer {
+.winamp .main-window.stop .visualizer {
 	display: none;
 }
 
-.webamp .text {
+.winamp .text {
 	display: none;
 }
 
-.webamp .marquee {
+.winamp .marquee {
 	position: absolute;
 	left: 111px;
 	top: 24px;
@@ -188,7 +183,7 @@
 	padding: 3px 0; /* Ensure the target is correct for the cursor */
 }
 
-.webamp .media-info #kbps {
+.winamp .media-info .kbps {
 	position: absolute;
 	left: 111px;
 	top: 43px;
@@ -197,11 +192,11 @@
 	overflow: hidden;
 }
 
-.webamp .stop .media-info #kbps {
+.winamp .stop .media-info .kbps {
 	display: none;
 }
 
-.webamp .media-info #khz {
+.winamp .media-info .khz {
 	position: absolute;
 	left: 156px;
 	top: 43px;
@@ -210,11 +205,11 @@
 	overflow: hidden;
 }
 
-.webamp .stop .media-info #khz {
+.winamp .stop .media-info .khz {
 	display: none;
 }
 
-.webamp .media-info .mono-stereo {
+.winamp .media-info .mono-stereo {
 	position: absolute;
 	left: 212px;
 	top: 41px;
@@ -222,21 +217,21 @@
 	height: 12px;
 }
 
-.webamp .media-info .mono-stereo div {
+.winamp .media-info .mono-stereo div {
 	position: absolute;
 	height: 12px;
 }
 
-.webamp .media-info .mono-stereo #mono {
+.winamp .media-info .mono-stereo .mono {
 	width: 27px;
 }
 
-.webamp .media-info .mono-stereo #stereo {
+.winamp .media-info .mono-stereo .stereo {
 	left: 27px;
 	width: 29px;
 }
 
-.webamp #volume {
+.winamp .volume {
 	position: absolute;
 	left: 107px;
 	top: 57px;
@@ -245,7 +240,7 @@
 	background-position: 0 0;
 }
 
-.webamp #volume input {
+.winamp .volume input {
 	height: 13px;
 	/* The input itself, is actually 3px shorter than the background
 	   * https://twitter.com/LuigiHann/status/959275940688867328
@@ -254,25 +249,25 @@
 	display: block;
 }
 
-.webamp #volume input::-webkit-slider-thumb {
+.winamp .volume input::-webkit-slider-thumb {
 	top: 1px;
 	height: 11px;
 	width: 14px;
 }
 
-.webamp #volume input::-moz-range-thumb {
+.winamp .volume input::-moz-range-thumb {
 	top: 1px;
 	height: 11px;
 	width: 14px;
 }
 
-.webamp #volume input::-ms-thumb {
+.winamp .volume input::-ms-thumb {
 	top: 1px;
 	height: 11px;
 	width: 14px;
 }
 
-.webamp #balance {
+.winamp input.balance {
 	position: absolute;
 	left: 177px;
 	top: 57px;
@@ -281,25 +276,25 @@
 	background-position: 0 0;
 }
 
-.webamp #balance::-webkit-slider-thumb {
+.winamp input.balance::-webkit-slider-thumb {
 	top: 1px;
 	height: 11px;
 	width: 14px;
 }
 
-.webamp #balance::-moz-range-thumb {
+.winamp input.balance::-moz-range-thumb {
 	top: 1px;
 	height: 11px;
 	width: 14px;
 }
 
-.webamp #balance::-ms-thumb {
+.winamp input.balance::-ms-thumb {
 	top: 1px;
 	height: 11px;
 	width: 14px;
 }
 
-.webamp .windows {
+.winamp .windows {
 	position: absolute;
 	left: 219px;
 	top: 58px;
@@ -307,21 +302,21 @@
 	height: 12px;
 }
 
-.webamp .windows div {
+.winamp .windows div {
 	position: absolute;
 	width: 23px;
 	height: 12px;
 }
 
-.webamp .windows #equalizer-button {
+.winamp .windows #equalizer-button {
 	left: 0;
 }
 
-.webamp .windows #playlist-button {
+.winamp .windows #playlist-button {
 	left: 23px;
 }
 
-.webamp #position {
+.winamp input.position {
 	position: absolute;
 	left: 16px;
 	top: 72px;
@@ -329,7 +324,7 @@
 	height: 10px;
 }
 
-.webamp #position::-webkit-slider-thumb {
+.winamp input.position::-webkit-slider-thumb {
 	height: 10px;
 	width: 29px;
 	/*
@@ -340,60 +335,60 @@
 	position: relative;
 }
 
-.webamp #position::-moz-range-thumb {
+.winamp input.position::-moz-range-thumb {
 	height: 10px;
 	width: 29px;
 }
 
-.webamp #position::-ms-thumb {
+.winamp input.position::-ms-thumb {
 	height: 10px;
 	width: 29px;
 }
 
 /* For some reason, we can't use display: none here */
-.webamp .stop #position::-webkit-slider-thumb {
+.winamp .stop .position::-webkit-slider-thumb {
 	visibility: hidden;
 }
-.webamp .stop #position::-moz-range-thumb {
+.winamp .stop .position::-moz-range-thumb {
 	visibility: hidden;
 }
 
 /* For some reason this is needed for the position slider to show up now that
  * we are using React.
  */
-.webamp .play #position::-webkit-slider-thumb {
+.winamp .play .position::-webkit-slider-thumb {
 	visibility: visible;
 }
 
-.webamp .actions div {
+.winamp .actions div {
 	height: 18px;
 	width: 23px;
 	position: absolute;
 }
 
-.webamp .actions #previous {
+.winamp .actions #previous {
 	top: 88px;
 	left: 16px;
 }
-.webamp .actions #play {
+.winamp .actions #play {
 	top: 88px;
 	left: 39px;
 }
-.webamp .actions #pause {
+.winamp .actions #pause {
 	top: 88px;
 	left: 62px;
 }
-.webamp .actions #stop {
+.winamp .actions #stop {
 	top: 88px;
 	left: 85px;
 }
-.webamp .actions #next {
+.winamp .actions #next {
 	top: 88px;
 	left: 108px;
 	width: 22px;
 }
 
-.webamp .eject {
+.winamp .eject {
 	position: absolute;
 	top: 89px;
 	left: 136px;
@@ -401,28 +396,28 @@
 	width: 22px;
 }
 
-.webamp .shuffle-repeat {
+.winamp .shuffle-repeat {
 	position: absolute;
 	top: 89px;
 	left: 164px;
 	width: 74px;
 }
 
-.webamp .shuffle-repeat div {
+.winamp .shuffle-repeat div {
 	position: absolute;
 	height: 15px;
 }
 
-.webamp .shuffle-repeat .shuffle {
+.winamp .shuffle-repeat .shuffle {
 	width: 47px;
 }
 
-.webamp .shuffle-repeat .repeat {
+.winamp .shuffle-repeat .repeat {
 	left: 46px;
 	width: 28px;
 }
 
-.webamp .about {
+.winamp .about {
 	position: absolute;
 	top: 91px;
 	left: 253px;
@@ -430,7 +425,7 @@
 	width: 13px;
 }
 
-.webamp .digit {
+.winamp .digit {
 	position: absolute;
 	display: inline-block;
 	width: 9px;
@@ -440,64 +435,64 @@
 }
 
 /* Shade View */
-.webamp .main-window.shade {
+.winamp .main-window.shade {
 	height: 14px;
 }
 
-.webamp .shade .media-info,
-.webamp .shade .windows,
-.webamp .shade #volume,
-.webamp .shade #balance,
-.webamp .shade .shuffle-repeat,
-.webamp .shade .status {
+.winamp .shade .media-info,
+.winamp .shade .windows,
+.winamp .shade .volume,
+.winamp .shade .balance,
+.winamp .shade .shuffle-repeat,
+.winamp .shade .status {
 	display: none;
 }
 
-.webamp .shade .actions div {
+.winamp .shade .actions div {
 	position: absolute;
 }
-.webamp .shade .actions #previous,
-.webamp .shade .actions #previous:active {
+.winamp .shade .actions #previous,
+.winamp .shade .actions #previous:active {
 	background: none;
 	height: 10px;
 	width: 7px;
 	top: 2px;
 	left: 169px;
 }
-.webamp .shade .actions #play,
-.webamp .shade .actions #play:active {
+.winamp .shade .actions #play,
+.winamp .shade .actions #play:active {
 	background: none;
 	height: 10px;
 	width: 10px;
 	top: 2px;
 	left: 176px;
 }
-.webamp .shade .actions #pause,
-.webamp .shade .actions #pause:active {
+.winamp .shade .actions #pause,
+.winamp .shade .actions #pause:active {
 	background: none;
 	height: 10px;
 	width: 9px;
 	top: 2px;
 	left: 186px;
 }
-.webamp .shade .actions #stop,
-.webamp .shade .actions #stop:active {
+.winamp .shade .actions #stop,
+.winamp .shade .actions #stop:active {
 	background: none;
 	height: 10px;
 	width: 9px;
 	top: 2px;
 	left: 195px;
 }
-.webamp .shade .actions #next,
-.webamp .shade .actions #next:active {
+.winamp .shade .actions #next,
+.winamp .shade .actions #next:active {
 	background: none;
 	height: 10px;
 	width: 10px;
 	top: 2px;
 	left: 204px;
 }
-.webamp .shade .eject,
-.webamp .shade .eject:active {
+.winamp .shade .eject,
+.winamp .shade .eject:active {
 	height: 10px;
 	width: 10px;
 	top: 2px;
@@ -505,7 +500,7 @@
 	background: none;
 }
 
-.webamp .shade #position {
+.winamp .shade .position {
 	position: absolute;
 	left: 226px;
 	top: 4px;
@@ -513,32 +508,32 @@
 	height: 7px;
 }
 
-.webamp .shade #position::-webkit-slider-thumb {
+.winamp .shade .position::-webkit-slider-thumb {
 	height: 7px;
 	width: 3px;
 	/* This make it appear. Not sure why */
 	background: none;
 }
 
-.webamp .shade #position::-moz-range-thumb {
+.winamp .shade .position::-moz-range-thumb {
 	height: 7px;
 	width: 3px;
 	/* This make it appear. Not sure why */
 	background: none;
 }
 
-.webamp .main-window .mini-time {
+.winamp .main-window .mini-time {
 	position: absolute;
 	top: 4px;
 	left: 127px;
 }
 /* Styles */
-.webamp #playlist-window {
+.winamp #playlist-window {
 	display: flex;
 	flex-direction: column;
 }
 
-.webamp .playlist-top {
+.winamp .playlist-top {
 	width: 100%;
 	min-height: 20px;
 	max-height: 20px;
@@ -546,63 +541,63 @@
 	display: flex;
 }
 
-.webamp .playlist-top-left {
+.winamp .playlist-top-left {
 	width: 25px;
 }
 
-.webamp .playlist-top-left-spacer {
+.winamp .playlist-top-left-spacer {
 	width: 12px;
 }
 
-.webamp .playlist-top-left-fill {
+.winamp .playlist-top-left-fill {
 	flex-grow: 1;
 	background-position: right;
 }
 
-.webamp .playlist-top-right-spacer {
+.winamp .playlist-top-right-spacer {
 	/* This goes to the right of the center */
 	width: 13px;
 }
 
-.webamp .playlist-top-right-fill {
+.winamp .playlist-top-right-fill {
 	flex-grow: 1;
 	background-position: right;
 }
 
-.webamp .playlist-top-title {
+.winamp .playlist-top-title {
 	width: 100px;
 }
 
-.webamp .playlist-top-right {
+.winamp .playlist-top-right {
 	width: 25px;
 }
 
-.webamp .playlist-middle {
+.winamp .playlist-middle {
 	flex-grow: 1;
 	display: flex;
 	flex-direction: row;
 	overflow: hidden;
 }
 
-.webamp .playlist-middle-left {
+.winamp .playlist-middle-left {
 	background-repeat: repeat-y;
 	width: 12px;
 	min-width: 12px;
 }
 
-.webamp .playlist-middle-center {
+.winamp .playlist-middle-center {
 	flex-grow: 1;
 	padding: 3px 0;
 	min-width: 0; /* Not sure why this is needed */
 }
 
-.webamp .playlist-tracks {
+.winamp .playlist-tracks {
 	display: flex;
 	flex: 1 0 auto;
 }
 
 /*noinspection CssFloatPxLength*/
-.webamp .playlist-tracks .track-cell {
+.winamp .playlist-tracks .track-cell {
 	height: 13px;
 	line-height: 13px;
 	font-size: 9px;
@@ -612,23 +607,23 @@
 	user-select: none;
 }
 
-.webamp .playlist-track-durations > div {
+.winamp .playlist-track-durations > div {
 	padding-right: 3px;
 	text-align: right;
 }
 
-.webamp .playlist-track-titles {
+.winamp .playlist-track-titles {
 	flex: 1 1 auto;
 	overflow: hidden;
 }
 
-.webamp .playlist-track-titles > div {
+.winamp .playlist-track-titles > div {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
 }
 
-.webamp .playlist-middle-right {
+.winamp .playlist-middle-right {
 	background-repeat: repeat-y;
 	background-position: top right;
 	width: 20px;
@@ -637,18 +632,18 @@
 	padding-bottom: 18px;
 }
 
-.webamp .playlist-scrollbar {
+.winamp .playlist-scrollbar {
 	height: 100%;
 	width: 8px;
 	margin-left: 5px;
 }
 
-.webamp .playlist-scrollbar-handle {
+.winamp .playlist-scrollbar-handle {
 	width: 8px;
 	height: 18px;
 }
 
-.webamp .playlist-bottom {
+.winamp .playlist-bottom {
 	width: 100%;
 	height: 38px;
 	min-height: 38px;
@@ -656,13 +651,13 @@
 	position: relative;
 }
 
-.webamp .playlist-bottom-left {
+.winamp .playlist-bottom-left {
 	width: 125px;
 	height: 100%;
 	position: absolute;
 }
 
-.webamp .playlist-menu li {
+.winamp .playlist-menu li {
 	list-style: none;
 	display: none;
 	width: 22px;
@@ -671,22 +666,22 @@
 	margin: 0;
 }
 
-.webamp .playlist-menu li > div {
+.winamp .playlist-menu li > div {
 	height: 100%;
 }
 
-.webamp .playlist-menu ul {
+.winamp .playlist-menu ul {
 	padding: 0;
 	margin: 0;
 	position: absolute;
 	bottom: 0;
 }
 
-.webamp .playlist-menu.selected li {
+.winamp .playlist-menu.selected li {
 	display: block;
 }
 
-.webamp .playlist-menu .bar {
+.winamp .playlist-menu .bar {
 	position: absolute;
 	bottom: 0;
 	left: -3px;
@@ -694,7 +689,7 @@
 	height: 54px;
 }
 
-.webamp #playlist-add-menu {
+.winamp #playlist-add-menu {
 	position: absolute;
 	bottom: 12px;
 	left: 14px;
@@ -702,11 +697,11 @@
 	height: 18px;
 }
 
-.webamp #playlist-remove-menu.playlist-menu .bar {
+.winamp #playlist-remove-menu.playlist-menu .bar {
 	height: 72px;
 }
 
-.webamp #playlist-remove-menu {
+.winamp #playlist-remove-menu {
 	position: absolute;
 	bottom: 12px;
 	left: 43px;
@@ -714,7 +709,7 @@
 	height: 18px;
 }
 
-.webamp #playlist-selection-menu {
+.winamp #playlist-selection-menu {
 	position: absolute;
 	bottom: 12px;
 	left: 72px;
@@ -722,7 +717,7 @@
 	height: 18px;
 }
 
-.webamp #playlist-misc-menu {
+.winamp #playlist-misc-menu {
 	position: absolute;
 	bottom: 12px;
 	left: 101px;
@@ -730,7 +725,7 @@
 	height: 18px;
 }
 
-.webamp #playlist-list-menu {
+.winamp #playlist-list-menu {
 	position: absolute;
 	bottom: 12px;
 	right: 22px;
@@ -738,33 +733,33 @@
 	height: 18px;
 }
 
-.webamp .playlist-bottom-right {
+.winamp .playlist-bottom-right {
 	width: 150px;
 	height: 100%;
 	position: absolute;
 	right: 0;
 }
 
-.webamp .playlist-running-time-display {
+.winamp .playlist-running-time-display {
 	position: absolute;
 	top: 10px;
 	left: 7px;
 	height: 10px;
 }
 
-.webamp .playlist-action-buttons {
+.winamp .playlist-action-buttons {
 	position: absolute;
 	top: 22px;
 	left: 3px;
 	display: flex;
 }
 
-.webamp .playlist-action-buttons > div {
+.winamp .playlist-action-buttons > div {
 	height: 10px;
 	width: 10px;
 }
 
-.webamp #playlist-window .playlist-visualizer {
+.winamp #playlist-window .playlist-visualizer {
 	width: 75px;
 	height: 100%;
 	position: absolute;
@@ -772,17 +767,17 @@
 	display: none; /* Only show if the window is wide enough */
 }
 
-.webamp #playlist-window.wide .playlist-visualizer {
+.winamp #playlist-window.wide .playlist-visualizer {
 	display: block;
 }
 
-.webamp #playlist-window .mini-time {
+.winamp #playlist-window .mini-time {
 	position: absolute;
 	top: 23px;
 	left: 66px;
 }
 
-.webamp #playlist-window #playlist-resize-target {
+.winamp #playlist-window #playlist-resize-target {
 	position: absolute;
 	right: 0;
 	bottom: 0;
@@ -790,7 +785,7 @@
 	width: 20px;
 }
 
-.webamp #playlist-close-button {
+.winamp #playlist-close-button {
 	position: absolute;
 	right: 2px;
 	height: 9px;
@@ -798,7 +793,7 @@
 	top: 3px;
 }
 
-.webamp #playlist-shade-button {
+.winamp #playlist-shade-button {
 	position: absolute;
 	right: 12px;
 	height: 9px;
@@ -806,37 +801,37 @@
 	top: 3px;
 }
 
-.webamp #playlist-window-shade {
+.winamp #playlist-window-shade {
 	height: 14px;
 }
 
-.webamp #playlist-window-shade .left {
+.winamp #playlist-window-shade .left {
 	height: 14px;
 	background-repeat: no-repeat;
 }
 
-.webamp #playlist-window-shade .right {
+.winamp #playlist-window-shade .right {
 	height: 14px;
 	background-repeat: no-repeat;
 	background-position-x: right;
 }
 
-.webamp #playlist-window #playlist-scroll-up-button,
-.webamp #playlist-window #playlist-scroll-down-button {
+.winamp #playlist-window #playlist-scroll-up-button,
+.winamp #playlist-window #playlist-scroll-down-button {
 	position: absolute;
 	width: 8px;
 	height: 5px;
 	right: 7px;
 }
 
-.webamp #playlist-window #playlist-scroll-up-button {
+.winamp #playlist-window #playlist-scroll-up-button {
 	top: 2px;
 }
-.webamp #playlist-window #playlist-scroll-down-button {
+.winamp #playlist-window #playlist-scroll-down-button {
 	top: 8px;
 }
 
-.webamp #playlist-window-shade #playlist-resize-target {
+.winamp #playlist-window-shade #playlist-resize-target {
 	position: absolute;
 	right: 20px;
 	top: 3px;
@@ -844,35 +839,35 @@
 	width: 9px;
 }
 
-.webamp #playlist-shade-track-title {
+.winamp #playlist-shade-track-title {
 	position: absolute;
 	top: 4px;
 	left: 5px;
 }
 
-.webamp #playlist-shade-time {
+.winamp #playlist-shade-time {
 	position: absolute;
 	top: 4px;
 	right: 30px;
 }
 
-.webamp #playlist-window #visualizer {
+.winamp #playlist-window .visualizer {
 	position: absolute;
 	/* TODO: These numbers are not quite right */
 	top: 10px;
 	left: 5px;
 }
 /* Styles */
-.webamp #equalizer-window {
+.winamp #equalizer-window {
 	height: 116px;
 	width: 275px;
 }
 
-.webamp #equalizer-window.shade {
+.winamp #equalizer-window.shade {
 	height: 14px;
 }
 
-.webamp #equalizer-volume {
+.winamp #equalizer-volume {
 	position: absolute;
 	left: 61px;
 	top: 4px;
@@ -881,17 +876,17 @@
 	background-position: 0 0;
 }
 
-.webamp #equalizer-volume::-webkit-slider-thumb {
+.winamp #equalizer-volume::-webkit-slider-thumb {
 	height: 7px;
 	width: 3px;
 }
 
-.webamp #equalizer-volume::-moz-range-thumb {
+.winamp #equalizer-volume::-moz-range-thumb {
 	height: 7px;
 	width: 3px;
 }
 
-.webamp #equalizer-balance {
+.winamp #equalizer-balance {
 	position: absolute;
 	left: 164px;
 	top: 4px;
@@ -900,23 +895,23 @@
 	background-position: 0 0;
 }
 
-.webamp #equalizer-balance::-webkit-slider-thumb {
+.winamp #equalizer-balance::-webkit-slider-thumb {
 	height: 7px;
 	width: 3px;
 }
 
-.webamp #equalizer-balance::-moz-range-thumb {
+.winamp #equalizer-balance::-moz-range-thumb {
 	height: 7px;
 	width: 3px;
 }
 
-.webamp .equalizer-top {
+.winamp .equalizer-top {
 	height: 14px;
 	width: 275px;
 	position: relative;
 }
 
-.webamp #equalizer-close {
+.winamp #equalizer-close {
 	position: absolute;
 	height: 9px;
 	width: 9px;
@@ -924,7 +919,7 @@
 	top: 3px;
 }
 
-.webamp #equalizer-shade {
+.winamp #equalizer-shade {
 	position: absolute;
 	height: 9px;
 	width: 9px;
@@ -932,7 +927,7 @@
 	top: 3px;
 }
 
-.webamp #on {
+.winamp #on {
 	position: absolute;
 	width: 26px;
 	height: 12px;
@@ -940,7 +935,7 @@
 	left: 14px;
 }
 
-.webamp #auto {
+.winamp #auto {
 	position: absolute;
 	width: 32px;
 	height: 12px;
@@ -948,7 +943,7 @@
 	left: 40px;
 }
 
-.webamp #presets-context {
+.winamp #presets-context {
 	position: absolute;
 	width: 44px;
 	height: 12px;
@@ -956,12 +951,12 @@
 	left: 217px;
 }
 
-.webamp #presets {
+.winamp #presets {
 	width: 100%;
 	height: 100%;
 }
 
-.webamp #eqGraph {
+.winamp #eqGraph {
 	position: absolute;
 	width: 113px;
 	height: 19px;
@@ -969,13 +964,13 @@
 	left: 86px;
 }
 
-.webamp #preamp {
+.winamp #preamp {
 	position: absolute;
 	left: 21px;
 	top: 38px;
 }
 
-.webamp #plus12db {
+.winamp #plus12db {
 	position: absolute;
 	left: 45px;
 	top: 36px;
@@ -983,7 +978,7 @@
 	height: 8px;
 }
 
-.webamp #zerodb {
+.winamp #zerodb {
 	position: absolute;
 	left: 45px;
 	top: 64px;
@@ -991,7 +986,7 @@
 	height: 8px;
 }
 
-.webamp #minus12db {
+.winamp #minus12db {
 	position: absolute;
 	left: 45px;
 	top: 95px;
@@ -999,78 +994,78 @@
 	height: 8px;
 }
 
-.webamp #band-60 {
+.winamp #band-60 {
 	position: absolute;
 	left: 78px;
 	top: 38px;
 }
 
-.webamp #band-170 {
+.winamp #band-170 {
 	position: absolute;
 	left: 96px;
 	top: 38px;
 }
 
-.webamp #band-310 {
+.winamp #band-310 {
 	position: absolute;
 	left: 114px;
 	top: 38px;
 }
 
-.webamp #band-600 {
+.winamp #band-600 {
 	position: absolute;
 	left: 132px;
 	top: 38px;
 }
 
-.webamp #band-1000 {
+.winamp #band-1000 {
 	position: absolute;
 	left: 150px;
 	top: 38px;
 }
 
-.webamp #band-3000 {
+.winamp #band-3000 {
 	position: absolute;
 	left: 168px;
 	top: 38px;
 }
 
-.webamp #band-6000 {
+.winamp #band-6000 {
 	position: absolute;
 	left: 186px;
 	top: 38px;
 }
 
-.webamp #band-12000 {
+.winamp #band-12000 {
 	position: absolute;
 	left: 204px;
 	top: 38px;
 }
 
-.webamp #band-14000 {
+.winamp #band-14000 {
 	position: absolute;
 	left: 222px;
 	top: 38px;
 }
 
-.webamp #band-16000 {
+.winamp #band-16000 {
 	position: absolute;
 	left: 240px;
 	top: 38px;
 }
 
-.webamp .band {
+.winamp .band {
 	width: 14px;
 	height: 63px;
 }
 
-.webamp .band .rc-slider {
+.winamp .band .rc-slider {
 	height: 51px;
 	width: 14px;
 	margin-top: 6px;
 }
 
-.webamp .band .rc-slider .rc-slider-handle {
+.winamp .band .rc-slider .rc-slider-handle {
 	width: 11px;
 	height: 11px;
 	margin: -6px 0 0 1px;
@@ -1172,31 +1167,31 @@
 
 /* Rules used by all windows */
 
-.webamp {
+.winamp {
 	position: absolute;
 	top: 0;
 	left: 0;
 }
 
 /* Prevent accidental highlighting */
-.webamp canvas {
+.winamp canvas {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	user-select: none;
 }
 
-.webamp * {
+.winamp * {
 	/* Some environments globably change the box-sizing */
 	-webkit-box-sizing: content-box;
 	box-sizing: content-box;
 }
 
-.webamp *:focus {
+.winamp *:focus {
 	outline: 0;
 }
 
 /* Range input css reset */
-.webamp input[type="range"] {
+.winamp input[type="range"] {
 	-webkit-appearance: none;
 	margin: 0;
 	padding: 0;
@@ -1204,59 +1199,59 @@
 	border: none;
 }
 
-.webamp input[type="range"]::-webkit-slider-thumb {
+.winamp input[type="range"]::-webkit-slider-thumb {
 	-webkit-appearance: none;
 	border: none;
 	border-radius: 0;
 	background: none;
 }
 
-.webamp input[type="range"]::-moz-range-thumb {
+.winamp input[type="range"]::-moz-range-thumb {
 	border: none;
 	border-radius: 0;
 	background: none;
 }
 
-.webamp input[type="range"]::-ms-thumb {
+.winamp input[type="range"]::-ms-thumb {
 	border: none;
 	border-radius: 0;
 	background: none;
 }
 
-.webamp input[type="range"]::-moz-range-track {
+.winamp input[type="range"]::-moz-range-track {
 	border: none;
 	background: none;
 }
 
-.webamp input[type="range"]::-ms-track {
+.winamp input[type="range"]::-ms-track {
 	border: none;
 	background: none;
 	color: transparent;
 }
 
-.webamp input[type="range"]::-ms-fill-lower {
+.winamp input[type="range"]::-ms-fill-lower {
 	background: none;
 	border-radius: 0;
 }
 
-.webamp input[type="range"]::-ms-fill-upper {
+.winamp input[type="range"]::-ms-fill-upper {
 	background: none;
 	border-radius: 0;
 }
 
-.webamp input[type="range"]::-ms-tooltip {
+.winamp input[type="range"]::-ms-tooltip {
 	display: none;
 }
 
-.webamp input[type="range"]:focus {
+.winamp input[type="range"]:focus {
 	outline: none;
 }
 
-.webamp input[type="range"]::-moz-focus-outer {
+.winamp input[type="range"]::-moz-focus-outer {
 	border: 0;
 }
 
-.webamp a:focus {
+.winamp a:focus {
 	outline: none;
 }
 
@@ -1284,7 +1279,7 @@
 	}
 }
 
-.webamp .character {
+.winamp .character {
 	display: inline-block;
 	vertical-align: top;
 	width: 5px;
@@ -1293,7 +1288,7 @@
 	text-indent: -9999px;
 }
 
-.webamp .window {
+.winamp .window {
 	position: absolute;
 	/* Ask the browser to scale showing large pixels if possible */
 	image-rendering: -moz-crisp-edges; /* Firefox */
@@ -1304,131 +1299,131 @@
 	-ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
 }
 
-.webamp .window {
+.winamp .window {
 	/* Work around rendering bug with clip-path */
 	-webkit-transform: translateZ(0);
 }
-.webamp .window.doubled {
+.winamp .window.doubled {
 	-moz-transform: translateZ(0) scale(2);
 	-moz-transform-origin: top left;
 	-webkit-transform: translateZ(0) scale(2);
 	-webkit-transform-origin: top left;
 }
 
-.webamp .gen-text-a {
+.winamp .gen-text-a {
 	width:6px
 }
-.webamp .gen-text-b {
+.winamp .gen-text-b {
 	width:7px
 }
 
-.webamp .gen-text-c {
+.winamp .gen-text-c {
 	width:7px
 }
 
-.webamp .gen-text-d {
+.winamp .gen-text-d {
 	width:6px
 }
 
-.webamp .gen-text-e {
+.winamp .gen-text-e {
 	width:6px
 }
 
-.webamp .gen-text-f {
+.winamp .gen-text-f {
 	width:6px
 }
 
-.webamp .gen-text-g {
+.winamp .gen-text-g {
 	width:7px
 }
 
-.webamp .gen-text-h {
+.winamp .gen-text-h {
 	width:6px
 }
 
-.webamp .gen-text-i {
+.winamp .gen-text-i {
 	width:4px
 }
 
-.webamp .gen-text-j {
+.winamp .gen-text-j {
 	width:6px
 }
 
-.webamp .gen-text-k {
+.winamp .gen-text-k {
 	width:7px
 }
 
-.webamp .gen-text-l {
+.winamp .gen-text-l {
 	width:5px
 }
 
-.webamp .gen-text-m {
+.winamp .gen-text-m {
 	width:8px
 }
 
-.webamp .gen-text-n {
+.winamp .gen-text-n {
 	width:6px
 }
 
-.webamp .gen-text-o {
+.winamp .gen-text-o {
 	width:6px
 }
 
-.webamp .gen-text-p {
+.winamp .gen-text-p {
 	width:6px
 }
 
-.webamp .gen-text-q {
+.winamp .gen-text-q {
 	width:7px
 }
 
-.webamp .gen-text-r {
+.winamp .gen-text-r {
 	width:7px
 }
 
-.webamp .gen-text-s {
+.winamp .gen-text-s {
 	width:6px
 }
 
-.webamp .gen-text-t {
+.winamp .gen-text-t {
 	width:5px
 }
 
-.webamp .gen-text-u {
+.winamp .gen-text-u {
 	width:6px
 }
 
-.webamp .gen-text-v {
+.winamp .gen-text-v {
 	width:6px
 }
 
-.webamp .gen-text-w {
+.winamp .gen-text-w {
 	width:8px
 }
 
-.webamp .gen-text-x {
+.winamp .gen-text-x {
 	width:7px
 }
 
-.webamp .gen-text-y {
+.winamp .gen-text-y {
 	width:6px
 }
 
-.webamp .gen-text-z {
+.winamp .gen-text-z {
 	width:5px
 }
 
 
-.webamp .gen-text-space {
+.winamp .gen-text-space {
 	width: 5px;
 }
 
-.webamp .gen-text-letter {
+.winamp .gen-text-letter {
 	height: 7px;
 	display: inline-block;
 }
 
-.webamp .gen-window {
+.winamp .gen-window {
 	/* Default size */
 	width: 275px;
 	height: 116px;
@@ -1436,52 +1431,52 @@
 	flex-direction: column;
 }
 
-.webamp .gen-top {
+.winamp .gen-top {
 	height: 20px;
 	display: flex;
 	flex-direction: row;
 }
 
-.webamp .gen-top-left {
+.winamp .gen-top-left {
 	width: 25px;
 	height: 20px;
 }
 
-.webamp .gen-top-title {
+.winamp .gen-top-title {
 	line-height: 7px;
 	margin-top: 2px;
 	/* TODO: This should be a conciquence of the repeating tiles, not hard coded */
 	padding: 0 3px 0 4px;
 }
 
-.webamp .gen-top-left-fill {
+.winamp .gen-top-left-fill {
 	flex-grow: 1;
 	height: 20px;
 	background-position: left;
 }
 
-.webamp .gen-top-right-fill {
+.winamp .gen-top-right-fill {
 	flex-grow: 1;
 	height: 20px;
 	background-position: right;
 }
 
-.webamp .gen-top-left-end {
+.winamp .gen-top-left-end {
 	width: 25px;
 	height: 20px;
 }
 
-.webamp .gen-top-right {
+.winamp .gen-top-right {
 	width: 25px;
 	height: 20px;
 }
 
-.webamp .gen-top-right-end {
+.winamp .gen-top-right-end {
 	width: 25px;
 	height: 20px;
 }
 
-.webamp .gen-close {
+.winamp .gen-close {
 	width: 9px;
 	height: 9px;
 	position: absolute;
@@ -1489,60 +1484,60 @@
 	top: 3px;
 }
 
-.webamp .gen-middle {
+.winamp .gen-middle {
 	flex-grow: 1;
 	display: flex;
 	flex-direction: row;
 	position: relative;
 }
 
-.webamp .gen-middle-left {
+.winamp .gen-middle-left {
 	width: 11px;
 }
 
-.webamp .gen-middle-left-bottom {
+.winamp .gen-middle-left-bottom {
 	width: 11px;
 	height: 24px;
 	bottom: 0;
 	position: absolute;
 }
 
-.webamp .gen-middle-center {
+.winamp .gen-middle-center {
 	flex-grow: 1;
 	position: relative;
 }
 
-.webamp .gen-middle-right {
+.winamp .gen-middle-right {
 	width: 8px;
 }
 
-.webamp .gen-middle-right-bottom {
+.winamp .gen-middle-right-bottom {
 	width: 8px;
 	height: 24px;
 	bottom: 0;
 	position: absolute;
 }
 
-.webamp .gen-bottom {
+.winamp .gen-bottom {
 	height: 14px;
 	background-repeat: repeat-x;
 }
 
-.webamp .gen-bottom-left {
+.winamp .gen-bottom-left {
 	position: absolute;
 	left: 0;
 	width: 125px;
 	height: 14px;
 }
 
-.webamp .gen-bottom-right {
+.winamp .gen-bottom-right {
 	position: absolute;
 	right: 0;
 	width: 125px;
 	height: 14px;
 }
 
-.webamp .gen-bottom-right #gen-resize-target {
+.winamp .gen-bottom-right #gen-resize-target {
 	position: absolute;
 	right: 0;
 	bottom: 0;
@@ -1550,22 +1545,22 @@
 	width: 20px;
 }
 
-.webamp .mini-time {
+.winamp .mini-time {
 	display: block;
 	height: 6px;
 	width: 25px;
 }
 
-.webamp .mini-time.blinking .character:not(.background-character) {
+.winamp .mini-time.blinking .character:not(.background-character) {
 	animation: blink 2s step-start 1s infinite;
 	-webkit-animation: blink 2s step-start 1s infinite;
 }
 
-.webamp .mini-time .background-character {
+.winamp .mini-time .background-character {
 	z-index: 1;
 }
 
-.webamp .mini-time .character {
+.winamp .mini-time .character {
 	position: absolute;
 	top: 0;
 	z-index: 2;
