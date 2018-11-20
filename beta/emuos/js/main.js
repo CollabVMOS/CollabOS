@@ -25,7 +25,7 @@
 				exports: 'KJUR'
 			},
 			octokat: {
-				deps: ['promise', 'fetch']
+				deps: ['promise', 'fetch', 'base64']
 			},
 			emuos: {
 				deps: ['desktop']
@@ -63,6 +63,7 @@
 			jquerycustomscrollbar: 'libraries/jquery-customscrollbar-3.1.5.min',
 			jqyeryajaxretry: 'libraries/jquery-ajax-retry-0.2.7.min',
 			jsrsasign: 'libraries/jsrsasign-all-8.0.12.min',
+			base64: 'polyfills/es3-base64-1.0.1.min',
 			promise: 'polyfills/es6-promise-4.2.5.min',
 			fetch: 'polyfills/es6-fetch-3.0.0',
 			octokat: 'libraries/octokat-0.10.0',
@@ -98,7 +99,7 @@
 		'jqueryuitree',
 		'jquerycustomscrollbar',
 		'jqyeryajaxretry'
-	], function(github_private_key, $, FileSystem, EmuOS, AppWinamp, winamp_template, tree_template) {
+	], function(github_private_key, $, FileSystem, EmuOS, Winamp, winamp_template, tree_template) {
 		$(function() {
 			var filesystem = new FileSystem({
 				github: {
@@ -106,7 +107,7 @@
 				}
 			});
 
-			var winamp = new AppWinamp({template: winamp_template});
+			var winamp = new Winamp({template: winamp_template});
 
 			// noinspection JSUnusedLocalSymbols
 			var desktop = new EmuOS({

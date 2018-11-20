@@ -205,7 +205,7 @@
 			minWidth: true
 		},
 
-		_create: function () {
+		_create: function() {
 			// tracks state of various elements of window
 			// and holds a bunch of calculated values and options
 			this._cache = {
@@ -336,17 +336,17 @@
 			this.$window.data(this._cnst.dataPrefix + "window", this);
 		},
 
-		_init: function () {
+		_init: function() {
 			var self = this;
 
 			this.options.hide = false;
 
 			this.open();
 
-			// dialog since jQuery UI 1.11.1set's overlay z-index
+			// dialog since jQuery UI 1.11.1 sets overlay z-index
 			// to 1 lower than modal z-index
 			// github.com/jquery/jquery-ui/commit/acfda4be521e48c6b61cc458a715ef163892ac36
-			// window has it's own flow of z-indexes, so we're revert z-index
+			// window has it's own flow of z-indexes, so we revert z-index
 			// value and use native flow manager instead
 			if (this.overlay) {
 				this.overlay.css("zIndex", "");
@@ -381,19 +381,19 @@
 			// the window,  for example, when having tabs inside a window,
 			// would scroll widget a fex pixels;
 			// this behaviour was consistent across browsers (Chrome, Firefox, IE)
-			this.$elem.on("scroll." + this._cache.uep, function () {
+			this.$elem.on("scroll." + this._cache.uep, function() {
 				self.$elem.scrollTop(0);
 			});
 
 			// prevents window losing focus, when element inside it is clicked
 			// and detached as a result
-			this.$elem.on("mousedown." + this._cache.uep, function () {
+			this.$elem.on("mousedown." + this._cache.uep, function() {
 				self._preventGlobalWindowClick();
 			});
 
 			// revert global click prevention counter
-			this.$elem.on("mouseup." + this._cache.uep, function () {
-				self._delay(function () {
+			this.$elem.on("mouseup." + this._cache.uep, function() {
+				self._delay(function() {
 					self._revertGlobalWindowClick();
 				});
 			});
@@ -404,7 +404,7 @@
 
 			this._preventGlobalWindowClick();
 
-			this._delay(function () {
+			this._delay(function() {
 				self._revertGlobalWindowClick();
 			});
 
@@ -415,7 +415,7 @@
 		},
 
 		// bind window to a given taskbar
-		_rebindTaskbar: function () {
+		_rebindTaskbar: function() {
 			this._refreshTaskbar();
 
 			// if there's no taskbar, there's nothing to rebind to
@@ -440,12 +440,10 @@
 
 			taskbar._bind(this.$window);
 
-			this.$elem
-				.add(this.overlay)
-				.attr("data-taskbar-uuid", this._getTaskbarInstance().uuid);
+			this.$elem.add(this.overlay).attr("data-taskbar-uuid", this._getTaskbarInstance().uuid);
 		},
 
-		_taskbarUnbind: function () {
+		_taskbarUnbind: function() {
 			var instance = this._getTaskbarInstance();
 
 			if (instance) {
@@ -456,21 +454,18 @@
 		},
 
 		// normalize option and bind reference to jQuery object
-		_refreshTaskbar: function () {
-			this.$taskbar = this.options.taskbar instanceof $
-				? this.options.taskbar
-				: $(this.options.taskbar);
-
+		_refreshTaskbar: function() {
+			this.$taskbar = this.options.taskbar instanceof $ ? this.options.taskbar : $(this.options.taskbar);
 			this.$taskbar = this.$taskbar.filter(":eq(0)");
 		},
 
-		_getTaskbarInstance: function () {
+		_getTaskbarInstance: function() {
 			this._validateTaskbar();
 
 			return this.$taskbar.data(this._cnst.dataPrefix + "taskbar");
 		},
 
-		_hasTaskbar: function () {
+		_hasTaskbar: function() {
 			var validation = this._taskbarStatus();
 
 			var hasTaskbar = !validation.isEmptyDomObject && validation.isTaskbar;
@@ -478,7 +473,7 @@
 			return hasTaskbar;
 		},
 
-		_taskbarStatus: function () {
+		_taskbarStatus: function() {
 			return {
 				isEmptyDomObject: this.$taskbar instanceof $ && !this.$taskbar.length,
 				isTaskbar: this.$taskbar.hasClass(this.classes.taskbar),
@@ -504,19 +499,10 @@
 				if (settings && (settings.initial || settings.rebind)) {
 					for (var reason in validation) {
 						// decide reason for failed bind
-						if (
-							validation [reason] === true
-							&& reason === "isEmptyDomObject"
-							|| validation [reason] === false
-							&& reason !== "isEmptyDomObject"
-						) {
-							errorUi.message = "Window #" + this.element[0].id
-								+ ": " + reasons[reason]
-								+ (
-									settings.rebind
-										? " Window was not rebinded."
-										: " Window was not created."
-								);
+						// noinspection JSUnfilteredForInLoop
+						if (validation[reason] === true && reason === "isEmptyDomObject" || validation[reason] === false && reason !== "isEmptyDomObject") {
+							// noinspection JSUnfilteredForInLoop
+							errorUi.message = "Window #" + this.element[0].id + ": " + reasons[reason] + (settings.rebind ? " Window was not rebinded." : " Window was not created.");
 							errorUi.initial = !settings.rebind;
 							break;
 						}
@@ -527,7 +513,7 @@
 
 					// if no taskbar is present, destroy window after creation
 					// this is easier than doing hacks to stop creation half-way
-					this._bindInternal("afterTaskbarBind", function () {
+					this._bindInternal("afterTaskbarBind", function() {
 						if (settings.initial) {
 							self.destroy();
 						}
@@ -557,12 +543,12 @@
 			return true;
 		},
 
-		_refreshGroup: function () {
+		_refreshGroup: function() {
 			this._taskbarUnbind();
 			this._bindTaskbar();
 		},
 
-		_debugOptions: function () {
+		_debugOptions: function() {
 			var taskbar = this._getTaskbarInstance();
 
 			if (!taskbar) {
@@ -593,7 +579,7 @@
 			}
 		},
 
-		_debugUnsupportedOptions: function () {
+		_debugUnsupportedOptions: function() {
 			var taskbar = this._getTaskbarInstance();
 
 			if (!taskbar) {
@@ -616,7 +602,7 @@
 			});
 		},
 
-		_resetUnsupportedOptions: function () {
+		_resetUnsupportedOptions: function() {
 			this.options.autoOpen = false;
 			this.options.closeText = false;
 			this.options.hide = false;
@@ -637,7 +623,7 @@
 			this._cache.internalCallbacks[name] = fn;
 		},
 
-		_createWrapper: function () {
+		_createWrapper: function() {
 			var self = this;
 
 			this._super();
@@ -691,7 +677,7 @@
 		// this function will detect scrollbars and freeze their state during drag,
 		// otherwise changing position from fixed to absolute could trigger
 		// scrollbar apperance, when body has overflow: auto, and if ofter do
-		_freezeBodyScrollbars: function () {
+		_freezeBodyScrollbars: function() {
 			var $body = $("body"),
 				d = document.documentElement,
 				c = this._cache;
@@ -716,7 +702,7 @@
 		},
 
 		// this function will revert window scrolls to state before drag
-		_revertBodyScrollbars: function () {
+		_revertBodyScrollbars: function() {
 			var r = this._cache.resizable,
 				$body = $("body");
 
@@ -728,7 +714,7 @@
 		},
 
 		// make resizable window
-		_makeResizable: function () {
+		_makeResizable: function() {
 			var self = this,
 				$dialog = this.uiDialog,
 				options = this.options,
@@ -1036,14 +1022,14 @@
 			// this.$elem will not work if invalid taskbar was given
 			// on initialization
 
-			// $(this.bindings[0]).children("." + this.classes.uiResizableHandle).on("mousedown." + this._cache.uep, function () {
-			$(this.bindings[0]).siblings("." + this.classes.uiResizableHandle).on("mousedown." + this._cache.uep, function () {
+			// $(this.bindings[0]).children("." + this.classes.uiResizableHandle).on("mousedown." + this._cache.uep, function() {
+			$(this.bindings[0]).siblings("." + this.classes.uiResizableHandle).on("mousedown." + this._cache.uep, function() {
 				self.$latestResizableHandle = $(this);
 
 				if (self.options.embeddedContent) {
 					self.$window.find('iframe').css('pointer-events', 'none');
 				}
-			}).on("mouseup." + this._cache.uep, function () {
+			}).on("mouseup." + this._cache.uep, function() {
 				if (self.options.embeddedContent) {
 					self.$window.find('iframe').removeAttr('style');
 				}
@@ -1051,13 +1037,13 @@
 		},
 
 		// this function will save scrollX and scrollY before drag
-		_freezeBodyScrolls: function () {
+		_freezeBodyScrolls: function() {
 			this._cache.draggable.scrollX = $(window).scrollLeft();
 			this._cache.draggable.scrollY = $(window).scrollTop();
 		},
 
 		// this function will revert scrolls after drag
-		_revertBodyScrolls: function () {
+		_revertBodyScrolls: function() {
 			window.scroll(
 				this._cache.draggable.scrollX,
 				this._cache.draggable.scrollY
@@ -1065,7 +1051,7 @@
 		},
 
 		// sets correction position option after resize/drag
-		_refreshPositionOption: function () {
+		_refreshPositionOption: function() {
 			var options = this.options,
 				$this = this.$elem;
 
@@ -1090,7 +1076,7 @@
 		},
 
 		// make draggable window
-		_makeDraggable: function () {
+		_makeDraggable: function() {
 			this._super();
 
 			var self = this,
@@ -1107,10 +1093,8 @@
 				var draggable = $elem.data(self.classes.uiDraggable);
 				var taskbar = self._getTaskbarInstance();
 
-				var $title = self.uiDialogTitlebar
-					.find("." + self.classes.uiDialogTitle);
-				var $lastButton = $title
-					.siblings("." + self.classes.uiButton + ":visible:eq(0)");
+				var $title = self.uiDialogTitlebar.find("." + self.classes.uiDialogTitle);
+				var $lastButton = $title.siblings("." + self.classes.uiButton + ":visible:eq(0)");
 
 				var draggableBefore = $.extend(true, {}, draggable);
 
@@ -1257,7 +1241,7 @@
 		},
 
 		// returns real containment, taking "inherit" into account
-		_getRealContainment: function () {
+		_getRealContainment: function() {
 			var taskbar = this._getTaskbarInstance();
 
 			return this.options.containment === "inherit" && taskbar
@@ -1265,13 +1249,13 @@
 				: this.options.containment;
 		},
 
-		_getRealContainmentObject: function () {
+		_getRealContainmentObject: function() {
 			return $("." + this.classes.taskbarWindowsContainment);
 		},
 
 		// calculate and return containment for windows with
 		// containment option set to visible
-		_getVisibleContainmentArray: function () {
+		_getVisibleContainmentArray: function() {
 			var taskbar = this._getTaskbarInstance(),
 				containment;
 
@@ -1319,7 +1303,7 @@
 			return containment;
 		},
 
-		_getWindowScroll: function () {
+		_getWindowScroll: function() {
 			return this._getTaskbarInstance()._getWindowScroll();
 		},
 
@@ -1354,7 +1338,7 @@
 			}
 		},
 
-		_extendDraggableCancel: function () {
+		_extendDraggableCancel: function() {
 			// cancel draggable on window manipulation buttons
 			var cancel = this.uiDialog.draggable("option", "cancel");
 
@@ -1365,7 +1349,7 @@
 		},
 
 		// open confirm close window
-		_openConfirmClose: function () {
+		_openConfirmClose: function() {
 			var self = this,
 				o = this.options;
 
@@ -1401,15 +1385,15 @@
 							resizable: false,
 							height: "auto",
 							minHeight: null,
-							beforeMinimize: function () {
+							beforeMinimize: function() {
 								self._cache.confirmCloseMinimizing = true;
 							},
-							minimize: function () {
+							minimize: function() {
 								self._cache.confirmCloseMinimizing = false;
 							},
 							// let's have it here so calling close() on this window
 							// don't break anything
-							close: function () {
+							close: function() {
 								self._unblock();
 							}
 						});
@@ -1456,19 +1440,19 @@
 		},
 
 		// returns calculated config for confirm close buttons
-		_confirmCloseButtonsConfig: function () {
+		_confirmCloseButtonsConfig: function() {
 			var self = this;
 
 			return [
 				{
 					text: this._buildConfirmCloseText("no"),
-					click: function () {
+					click: function() {
 						self.$confirmCloseWindow.window("close");
 					}
 				},
 				{
 					text: this._buildConfirmCloseText("yes"),
-					click: function () {
+					click: function() {
 						// closing the parent window, so we don't need
 						// to unblock or move it to the top anymore
 						self.close();
@@ -1479,7 +1463,7 @@
 			];
 		},
 
-		_afterConfirmCloseButtonsBuild: function () {
+		_afterConfirmCloseButtonsBuild: function() {
 			var buttonClasses = [
 				this.classes.confirmCloseNo,
 				this.classes.confirmCloseYes
@@ -1501,9 +1485,7 @@
 				title: this.title()
 			};
 
-			return o.confirmClose[key]
-				? this._getTaskbarInstance()._i18n_replace_keys(o.confirmClose[key], keys)
-				: this._i18n(o.confirmClose[key + "Localized"], keys);
+			return o.confirmClose[key] ? this._getTaskbarInstance()._i18n_replace_keys(o.confirmClose[key], keys) : this._i18n(o.confirmClose[key + "Localized"], keys);
 		},
 
 		// confirm close windows are subordinates and receive
@@ -1524,10 +1506,7 @@
 			}
 
 			$.each(options, function (key, prev) {
-				if (
-					self.$window.hasClass(self.classes.confirmClose)
-					&& key === "confirmClose"
-				) {
+				if (self.$window.hasClass(self.classes.confirmClose) && key === "confirmClose") {
 					var taskbar = self._getTaskbarInstance();
 
 					if (!taskbar) {
@@ -1537,16 +1516,13 @@
 					// warning about nesting confirm close window,
 					// although, it should not be done and probably will never
 					// be officially supported
-					self._debugLogAdd("Trying to change confirmClose option on a"
-						+ " window that is a confirm close window itself."
-						+ " Confirm close windows should not be nested.", 1, 2);
+					self._debugLogAdd("Trying to change confirmClose option on a window that is a confirm close window itself. Confirm close windows should not be nested.", 1, 2);
 				}
 
 				if (self.$confirmCloseWindow.length) {
 					if (key === "durations") {
 						// confirm close should have the same durations as parent window
-						self.$confirmCloseWindow
-							.window("option", "durations", self.options.durations);
+						self.$confirmCloseWindow.window("option", "durations", self.options.durations);
 					}
 
 					if (key === "confirmClose") {
@@ -1608,40 +1584,29 @@
 					}
 
 					if (key === "icons") {
-						self.$confirmCloseWindow
-							.window(
-								"option",
-								"icons.main",
-								self.options.icons.confirmClose
-							);
+						self.$confirmCloseWindow.window("option", "icons.main", self.options.icons.confirmClose);
 					}
 
 					if (key === "title") {
-						self.$confirmCloseWindow
-							.window(
-								"option",
-								"title",
-								self._buildConfirmCloseText("title")
-							);
+						self.$confirmCloseWindow.window("option", "title", self._buildConfirmCloseText("title"));
 					}
 
 					// rebind confirm close window when window taskbar was changed
 					if (key === "taskbar") {
-						self.$confirmCloseWindow
-							.window("option", "taskbar", self.$taskbar);
+						self.$confirmCloseWindow.window("option", "taskbar", self.$taskbar);
 					}
 				}
 			});
 		},
 
 		// close confirm close window and reset reference
-		_closeConfirmCloseWindow: function () {
+		_closeConfirmCloseWindow: function() {
 			var self = this;
 
 			if (this.$confirmCloseWindow.length) {
 				this.$confirmCloseWindow.window("option", {
 					beforeClose: $.noop,
-					close: function () {
+					close: function() {
 						self._unblock();
 					}
 				}).window("close");
@@ -1650,7 +1615,7 @@
 			}
 		},
 
-		_unblock: function () {
+		_unblock: function() {
 			this.$confirmCloseWindow = $();
 
 			// destroy window overlay
@@ -1674,7 +1639,7 @@
 		},
 
 		// create titlebar and it's buttons
-		_createTitlebar: function () {
+		_createTitlebar: function() {
 			this._super();
 
 			if (!this._hasTaskbar()) {
@@ -1724,7 +1689,7 @@
 		},
 
 		// set label and visibility to close button
-		_setButtonCloseState: function () {
+		_setButtonCloseState: function() {
 			this.uiDialogTitlebarClose
 				.button("option", "label", this._i18n("close"));
 
@@ -1780,7 +1745,7 @@
 							self.moveToTop();
 						}
 					},
-					mousedown: function () {
+					mousedown: function() {
 						$(this)
 							.siblings("." + self.classes.uiButton)
 							.removeClass(self.classes.uiStateHover);
@@ -1885,7 +1850,7 @@
 					.not("." + this.classes.modal)
 					.filter(":visible");
 
-			$("." + this.classes.taskbar).each(function () {
+			$("." + this.classes.taskbar).each(function() {
 				var $taskbar = $(this);
 
 				var instance = $taskbar.data(self._cnst.dataPrefix + "taskbar");
@@ -1931,7 +1896,7 @@
 			// place window overlays;
 			// autodetect if they should be created
 			$otherWindows
-				.each(function () {
+				.each(function() {
 					$(this)
 						.children("." + self.classes.windowContent)
 						.data(self._cnst.dataPrefix + "window")
@@ -1995,7 +1960,7 @@
 						// on top, that could be active modal
 						$elem
 							.add($modal)
-							.each(function () {
+							.each(function() {
 								$(this)
 									.children("." + self.classes.windowContent)
 									.data(self._cnst.dataPrefix + "window")
@@ -2077,7 +2042,7 @@
 			var $this = $elem ? $elem : this.$elem,
 				self = this;
 
-			$this.each(function () {
+			$this.each(function() {
 				var $this = $(this);
 
 				if ($this.hasClass(self.classes.windowTop)) {
@@ -2102,7 +2067,7 @@
 		_setConnectedButtonsState: function ($elems) {
 			var self = this;
 
-			$elems.each(function () {
+			$elems.each(function() {
 				$(this)
 					.data(self._cnst.dataPrefix + "window")
 					._setConnectedButtonState();
@@ -2292,7 +2257,7 @@
 
 			var animation = {
 				duration: duration,
-				complete: function () {
+				complete: function() {
 					self._fixTitlebarTitleWidth();
 					self._setContentHeight();
 					self._focusTabbable();
@@ -2300,13 +2265,13 @@
 						self._trigger("focus");
 					}
 				},
-				progress: function () {
+				progress: function() {
 					self._fixTitlebarTitleWidthDuringAnimation.apply(
 						self, arguments
 					);
 					self._setContentHeight();
 				},
-				always: function () {
+				always: function() {
 					self.$elem
 						.removeClass(self.classes.windowShowing)
 						.removeClass(self.classes.windowMaximizing)
@@ -2429,17 +2394,17 @@
 
 			var animation = {
 				duration: duration,
-				complete: function () {
+				complete: function() {
 					self._fixTitlebarTitleWidth();
 					self._setContentHeight();
 				},
-				progress: function () {
+				progress: function() {
 					self._fixTitlebarTitleWidthDuringAnimation.apply(
 						self, arguments
 					);
 					self._setContentHeight();
 				},
-				always: function () {
+				always: function() {
 					self.$elem
 						.hide()
 						.addClass(self.classes.windowMinimized)
@@ -2632,20 +2597,20 @@
 
 			var animation = {
 				duration: quick ? false : parsedDuration || duration,
-				complete: function () {
+				complete: function() {
 					self._fixTitlebarTitleWidth();
 					self._setContentHeight();
 				},
-				progress: function () {
+				progress: function() {
 					self._fixTitlebarTitleWidthDuringAnimation.apply(
 						self, arguments
 					);
 					self._setContentHeight();
 				},
-				start: function () {
+				start: function() {
 					self._cache.shown = true;
 				},
-				always: function () {
+				always: function() {
 					self._cache[progress] = false;
 					self._cache[progressInverted] = false;
 					self._cache[state] = true;
@@ -2695,7 +2660,7 @@
 		},
 
 		// helper for quick changing window state
-		_noAnimationDurations: function () {
+		_noAnimationDurations: function() {
 			return {
 				maximize: false,
 				minimize: false,
@@ -2707,7 +2672,7 @@
 		// titlebar buttons has to be enumerated,
 		// because selectors will apply to attributes set here,
 		// so they'll be in the right distance from the right widget edge
-		_enumerateTitlebarButtons: function () {
+		_enumerateTitlebarButtons: function() {
 			this.uiDialogTitlebar
 				.children("." + this.classes.uiButton)
 				.removeAttr("data-button-order");
@@ -2722,7 +2687,7 @@
 				});
 		},
 
-		_setConnectedButtonState: function () {
+		_setConnectedButtonState: function() {
 			// blur all window buttons
 			$("." + this.classes.taskbar + " ." + this.classes.taskbarWindowButton)
 				.removeClass(this.classes.uiStateActive);
@@ -2741,12 +2706,12 @@
 			}
 		},
 
-		_setWidth: function () {
+		_setWidth: function() {
 			this._setDimension("width");
 			this._setContentHeight();
 		},
 
-		_setHeight: function () {
+		_setHeight: function() {
 			this._setDimension("height");
 			this._setContentHeight();
 		},
@@ -2807,7 +2772,7 @@
 		},
 
 		// helper for refreshing all button icons
-		_refreshButtonIcons: function () {
+		_refreshButtonIcons: function() {
 			this._setIcon({
 				button: "close"
 			});
@@ -2823,7 +2788,7 @@
 		},
 
 		// sets labels for buttons
-		_setButtonsTexts: function () {
+		_setButtonsTexts: function() {
 			var self = this;
 
 			$.each(this._titlebarButtons, function (index, button) {
@@ -2967,18 +2932,18 @@
 			this._removeClassDisabled();
 		},
 
-		_clearTimeouts: function () {
+		_clearTimeouts: function() {
 			clearTimeout(this._cache.timeouts.closeWindowShow);
 		},
 
 		// on resizable and draggable, we only want the behaviour,
 		// not the visual of widget's disabled state
-		_removeClassDisabled: function () {
+		_removeClassDisabled: function() {
 			this.$elem
 				.removeClass(this.classes.uiStateDisabled);
 		},
 
-		_setRestoreSize: function () {
+		_setRestoreSize: function() {
 			// don't update size if window is maximized, maximizing,
 			// minimized, or minimizing
 			if (!this.maximized() && !this.minimized()) {
@@ -3003,7 +2968,7 @@
 			}
 		},
 
-		_refreshContainmentSize: function () {
+		_refreshContainmentSize: function() {
 			this._cache.sizes.containment = this._getDimensions.call(
 				this._getRealContainmentObject(), {
 					position: true
@@ -3016,7 +2981,7 @@
 			this._cache.sizes.containment.height -= this._cache.sizes.diffs.height;
 		},
 
-		_refreshTaskbarMargins: function () {
+		_refreshTaskbarMargins: function() {
 			var taskbar = this._getTaskbarInstance();
 
 			if (!taskbar) {
@@ -3043,7 +3008,7 @@
 
 		// get the current offset of button this window if binded to,
 		// so minimize/restore could have the right animation effect
-		_getButtonCoordinates: function () {
+		_getButtonCoordinates: function() {
 			var $button = this.button(),
 				horizontal = this.$taskbar.hasClass(this.classes.taskbarHorizontal),
 				dimensions = this._getDimensions.call($button, {
@@ -3119,7 +3084,7 @@
 
 			// interaction is in progress, call this function on interaction end
 			if (this._animationProgress()) {
-				this._bindInternal("afterWindowAnimationStop", function () {
+				this._bindInternal("afterWindowAnimationStop", function() {
 					self.refreshPosition();
 				});
 
@@ -3363,7 +3328,7 @@
 
 		// find by how much should the tolerance by for draggable
 		// handle visibility, based on titlebar font-size
-		_bringIntoViewReserve: function () {
+		_bringIntoViewReserve: function() {
 			return parseInt(
 				this.uiDialogTitlebar
 					.find("." + this.classes.uiDialogTitle)
@@ -3372,7 +3337,7 @@
 			);
 		},
 
-		_moveIntoView: function () {
+		_moveIntoView: function() {
 			this._bringIntoView({
 				move: true
 			});
@@ -3411,7 +3376,7 @@
 		// sets calculated width of titlebar,
 		// this function is usually called during resize and animations
 		// todo
-		_fixTitlebarTitleWidth: function () {
+		_fixTitlebarTitleWidth: function() {
 			var $lastButton = this.$elem.find(
 				"." + this.classes.uiDialogTitlebar
 				+ " ." + this.classes.uiButton + ":last"
@@ -3433,14 +3398,14 @@
 			);
 		},
 
-		_fixTitlebarTitleWidthDuringAnimation: function () {
+		_fixTitlebarTitleWidthDuringAnimation: function() {
 			if (typeof(arguments[1]) === "number") {
 				this._cache.animationProgress = arguments[1];
 			}
 			this._fixTitlebarTitleWidth();
 		},
 
-		_setWindowIcon: function () {
+		_setWindowIcon: function() {
 			var $icon = this.$elem.find("." + this.classes.icon);
 
 			if ($icon.length && this.options.icons.main === null) {
@@ -3493,7 +3458,7 @@
 			});
 		},
 
-		_setContentHeight: function () {
+		_setContentHeight: function() {
 			var taskbar = this._getTaskbarInstance();
 
 			if (!taskbar) {
@@ -3534,7 +3499,7 @@
 			this.$window.css("maxHeight", maxHeight);
 		},
 
-		_createTitleForEmpty: function () {
+		_createTitleForEmpty: function() {
 			if (this._hasTaskbar()) {
 				if (this.options.title === null) {
 					var $containment = this.$taskbar
@@ -3559,7 +3524,7 @@
 			}
 		},
 
-		_title: function () {
+		_title: function() {
 			if (this.options.titleLocalized) {
 				if (this._i18n(this.options.titleLocalized)) {
 					this._setTitle(this._i18n(this.options.titleLocalized));
@@ -3612,7 +3577,7 @@
 			this._setConnectedButtonTitle();
 		},
 
-		_setConnectedButtonTitle: function () {
+		_setConnectedButtonTitle: function() {
 			var title = this._cache.realTitle,
 				taskbar = this._getTaskbarInstance(),
 				$button;
@@ -3659,7 +3624,7 @@
 			var c = this._cnst.lowestPossibleZIndex;
 
 			$elems
-				.each(function () {
+				.each(function() {
 					// we either have numeric zIndex or use faked zIndex
 					var zIndex = parseInt($(this).css("zIndex"), 10) || ++c;
 
@@ -3686,7 +3651,7 @@
 
 		// set  z-indexes to element that should be covered and should not
 		// be covered by modal overlay
-		_setModalZIndexes: function () {
+		_setModalZIndexes: function() {
 			this.$elem.removeClass(this.classes.modal);
 
 			if (!this.options.modal) {
@@ -3772,7 +3737,7 @@
 			};
 
 			if ($setCover.length) {
-				$setCover.each(function () {
+				$setCover.each(function() {
 					set.call(this, true);
 				});
 
@@ -3780,7 +3745,7 @@
 
 				var zIndexDown = zIndex;
 
-				$setCover.each(function () {
+				$setCover.each(function() {
 					$(this).css("zIndex", --zIndexDown);
 				});
 			}
@@ -3801,13 +3766,13 @@
 			this.overlay.css("zIndex", this._cache.modalOverlayZIndex);
 
 			if ($setNoCover.length) {
-				$setNoCover.each(function () {
+				$setNoCover.each(function() {
 					set.call(this, false);
 				});
 
 				$setNoCover = this._sortByZIndex($setNoCover, "asc");
 
-				$setNoCover.each(function () {
+				$setNoCover.each(function() {
 					$(this).css("zIndex", ++zIndex);
 				});
 			}
@@ -3837,7 +3802,7 @@
 
 			var self = this;
 
-			var revert = function () {
+			var revert = function() {
 				var $this = $(this);
 
 				if (
@@ -3873,7 +3838,7 @@
 			$("." + this.classes.notCoveredByOverlay + this.uuid).each(revert);
 		},
 
-		_revertActiveModalZIndexes: function () {
+		_revertActiveModalZIndexes: function() {
 			var $activeModals = this._getAllModals();
 
 			var self = this;
@@ -3881,7 +3846,7 @@
 			if ($activeModals.length) {
 				$activeModals
 					.children("." + this.classes.windowContent)
-					.each(function () {
+					.each(function() {
 						var $this = $(this);
 
 						var instance = $this.data(self._cnst.dataPrefix + "window");
@@ -3913,13 +3878,13 @@
 			}
 		},
 
-		_getActiveModal: function () {
+		_getActiveModal: function() {
 			return $("." + this.classes.modal)
 				.not("." + this.classes.windowMinimizing + ":visible")
 				.not(this.$elem);
 		},
 
-		_getAllModals: function () {
+		_getAllModals: function() {
 			return $("." + this.classes.modal)
 				.not(this.$elem);
 		},
@@ -3937,7 +3902,7 @@
 			var $modal = this._getActiveModal();
 
 			if ($modal.length) {
-				$modal.each(function () {
+				$modal.each(function() {
 					var $window = $(this).children("." + self.classes.windowContent);
 
 					// force minimize window
@@ -3950,17 +3915,17 @@
 			}
 		},
 
-		_isMinimizeAllInProgress: function () {
+		_isMinimizeAllInProgress: function() {
 			return !!this._getTaskbarInstance()
 				.$windowsContainment
 				.data(this._cnst.dataPrefix + "minimizeAllInProgress");
 		},
 
-		_hideTaskbarsSubordinates: function () {
+		_hideTaskbarsSubordinates: function() {
 			$("." + this.classes.taskbar).taskbar("hideSubordinates");
 		},
 
-		_createOverlay: function () {
+		_createOverlay: function() {
 			if (this.overlay || !this.options.modal) {
 				return;
 			}
@@ -4014,7 +3979,7 @@
 			}
 		},
 
-		_showOverlay: function () {
+		_showOverlay: function() {
 			if (!this.options.modal || !this.overlay) {
 				return;
 			}
@@ -4062,7 +4027,7 @@
 				duration: typeof quick !== "undefined"
 					? quick
 					: this.options.durations.minimize,
-				always: function () {
+				always: function() {
 					if (self.overlay) {
 						self.overlay.hide();
 					}
@@ -4159,7 +4124,7 @@
 				// window with confirm close in progress
 				this.$windowOverlay
 					.off("mousedown." + this._cache.uep)
-					.on("mousedown." + this._cache.uep, function () {
+					.on("mousedown." + this._cache.uep, function() {
 						if (
 							self._cache.progress.close
 							&& self.$confirmCloseWindow.length
@@ -4170,7 +4135,7 @@
 			}
 		},
 
-		_preventGlobalWindowClick: function () {
+		_preventGlobalWindowClick: function() {
 			var taskbar = this._getTaskbarInstance();
 
 			if (!taskbar) {
@@ -4190,7 +4155,7 @@
 				.data(this._cnst.dataPrefix + "preventClicks", current + prev);
 		},
 
-		_revertGlobalWindowClick: function () {
+		_revertGlobalWindowClick: function() {
 			var taskbar = this._getTaskbarInstance();
 
 			if (!taskbar) {
@@ -4208,7 +4173,7 @@
 				.data(this._cnst.dataPrefix + "preventClicks", newClicks);
 		},
 
-		_createButtons: function () {
+		_createButtons: function() {
 			this._super();
 
 			var self = this;
@@ -4249,7 +4214,7 @@
 			}
 		},
 
-		_setMinimizableMaximizableClasses: function () {
+		_setMinimizableMaximizableClasses: function() {
 			this.$elem.toggleClass(
 				this.classes.unminimizable,
 				this.options.minimizable === false
@@ -4260,7 +4225,7 @@
 			);
 		},
 
-		_languageChange: function () {
+		_languageChange: function() {
 			this._createTitleForEmpty();
 			this._title();
 
@@ -4276,7 +4241,7 @@
 			this._createButtons();
 		},
 
-		_size: function () {
+		_size: function() {
 			// mimics
 			// github.com/jquery/jquery-ui/commit/62cda1f95d0e7040153f0b5fe5745d199a0a094e
 			if (this._versionOf("dialog", "==", "1.10.0")) {
@@ -4408,7 +4373,7 @@
 		},
 
 		/* public methods */
-		button: function () {
+		button: function() {
 			var taskbar = this._getTaskbarInstance();
 
 			if (taskbar) {
@@ -4422,11 +4387,11 @@
 			this._close(event);
 		},
 
-		confirmCloseWindow: function () {
+		confirmCloseWindow: function() {
 			return this.$confirmCloseWindow;
 		},
 
-		containment: function () {
+		containment: function() {
 			return this._getRealContainment();
 		},
 
@@ -4434,11 +4399,11 @@
 			this._toggleMaximized(true, event);
 		},
 
-		maximized: function () {
+		maximized: function() {
 			return this._cache.maximized && !this._cache.maximizing;
 		},
 
-		maximizing: function () {
+		maximizing: function() {
 			return this._cache.maximizing;
 		},
 
@@ -4446,15 +4411,15 @@
 			this._minimize(event);
 		},
 
-		minimized: function () {
+		minimized: function() {
 			return this._cache.minimized && !this._cache.minimizing;
 		},
 
-		minimizing: function () {
+		minimizing: function() {
 			return this._cache.minimizing;
 		},
 
-		modalOverlay: function () {
+		modalOverlay: function() {
 			return this.overlay || $();
 		},
 
@@ -4482,27 +4447,27 @@
 			this._toggleMaximized(false, quick);
 		},
 
-		restored: function () {
+		restored: function() {
 			return this.shown() && !this.maximized();
 		},
 
-		restoring: function () {
+		restoring: function() {
 			return this._cache.restoring;
 		},
 
-		shown: function () {
+		shown: function() {
 			return this.$elem.is(":visible") && !this._animationProgress();
 		},
 
-		showing: function () {
+		showing: function() {
 			return this._cache.showing;
 		},
 
-		taskbar: function () {
+		taskbar: function() {
 			return this.$taskbar;
 		},
 
-		title: function () {
+		title: function() {
 			return this._cache.realTitle;
 		},
 
@@ -4677,7 +4642,7 @@
 			}
 		},
 
-		destroy: function () {
+		destroy: function() {
 			if (this._onInteractionEnd("destroy") === true) {
 				return this;
 			}

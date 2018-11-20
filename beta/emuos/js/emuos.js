@@ -305,7 +305,7 @@
 		// var icon	= typeof options.icon		!== 'undefined'	? options.icon		: '';
 		var content	= typeof options.content	!== 'undefined'	? options.content	: '';
 
-		var widget	= $('<div class="widget" title="'+ title +'">' + content + '</div>');
+		var widget	= $('<div class="widget" data-title="'+ title +'">' + content + '</div>');
 
 		self.$body.append(widget);
 
@@ -319,7 +319,7 @@
 		var icon	= typeof options.icon		!== 'undefined'	? options.icon		: '';
 		var content	= typeof options.content	!== 'undefined'	? options.content	: '';
 
-		var window	= $('<div class="window" title="'+ title +'">' + content + '</div>');
+		var window	= $('<div class="window" data-title="'+ title +'">' + content + '</div>');
 
 		self.$body.append(window);
 
@@ -391,7 +391,7 @@
 		var icon	= typeof options.icon	!== 'undefined'	? options.icon	: '';
 		var src		= typeof options.src	!== 'undefined'	? options.src	: '';
 
-		var window	= $('<div class="iframe" title="'+ title +'"><iframe src="' + src + '" allowfullscreen></iframe></div>');
+		var window	= $('<div class="iframe" data-title="'+ title +'"><iframe src="' + src + '" allowfullscreen></iframe></div>');
 
 		self.$body.append(window);
 

@@ -1244,6 +1244,10 @@
 	border-radius: 0;
 }
 
+.webamp input[type="range"]::-ms-tooltip {
+	display: none;
+}
+
 .webamp input[type="range"]:focus {
 	outline: none;
 }
