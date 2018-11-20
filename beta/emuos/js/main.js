@@ -86,8 +86,8 @@
 		'jquery',
 		'filesystem',
 		'emuos',
-		'../apps/winamp/js/main',
-		'text!../apps/winamp/index.html',
+		'../apps/webamp2/js/main',
+		'text!../apps/webamp2/js/views/layout.html',
 		'text!../apps/github-tree/index.html',
 		'desktop',
 		'taskbar',
@@ -99,7 +99,7 @@
 		'jqueryuitree',
 		'jquerycustomscrollbar',
 		'jqyeryajaxretry'
-	], function(github_private_key, $, FileSystem, EmuOS, Winamp, winamp_template, tree_template) {
+	], function(github_private_key, $, FileSystem, EmuOS, Webamp2, webamp_template, tree_template) {
 		$(function() {
 			var filesystem = new FileSystem({
 				github: {
@@ -107,14 +107,14 @@
 				}
 			});
 
-			var winamp = new Winamp({template: winamp_template});
+			var webamp2 = new Webamp2({template: webamp_template});
 
 			// noinspection JSUnusedLocalSymbols
 			var desktop = new EmuOS({
 				filesystem: filesystem,
 				theme: 'theme-win9x',
 				apps: {
-					winamp: winamp
+					webamp: webamp2
 				}
 			});
 

@@ -62,8 +62,8 @@
 				icon: 'apps/quake1/favicon.ico',
 				link: 'apps/quake1/index.html'
 			} , {
-				name: 'Winamp 2.9',
-				icon: 'apps/winamp/favicon.ico'
+				name: 'Webamp 2.9',
+				icon: 'apps/webamp2/favicon.ico'
 			}]
 		};
 
@@ -186,18 +186,19 @@
 					});
 				} else {
 					switch ($(this).data('name')) {
-						case 'Winamp 2.9':
+						case 'Webamp 2.9':
 							// noinspection JSUnresolvedFunction
-							var winamp_content = self.options.apps.winamp.render();
+							var webamp_content = self.options.apps.webamp.render();
 
 							// noinspection JSUnfilteredForInLoop,JSReferencingMutableVariableFromClosure
 							self.widget({
 								title: $(this).data('name'),
 								icon :$(this).data('icon'),
-								content: winamp_content
+								content: webamp_content
 							});
 
-							self.options.apps.winamp.events();
+							// noinspection JSUnresolvedFunction
+							self.options.apps.webamp.events();
 							break;
 						default:
 					}

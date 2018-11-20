@@ -20,7 +20,7 @@
 	// noinspection JSUnusedLocalSymbols
 	var root = window.location.protocol + '//' + window.location.host + '/';
 
-	var Winamp = function (options) {
+	var Webamp2 = function (options) {
 		var self = this;
 
 		self.options = options;
@@ -29,14 +29,14 @@
 		return self.render();
 	};
 
-	Winamp.prototype.events = function() {
+	Webamp2.prototype.events = function() {
 		// noinspection JSValidateTypes
 		$('.draggable').draggable({
 			cancel: '.window .marquee, .window .windows, .window .actions, .window .eject, .window .shuffle-repeat, .window .about, input, #option, #minimize, #shade, #close'
 		});
 	};
 
-	Winamp.prototype.render = function(template) {
+	Webamp2.prototype.render = function(template) {
 		var self = this;
 
 		if (typeof template === 'undefined') {
@@ -46,5 +46,5 @@
 		return template;
 	};
 
-	return Winamp;
+	return Webamp2;
 }));
