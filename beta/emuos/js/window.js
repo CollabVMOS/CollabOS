@@ -291,7 +291,7 @@
 			this._debugUnsupportedOptions();
 			this._resetUnsupportedOptions();
 
-			this.options.realTitle = this.$window.attr('title') ? this.$window.attr('title') : undefined;
+			this.options.realTitle = this.$window.attr('title') ? this.$window.attr('title') : (this.$window.data('title') ? this.$window.data('title') : undefined);
 
 			this._super();
 

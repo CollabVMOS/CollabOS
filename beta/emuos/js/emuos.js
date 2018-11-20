@@ -58,9 +58,9 @@
 				icon: 'apps/wolf3d-' + (SYSTEM_FEATURE_CANVAS ? 'canvas' : '') + '/favicon.gif',
 				link: 'apps/wolf3d-' + (SYSTEM_FEATURE_CANVAS ? 'canvas' : '') + '/index.html'
 			} , {
-				name: 'Quake 1',
-				icon: 'apps/quake1/favicon.ico',
-				link: 'apps/quake1/index.html'
+				name: 'WebQuake 1',
+				icon: 'apps/webquake1/favicon.ico',
+				link: 'apps/webquake1/index.html'
 			} , {
 				name: 'Webamp 2.9',
 				icon: 'apps/webamp2/favicon.ico'
