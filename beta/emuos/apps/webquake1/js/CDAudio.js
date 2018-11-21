@@ -3,6 +3,8 @@ CDAudio = {};
 CDAudio.known = [];
 
 CDAudio.Play = function(track, looping) {
+	Sys.DPrint('CDAudio.Play(' + [].slice.apply(arguments) + ')');
+
 	if ((CDAudio.initialized !== true) || (CDAudio.enabled !== true)) {
 		return;
 	}
@@ -36,6 +38,8 @@ CDAudio.Play = function(track, looping) {
 };
 
 CDAudio.Stop = function() {
+	Sys.DPrint('CDAudio.Stop()');
+
 	if ((CDAudio.initialized !== true) || (CDAudio.enabled !== true)) {
 		return;
 	}
@@ -49,6 +53,8 @@ CDAudio.Stop = function() {
 };
 
 CDAudio.Pause = function() {
+	Sys.DPrint('CDAudio.Pause()');
+
 	if ((CDAudio.initialized !== true) || (CDAudio.enabled !== true)) {
 		return;
 	}
@@ -59,6 +65,8 @@ CDAudio.Pause = function() {
 };
 
 CDAudio.Resume = function() {
+	Sys.DPrint('CDAudio.Resume()');
+
 	if ((CDAudio.initialized !== true) || (CDAudio.enabled !== true)) {
 		return;
 	}
@@ -69,6 +77,8 @@ CDAudio.Resume = function() {
 };
 
 CDAudio.CD_f = function() {
+	Sys.DPrint('CDAudio.CD_f()');
+
 	if ((CDAudio.initialized !== true) || (Cmd.argv.length <= 1)) {
 		return;
 	}
@@ -113,6 +123,8 @@ CDAudio.CD_f = function() {
 };
 
 CDAudio.Update = function() {
+	Sys.DPrint('CDAudio.Update()');
+
 	if ((CDAudio.initialized !== true) || (CDAudio.enabled !== true)) {
 		return;
 	}
@@ -135,6 +147,8 @@ CDAudio.Update = function() {
 };
 
 CDAudio.Init = function() {
+	Sys.DPrint('CDAudio.Init()');
+
 	Cmd.AddCommand('cd', CDAudio.CD_f);
 
 	if (COM.CheckParm('-nocdaudio') != null) {

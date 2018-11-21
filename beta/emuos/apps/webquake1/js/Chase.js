@@ -1,6 +1,8 @@
 Chase = {};
 
 Chase.Init = function() {
+	Sys.DPrint('Chase.Init()');
+
 	Chase.back = Cvar.RegisterVariable('chase_back', '100');
 	Chase.up = Cvar.RegisterVariable('chase_up', '16');
 	Chase.right = Cvar.RegisterVariable('chase_right', '0');
@@ -8,6 +10,8 @@ Chase.Init = function() {
 };
 
 Chase.Update = function() {
+	Sys.DPrint('Chase.Update()');
+
 	var forward = [], right = [];
 	Vec.AngleVectors(CL.state.viewangles, forward, right);
 

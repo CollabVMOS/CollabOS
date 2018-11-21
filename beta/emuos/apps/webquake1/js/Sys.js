@@ -1,5 +1,7 @@
 Sys = {};
 
+Sys.debug = true;
+
 Sys.ongamepadpoll = function(e) {
 	Key.gamepadlastaxes = e.axes;
 
@@ -55,6 +57,16 @@ Sys.Quit = function() {
 Sys.Print = function(text) {
 	if (window.console != null) {
 		console.log(text);
+	}
+};
+
+Sys.DPrint = function(id, name, args) {
+	if (Sys.debug) {
+		if (typeof args === 'object') {
+			Sys.Print(id + '.' + name + '(' + [].slice.apply(args) + ')');
+		} else {
+			Sys.Print(id);
+		}
 	}
 };
 
@@ -197,7 +209,6 @@ window.onload = function() {
 
 	Sys.oldtime = Date.now() * 0.001;
 
-	Sys.Print('Host.Init\n');
 	Host.Init();
 
 	for (i = 0; i < Sys.events.length; ++i) {

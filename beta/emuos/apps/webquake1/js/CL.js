@@ -1,5 +1,7 @@
 CL = {};
 
+CL.id = 'CL';
+
 CL.cshift = {
 	contents: 0,
 	damage: 1,
@@ -16,6 +18,8 @@ CL.active = {
 // demo
 
 CL.StopPlayback = function() {
+	Sys.DPrint(CL.id, 'StopPlayback', arguments);
+
 	if (CL.cls.demoplayback !== true) {
 		return;
 	}
@@ -30,7 +34,10 @@ CL.StopPlayback = function() {
 };
 
 CL.WriteDemoMessage = function() {
+	Sys.DPrint(CL.id,'WriteDemoMessage', arguments);
+
 	var len = CL.cls.demoofs + 16 + NET.message.cursize;
+
 	if (CL.cls.demofile.byteLength < len) {
 		var src = new Uint8Array(CL.cls.demofile, 0, CL.cls.demoofs);
 		CL.cls.demofile = new ArrayBuffer(CL.cls.demofile.byteLength + 16384);
@@ -50,6 +57,8 @@ CL.WriteDemoMessage = function() {
 };
 
 CL.GetMessage = function() {
+	Sys.DPrint('CL.GetMessage()');
+
 	if (CL.cls.demoplayback === true) {
 		if (CL.cls.signon === 4) {
 			if (CL.cls.timedemo === true) {
@@ -132,6 +141,8 @@ CL.GetMessage = function() {
 };
 
 CL.Stop_f = function() {
+	Sys.DPrint('CL.Stop_f()');
+
 	if (Cmd.client === true) {
 		return;
 	}
@@ -157,6 +168,8 @@ CL.Stop_f = function() {
 };
 
 CL.Record_f = function() {
+	Sys.DPrint('CL.Record_f()');
+
 	var c = Cmd.argv.length;
 
 	if ((c <= 1) || (c >= 5)) {
@@ -205,6 +218,8 @@ CL.Record_f = function() {
 };
 
 CL.PlayDemo_f = function() {
+	Sys.DPrint('CL.PlayDemo_f()');
+
 	if (Cmd.client === true) {
 		return;
 	}
@@ -259,6 +274,8 @@ CL.PlayDemo_f = function() {
 };
 
 CL.FinishTimeDemo = function() {
+	Sys.DPrint('CL.FinishTimeDemo()');
+
 	CL.cls.timedemo = false;
 
 	var frames = Host.framecount - CL.cls.td_startframe - 1;
@@ -272,6 +289,8 @@ CL.FinishTimeDemo = function() {
 };
 
 CL.TimeDemo_f = function() {
+	Sys.DPrint('CL.TimeDemo_f()');
+
 	if (Cmd.client === true) {
 		return;
 	}
@@ -313,6 +332,8 @@ CL.kbutton = {
 CL.kbuttons = [];
 
 CL.KeyDown = function() {
+	Sys.DPrint('CL.KeyDown()');
+
 	var b = CL.kbutton[Cmd.argv[0].substring(1)];
 
 	if (b == null) {
@@ -349,6 +370,8 @@ CL.KeyDown = function() {
 };
 
 CL.KeyUp = function() {
+	Sys.DPrint('CL.KeyUp()');
+
 	var b = CL.kbutton[Cmd.argv[0].substring(1)];
 
 	if (b == null) {
@@ -386,6 +409,8 @@ CL.KeyUp = function() {
 };
 
 CL.MLookUp = function() {
+	Sys.DPrint('CL.MLookUp()');
+
 	CL.KeyUp();
 
 	if (((CL.kbuttons[CL.kbutton.mlook].state & 1) === 0) && (CL.lookspring.value !== 0)) {
@@ -394,10 +419,14 @@ CL.MLookUp = function() {
 };
 
 CL.Impulse = function() {
+	Sys.DPrint('CL.Impulse()');
+
 	CL.impulse = Q.atoi(Cmd.argv[1]);
 };
 
 CL.KeyState = function(key) {
+	Sys.DPrint(CL.id,'KeyState', arguments);
+
 	key = CL.kbuttons[key];
 
 	var down = key.state & 1;
@@ -424,6 +453,8 @@ CL.KeyState = function(key) {
 };
 
 CL.AdjustAngles = function() {
+	Sys.DPrint('CL.AdjustAngles()');
+
 	var speed = Host.frametime;
 
 	if ((CL.kbuttons[CL.kbutton.speed].state & 1) !== 0) {
@@ -474,6 +505,8 @@ CL.AdjustAngles = function() {
 };
 
 CL.BaseMove = function() {
+	Sys.DPrint('CL.BaseMove()');
+
 	if (CL.cls.signon !== 4) {
 		return;
 	}
@@ -518,6 +551,8 @@ CL.BaseMove = function() {
 CL.sendmovebuf = {data: new ArrayBuffer(16), cursize: 0};
 
 CL.SendMove = function() {
+	Sys.DPrint('CL.SendMove()');
+
 	var buf = CL.sendmovebuf;
 	buf.cursize = 0;
 
@@ -562,6 +597,8 @@ CL.SendMove = function() {
 };
 
 CL.InitInput = function() {
+	Sys.DPrint('CL.InitInput()');
+
 	var i;
 
 	var commands = [
@@ -598,6 +635,8 @@ CL.static_entities = [];
 CL.visedicts = [];
 
 CL.Rcon_f = function() {
+	Sys.DPrint('CL.Rcon_f()');
+
 	if (CL.rcon_password.string.length === 0) {
 		Con.Print('You must set \'rcon_password\' before\nissuing an rcon command.\n');
 
@@ -649,6 +688,8 @@ CL.Rcon_f = function() {
 };
 
 CL.ClearState = function() {
+	Sys.DPrint('CL.ClearState()');
+
 	if (SV.server.active !== true) {
 		Con.DPrint('Clearing memory\n');
 		Mod.ClearAll();
@@ -726,6 +767,8 @@ CL.ClearState = function() {
 };
 
 CL.Disconnect = function() {
+	Sys.DPrint('CL.Disconnect()');
+
 	S.StopAllSounds();
 
 	if (CL.cls.demoplayback === true) {
@@ -753,6 +796,8 @@ CL.Disconnect = function() {
 };
 
 CL.Connect = function(sock) {
+	Sys.DPrint(CL.id,'Connect', arguments);
+
 	CL.cls.netcon = sock;
 	Con.DPrint('CL.Connect: connected to ' + CL.host + '\n');
 	CL.cls.demonum = -1;
@@ -761,6 +806,8 @@ CL.Connect = function(sock) {
 };
 
 CL.EstablishConnection = function(host) {
+	Sys.DPrint('CL.EstablishConnection()');
+
 	if (CL.cls.demoplayback === true) {
 		return;
 	}
@@ -778,13 +825,13 @@ CL.EstablishConnection = function(host) {
 };
 
 CL.SignonReply = function() {
+	Sys.DPrint('CL.SignonReply()');
 	Con.DPrint('CL.SignonReply: ' + CL.cls.signon + '\n');
 
 	switch (CL.cls.signon) {
 		case 1:
 			MSG.WriteByte(CL.cls.message, Protocol.clc.stringcmd);
 			MSG.WriteString(CL.cls.message, 'prespawn');
-
 			return;
 		case 2:
 			MSG.WriteByte(CL.cls.message, Protocol.clc.stringcmd);
@@ -793,12 +840,10 @@ CL.SignonReply = function() {
 			MSG.WriteString(CL.cls.message, 'color ' + (CL.color.value >> 4) + ' ' + (CL.color.value & 15) + '\n');
 			MSG.WriteByte(CL.cls.message, Protocol.clc.stringcmd);
 			MSG.WriteString(CL.cls.message, 'spawn ' + CL.cls.spawnparms);
-
 			return;
 		case 3:
 			MSG.WriteByte(CL.cls.message, Protocol.clc.stringcmd);
 			MSG.WriteString(CL.cls.message, 'begin');
-
 			return;
 		case 4:
 			SCR.EndLoadingPlaque();
@@ -806,6 +851,8 @@ CL.SignonReply = function() {
 };
 
 CL.NextDemo = function() {
+	Sys.DPrint('CL.NextDemo()');
+
 	if (CL.cls.demonum === -1) {
 		return;
 	}
@@ -828,6 +875,8 @@ CL.NextDemo = function() {
 };
 
 CL.PrintEntities_f = function() {
+	Sys.DPrint('CL.PrintEntities_f()');
+
 	var i, ent;
 
 	for (i = 0; i < CL.entities.length; ++i) {
@@ -855,6 +904,8 @@ CL.PrintEntities_f = function() {
 };
 
 CL.AllocDlight = function(key) {
+	Sys.DPrint(CL.id,'AllocDlight', arguments);
+
 	var i, dl;
 
 	if (key !== 0) {
@@ -890,6 +941,8 @@ CL.AllocDlight = function(key) {
 };
 
 CL.DecayLights = function() {
+	Sys.DPrint('CL.DecayLights()');
+
 	var i, dl, time = CL.state.time - CL.state.oldtime;
 
 	for (i = 0; i <= 31; ++i) {
@@ -908,6 +961,8 @@ CL.DecayLights = function() {
 };
 
 CL.LerpPoint = function() {
+	Sys.DPrint('CL.LerpPoint()');
+
 	var f = CL.state.mtime[0] - CL.state.mtime[1];
 
 	if ((f === 0.0) || (CL.nolerp.value !== 0) || (CL.cls.timedemo === true) || (SV.server.active === true)) {
@@ -947,6 +1002,8 @@ CL.LerpPoint = function() {
 };
 
 CL.RelinkEntities = function() {
+	Sys.DPrint('CL.RelinkEntities()');
+
 	var i, j;
 	var frac = CL.LerpPoint(), f, d, delta = [];
 
@@ -1086,6 +1143,8 @@ CL.RelinkEntities = function() {
 };
 
 CL.ReadFromServer = function() {
+	Sys.DPrint('CL.ReadFromServer()');
+
 	CL.state.oldtime = CL.state.time;
 	CL.state.time += Host.frametime;
 
@@ -1119,6 +1178,8 @@ CL.ReadFromServer = function() {
 };
 
 CL.SendCmd = function() {
+	Sys.DPrint('CL.SendCmd()');
+
 	if (CL.cls.state !== CL.active.connected) {
 		return;
 	}
@@ -1153,6 +1214,8 @@ CL.SendCmd = function() {
 };
 
 CL.Init = function() {
+	Sys.DPrint('CL.Init()');
+
 	CL.ClearState();
 	CL.InitInput();
 	CL.InitTEnts();
@@ -1230,9 +1293,12 @@ CL.svc_strings = [
 ];
 
 CL.EntityNum = function(num) {
+	Sys.DPrint(CL.id,'EntityNum', arguments);
+
 	if (num < CL.entities.length) {
 		return CL.entities[num];
 	}
+
 	for (; CL.entities.length <= num;) {
 		CL.entities[CL.entities.length] = {
 			num: num,
@@ -1260,10 +1326,13 @@ CL.EntityNum = function(num) {
 			dlightbits: 0
 		};
 	}
+
 	return CL.entities[num];
 };
 
 CL.ParseStartSoundPacket = function() {
+	Sys.DPrint('CL.ParseStartSoundPacket()');
+
 	var field_mask = MSG.ReadByte();
 	var volume = ((field_mask & 1) !== 0) ? MSG.ReadByte() : 255;
 	var attenuation = ((field_mask & 2) !== 0) ? MSG.ReadByte() * 0.015625 : 1.0;
@@ -1277,15 +1346,21 @@ CL.ParseStartSoundPacket = function() {
 
 CL.lastmsg = 0.0;
 CL.KeepaliveMessage = function() {
+	Sys.DPrint('CL.KeepaliveMessage()');
+
 	if ((SV.server.active === true) || (CL.cls.demoplayback === true)) {
 		return;
 	}
+
 	var oldsize = NET.message.cursize;
 	var olddata = new Uint8Array(8192);
 	olddata.set(new Uint8Array(NET.message.data, 0, oldsize));
 	var ret;
+
 	for (; ;) {
 		ret = CL.GetMessage();
+
+		// noinspection FallThroughInSwitchStatementJS
 		switch (ret) {
 			case 0:
 				break;
@@ -1298,16 +1373,20 @@ CL.KeepaliveMessage = function() {
 			default:
 				Host.Error('CL.KeepaliveMessage: CL.GetMessage failed');
 		}
+
 		if (ret === 0) {
 			break;
 		}
 	}
+
 	NET.message.cursize = oldsize;
 	(new Uint8Array(NET.message.data, 0, oldsize)).set(olddata.subarray(0, oldsize));
 	var time = Sys.FloatTime();
+
 	if ((time - CL.lastmsg) < 5.0) {
 		return;
 	}
+
 	CL.lastmsg = time;
 	Con.Print('--> client to server keepalive\n');
 	MSG.WriteByte(CL.cls.message, Protocol.clc.nop);
@@ -1316,6 +1395,8 @@ CL.KeepaliveMessage = function() {
 };
 
 CL.ParseServerInfo = function() {
+	Sys.DPrint('CL.ParseServerInfo()');
+
 	Con.DPrint('Serverinfo packet received.\n');
 	CL.ClearState();
 	var i = MSG.ReadLong();
@@ -1382,6 +1463,8 @@ CL.ParseServerInfo = function() {
 };
 
 CL.ParseUpdate = function(bits) {
+	Sys.DPrint(Cvar.id,'ParseUpdate', arguments);
+
 	if (CL.cls.signon === 3) {
 		CL.cls.signon = 4;
 		CL.SignonReply();
@@ -1397,8 +1480,10 @@ CL.ParseUpdate = function(bits) {
 	ent.msgtime = CL.state.mtime[0];
 
 	var model = CL.state.model_precache[((bits & Protocol.u.model) !== 0) ? MSG.ReadByte() : ent.baseline.modelindex];
+
 	if (model !== ent.model) {
 		ent.model = model;
+
 		if (model != null) {
 			ent.syncbase = (model.random === true) ? Math.random() : 0.0;
 		} else {
@@ -1408,14 +1493,17 @@ CL.ParseUpdate = function(bits) {
 
 	ent.frame = ((bits & Protocol.u.frame) !== 0) ? MSG.ReadByte() : ent.baseline.frame;
 	ent.colormap = ((bits & Protocol.u.colormap) !== 0) ? MSG.ReadByte() : ent.baseline.colormap;
+
 	if (ent.colormap > CL.state.maxclients) {
 		Sys.Error('i >= cl.maxclients');
 	}
+
 	ent.skinnum = ((bits & Protocol.u.skin) !== 0) ? MSG.ReadByte() : ent.baseline.skin;
 	ent.effects = ((bits & Protocol.u.effects) !== 0) ? MSG.ReadByte() : ent.baseline.effects;
 
 	Vec.Copy(ent.msg_origins[0], ent.msg_origins[1]);
 	Vec.Copy(ent.msg_angles[0], ent.msg_angles[1]);
+
 	ent.msg_origins[0][0] = ((bits & Protocol.u.origin1) !== 0) ? MSG.ReadCoord() : ent.baseline.origin[0];
 	ent.msg_angles[0][0] = ((bits & Protocol.u.angle1) !== 0) ? MSG.ReadAngle() : ent.baseline.angles[0];
 	ent.msg_origins[0][1] = ((bits & Protocol.u.origin2) !== 0) ? MSG.ReadCoord() : ent.baseline.origin[1];
@@ -1437,6 +1525,8 @@ CL.ParseUpdate = function(bits) {
 };
 
 CL.ParseBaseline = function(ent) {
+	Sys.DPrint(Cvar.id,'ParseBaseline', arguments);
+
 	ent.baseline.modelindex = MSG.ReadByte();
 	ent.baseline.frame = MSG.ReadByte();
 	ent.baseline.colormap = MSG.ReadByte();
@@ -1450,18 +1540,22 @@ CL.ParseBaseline = function(ent) {
 };
 
 CL.ParseClientdata = function(bits) {
+	Sys.DPrint(Cvar.id,'ParseClientdata', arguments);
+
 	var i;
 
 	CL.state.viewheight = ((bits & Protocol.su.viewheight) !== 0) ? MSG.ReadChar() : Protocol.default_viewheight;
 	CL.state.idealpitch = ((bits & Protocol.su.idealpitch) !== 0) ? MSG.ReadChar() : 0.0;
 
 	CL.state.mvelocity[1] = [CL.state.mvelocity[0][0], CL.state.mvelocity[0][1], CL.state.mvelocity[0][2]];
+
 	for (i = 0; i <= 2; ++i) {
 		if ((bits & (Protocol.su.punch1 << i)) !== 0) {
 			CL.state.punchangle[i] = MSG.ReadChar();
 		} else {
 			CL.state.punchangle[i] = 0.0;
 		}
+
 		if ((bits & (Protocol.su.velocity1 << i)) !== 0) {
 			CL.state.mvelocity[0][i] = MSG.ReadChar() * 16.0;
 		} else {
@@ -1471,12 +1565,14 @@ CL.ParseClientdata = function(bits) {
 
 	i = MSG.ReadLong();
 	var j;
+
 	if (CL.state.items !== i) {
 		for (j = 0; j <= 31; ++j) {
 			if ((((i >>> j) & 1) !== 0) && (((CL.state.items >>> j) & 1) === 0)) {
 				CL.state.item_gettime[j] = CL.state.time;
 			}
 		}
+
 		CL.state.items = i;
 	}
 
@@ -1492,6 +1588,7 @@ CL.ParseClientdata = function(bits) {
 	CL.state.stats[Def.stat.nails] = MSG.ReadByte();
 	CL.state.stats[Def.stat.rockets] = MSG.ReadByte();
 	CL.state.stats[Def.stat.cells] = MSG.ReadByte();
+
 	if (COM.standard_quake === true) {
 		CL.state.stats[Def.stat.activeweapon] = MSG.ReadByte();
 	} else {
@@ -1500,6 +1597,8 @@ CL.ParseClientdata = function(bits) {
 };
 
 CL.ParseStatic = function() {
+	Sys.DPrint('CL.ParseStatic()');
+
 	var ent = {
 		num: -1,
 		update_type: 0,
@@ -1528,6 +1627,8 @@ CL.ParseStatic = function() {
 };
 
 CL.ParseStaticSound = function() {
+	Sys.DPrint('CL.ParseStaticSound()');
+
 	var org = [MSG.ReadCoord(), MSG.ReadCoord(), MSG.ReadCoord()];
 	var sound_num = MSG.ReadByte();
 	var vol = MSG.ReadByte();
@@ -1536,13 +1637,16 @@ CL.ParseStaticSound = function() {
 };
 
 CL.Shownet = function(x) {
+	Sys.DPrint(Cvar.id,'Shownet', arguments);
+
 	if (CL.shownet.value === 2) {
-		Con.Print((MSG.readcount <= 99 ? (MSG.readcount <= 9 ? '  ' : ' ') : '')
-			+ (MSG.readcount - 1) + ':' + x + '\n');
+		Con.Print((MSG.readcount <= 99 ? (MSG.readcount <= 9 ? '  ' : ' ') : '') + (MSG.readcount - 1) + ':' + x + '\n');
 	}
 };
 
 CL.ParseServerMessage = function() {
+	Sys.DPrint('CL.ParseServerMessage()');
+
 	if (CL.shownet.value === 1) {
 		Con.Print(NET.message.cursize + ' ');
 	} else if (CL.shownet.value === 2) {
@@ -1554,6 +1658,7 @@ CL.ParseServerMessage = function() {
 	MSG.BeginReading();
 
 	var cmd, i;
+
 	for (; ;) {
 		if (MSG.badread === true) {
 			Host.Error('CL.ParseServerMessage: Bad server message');
@@ -1586,9 +1691,11 @@ CL.ParseServerMessage = function() {
 				continue;
 			case Protocol.svc.version:
 				i = MSG.ReadLong();
+
 				if (i !== Protocol.version) {
 					Host.Error('CL.ParseServerMessage: Server is protocol ' + i + ' instead of ' + Protocol.version + '\n');
 				}
+
 				continue;
 			case Protocol.svc.disconnect:
 				Host.EndGame('Server disconnected\n');
@@ -1619,9 +1726,11 @@ CL.ParseServerMessage = function() {
 				continue;
 			case Protocol.svc.lightstyle:
 				i = MSG.ReadByte();
+
 				if (i >= 64) {
 					Sys.Error('svc_lightstyle > MAX_LIGHTSTYLES');
 				}
+
 				CL.lightstyle[i] = MSG.ReadString();
 				continue;
 			case Protocol.svc.sound:
@@ -1633,23 +1742,29 @@ CL.ParseServerMessage = function() {
 				continue;
 			case Protocol.svc.updatename:
 				i = MSG.ReadByte();
+
 				if (i >= CL.state.maxclients) {
 					Host.Error('CL.ParseServerMessage: svc_updatename > MAX_SCOREBOARD');
 				}
+
 				CL.state.scores[i].name = MSG.ReadString();
 				continue;
 			case Protocol.svc.updatefrags:
 				i = MSG.ReadByte();
+
 				if (i >= CL.state.maxclients) {
 					Host.Error('CL.ParseServerMessage: svc_updatefrags > MAX_SCOREBOARD');
 				}
+
 				CL.state.scores[i].frags = MSG.ReadShort();
 				continue;
 			case Protocol.svc.updatecolors:
 				i = MSG.ReadByte();
+
 				if (i >= CL.state.maxclients) {
 					Host.Error('CL.ParseServerMessage: svc_updatecolors > MAX_SCOREBOARD');
 				}
+
 				CL.state.scores[i].colors = MSG.ReadByte();
 				continue;
 			case Protocol.svc.particle:
@@ -1666,6 +1781,7 @@ CL.ParseServerMessage = function() {
 				continue;
 			case Protocol.svc.setpause:
 				CL.state.paused = MSG.ReadByte() !== 0;
+
 				if (CL.state.paused === true) {
 					CDAudio.Pause();
 				} else {
@@ -1674,9 +1790,11 @@ CL.ParseServerMessage = function() {
 				continue;
 			case Protocol.svc.signonnum:
 				i = MSG.ReadByte();
+
 				if (i <= CL.cls.signon) {
 					Host.Error('Received signon ' + i + ' when at ' + CL.cls.signon);
 				}
+
 				CL.cls.signon = i;
 				CL.SignonReply();
 				continue;
@@ -1688,9 +1806,11 @@ CL.ParseServerMessage = function() {
 				continue;
 			case Protocol.svc.updatestat:
 				i = MSG.ReadByte();
+
 				if (i >= 32) {
 					Sys.Error('svc_updatestat: ' + i + ' is invalid');
 				}
+
 				CL.state.stats[i] = MSG.ReadLong();
 				continue;
 			case Protocol.svc.spawnstaticsound:
@@ -1699,6 +1819,7 @@ CL.ParseServerMessage = function() {
 			case Protocol.svc.cdtrack:
 				CL.state.cdtrack = MSG.ReadByte();
 				MSG.ReadByte();
+
 				if (((CL.cls.demoplayback === true) || (CL.cls.demorecording === true)) && (CL.cls.forcetrack !== -1)) {
 					CDAudio.Play(CL.cls.forcetrack, true);
 				} else {
@@ -1735,6 +1856,8 @@ CL.ParseServerMessage = function() {
 CL.temp_entities = [];
 
 CL.InitTEnts = function() {
+	Sys.DPrint('CL.InitTEnts()');
+
 	CL.sfx_wizhit = S.PrecacheSound('wizard/hit.wav');
 	CL.sfx_knighthit = S.PrecacheSound('hknight/hit.wav');
 	CL.sfx_tink1 = S.PrecacheSound('weapons/tink1.wav');
@@ -1745,37 +1868,50 @@ CL.InitTEnts = function() {
 };
 
 CL.ParseBeam = function(m) {
+	Sys.DPrint(Cvar.id,'ParseBeam', arguments);
+
 	var ent = MSG.ReadShort();
 	var start = [MSG.ReadCoord(), MSG.ReadCoord(), MSG.ReadCoord()];
 	var end = [MSG.ReadCoord(), MSG.ReadCoord(), MSG.ReadCoord()];
 	var i, b;
+
 	for (i = 0; i <= 23; ++i) {
 		b = CL.beams[i];
+
 		if (b.entity !== ent) {
 			continue;
 		}
+
 		b.model = m;
 		b.endtime = CL.state.time + 0.2;
 		b.start = [start[0], start[1], start[2]];
 		b.end = [end[0], end[1], end[2]];
+
 		return;
 	}
+
 	for (i = 0; i <= 23; ++i) {
 		b = CL.beams[i];
+
 		if ((b.model != null) && (b.endtime >= CL.state.time)) {
 			continue;
 		}
+
 		b.entity = ent;
 		b.model = m;
 		b.endtime = CL.state.time + 0.2;
 		b.start = [start[0], start[1], start[2]];
 		b.end = [end[0], end[1], end[2]];
+
 		return;
 	}
+
 	Con.Print('beam list overflow!\n');
 };
 
 CL.ParseTEnt = function() {
+	Sys.DPrint('CL.ParseTEnt()');
+
 	var type = MSG.ReadByte();
 
 	switch (type) {
@@ -1795,6 +1931,7 @@ CL.ParseTEnt = function() {
 
 	var pos = [MSG.ReadCoord(), MSG.ReadCoord(), MSG.ReadCoord()];
 	var dl;
+
 	switch (type) {
 		case Protocol.te.wizspike:
 			R.RunParticleEffect(pos, Vec.origin, 20, 20);
@@ -1849,6 +1986,8 @@ CL.ParseTEnt = function() {
 };
 
 CL.NewTempEntity = function() {
+	Sys.DPrint('CL.NewTempEntity()');
+
 	var ent = {frame: 0, syncbase: 0.0, skinnum: 0};
 	CL.temp_entities[CL.num_temp_entities++] = ent;
 	CL.visedicts[CL.numvisedicts++] = ent;
@@ -1856,41 +1995,54 @@ CL.NewTempEntity = function() {
 };
 
 CL.UpdateTEnts = function() {
+	Sys.DPrint('CL.UpdateTEnts()');
+
 	CL.num_temp_entities = 0;
 	var i, b, dist = [], yaw, pitch, org = [], d, ent;
+
 	for (i = 0; i <= 23; ++i) {
 		b = CL.beams[i];
+
 		if ((b.model == null) || (b.endtime < CL.state.time)) {
 			continue;
 		}
+
 		if (b.entity === CL.state.viewentity) {
 			Vec.Copy(CL.entities[CL.state.viewentity].origin, b.start);
 		}
+
 		dist[0] = b.end[0] - b.start[0];
 		dist[1] = b.end[1] - b.start[1];
 		dist[2] = b.end[2] - b.start[2];
+
 		if ((dist[0] === 0.0) && (dist[1] === 0.0)) {
 			yaw = 0;
 			pitch = dist[2] > 0.0 ? 90 : 270;
 		} else {
 			yaw = (Math.atan2(dist[1], dist[0]) * 180.0 / Math.PI) >> 0;
+
 			if (yaw < 0) {
 				yaw += 360;
 			}
+
 			pitch = (Math.atan2(dist[2], Math.sqrt(dist[0] * dist[0] + dist[1] * dist[1])) * 180.0 / Math.PI) >> 0;
+
 			if (pitch < 0) {
 				pitch += 360;
 			}
 		}
+
 		org[0] = b.start[0];
 		org[1] = b.start[1];
 		org[2] = b.start[2];
 		d = Math.sqrt(dist[0] * dist[0] + dist[1] * dist[1] + dist[2] * dist[2]);
+
 		if (d !== 0.0) {
 			dist[0] /= d;
 			dist[1] /= d;
 			dist[2] /= d;
 		}
+
 		for (; d > 0.0;) {
 			ent = CL.NewTempEntity();
 			ent.origin = [org[0], org[1], org[2]];

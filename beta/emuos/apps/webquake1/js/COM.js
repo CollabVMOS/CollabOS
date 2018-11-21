@@ -5,7 +5,7 @@ COM.argv = [];
 COM.standard_quake = true;
 
 COM.DefaultExtension = function(path, extension) {
-	Sys.Print('COM.DefaultExtension(' + path + ', ' + extension + ')');
+	Sys.DPrint('COM.DefaultExtension(' + [].slice.apply(arguments) + ')');
 
 	var i, src;
 
@@ -28,7 +28,7 @@ COM.DefaultExtension = function(path, extension) {
 };
 
 COM.Parse = function(data) {
-	Sys.Print('COM.Parse(' + data + ')');
+	Sys.DPrint('COM.Parse(' + [].slice.apply(arguments) + ')');
 
 	COM.token = '';
 
@@ -103,7 +103,7 @@ COM.Parse = function(data) {
 };
 
 COM.CheckParm = function(parm) {
-	Sys.Print('COM.CheckParm(' + parm + ')');
+	Sys.DPrint('COM.CheckParm(' + [].slice.apply(arguments) + ')');
 
 	var i;
 
@@ -125,7 +125,7 @@ COM.CheckParm = function(parm) {
 };
 
 COM.CheckRegistered = function() {
-	Sys.Print('CheckRegistered()');
+	Sys.DPrint('COM.CheckRegistered()');
 
 	var h = COM.LoadFile('gfx/pop.lmp');
 
@@ -178,7 +178,7 @@ COM.CheckRegistered = function() {
 };
 
 COM.InitArgv = function(argv) {
-	Sys.Print('COM.InitArgv(' + argv + ')');
+	Sys.DPrint('COM.InitArgv(' + [].slice.apply(arguments) + ')');
 
 	COM.cmdline = (argv.join(' ') + ' ').substring(0, 256);
 	var i;
@@ -206,11 +206,11 @@ COM.InitArgv = function(argv) {
 };
 
 COM.Init = function() {
-	Sys.Print('COM.Init()');
+	Sys.DPrint('COM.Init()');
 
-	if ((document.location.protocol !== 'http:') && (document.location.protocol !== 'https:')) {
-		Sys.Error('Protocol is ' + document.location.protocol + ', not http: or https:');
-	}
+	// if ((document.location.protocol !== 'http:') && (document.location.protocol !== 'https:')) {
+	// 	Sys.Error('Protocol is ' + document.location.protocol + ', not http: or https:');
+	// }
 
 	var swaptest = new ArrayBuffer(2);
 	var swaptestview = new Uint8Array(swaptest);
@@ -237,7 +237,7 @@ COM.Init = function() {
 COM.searchpaths = [];
 
 COM.Path_f = function() {
-	Sys.Print('COM.Path_f()');
+	Sys.DPrint('COM.Path_f()');
 
 	Sys.Print('Current search path:\n');
 	Con.Print('Current search path:\n');
@@ -258,7 +258,7 @@ COM.Path_f = function() {
 };
 
 COM.WriteFile = function(filename, data, len) {
-	Sys.Print('COM.WriteFile(' + filename + ', ' +  data + ', ' + len + ')');
+	Sys.DPrint('COM.WriteFile(' + [].slice.apply(arguments) + ')');
 
 	filename = filename.toLowerCase();
 
@@ -282,7 +282,7 @@ COM.WriteFile = function(filename, data, len) {
 };
 
 COM.WriteTextFile = function(filename, data) {
-	Sys.Print('COM.WriteTextFile('+ filename + ', ' + data +')');
+	Sys.DPrint('COM.WriteTextFile(' + [].slice.apply(arguments) + ')');
 
 	filename = filename.toLowerCase();
 
@@ -300,7 +300,7 @@ COM.WriteTextFile = function(filename, data) {
 };
 
 COM.LoadFile = function(filename) {
-	Sys.Print('COM.LoadFile('+ filename +')');
+	Sys.DPrint('COM.LoadFile(' + [].slice.apply(arguments) + ')');
 
 	filename = filename.toLowerCase();
 
@@ -377,7 +377,7 @@ COM.LoadFile = function(filename) {
 };
 
 COM.LoadTextFile = function(filename) {
-	Sys.Print('COM.LoadTextFile('+ filename +')');
+	Sys.DPrint('COM.LoadTextFile(' + [].slice.apply(arguments) + ')');
 
 	var buf = COM.LoadFile(filename);
 
@@ -402,7 +402,7 @@ COM.LoadTextFile = function(filename) {
 };
 
 COM.LoadPackFile = function(packfile) {
-	Sys.Print('COM.LoadTextFile('+ packfile +')');
+	Sys.DPrint('COM.LoadTextFile(' + [].slice.apply(arguments) + ')');
 
 	var xhr = new XMLHttpRequest();
 	xhr.overrideMimeType('text/plain; charset=x-user-defined');
@@ -465,7 +465,7 @@ COM.LoadPackFile = function(packfile) {
 };
 
 COM.AddGameDirectory = function(dir) {
-	Sys.Print('COM.AddGameDirectory('+ dir +')');
+	Sys.DPrint('COM.AddGameDirectory(' + [].slice.apply(arguments) + ')');
 
 	if (typeof dir === 'undefined') {
 		return;
@@ -489,7 +489,7 @@ COM.AddGameDirectory = function(dir) {
 };
 
 COM.InitFilesystem = function() {
-	Sys.Print('COM.InitFilesystem()');
+	Sys.DPrint('COM.InitFilesystem()');
 
 	var i, search;
 

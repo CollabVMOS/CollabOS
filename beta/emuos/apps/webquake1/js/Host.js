@@ -283,6 +283,8 @@ Host.Frame = function() {
 };
 
 Host.Init = function() {
+	Sys.DPrint('Host.Init()');
+
 	Host.oldrealtime = Sys.FloatTime();
 	Cmd.Init();
 	V.Init();
