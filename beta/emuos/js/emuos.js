@@ -198,7 +198,7 @@
 							});
 
 							// noinspection JSUnresolvedFunction
-							self.options.apps.webamp.events();
+							self.options.apps.webamp.events('.emuos-taskbar-windows-containment');
 							break;
 						default:
 					}

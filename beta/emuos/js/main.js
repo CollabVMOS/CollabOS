@@ -42,9 +42,6 @@
 			window: {
 				deps: ['taskbar']
 			},
-			winamp: {
-				deps: ['jquery']
-			},
 			lang: {
 				deps: ['taskbar']
 			}
@@ -86,7 +83,7 @@
 		'jquery',
 		'filesystem',
 		'emuos',
-		'../apps/webamp2/js/main',
+		'../apps/webamp2/js/webamp',
 		'text!../apps/webamp2/js/views/layout.html',
 		'text!../apps/github-tree/index.html',
 		'desktop',
@@ -99,7 +96,7 @@
 		'jqueryuitree',
 		'jquerycustomscrollbar',
 		'jqyeryajaxretry'
-	], function(github_private_key, $, FileSystem, EmuOS, Webamp2, webamp_template, tree_template) {
+	], function(github_private_key, $, FileSystem, EmuOS, Webamp, webamp_template, tree_template) {
 		$(function() {
 			var filesystem = new FileSystem({
 				github: {
@@ -107,14 +104,14 @@
 				}
 			});
 
-			var webamp2 = new Webamp2({template: webamp_template});
+			var webamp = new Webamp({template: webamp_template});
 
 			// noinspection JSUnusedLocalSymbols
 			var desktop = new EmuOS({
 				filesystem: filesystem,
 				theme: 'theme-win9x',
 				apps: {
-					webamp: webamp2
+					webamp: webamp
 				}
 			});
 

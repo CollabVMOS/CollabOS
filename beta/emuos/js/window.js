@@ -1311,10 +1311,7 @@
 		_setContainment: function (options) {
 			var containment = this._getRealContainment();
 
-			if (
-				$.ui.draggable && this.options.draggable
-				&& this.uiDialog.hasClass(this.classes.uiDraggable)
-			) {
+			if ($.ui.draggable && this.options.draggable && this.uiDialog.hasClass(this.classes.uiDraggable)) {
 				var $containment;
 
 				if (containment === "viewport") {
@@ -1326,10 +1323,7 @@
 				this.uiDialog.draggable("option", "containment", $containment);
 			}
 
-			if (
-				$.ui.resizable && this.options.resizable
-				&& this.uiDialog.hasClass(this.classes.uiResizable)
-			) {
+			if ($.ui.resizable && this.options.resizable && this.uiDialog.hasClass(this.classes.uiResizable)) {
 				if (containment === "viewport") {
 					this.uiDialog.resizable("option", "containment", "document");
 				} else if (containment === "visible") {

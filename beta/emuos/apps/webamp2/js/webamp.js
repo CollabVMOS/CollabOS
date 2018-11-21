@@ -20,7 +20,7 @@
 	// noinspection JSUnusedLocalSymbols
 	var root = window.location.protocol + '//' + window.location.host + '/';
 
-	var Webamp2 = function (options) {
+	var Webamp = function (options) {
 		var self = this;
 
 		self.options = options;
@@ -29,22 +29,24 @@
 		return self.render();
 	};
 
-	Webamp2.prototype.events = function() {
+	Webamp.prototype.events = function(containment, snap, snapTolerance) {
 		// noinspection JSValidateTypes
 		$('.draggable').draggable({
+			containment: typeof containment !== 'undefined' ? containment : '.widget',
+			snap: !!snap,
+			snapMode: 'outer',
+			snapTolerance: typeof snapTolerance !== 'undefined' ? parseInt(snapTolerance, 10) : 10,
 			cancel: '.window .marquee, .window .windows, .window .actions, .window .eject, .window .shuffle-repeat, .window .about, input, #option, #minimize, #shade, #close'
 		});
 	};
 
-	Webamp2.prototype.render = function(template) {
+	Webamp.prototype.render = function(template) {
 		var self = this;
 
-		if (typeof template === 'undefined') {
-			template = self.options.template;
-		}
+		template = typeof template !== 'undefined' ? template : self.options.template;
 
 		return template;
 	};
 
-	return Webamp2;
+	return Webamp;
 }));

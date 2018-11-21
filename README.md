@@ -65,7 +65,7 @@ More about [Video game preservation](https://en.wikipedia.org/wiki/Video_game_pr
 | ES6 Promise Polyfill     | ❌                                                                                                     | [github.com/stefanpenner/es6-promise](https://github.com/stefanpenner/es6-promise)                           | [MIT](https://github.com/stefanpenner/es6-promise/blob/master/LICENSE)                  |
 | ES6 Fetch Polyfill       | ❌                                                                                                     | [github.com/github/fetch](https://github.com/github/fetch)                                                   | [MIT](https://github.com/github/fetch/blob/master/LICENSE)                              |
 
-##### Similar recommended projects (from which this project is heavily inspired)
+#### Similar recommended projects (from which this project is heavily inspired)
 
 | Name                     | Website                                                                                                | Repository                                                                                                   | License                                                                                 |
 | :---                     | :---:                                                                                                  | :---:                                                                                                        | :---:                                                                                   |
