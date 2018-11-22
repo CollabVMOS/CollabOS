@@ -233,17 +233,18 @@ GL.LoadPicTexture = function(pic) {
 };
 
 GL.CreateProgram = function(identifier, uniforms, attribs, textures) {
+	var i;
 	var p = gl.createProgram();
-	var program =
-			{
-				identifier: identifier,
-				program: p,
-				attribs: []
-			};
+	var program = {
+		identifier: identifier,
+		program: p,
+		attribs: []
+	};
 
 	var vsh = gl.createShader(gl.VERTEX_SHADER);
 	gl.shaderSource(vsh, document.getElementById('vsh' + identifier).text);
 	gl.compileShader(vsh);
+
 	if (gl.getShaderParameter(vsh, gl.COMPILE_STATUS) !== true) {
 		Sys.Error('Error compiling shader: ' + gl.getShaderInfoLog(vsh));
 	}
@@ -251,6 +252,7 @@ GL.CreateProgram = function(identifier, uniforms, attribs, textures) {
 	var fsh = gl.createShader(gl.FRAGMENT_SHADER);
 	gl.shaderSource(fsh, document.getElementById('fsh' + identifier).text);
 	gl.compileShader(fsh);
+
 	if (gl.getShaderParameter(fsh, gl.COMPILE_STATUS) !== true) {
 		Sys.Error('Error compiling shader: ' + gl.getShaderInfoLog(fsh));
 	}
@@ -259,31 +261,34 @@ GL.CreateProgram = function(identifier, uniforms, attribs, textures) {
 	gl.attachShader(p, fsh);
 
 	gl.linkProgram(p);
+
 	if (gl.getProgramParameter(p, gl.LINK_STATUS) !== true) {
 		Sys.Error('Error linking program: ' + gl.getProgramInfoLog(p));
 	}
 
 	gl.useProgram(p);
 
-	for (var i = 0; i < uniforms.length; ++i) {
+	for (i = 0; i < uniforms.length; ++i) {
 		program[uniforms[i]] = gl.getUniformLocation(p, uniforms[i]);
 	}
 
 	program.vertexSize = 0;
 	program.attribBits = 0;
-	for (var i = 0; i < attribs.length; ++i) {
+
+	for (i = 0; i < attribs.length; ++i) {
 		var attribParameters = attribs[i];
-		var attrib =
-				{
-					name: attribParameters[0],
-					location: gl.getAttribLocation(p, attribParameters[0]),
-					type: attribParameters[1],
-					components: attribParameters[2],
-					normalized: (attribParameters[3] === true),
-					offset: program.vertexSize
-				};
+		var attrib = {
+			name: attribParameters[0],
+			location: gl.getAttribLocation(p, attribParameters[0]),
+			type: attribParameters[1],
+			components: attribParameters[2],
+			normalized: (attribParameters[3] === true),
+			offset: program.vertexSize
+		};
+
 		program.attribs[i] = attrib;
 		program[attrib.name] = attrib;
+
 		if (attrib.type === gl.FLOAT) {
 			program.vertexSize += attrib.components * 4;
 		} else if (attrib.type === gl.BYTE || attrib.type === gl.UNSIGNED_BYTE) {
@@ -291,10 +296,11 @@ GL.CreateProgram = function(identifier, uniforms, attribs, textures) {
 		} else {
 			Sys.Error('Unknown vertex attribute type');
 		}
+
 		program.attribBits |= 1 << attrib.location;
 	}
 
-	for (var i = 0; i < textures.length; ++i) {
+	for (i = 0; i < textures.length; ++i) {
 		program[textures[i]] = i;
 		gl.uniform1i(gl.getUniformLocation(p, textures[i]), i);
 	}
@@ -305,40 +311,50 @@ GL.CreateProgram = function(identifier, uniforms, attribs, textures) {
 
 GL.UseProgram = function(identifier, flushStream) {
 	var currentProgram = GL.currentProgram;
+
 	if (currentProgram != null) {
 		if (currentProgram.identifier === identifier) {
 			return currentProgram;
 		}
+
 		if (flushStream === true) {
 			GL.StreamFlush();
 		}
 	}
 
 	var program = null;
+
 	for (var i = 0; i < GL.programs.length; ++i) {
 		if (GL.programs[i].identifier === identifier) {
 			program = GL.programs[i];
 			break;
 		}
 	}
+
 	if (program == null) {
+		// noinspection JSConstructorReturnsPrimitive
 		return null;
 	}
 
 	var enableAttribs = program.attribBits, disableAttribs = 0;
+
 	if (currentProgram != null) {
 		enableAttribs &= ~currentProgram.attribBits;
 		disableAttribs = currentProgram.attribBits & ~program.attribBits;
 	}
+
 	GL.currentProgram = program;
 	gl.useProgram(program.program);
+
 	for (var attrib = 0; enableAttribs !== 0 || disableAttribs !== 0; ++attrib) {
 		var mask = 1 << attrib;
+
 		if ((enableAttribs & mask) !== 0) {
 			gl.enableVertexAttribArray(attrib);
 		} else if ((disableAttribs & mask) !== 0) {
 			gl.disableVertexAttribArray(attrib);
 		}
+
 		enableAttribs &= ~mask;
 		disableAttribs &= ~mask;
 	}
@@ -350,11 +366,14 @@ GL.UnbindProgram = function() {
 	if (GL.currentProgram == null) {
 		return;
 	}
+
 	GL.StreamFlush();
 	var i;
+
 	for (i = 0; i < GL.currentProgram.attribs.length; ++i) {
 		gl.disableVertexAttribArray(GL.currentProgram.attribs[i].location);
 	}
+
 	GL.currentProgram = null;
 };
 
@@ -485,10 +504,13 @@ GL.StreamDrawColoredQuad = function(x, y, w, h, r, g, b, a) {
 
 GL.Init = function() {
 	VID.mainwindow = document.getElementById('mainwindow');
+
+	var gl;
+
 	try {
 		gl = VID.mainwindow.getContext('webgl') || VID.mainwindow.getContext('experimental-webgl');
-	} catch (e) {
-	}
+	} catch (e) {}
+
 	if (gl == null) {
 		Sys.Error('Unable to initialize WebGL. Your browser may not support it.');
 	}

@@ -239,7 +239,7 @@ Cmd.CompleteCommand = function(partial) {
 };
 
 Cmd.ExecuteString = function(text, client) {
-	Sys.DPrint(Cmd.id, 'ExecuteString', arguments);
+	// Sys.DPrint(Cmd.id, 'ExecuteString', arguments);
 
 	Cmd.client = client;
 	Cmd.TokenizeString(text);
