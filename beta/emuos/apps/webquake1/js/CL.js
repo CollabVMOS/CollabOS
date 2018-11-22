@@ -1463,7 +1463,7 @@ CL.ParseServerInfo = function() {
 };
 
 CL.ParseUpdate = function(bits) {
-	Sys.DPrint(Cvar.id,'ParseUpdate', arguments);
+	Sys.DPrint(CL.id,'ParseUpdate', arguments);
 
 	if (CL.cls.signon === 3) {
 		CL.cls.signon = 4;
@@ -1525,7 +1525,7 @@ CL.ParseUpdate = function(bits) {
 };
 
 CL.ParseBaseline = function(ent) {
-	Sys.DPrint(Cvar.id,'ParseBaseline', arguments);
+	Sys.DPrint(CL.id,'ParseBaseline', arguments);
 
 	ent.baseline.modelindex = MSG.ReadByte();
 	ent.baseline.frame = MSG.ReadByte();
@@ -1540,7 +1540,7 @@ CL.ParseBaseline = function(ent) {
 };
 
 CL.ParseClientdata = function(bits) {
-	Sys.DPrint(Cvar.id,'ParseClientdata', arguments);
+	Sys.DPrint(CL.id,'ParseClientdata', arguments);
 
 	var i;
 
@@ -1637,7 +1637,7 @@ CL.ParseStaticSound = function() {
 };
 
 CL.Shownet = function(x) {
-	Sys.DPrint(Cvar.id,'Shownet', arguments);
+	Sys.DPrint(CL.id,'Shownet', arguments);
 
 	if (CL.shownet.value === 2) {
 		Con.Print((MSG.readcount <= 99 ? (MSG.readcount <= 9 ? '  ' : ' ') : '') + (MSG.readcount - 1) + ':' + x + '\n');
@@ -1868,7 +1868,7 @@ CL.InitTEnts = function() {
 };
 
 CL.ParseBeam = function(m) {
-	Sys.DPrint(Cvar.id,'ParseBeam', arguments);
+	Sys.DPrint(CL.id,'ParseBeam', arguments);
 
 	var ent = MSG.ReadShort();
 	var start = [MSG.ReadCoord(), MSG.ReadCoord(), MSG.ReadCoord()];

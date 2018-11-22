@@ -1,14 +1,20 @@
 Cmd = {};
 
+Cmd.id = 'Cmd';
+
 Cmd.alias = [];
 
 Cmd.Wait_f = function() {
+	Sys.DPrint('Cmd.Wait_f()');
+
 	Cmd.wait = true;
 };
 
 Cmd.text = '';
 
 Cmd.Execute = function() {
+	Sys.DPrint('Cmd.Execute()');
+
 	var c, line = '', quotes = false;
 
 	while (Cmd.text.length !== 0) {
@@ -45,6 +51,8 @@ Cmd.Execute = function() {
 };
 
 Cmd.StuffCmds_f = function() {
+	Sys.DPrint('Cmd.StuffCmds_f()');
+
 	var i, s = false, build = '', c;
 
 	for (i = 0; i < COM.argv.length; ++i) {
@@ -79,6 +87,8 @@ Cmd.StuffCmds_f = function() {
 };
 
 Cmd.Exec_f = function() {
+	Sys.DPrint('Cmd.Exec_f()');
+
 	if (Cmd.argv.length !== 2) {
 		Con.Print('exec <filename> : execute a script file\n');
 		return;
@@ -96,6 +106,8 @@ Cmd.Exec_f = function() {
 };
 
 Cmd.Echo_f = function() {
+	Sys.DPrint('Cmd.Echo_f()');
+
 	var i;
 
 	for (i = 1; i < Cmd.argv.length; ++i) {
@@ -106,6 +118,8 @@ Cmd.Echo_f = function() {
 };
 
 Cmd.Alias_f = function() {
+	Sys.DPrint('Cmd.Alias_f()');
+
 	var i;
 
 	if (Cmd.argv.length <= 1) {
@@ -141,6 +155,8 @@ Cmd.argv = [];
 Cmd.functions = [];
 
 Cmd.Init = function() {
+	Sys.DPrint('Cmd.Init()');
+
 	Cmd.AddCommand('stuffcmds', Cmd.StuffCmds_f);
 	Cmd.AddCommand('exec', Cmd.Exec_f);
 	Cmd.AddCommand('echo', Cmd.Echo_f);
@@ -150,6 +166,8 @@ Cmd.Init = function() {
 };
 
 Cmd.TokenizeString = function(text) {
+	Sys.DPrint(Cmd.id,'TokenizeString', arguments);
+
 	Cmd.argv = [];
 
 	var i, c;
@@ -182,6 +200,8 @@ Cmd.TokenizeString = function(text) {
 };
 
 Cmd.AddCommand = function(name, command) {
+	Sys.DPrint(Cmd.id,'AddCommand', arguments);
+
 	var i;
 
 	for (i = 0; i < Cvar.vars.length; ++i) {
@@ -202,6 +222,8 @@ Cmd.AddCommand = function(name, command) {
 };
 
 Cmd.CompleteCommand = function(partial) {
+	Sys.DPrint(Cmd.id,'CompleteCommand', arguments);
+
 	if (partial.length === 0) {
 		return;
 	}
@@ -216,6 +238,8 @@ Cmd.CompleteCommand = function(partial) {
 };
 
 Cmd.ExecuteString = function(text, client) {
+	Sys.DPrint(Cmd.id,'ExecuteString', arguments);
+
 	Cmd.client = client;
 	Cmd.TokenizeString(text);
 
@@ -246,6 +270,8 @@ Cmd.ExecuteString = function(text, client) {
 };
 
 Cmd.ForwardToServer = function() {
+	Sys.DPrint(Cmd.id,'ForwardToServer', arguments);
+
 	if (CL.cls.state !== CL.active.connected) {
 		Con.Print('Can\'t "' + Cmd.argv[0] + '", not connected\n');
 		return;

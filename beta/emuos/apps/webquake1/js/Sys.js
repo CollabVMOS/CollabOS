@@ -2,35 +2,13 @@ Sys = {};
 
 Sys.debug = true;
 
-Sys.ongamepadpoll = function(e) {
-	Key.gamepadlastaxes = e.axes;
-
-	if (Key.gamepadlastbuttons) {
-		for (var i = 0; i < e.buttons.length; i++) {
-			if (e.buttons[i].value !== Key.gamepadlastbuttons[i]) {
-				if (e.buttons[i].value) {
-					Key.Event(Key.k['joy' + (i + 1)], true);
-					//console.log("JOY"+(i+1), true)
-				} else {
-					Key.Event(Key.k['joy' + (i + 1)]);
-					//console.log("JOY"+(i+1), false)
-				}
-			}
-		}
-
-		Key.gamepadlastbuttons = e.buttons.map(function(b) {
-			return b.value;
-		});
-	} else {
-		Key.gamepadlastbuttons = e.buttons.map(function(b) {
-			return b.value;
-		});
-	}
-};
+Sys.id = 'Sys';
 
 Sys.events = ['onbeforeunload', 'oncontextmenu', 'onfocus', 'onkeydown', 'onkeyup', 'onmousedown', 'onmouseup', 'onmousewheel', 'onunload', 'onwheel'];
 
 Sys.Quit = function() {
+	Sys.DPrint('Sys.Quit()');
+
 	if (Sys.frame != null) {
 		clearInterval(Sys.frame);
 	}
@@ -281,6 +259,7 @@ Sys.onmousedown = function(e) {
 	}
 
 	Key.Event(key, true);
+
 	e.preventDefault();
 };
 
@@ -302,13 +281,16 @@ Sys.onmouseup = function(e) {
 	}
 
 	Key.Event(key);
+
 	e.preventDefault();
 };
 
 Sys.onmousewheel = function(e) {
 	var key = e.wheelDeltaY > 0 ? Key.k.mwheelup : Key.k.mwheeldown;
+
 	Key.Event(key, true);
 	Key.Event(key);
+
 	e.preventDefault();
 };
 
@@ -318,7 +300,35 @@ Sys.onunload = function() {
 
 Sys.onwheel = function(e) {
 	var key = e.deltaY < 0 ? Key.k.mwheelup : Key.k.mwheeldown;
+
 	Key.Event(key, true);
 	Key.Event(key);
+
 	e.preventDefault();
+};
+
+Sys.ongamepadpoll = function(e) {
+	Key.gamepadlastaxes = e.axes;
+
+	if (Key.gamepadlastbuttons) {
+		for (var i = 0; i < e.buttons.length; i++) {
+			if (e.buttons[i].value !== Key.gamepadlastbuttons[i]) {
+				if (e.buttons[i].value) {
+					Key.Event(Key.k['joy' + (i + 1)], true);
+					//console.log("JOY"+(i+1), true)
+				} else {
+					Key.Event(Key.k['joy' + (i + 1)]);
+					//console.log("JOY"+(i+1), false)
+				}
+			}
+		}
+
+		Key.gamepadlastbuttons = e.buttons.map(function(b) {
+			return b.value;
+		});
+	} else {
+		Key.gamepadlastbuttons = e.buttons.map(function(b) {
+			return b.value;
+		});
+	}
 };
