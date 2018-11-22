@@ -151,7 +151,7 @@ Draw.CachePic = function(path) {
 };
 
 Draw.Pic = function(x, y, pic) {
-	Sys.DPrint(Draw.id,'Pic', arguments);
+	// Sys.DPrint(Draw.id,'Pic', arguments);
 
 	var program = GL.UseProgram('Pic', true);
 	// noinspection JSUnresolvedVariable
