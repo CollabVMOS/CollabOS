@@ -1178,7 +1178,7 @@ CL.ReadFromServer = function() {
 };
 
 CL.SendCmd = function() {
-	Sys.DPrint('CL.SendCmd()');
+	// Sys.DPrint('CL.SendCmd()');
 
 	if (CL.cls.state !== CL.active.connected) {
 		return;
@@ -1541,7 +1541,7 @@ CL.ParseBaseline = function(ent) {
 };
 
 CL.ParseClientdata = function(bits) {
-	Sys.DPrint(CL.id,'ParseClientdata', arguments);
+	// Sys.DPrint(CL.id,'ParseClientdata', arguments);
 
 	var i;
 
@@ -1646,7 +1646,7 @@ CL.Shownet = function(x) {
 };
 
 CL.ParseServerMessage = function() {
-	Sys.DPrint('CL.ParseServerMessage()');
+	// Sys.DPrint('CL.ParseServerMessage()');
 
 	if (CL.shownet.value === 1) {
 		Con.Print(NET.message.cursize + ' ');

@@ -129,7 +129,7 @@ Draw.PicFromWad = function(name) {
 };
 
 Draw.CachePic = function(path) {
-	Sys.DPrint(Draw.id,'CachePic', arguments);
+	// Sys.DPrint(Draw.id,'CachePic', arguments);
 
 	path = 'gfx/' + path + '.lmp';
 
