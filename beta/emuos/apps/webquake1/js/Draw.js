@@ -88,7 +88,7 @@ Draw.Character = function(x, y, num) {
 };
 
 Draw.String = function(x, y, str) {
-	Sys.DPrint(Draw.id, 'String', arguments);
+	// Sys.DPrint(Draw.id, 'String', arguments);
 
 	var program = GL.UseProgram('Pic', true);
 	// noinspection JSUnresolvedVariable
@@ -101,7 +101,7 @@ Draw.String = function(x, y, str) {
 };
 
 Draw.StringWhite = function(x, y, str) {
-	Sys.DPrint(Draw.id, 'StringWhite', arguments);
+	// Sys.DPrint(Draw.id, 'StringWhite', arguments);
 
 	var program = GL.UseProgram('Pic', true);
 	// noinspection JSUnresolvedVariable
@@ -183,7 +183,7 @@ Draw.PicTranslate = function(x, y, pic, top, bottom) {
 };
 
 Draw.ConsoleBackground = function(lines) {
-	Sys.DPrint(Draw.id, 'ConsoleBackground', arguments);
+	// Sys.DPrint(Draw.id, 'ConsoleBackground', arguments);
 
 	var program = GL.UseProgram('Pic', true);
 	// noinspection JSUnresolvedVariable

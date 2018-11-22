@@ -137,7 +137,7 @@ Con.DPrint = function(msg) {
 };
 
 Con.DrawInput = function() {
-	Sys.DPrint('Con.DrawInput()');
+	// Sys.DPrint('Con.DrawInput()');
 
 	if ((Key.dest.value !== Key.dest.console) && (Con.forcedup !== true)) {
 		return;
@@ -178,7 +178,7 @@ Con.DrawNotify = function() {
 };
 
 Con.DrawConsole = function(lines) {
-	Sys.DPrint('Con.DrawConsole()');
+	// Sys.DPrint('Con.DrawConsole()');
 
 	if (lines <= 0) {
 		return;
