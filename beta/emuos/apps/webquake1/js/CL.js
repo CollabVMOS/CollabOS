@@ -425,7 +425,7 @@ CL.Impulse = function() {
 };
 
 CL.KeyState = function(key) {
-	Sys.DPrint(CL.id,'KeyState', arguments);
+	// Sys.DPrint(CL.id,'KeyState', arguments);
 
 	key = CL.kbuttons[key];
 
@@ -1293,7 +1293,7 @@ CL.svc_strings = [
 ];
 
 CL.EntityNum = function(num) {
-	Sys.DPrint(CL.id,'EntityNum', arguments);
+	// Sys.DPrint(CL.id,'EntityNum', arguments);
 
 	if (num < CL.entities.length) {
 		return CL.entities[num];
