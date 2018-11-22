@@ -505,7 +505,7 @@ CL.AdjustAngles = function() {
 };
 
 CL.BaseMove = function() {
-	Sys.DPrint('CL.BaseMove()');
+	// Sys.DPrint('CL.BaseMove()');
 
 	if (CL.cls.signon !== 4) {
 		return;
@@ -941,7 +941,7 @@ CL.AllocDlight = function(key) {
 };
 
 CL.DecayLights = function() {
-	Sys.DPrint('CL.DecayLights()');
+	// Sys.DPrint('CL.DecayLights()');
 
 	var i, dl, time = CL.state.time - CL.state.oldtime;
 
@@ -961,7 +961,7 @@ CL.DecayLights = function() {
 };
 
 CL.LerpPoint = function() {
-	Sys.DPrint('CL.LerpPoint()');
+	// Sys.DPrint('CL.LerpPoint()');
 
 	var f = CL.state.mtime[0] - CL.state.mtime[1];
 
@@ -1345,6 +1345,7 @@ CL.ParseStartSoundPacket = function() {
 };
 
 CL.lastmsg = 0.0;
+
 CL.KeepaliveMessage = function() {
 	Sys.DPrint('CL.KeepaliveMessage()');
 
@@ -1463,7 +1464,7 @@ CL.ParseServerInfo = function() {
 };
 
 CL.ParseUpdate = function(bits) {
-	Sys.DPrint(CL.id,'ParseUpdate', arguments);
+	// Sys.DPrint(CL.id,'ParseUpdate', arguments);
 
 	if (CL.cls.signon === 3) {
 		CL.cls.signon = 4;
@@ -1910,7 +1911,7 @@ CL.ParseBeam = function(m) {
 };
 
 CL.ParseTEnt = function() {
-	Sys.DPrint('CL.ParseTEnt()');
+	// Sys.DPrint('CL.ParseTEnt()');
 
 	var type = MSG.ReadByte();
 
@@ -1995,7 +1996,7 @@ CL.NewTempEntity = function() {
 };
 
 CL.UpdateTEnts = function() {
-	Sys.DPrint('CL.UpdateTEnts()');
+	// Sys.DPrint('CL.UpdateTEnts()');
 
 	CL.num_temp_entities = 0;
 	var i, b, dist = [], yaw, pitch, org = [], d, ent;
