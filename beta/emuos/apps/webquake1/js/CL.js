@@ -1526,7 +1526,7 @@ CL.ParseUpdate = function(bits) {
 };
 
 CL.ParseBaseline = function(ent) {
-	Sys.DPrint(CL.id, 'ParseBaseline', arguments);
+	// Sys.DPrint(CL.id, 'ParseBaseline', arguments);
 
 	ent.baseline.modelindex = MSG.ReadByte();
 	ent.baseline.frame = MSG.ReadByte();
@@ -1598,7 +1598,7 @@ CL.ParseClientdata = function(bits) {
 };
 
 CL.ParseStatic = function() {
-	Sys.DPrint('CL.ParseStatic()');
+	// Sys.DPrint('CL.ParseStatic()');
 
 	var ent = {
 		num: -1,
@@ -1613,14 +1613,17 @@ CL.ParseStatic = function() {
 		dlightbits: 0,
 		leafs: []
 	};
+
 	CL.static_entities[CL.state.num_statics++] = ent;
 	CL.ParseBaseline(ent);
+
 	ent.model = CL.state.model_precache[ent.baseline.modelindex];
 	ent.frame = ent.baseline.frame;
 	ent.skinnum = ent.baseline.skin;
 	ent.effects = ent.baseline.effects;
 	ent.origin = [ent.baseline.origin[0], ent.baseline.origin[1], ent.baseline.origin[2]];
 	ent.angles = [ent.baseline.angles[0], ent.baseline.angles[1], ent.baseline.angles[2]];
+
 	R.currententity = ent;
 	R.emins = [ent.origin[0] + ent.model.mins[0], ent.origin[1] + ent.model.mins[1], ent.origin[2] + ent.model.mins[2]];
 	R.emaxs = [ent.origin[0] + ent.model.maxs[0], ent.origin[1] + ent.model.maxs[1], ent.origin[2] + ent.model.maxs[2]];
@@ -1628,7 +1631,7 @@ CL.ParseStatic = function() {
 };
 
 CL.ParseStaticSound = function() {
-	Sys.DPrint('CL.ParseStaticSound()');
+	// Sys.DPrint('CL.ParseStaticSound()');
 
 	var org = [MSG.ReadCoord(), MSG.ReadCoord(), MSG.ReadCoord()];
 	var sound_num = MSG.ReadByte();
