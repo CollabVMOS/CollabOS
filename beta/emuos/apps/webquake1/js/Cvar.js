@@ -5,7 +5,7 @@ Cvar.id = 'Cvar';
 Cvar.vars = [];
 
 Cvar.FindVar = function(name) {
-	Sys.DPrint(Cvar.id,'FindVar', arguments);
+	Sys.DPrint(Cvar.id, 'FindVar', arguments);
 
 	var i;
 
@@ -17,7 +17,7 @@ Cvar.FindVar = function(name) {
 };
 
 Cvar.CompleteVariable = function(partial) {
-	Sys.DPrint(Cvar.id,'CompleteVariable', arguments);
+	Sys.DPrint(Cvar.id, 'CompleteVariable', arguments);
 
 	if (partial.length === 0) {
 		return;
@@ -33,7 +33,7 @@ Cvar.CompleteVariable = function(partial) {
 };
 
 Cvar.Set = function(name, value) {
-	Sys.DPrint(Cvar.id,'Set', arguments);
+	Sys.DPrint(Cvar.id, 'Set', arguments);
 
 	var i, v, changed;
 
@@ -62,7 +62,7 @@ Cvar.Set = function(name, value) {
 };
 
 Cvar.SetValue = function(name, value) {
-	Sys.DPrint(Cvar.id,'SetValue', arguments);
+	Sys.DPrint(Cvar.id, 'SetValue', arguments);
 
 	Cvar.Set(name, value.toFixed(6));
 };

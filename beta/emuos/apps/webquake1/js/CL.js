@@ -34,7 +34,7 @@ CL.StopPlayback = function() {
 };
 
 CL.WriteDemoMessage = function() {
-	Sys.DPrint(CL.id,'WriteDemoMessage', arguments);
+	Sys.DPrint(CL.id, 'WriteDemoMessage', arguments);
 
 	var len = CL.cls.demoofs + 16 + NET.message.cursize;
 
@@ -332,7 +332,7 @@ CL.kbutton = {
 CL.kbuttons = [];
 
 CL.KeyDown = function() {
-	Sys.DPrint('CL.KeyDown()');
+	// Sys.DPrint('CL.KeyDown()');
 
 	var b = CL.kbutton[Cmd.argv[0].substring(1)];
 
@@ -370,7 +370,7 @@ CL.KeyDown = function() {
 };
 
 CL.KeyUp = function() {
-	Sys.DPrint('CL.KeyUp()');
+	// Sys.DPrint('CL.KeyUp()');
 
 	var b = CL.kbutton[Cmd.argv[0].substring(1)];
 
@@ -409,7 +409,7 @@ CL.KeyUp = function() {
 };
 
 CL.MLookUp = function() {
-	Sys.DPrint('CL.MLookUp()');
+	// Sys.DPrint('CL.MLookUp()');
 
 	CL.KeyUp();
 
@@ -425,7 +425,7 @@ CL.Impulse = function() {
 };
 
 CL.KeyState = function(key) {
-	// Sys.DPrint(CL.id,'KeyState', arguments);
+	// Sys.DPrint(CL.id, 'KeyState', arguments);
 
 	key = CL.kbuttons[key];
 
@@ -796,7 +796,7 @@ CL.Disconnect = function() {
 };
 
 CL.Connect = function(sock) {
-	Sys.DPrint(CL.id,'Connect', arguments);
+	Sys.DPrint(CL.id, 'Connect', arguments);
 
 	CL.cls.netcon = sock;
 	Con.DPrint('CL.Connect: connected to ' + CL.host + '\n');
@@ -904,7 +904,7 @@ CL.PrintEntities_f = function() {
 };
 
 CL.AllocDlight = function(key) {
-	// Sys.DPrint(CL.id,'AllocDlight', arguments);
+	// Sys.DPrint(CL.id, 'AllocDlight', arguments);
 
 	var i, dl;
 
@@ -1293,7 +1293,7 @@ CL.svc_strings = [
 ];
 
 CL.EntityNum = function(num) {
-	// Sys.DPrint(CL.id,'EntityNum', arguments);
+	// Sys.DPrint(CL.id, 'EntityNum', arguments);
 
 	if (num < CL.entities.length) {
 		return CL.entities[num];
@@ -1464,7 +1464,7 @@ CL.ParseServerInfo = function() {
 };
 
 CL.ParseUpdate = function(bits) {
-	// Sys.DPrint(CL.id,'ParseUpdate', arguments);
+	// Sys.DPrint(CL.id, 'ParseUpdate', arguments);
 
 	if (CL.cls.signon === 3) {
 		CL.cls.signon = 4;
@@ -1526,7 +1526,7 @@ CL.ParseUpdate = function(bits) {
 };
 
 CL.ParseBaseline = function(ent) {
-	Sys.DPrint(CL.id,'ParseBaseline', arguments);
+	Sys.DPrint(CL.id, 'ParseBaseline', arguments);
 
 	ent.baseline.modelindex = MSG.ReadByte();
 	ent.baseline.frame = MSG.ReadByte();
@@ -1541,7 +1541,7 @@ CL.ParseBaseline = function(ent) {
 };
 
 CL.ParseClientdata = function(bits) {
-	// Sys.DPrint(CL.id,'ParseClientdata', arguments);
+	// Sys.DPrint(CL.id, 'ParseClientdata', arguments);
 
 	var i;
 
@@ -1638,7 +1638,7 @@ CL.ParseStaticSound = function() {
 };
 
 CL.Shownet = function(x) {
-	// Sys.DPrint(CL.id,'Shownet', arguments);
+	// Sys.DPrint(CL.id, 'Shownet', arguments);
 
 	if (CL.shownet.value === 2) {
 		Con.Print((MSG.readcount <= 99 ? (MSG.readcount <= 9 ? '  ' : ' ') : '') + (MSG.readcount - 1) + ':' + x + '\n');
@@ -1869,7 +1869,7 @@ CL.InitTEnts = function() {
 };
 
 CL.ParseBeam = function(m) {
-	Sys.DPrint(CL.id,'ParseBeam', arguments);
+	Sys.DPrint(CL.id, 'ParseBeam', arguments);
 
 	var ent = MSG.ReadShort();
 	var start = [MSG.ReadCoord(), MSG.ReadCoord(), MSG.ReadCoord()];

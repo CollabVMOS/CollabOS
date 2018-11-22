@@ -3,7 +3,7 @@ Draw = {};
 Draw.id = 'Draw';
 
 Draw.CharToConback = function(num, dest) {
-	// Sys.DPrint(Draw.id,'CharToConback', arguments);
+	// Sys.DPrint(Draw.id, 'CharToConback', arguments);
 
 	var source = ((num >> 4) << 10) + ((num & 15) << 3);
 	var drawline, x;
@@ -73,13 +73,13 @@ Draw.Init = function() {
 };
 
 Draw.Char = function(x, y, num) {
-	// Sys.DPrint(Draw.id,'Char', arguments);
+	// Sys.DPrint(Draw.id, 'Char', arguments);
 
 	GL.StreamDrawTexturedQuad(x, y, 8, 8, (num & 15) * 0.0625, (num >> 4) * 0.0625, ((num & 15) + 1) * 0.0625, ((num >> 4) + 1) * 0.0625);
 };
 
 Draw.Character = function(x, y, num) {
-	// Sys.DPrint(Draw.id,'Character', arguments);
+	// Sys.DPrint(Draw.id, 'Character', arguments);
 
 	var program = GL.UseProgram('Pic', true);
 	// noinspection JSUnresolvedVariable
@@ -88,7 +88,7 @@ Draw.Character = function(x, y, num) {
 };
 
 Draw.String = function(x, y, str) {
-	Sys.DPrint(Draw.id,'String', arguments);
+	Sys.DPrint(Draw.id, 'String', arguments);
 
 	var program = GL.UseProgram('Pic', true);
 	// noinspection JSUnresolvedVariable
@@ -101,7 +101,7 @@ Draw.String = function(x, y, str) {
 };
 
 Draw.StringWhite = function(x, y, str) {
-	Sys.DPrint(Draw.id,'StringWhite', arguments);
+	Sys.DPrint(Draw.id, 'StringWhite', arguments);
 
 	var program = GL.UseProgram('Pic', true);
 	// noinspection JSUnresolvedVariable
@@ -114,7 +114,7 @@ Draw.StringWhite = function(x, y, str) {
 };
 
 Draw.PicFromWad = function(name) {
-	Sys.DPrint(Draw.id,'PicFromWad', arguments);
+	Sys.DPrint(Draw.id, 'PicFromWad', arguments);
 
 	var buf = W.GetLumpName(name);
 	var p = {};
@@ -129,7 +129,7 @@ Draw.PicFromWad = function(name) {
 };
 
 Draw.CachePic = function(path) {
-	// Sys.DPrint(Draw.id,'CachePic', arguments);
+	// Sys.DPrint(Draw.id, 'CachePic', arguments);
 
 	path = 'gfx/' + path + '.lmp';
 
@@ -151,7 +151,7 @@ Draw.CachePic = function(path) {
 };
 
 Draw.Pic = function(x, y, pic) {
-	// Sys.DPrint(Draw.id,'Pic', arguments);
+	// Sys.DPrint(Draw.id, 'Pic', arguments);
 
 	var program = GL.UseProgram('Pic', true);
 	// noinspection JSUnresolvedVariable
@@ -160,7 +160,7 @@ Draw.Pic = function(x, y, pic) {
 };
 
 Draw.PicTranslate = function(x, y, pic, top, bottom) {
-	Sys.DPrint(Draw.id,'PicTranslate', arguments);
+	Sys.DPrint(Draw.id, 'PicTranslate', arguments);
 
 	GL.StreamFlush();
 	var program = GL.UseProgram('PicTranslate');
@@ -183,7 +183,7 @@ Draw.PicTranslate = function(x, y, pic, top, bottom) {
 };
 
 Draw.ConsoleBackground = function(lines) {
-	Sys.DPrint(Draw.id,'ConsoleBackground', arguments);
+	Sys.DPrint(Draw.id, 'ConsoleBackground', arguments);
 
 	var program = GL.UseProgram('Pic', true);
 	// noinspection JSUnresolvedVariable
@@ -192,7 +192,7 @@ Draw.ConsoleBackground = function(lines) {
 };
 
 Draw.Fill = function(x, y, w, h, c) {
-	Sys.DPrint(Draw.id,'Fill', arguments);
+	Sys.DPrint(Draw.id, 'Fill', arguments);
 
 	GL.UseProgram('Fill', true);
 	var color = VID.d_8to24table[c];
@@ -227,7 +227,7 @@ Draw.EndDisc = function() {
 };
 
 Draw.PicToDataURL = function(pic) {
-	// Sys.DPrint(Draw.id,'PicToDataURL', arguments);
+	// Sys.DPrint(Draw.id, 'PicToDataURL', arguments);
 
 	var canvas = document.createElement('canvas');
 	canvas.width = pic.width;

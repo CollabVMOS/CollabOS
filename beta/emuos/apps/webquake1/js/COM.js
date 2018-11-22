@@ -30,7 +30,7 @@ COM.DefaultExtension = function(path, extension) {
 };
 
 COM.Parse = function(data) {
-	Sys.DPrint('COM.Parse(' + [].slice.apply(arguments) + ')');
+	// Sys.DPrint(COM.id, 'KeyState', arguments);
 
 	COM.token = '';
 
@@ -302,7 +302,7 @@ COM.WriteTextFile = function(filename, data) {
 };
 
 COM.LoadFile = function(filename) {
-	// Sys.DPrint(COM.id,'LoadFile', arguments);
+	// Sys.DPrint(COM.id, 'LoadFile', arguments);
 
 	filename = filename.toLowerCase();
 
@@ -353,7 +353,7 @@ COM.LoadFile = function(filename) {
 				xhr.send();
 
 				if ((xhr.status >= 200) && (xhr.status <= 299) && (xhr.responseText.length === file.filelen)) {
-					Sys.DPrint('PackFile: ' + search.filename + '/pak' + j + '.zip : ' + filename + '\n');
+					Sys.DPrint('PackFile: ' + search.filename + '/pak' + j + '.zip | File: ' + filename + '\n');
 					Draw.EndDisc();
 
 					return Q.strmem(xhr.responseText);

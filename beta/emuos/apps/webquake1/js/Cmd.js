@@ -166,7 +166,7 @@ Cmd.Init = function() {
 };
 
 Cmd.TokenizeString = function(text) {
-	Sys.DPrint(Cmd.id,'TokenizeString', arguments);
+	// Sys.DPrint(Cmd.id, 'TokenizeString', arguments);
 
 	Cmd.argv = [];
 
@@ -200,7 +200,7 @@ Cmd.TokenizeString = function(text) {
 };
 
 Cmd.AddCommand = function(name, command) {
-	// Sys.DPrint(Cmd.id,'AddCommand', arguments);
+	// Sys.DPrint(Cmd.id, 'AddCommand', arguments);
 	Sys.DPrint('Cmd.AddCommand(' + name + ')');
 
 	var i;
@@ -223,7 +223,7 @@ Cmd.AddCommand = function(name, command) {
 };
 
 Cmd.CompleteCommand = function(partial) {
-	Sys.DPrint(Cmd.id,'CompleteCommand', arguments);
+	Sys.DPrint(Cmd.id, 'CompleteCommand', arguments);
 
 	if (partial.length === 0) {
 		return;
@@ -239,7 +239,7 @@ Cmd.CompleteCommand = function(partial) {
 };
 
 Cmd.ExecuteString = function(text, client) {
-	Sys.DPrint(Cmd.id,'ExecuteString', arguments);
+	Sys.DPrint(Cmd.id, 'ExecuteString', arguments);
 
 	Cmd.client = client;
 	Cmd.TokenizeString(text);
