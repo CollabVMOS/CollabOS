@@ -688,7 +688,7 @@ CL.Rcon_f = function() {
 };
 
 CL.ClearState = function() {
-	Sys.DPrint('CL.ClearState()');
+	// Sys.DPrint('CL.ClearState()');
 
 	if (SV.server.active !== true) {
 		Con.DPrint('Clearing memory\n');
@@ -904,7 +904,7 @@ CL.PrintEntities_f = function() {
 };
 
 CL.AllocDlight = function(key) {
-	Sys.DPrint(CL.id,'AllocDlight', arguments);
+	// Sys.DPrint(CL.id,'AllocDlight', arguments);
 
 	var i, dl;
 

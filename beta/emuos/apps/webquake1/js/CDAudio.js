@@ -123,7 +123,7 @@ CDAudio.CD_f = function() {
 };
 
 CDAudio.Update = function() {
-	Sys.DPrint('CDAudio.Update()');
+	// Sys.DPrint('CDAudio.Update()');
 
 	if ((CDAudio.initialized !== true) || (CDAudio.enabled !== true)) {
 		return;
