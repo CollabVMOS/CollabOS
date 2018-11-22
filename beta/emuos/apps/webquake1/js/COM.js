@@ -7,7 +7,7 @@ COM.argv = [];
 COM.standard_quake = true;
 
 COM.DefaultExtension = function(path, extension) {
-	Sys.DPrint('COM.DefaultExtension(' + [].slice.apply(arguments) + ')');
+	Sys.DPrint(COM.id, 'DefaultExtension', arguments);
 
 	var i, src;
 
@@ -105,7 +105,7 @@ COM.Parse = function(data) {
 };
 
 COM.CheckParm = function(parm) {
-	Sys.DPrint('COM.CheckParm(' + [].slice.apply(arguments) + ')');
+	Sys.DPrint(COM.id, 'CheckParm', arguments);
 
 	var i;
 
@@ -180,7 +180,7 @@ COM.CheckRegistered = function() {
 };
 
 COM.InitArgv = function(argv) {
-	Sys.DPrint('COM.InitArgv(' + [].slice.apply(arguments) + ')');
+	Sys.DPrint(COM.id, 'InitArgv', arguments);
 
 	COM.cmdline = (argv.join(' ') + ' ').substring(0, 256);
 	var i;
@@ -260,7 +260,7 @@ COM.Path_f = function() {
 };
 
 COM.WriteFile = function(filename, data, len) {
-	Sys.DPrint('COM.WriteFile(' + [].slice.apply(arguments) + ')');
+	Sys.DPrint(COM.id, 'WriteFile', arguments);
 
 	filename = filename.toLowerCase();
 
@@ -284,7 +284,7 @@ COM.WriteFile = function(filename, data, len) {
 };
 
 COM.WriteTextFile = function(filename, data) {
-	Sys.DPrint('COM.WriteTextFile(' + [].slice.apply(arguments) + ')');
+	Sys.DPrint(COM.id, 'ExecuteString', arguments);
 
 	filename = filename.toLowerCase();
 
@@ -379,7 +379,7 @@ COM.LoadFile = function(filename) {
 };
 
 COM.LoadTextFile = function(filename) {
-	Sys.DPrint('COM.LoadTextFile(' + [].slice.apply(arguments) + ')');
+	Sys.DPrint(COM.id, 'LoadTextFile', arguments);
 
 	var buf = COM.LoadFile(filename);
 
@@ -404,7 +404,7 @@ COM.LoadTextFile = function(filename) {
 };
 
 COM.LoadPackFile = function(packfile) {
-	Sys.DPrint('COM.LoadTextFile(' + [].slice.apply(arguments) + ')');
+	Sys.DPrint(COM.id, 'LoadPackFile', arguments);
 
 	var xhr = new XMLHttpRequest();
 	xhr.overrideMimeType('text/plain; charset=x-user-defined');
@@ -467,7 +467,7 @@ COM.LoadPackFile = function(packfile) {
 };
 
 COM.AddGameDirectory = function(dir) {
-	Sys.DPrint('COM.AddGameDirectory(' + [].slice.apply(arguments) + ')');
+	Sys.DPrint(COM.id, 'AddGameDirectory', arguments);
 
 	if (typeof dir === 'undefined') {
 		return;

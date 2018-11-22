@@ -200,7 +200,7 @@ Draw.Fill = function(x, y, w, h, c) {
 };
 
 Draw.FadeScreen = function() {
-	Sys.DPrint('Draw.FadeScreen()');
+	// Sys.DPrint('Draw.FadeScreen()');
 
 	GL.UseProgram('Fill', true);
 	GL.StreamDrawColoredQuad(0, 0, VID.width, VID.height, 0, 0, 0, 204);

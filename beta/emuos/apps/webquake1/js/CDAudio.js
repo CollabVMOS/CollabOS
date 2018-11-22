@@ -1,9 +1,11 @@
 CDAudio = {};
 
+CDAudio.id = 'CDAudio';
+
 CDAudio.known = [];
 
 CDAudio.Play = function(track, looping) {
-	Sys.DPrint('CDAudio.Play(' + [].slice.apply(arguments) + ')');
+	Sys.DPrint(CDAudio.id, 'Play', arguments);
 
 	if ((CDAudio.initialized !== true) || (CDAudio.enabled !== true)) {
 		return;
