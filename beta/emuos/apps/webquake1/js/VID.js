@@ -3,6 +3,8 @@ VID = {};
 VID.d_8to24table = new Uint32Array(new ArrayBuffer(1024));
 
 VID.SetPalette = function() {
+	Sys.DPrint('VID.SetPalette()');
+
 	var palette = COM.LoadFile('gfx/palette.lmp');
 
 	if (palette == null) {
@@ -20,6 +22,8 @@ VID.SetPalette = function() {
 };
 
 VID.Init = function() {
+	Sys.DPrint('VID.Init()');
+
 	document.getElementById('progress').style.display = 'none';
 	GL.Init();
 	VID.SetPalette();

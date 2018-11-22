@@ -34,6 +34,38 @@
 
 		<script type="text/javascript" src="js/libraries/dropbox-sdk-4.0.12.min.js"></script>
 
+		<script>
+			var PAK = [];
+
+			ES6Promise.polyfill();
+
+			var dbx = new Dropbox.Dropbox({accessToken: 'Rw1XBhHt3aAAAAAAAAADLlH_3RQLTgbyiwKwBQlcRIHkzxzKbhFyX4oTPGvSqgqt', fetch: WHATWGFetch.fetch});
+
+			dbx.filesGetTemporaryLink({path: '/quake1/id1/pak0.zip'}).then(function(response) {
+				// noinspection JSUnfilteredForInLoop,JSReferencingMutableVariableFromClosure
+				PAK.push({pak0: response.link});
+
+				dbx.filesGetTemporaryLink({path: '/quake1/id1/pak1.zip'}).then(function(response) {
+					// noinspection JSUnfilteredForInLoop,JSReferencingMutableVariableFromClosure
+					PAK.push({pak1: response.link});
+
+					dbx.filesGetTemporaryLink({path: '/quake1/id1/pak2.zip'}).then(function(response) {
+						// noinspection JSUnfilteredForInLoop,JSReferencingMutableVariableFromClosure
+						PAK.push({pak2: response.link});
+						PAK.push('');
+
+						Sys.Start();
+					}).catch(function(error) {
+						console.log(error);
+					});
+				}).catch(function(error) {
+					console.log(error);
+				});
+			}).catch(function(error) {
+				console.log(error);
+			});
+		</script>
+
 		<script type="text/javascript" src="js/CDAudio.js"></script>
 		<script type="text/javascript" src="js/Chase.js"></script>
 		<script type="text/javascript" src="js/CL.js"></script>

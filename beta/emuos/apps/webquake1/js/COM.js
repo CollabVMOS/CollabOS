@@ -319,18 +319,12 @@ COM.LoadFile = function(filename) {
 		netpath = search.filename + '/' + filename;
 		data = localStorage.getItem('Quake.' + netpath);
 
-		// console.log('data');
-		// console.log(data);
-
 		if (data != null) {
 			Sys.Print('FindFile: ' + netpath + '\n');
 			Draw.EndDisc();
 
 			return Q.strmem(data);
 		}
-
-		// console.log('search');
-		// console.log(search);
 
 		for (j = search.pack.length - 1; j >= 0; --j) {
 			pak = search.pack[j];
@@ -348,7 +342,8 @@ COM.LoadFile = function(filename) {
 					return new ArrayBuffer(0);
 				}
 
-				xhr.open('GET', search.filename + '/pak' + j + '.zip', false);
+				//xhr.open('GET', search.filename + '/pak' + j + '.zip', false);
+				xhr.open('GET', PAK[j]['pak' + j], false);
 				xhr.setRequestHeader('Range', 'bytes=' + file.filepos + '-' + (file.filepos + file.filelen - 1));
 				xhr.send();
 
@@ -408,7 +403,11 @@ COM.LoadPackFile = function(packfile) {
 
 	var xhr = new XMLHttpRequest();
 	xhr.overrideMimeType('text/plain; charset=x-user-defined');
-	xhr.open('GET', packfile, false);
+
+	var paknumber = parseInt(packfile.split('.')[0].split('/')[1].replace('pak', ''), 10);
+
+	// xhr.open('GET', packfile, false);
+	xhr.open('GET', PAK[paknumber]['pak' + paknumber], false);
 	xhr.setRequestHeader('Range', 'bytes=0-11');
 	xhr.send();
 
@@ -433,7 +432,8 @@ COM.LoadPackFile = function(packfile) {
 	var pack = [];
 
 	if (numpackfiles !== 0) {
-		xhr.open('GET', packfile, false);
+		// xhr.open('GET', packfile, false);
+		xhr.open('GET', PAK[paknumber]['pak' + paknumber], false);
 		xhr.setRequestHeader('Range', 'bytes=' + dirofs + '-' + (dirofs + dirlen - 1));
 		xhr.send();
 

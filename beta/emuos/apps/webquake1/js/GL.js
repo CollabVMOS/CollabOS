@@ -1,3 +1,5 @@
+var gl;
+
 GL = {};
 
 GL.textures = [];
@@ -503,9 +505,9 @@ GL.StreamDrawColoredQuad = function(x, y, w, h, r, g, b, a) {
 };
 
 GL.Init = function() {
-	VID.mainwindow = document.getElementById('mainwindow');
+	Sys.DPrint('GL.Init()');
 
-	var gl;
+	VID.mainwindow = document.getElementById('mainwindow');
 
 	try {
 		gl = VID.mainwindow.getContext('webgl') || VID.mainwindow.getContext('experimental-webgl');
