@@ -4,11 +4,13 @@ Host.framecount = 0;
 
 Host.EndGame = function(message) {
 	Con.DPrint('Host.EndGame: ' + message + '\n');
+
 	if (CL.cls.demonum !== -1) {
 		CL.NextDemo();
 	} else {
 		CL.Disconnect();
 	}
+
 	throw 'Host.abortserver';
 };
 
@@ -16,15 +18,19 @@ Host.Error = function(error) {
 	if (Host.inerror === true) {
 		Sys.Error('Host.Error: recursively entered');
 	}
+
 	Host.inerror = true;
 	SCR.EndLoadingPlaque();
 	Con.Print('Host.Error: ' + error + '\n');
+
 	if (SV.server.active === true) {
 		Host.ShutdownServer();
 	}
+
 	CL.Disconnect();
 	CL.cls.demonum = -1;
 	Host.inerror = false;
+
 	throw new Error('Host.abortserver');
 };
 

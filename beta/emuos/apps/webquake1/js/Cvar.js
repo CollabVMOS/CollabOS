@@ -5,7 +5,7 @@ Cvar.id = 'Cvar';
 Cvar.vars = [];
 
 Cvar.FindVar = function(name) {
-	Sys.DPrint(Cvar.id, 'FindVar', arguments);
+	// Sys.DPrint(Cvar.id, 'FindVar', arguments);
 
 	var i;
 
