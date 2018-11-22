@@ -3,7 +3,7 @@ Draw = {};
 Draw.id = 'Draw';
 
 Draw.CharToConback = function(num, dest) {
-	Sys.DPrint(Draw.id,'CharToConback', arguments);
+	// Sys.DPrint(Draw.id,'CharToConback', arguments);
 
 	var source = ((num >> 4) << 10) + ((num & 15) << 3);
 	var drawline, x;
@@ -207,7 +207,7 @@ Draw.FadeScreen = function() {
 };
 
 Draw.BeginDisc = function() {
-	Sys.DPrint('Draw.BeginDisc()');
+	// Sys.DPrint('Draw.BeginDisc()');
 
 	if (Draw.loadingElem == null) {
 		return;
@@ -219,7 +219,7 @@ Draw.BeginDisc = function() {
 };
 
 Draw.EndDisc = function() {
-	Sys.DPrint('Draw.EndDisc()');
+	// Sys.DPrint('Draw.EndDisc()');
 
 	if (Draw.loadingElem != null) {
 		Draw.loadingElem.style.display = 'none';
@@ -227,7 +227,7 @@ Draw.EndDisc = function() {
 };
 
 Draw.PicToDataURL = function(pic) {
-	Sys.DPrint(Draw.id,'PicToDataURL', arguments);
+	// Sys.DPrint(Draw.id,'PicToDataURL', arguments);
 
 	var canvas = document.createElement('canvas');
 	canvas.width = pic.width;

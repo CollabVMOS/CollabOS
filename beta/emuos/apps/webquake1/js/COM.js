@@ -317,8 +317,8 @@ COM.LoadFile = function(filename) {
 		netpath = search.filename + '/' + filename;
 		data = localStorage.getItem('Quake.' + netpath);
 
-		console.log('data');
-		console.log(data);
+		// console.log('data');
+		// console.log(data);
 
 		if (data != null) {
 			Sys.Print('FindFile: ' + netpath + '\n');
@@ -327,8 +327,8 @@ COM.LoadFile = function(filename) {
 			return Q.strmem(data);
 		}
 
-		console.log('search');
-		console.log(search);
+		// console.log('search');
+		// console.log(search);
 
 		for (j = search.pack.length - 1; j >= 0; --j) {
 			pak = search.pack[j];
