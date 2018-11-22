@@ -73,7 +73,7 @@ Sys.Error = function(text) {
 
 	if (window.console != null) {
 		for (; i < Con.text.length; ++i) {
-			console.log(Con.text[i].text);
+			console.error(Con.text[i].text);
 		}
 	}
 

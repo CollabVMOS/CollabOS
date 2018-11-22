@@ -270,7 +270,7 @@ Cmd.ExecuteString = function(text, client) {
 };
 
 Cmd.ForwardToServer = function() {
-	Sys.DPrint(Cmd.id,'ForwardToServer', arguments);
+	Sys.DPrint('Cmd.ForwardToServer()');
 
 	if (CL.cls.state !== CL.active.connected) {
 		Con.Print('Can\'t "' + Cmd.argv[0] + '", not connected\n');
