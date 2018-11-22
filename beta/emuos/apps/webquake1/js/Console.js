@@ -154,7 +154,7 @@ Con.DrawInput = function() {
 };
 
 Con.DrawNotify = function() {
-	Sys.DPrint('Con.DrawNotify()');
+	// Sys.DPrint('Con.DrawNotify()');
 
 	var width = (VID.width >> 3) - 2;
 	var i = Con.text.length - 4, v = 0;

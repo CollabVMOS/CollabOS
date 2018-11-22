@@ -13,7 +13,7 @@ Cmd.Wait_f = function() {
 Cmd.text = '';
 
 Cmd.Execute = function() {
-	Sys.DPrint('Cmd.Execute()');
+	// Sys.DPrint('Cmd.Execute()');
 
 	var c, line = '', quotes = false;
 
