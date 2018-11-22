@@ -73,13 +73,13 @@ Draw.Init = function() {
 };
 
 Draw.Char = function(x, y, num) {
-	Sys.DPrint(Draw.id,'Char', arguments);
+	// Sys.DPrint(Draw.id,'Char', arguments);
 
 	GL.StreamDrawTexturedQuad(x, y, 8, 8, (num & 15) * 0.0625, (num >> 4) * 0.0625, ((num & 15) + 1) * 0.0625, ((num >> 4) + 1) * 0.0625);
 };
 
 Draw.Character = function(x, y, num) {
-	Sys.DPrint(Draw.id,'Character', arguments);
+	// Sys.DPrint(Draw.id,'Character', arguments);
 
 	var program = GL.UseProgram('Pic', true);
 	// noinspection JSUnresolvedVariable

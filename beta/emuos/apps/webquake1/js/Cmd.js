@@ -200,7 +200,8 @@ Cmd.TokenizeString = function(text) {
 };
 
 Cmd.AddCommand = function(name, command) {
-	Sys.DPrint(Cmd.id,'AddCommand', arguments);
+	// Sys.DPrint(Cmd.id,'AddCommand', arguments);
+	Sys.DPrint('Cmd.AddCommand(' + name + ')');
 
 	var i;
 
