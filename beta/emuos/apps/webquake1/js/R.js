@@ -167,6 +167,7 @@ R.PushDlights = function() {
 
 R.RecursiveLightPoint = function(node, start, end) {
 	if (node.contents < 0) {
+		// noinspection JSConstructorReturnsPrimitive
 		return -1;
 	}
 
@@ -192,6 +193,7 @@ R.RecursiveLightPoint = function(node, start, end) {
 	}
 
 	if ((back < 0) === side) {
+		// noinspection JSConstructorReturnsPrimitive
 		return -1;
 	}
 
@@ -217,6 +219,7 @@ R.RecursiveLightPoint = function(node, start, end) {
 		}
 
 		if (surf.lightofs === 0) {
+			// noinspection JSConstructorReturnsPrimitive
 			return 0;
 		}
 
@@ -225,6 +228,7 @@ R.RecursiveLightPoint = function(node, start, end) {
 
 		lightmap = surf.lightofs;
 		if (lightmap === 0) {
+			// noinspection JSConstructorReturnsPrimitive
 			return 0;
 		}
 
@@ -235,6 +239,8 @@ R.RecursiveLightPoint = function(node, start, end) {
 			r += CL.state.worldmodel.lightdata[lightmap] * R.lightstylevalue[surf.styles[maps]] * 22;
 			lightmap += size;
 		}
+
+		// noinspection JSConstructorReturnsPrimitive
 		return r >> 8;
 	}
 	return R.RecursiveLightPoint(node.children[side !== true ? 1 : 0], mid, end);
@@ -242,12 +248,17 @@ R.RecursiveLightPoint = function(node, start, end) {
 
 R.LightPoint = function(p) {
 	if (CL.state.worldmodel.lightdata == null) {
+		// noinspection JSConstructorReturnsPrimitive
 		return 255;
 	}
+
 	var r = R.RecursiveLightPoint(CL.state.worldmodel.nodes[0], p, [p[0], p[1], p[2] - 2048.0]);
+
 	if (r === -1) {
+		// noinspection JSConstructorReturnsPrimitive
 		return 0;
 	}
+
 	return r;
 };
 
@@ -269,15 +280,22 @@ R.refdef = {
 
 R.CullBox = function(mins, maxs) {
 	if (Vec.BoxOnPlaneSide(mins, maxs, R.frustum[0]) === 2) {
+		// noinspection JSConstructorReturnsPrimitive
 		return true;
 	}
+
 	if (Vec.BoxOnPlaneSide(mins, maxs, R.frustum[1]) === 2) {
+		// noinspection JSConstructorReturnsPrimitive
 		return true;
 	}
+
 	if (Vec.BoxOnPlaneSide(mins, maxs, R.frustum[2]) === 2) {
+		// noinspection JSConstructorReturnsPrimitive
 		return true;
 	}
+
 	if (Vec.BoxOnPlaneSide(mins, maxs, R.frustum[3]) === 2) {
+		// noinspection JSConstructorReturnsPrimitive
 		return true;
 	}
 };
@@ -647,9 +665,9 @@ R.DrawAliasModel = function(e) {
 	}
 	// noinspection JSUnresolvedVariable
 	GL.Bind(program.tTexture, skin.texturenum.texnum);
-	if (clmodel.player === true)
-	// noinspection JSUnresolvedVariable
-	{
+
+	if (clmodel.player === true) {
+		// noinspection JSUnresolvedVariable
 		GL.Bind(program.tPlayer, skin.playertexture);
 	}
 
@@ -944,10 +962,14 @@ R.MakeBrushModelDisplayLists = function(m) {
 		chain = [i, verts, 0];
 		for (j = 0; j < m.numfaces; ++j) {
 			surf = m.faces[m.firstface + j];
+
 			if (surf.texture !== i) {
 				continue;
 			}
+
 			styles[0] = styles[1] = styles[2] = styles[3] = 0.0;
+
+			// noinspection FallThroughInSwitchStatementJS
 			switch (surf.styles.length) {
 				case 4:
 					styles[3] = surf.styles[3] * 0.015625 + 0.0078125;
@@ -958,6 +980,7 @@ R.MakeBrushModelDisplayLists = function(m) {
 				case 1:
 					styles[0] = surf.styles[0] * 0.015625 + 0.0078125;
 			}
+
 			chain[2] += surf.verts.length;
 			for (k = 0; k < surf.verts.length; ++k) {
 				vert = surf.verts[k];
@@ -1025,15 +1048,21 @@ R.MakeWorldModelDisplayLists = function(m) {
 		if ((texture.sky === true) || (texture.turbulent === true)) {
 			continue;
 		}
+
 		for (j = 0; j < m.leafs.length; ++j) {
 			leaf = m.leafs[j];
 			chain = [i, verts, 0];
+
 			for (k = 0; k < leaf.nummarksurfaces; ++k) {
 				surf = m.faces[m.marksurfaces[leaf.firstmarksurface + k]];
+
 				if (surf.texture !== i) {
 					continue;
 				}
+
 				styles[0] = styles[1] = styles[2] = styles[3] = 0.0;
+
+				// noinspection FallThroughInSwitchStatementJS
 				switch (surf.styles.length) {
 					case 4:
 						styles[3] = surf.styles[3] * 0.015625 + 0.0078125;
@@ -1044,7 +1073,9 @@ R.MakeWorldModelDisplayLists = function(m) {
 					case 1:
 						styles[0] = surf.styles[0] * 0.015625 + 0.0078125;
 				}
+
 				chain[2] += surf.verts.length;
+
 				for (l = 0; l < surf.verts.length; ++l) {
 					vert = surf.verts[l];
 					cmds[cmds.length] = vert[0];
@@ -1922,15 +1953,15 @@ R.DrawBrushModel = function(e) {
 	gl.vertexAttribPointer(program.aTexCoord.location, 4, gl.FLOAT, false, 44, 12);
 	// noinspection JSUnresolvedVariable
 	gl.vertexAttribPointer(program.aLightStyle.location, 4, gl.FLOAT, false, 44, 28);
-	if ((R.fullbright.value !== 0) || (clmodel.lightdata == null))
-	// noinspection JSUnresolvedVariable
-	{
+
+	if ((R.fullbright.value !== 0) || (clmodel.lightdata == null)) {
+		// noinspection JSUnresolvedVariable
 		GL.Bind(program.tLightmap, R.fullbright_texture);
-	} else
-	// noinspection JSUnresolvedVariable
-	{
+	} else {
+		// noinspection JSUnresolvedVariable
 		GL.Bind(program.tLightmap, R.lightmap_texture);
 	}
+
 	// noinspection JSUnresolvedVariable
 	GL.Bind(program.tDlight, ((R.flashblend.value === 0) && (clmodel.submodel === true)) ? R.dlightmap_texture : R.null_texture);
 	// noinspection JSUnresolvedVariable
@@ -2006,35 +2037,37 @@ R.DrawWorld = function() {
 	gl.vertexAttribPointer(program.aTexCoord.location, 4, gl.FLOAT, false, 44, 12);
 	// noinspection JSUnresolvedVariable
 	gl.vertexAttribPointer(program.aLightStyle.location, 4, gl.FLOAT, false, 44, 28);
-	if ((R.fullbright.value !== 0) || (clmodel.lightdata == null))
-	// noinspection JSUnresolvedVariable
-	{
+
+	if ((R.fullbright.value !== 0) || (clmodel.lightdata == null)) {
+		// noinspection JSUnresolvedVariable
 		GL.Bind(program.tLightmap, R.fullbright_texture);
-	} else
-	// noinspection JSUnresolvedVariable
-	{
+	} else {
+		// noinspection JSUnresolvedVariable
 		GL.Bind(program.tLightmap, R.lightmap_texture);
 	}
-	if (R.flashblend.value === 0)
-	// noinspection JSUnresolvedVariable
-	{
+	if (R.flashblend.value === 0) {
+		// noinspection JSUnresolvedVariable
 		GL.Bind(program.tDlight, R.dlightmap_texture);
-	} else
-	// noinspection JSUnresolvedVariable
-	{
+	} else {
+		// noinspection JSUnresolvedVariable
 		GL.Bind(program.tDlight, R.null_texture);
 	}
+
 	// noinspection JSUnresolvedVariable
 	GL.Bind(program.tLightStyle, R.lightstyle_texture);
 	var i, j, leaf, cmds;
+
 	for (i = 0; i < clmodel.leafs.length; ++i) {
 		leaf = clmodel.leafs[i];
+
 		if ((leaf.visframe !== R.visframecount) || (leaf.skychain === 0)) {
 			continue;
 		}
+
 		if (R.CullBox(leaf.mins, leaf.maxs) === true) {
 			continue;
 		}
+
 		for (j = 0; j < leaf.skychain; ++j) {
 			cmds = leaf.cmds[j];
 			R.c_brush_verts += cmds[2];

@@ -7,9 +7,11 @@ IN.old_mouse_y = 0.0;
 
 IN.StartupMouse = function() {
 	IN.m_filter = Cvar.RegisterVariable('m_filter', '1');
+
 	if (COM.CheckParm('-nomouse') != null) {
 		return;
 	}
+
 	if (VID.mainwindow.requestPointerLock != null) {
 		IN.movementX = 'movementX';
 		IN.movementY = 'movementY';
@@ -31,6 +33,7 @@ IN.StartupMouse = function() {
 	} else {
 		return;
 	}
+
 	VID.mainwindow.onclick = IN.onclick;
 	document.onmousemove = IN.onmousemove;
 	document[IN.pointerlockchange] = IN.onpointerlockchange;
@@ -109,13 +112,9 @@ IN.onclick = function() {
 	if (document[IN.pointerLockElement] !== this) {
 		this[IN.requestPointerLock]();
 	}
+
 	// noinspection JSUnresolvedVariable
-	if (
-		document.fullscreenEnabled ||
-		document.webkitFullscreenEnabled ||
-		document.mozFullScreenEnabled ||
-		document.msFullscreenEnabled
-	) {
+	if (document.fullscreenEnabled || document.webkitFullscreenEnabled || document.mozFullScreenEnabled || document.msFullscreenEnabled) {
 		if (VID.mainwindow.requestFullscreen) {
 			VID.mainwindow.requestFullscreen();
 		} else if (VID.mainwindow.webkitRequestFullscreen) {
@@ -132,12 +131,14 @@ IN.onmousemove = function(e) {
 	if (document[IN.pointerLockElement] !== VID.mainwindow) {
 		return;
 	}
+
 	IN.mouse_x += e[IN.movementX];
 	IN.mouse_y += e[IN.movementY];
 };
 
 IN.onpointerlockchange = function() {
 	if (document[IN.pointerLockElement] === VID.mainwindow) {
+		// noinspection UnnecessaryReturnStatementJS
 		return;
 	}
 	// Key.Event(Key.k.escape, true);

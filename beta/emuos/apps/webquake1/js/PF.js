@@ -2,9 +2,12 @@ PF = {};
 
 PF.VarString = function(first) {
 	var i, out = '';
+
 	for (i = first; i < PR.argc; ++i) {
 		out += PR.GetString(PR.globals_int[4 + i * 3]);
 	}
+
+	// noinspection JSConstructorReturnsPrimitive
 	return out;
 };
 
@@ -527,32 +530,37 @@ PF.aim = function() {
 	var ent = SV.server.edicts[PR.globals_int[4]];
 	var start = [ent.v_float[PR.entvars.origin], ent.v_float[PR.entvars.origin1], ent.v_float[PR.entvars.origin2] + 20.0];
 	var dir = [PR.globals_float[PR.globalvars.v_forward], PR.globals_float[PR.globalvars.v_forward1], PR.globals_float[PR.globalvars.v_forward2]];
-	var end = [start[0] + 2048.0 * dir[0], start[1] + 2048.0 * dir[1], start[2] + 2048.0 * dir[2]];
-	var tr = SV.Move(start, Vec.origin, Vec.origin, end, 0, ent);
+	var tr = SV.Move(start, Vec.origin, Vec.origin, [start[0] + 2048.0 * dir[0], start[1] + 2048.0 * dir[1], start[2] + 2048.0 * dir[2]], 0, ent);
+
 	if (tr.ent != null) {
-		if ((tr.ent.v_float[PR.entvars.takedamage] === SV.damage.aim) &&
-			((Host.teamplay.value === 0) || (ent.v_float[PR.entvars.team] <= 0) ||
-				(ent.v_float[PR.entvars.team] !== tr.ent.v_float[PR.entvars.team]))) {
+		if ((tr.ent.v_float[PR.entvars.takedamage] === SV.damage.aim) && ((Host.teamplay.value === 0) || (ent.v_float[PR.entvars.team] <= 0) || (ent.v_float[PR.entvars.team] !== tr.ent.v_float[PR.entvars.team]))) {
 			PR.globals_float[1] = dir[0];
 			PR.globals_float[2] = dir[1];
 			PR.globals_float[3] = dir[2];
+
 			return;
 		}
 	}
+
 	var bestdir = [dir[0], dir[1], dir[2]];
 	var bestdist = SV.aim.value;
 	var bestent, i, check, dist, end = [];
+
 	for (i = 1; i < SV.server.num_edicts; ++i) {
 		check = SV.server.edicts[i];
+
 		if (check.v_float[PR.entvars.takedamage] !== SV.damage.aim) {
 			continue;
 		}
+
 		if (check === ent) {
 			continue;
 		}
+
 		if ((Host.teamplay.value !== 0) && (ent.v_float[PR.entvars.team] > 0) && (ent.v_float[PR.entvars.team] === check.v_float[PR.entvars.team])) {
 			continue;
 		}
+
 		end[0] = check.v_float[PR.entvars.origin] + 0.5 * (check.v_float[PR.entvars.mins] + check.v_float[PR.entvars.maxs]);
 		end[1] = check.v_float[PR.entvars.origin1] + 0.5 * (check.v_float[PR.entvars.mins1] + check.v_float[PR.entvars.maxs1]);
 		end[2] = check.v_float[PR.entvars.origin2] + 0.5 * (check.v_float[PR.entvars.mins2] + check.v_float[PR.entvars.maxs2]);
@@ -561,15 +569,19 @@ PF.aim = function() {
 		dir[2] = end[2] - start[2];
 		Vec.Normalize(dir);
 		dist = dir[0] * bestdir[0] + dir[1] * bestdir[1] + dir[2] * bestdir[2];
+
 		if (dist < bestdist) {
 			continue;
 		}
+
 		tr = SV.Move(start, Vec.origin, Vec.origin, end, 0, ent);
+
 		if (tr.ent === check) {
 			bestdist = dist;
 			bestent = check;
 		}
 	}
+
 	if (bestent != null) {
 		dir[0] = bestent.v_float[PR.entvars.origin] - ent.v_float[PR.entvars.origin];
 		dir[1] = bestent.v_float[PR.entvars.origin1] - ent.v_float[PR.entvars.origin1];
@@ -582,8 +594,10 @@ PF.aim = function() {
 		PR.globals_float[1] = end[0];
 		PR.globals_float[2] = end[1];
 		PR.globals_float[3] = end[2];
+
 		return;
 	}
+
 	PR.globals_float[1] = bestdir[0];
 	PR.globals_float[2] = bestdir[1];
 	PR.globals_float[3] = bestdir[2];
@@ -593,10 +607,13 @@ PF.changeyaw = function() {
 	var ent = SV.server.edicts[PR.globals_int[PR.globalvars.self]];
 	var current = Vec.Anglemod(ent.v_float[PR.entvars.angles1]);
 	var ideal = ent.v_float[PR.entvars.ideal_yaw];
+
 	if (current === ideal) {
 		return;
 	}
+
 	var move = ideal - current;
+
 	if (ideal > current) {
 		if (move >= 180.0) {
 			move -= 360.0;
@@ -604,7 +621,9 @@ PF.changeyaw = function() {
 	} else if (move <= -180.0) {
 		move += 360.0;
 	}
+
 	var speed = ent.v_float[PR.entvars.yaw_speed];
+
 	if (move > 0.0) {
 		if (move > speed) {
 			move = speed;
@@ -612,6 +631,7 @@ PF.changeyaw = function() {
 	} else if (move < -speed) {
 		move = -speed;
 	}
+
 	ent.v_float[PR.entvars.angles1] = Vec.Anglemod(current + move);
 };
 
@@ -630,30 +650,38 @@ PF.WriteDest = function() {
 		case 3: // init
 			return SV.server.signon;
 	}
+
 	PR.RunError('WriteDest: bad destination');
 };
 
 PF.WriteByte = function() {
 	MSG.WriteByte(PF.WriteDest(), PR.globals_float[7]);
 };
+
 PF.WriteChar = function() {
 	MSG.WriteChar(PF.WriteDest(), PR.globals_float[7]);
 };
+
 PF.WriteShort = function() {
 	MSG.WriteShort(PF.WriteDest(), PR.globals_float[7]);
 };
+
 PF.WriteLong = function() {
 	MSG.WriteLong(PF.WriteDest(), PR.globals_float[7]);
 };
+
 PF.WriteAngle = function() {
 	MSG.WriteAngle(PF.WriteDest(), PR.globals_float[7]);
 };
+
 PF.WriteCoord = function() {
 	MSG.WriteCoord(PF.WriteDest(), PR.globals_float[7]);
 };
+
 PF.WriteString = function() {
 	MSG.WriteString(PF.WriteDest(), PR.GetString(PR.globals_int[7]));
 };
+
 PF.WriteEntity = function() {
 	MSG.WriteShort(PF.WriteDest(), PR.globals_int[7]);
 };
@@ -677,10 +705,13 @@ PF.makestatic = function() {
 
 PF.setspawnparms = function() {
 	var i = PR.globals_int[4];
+
 	if ((i <= 0) || (i > SV.svs.maxclients)) {
 		PR.RunError('Entity is not a client');
 	}
+
 	var spawn_parms = SV.svs.clients[i - 1].spawn_parms;
+
 	for (i = 0; i <= 15; ++i) {
 		PR.globals_float[PR.globalvars.parms + i] = spawn_parms[i];
 	}
@@ -690,6 +721,7 @@ PF.changelevel = function() {
 	if (SV.svs.changelevel_issued === true) {
 		return;
 	}
+
 	SV.svs.changelevel_issued = true;
 	Cmd.text += 'changelevel ' + PR.GetString(PR.globals_int[4]) + '\n';
 };

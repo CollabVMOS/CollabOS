@@ -752,17 +752,24 @@ SV.SendClientMessages = function() {
 
 SV.ModelIndex = function(name) {
 	if (name == null) {
+		// noinspection JSConstructorReturnsPrimitive
 		return 0;
 	}
+
 	if (name.length === 0) {
+		// noinspection JSConstructorReturnsPrimitive
 		return 0;
 	}
+
 	var i;
+
 	for (i = 0; i < SV.server.model_precache.length; ++i) {
 		if (SV.server.model_precache[i] === name) {
+			// noinspection JSConstructorReturnsPrimitive
 			return i;
 		}
 	}
+
 	Sys.Error('SV.ModelIndex: model ' + name + ' not precached');
 };
 
@@ -784,6 +791,7 @@ SV.CreateBaseline = function() {
 		baseline.frame = svent.v_float[PR.entvars.frame] >> 0;
 		baseline.skin = svent.v_float[PR.entvars.skin] >> 0;
 		if ((i > 0) && (i <= SV.server.maxclients)) {
+			// noinspection JSUnresolvedVariable
 			baseline.colormap = entnum;
 			baseline.modelindex = player;
 		} else {
@@ -970,35 +978,48 @@ SV.CheckBottom = function(ent) {
 		ent.v_float[PR.entvars.origin1] + ent.v_float[PR.entvars.mins1],
 		ent.v_float[PR.entvars.origin2] + ent.v_float[PR.entvars.mins2]
 	];
+
 	var maxs = [
 		ent.v_float[PR.entvars.origin] + ent.v_float[PR.entvars.maxs],
 		ent.v_float[PR.entvars.origin1] + ent.v_float[PR.entvars.maxs1],
 		ent.v_float[PR.entvars.origin2] + ent.v_float[PR.entvars.maxs2]
 	];
+
+	// noinspection LoopStatementThatDoesntLoopJS
 	for (; ;) {
 		if (SV.PointContents([mins[0], mins[1], mins[2] - 1.0]) !== Mod.contents.solid) {
 			break;
 		}
+
 		if (SV.PointContents([mins[0], maxs[1], mins[2] - 1.0]) !== Mod.contents.solid) {
 			break;
 		}
+
 		if (SV.PointContents([maxs[0], mins[1], mins[2] - 1.0]) !== Mod.contents.solid) {
 			break;
 		}
+
 		if (SV.PointContents([maxs[0], maxs[1], mins[2] - 1.0]) !== Mod.contents.solid) {
 			break;
 		}
+
+		// FIXME: is this a bug? should not return early
+		// noinspection JSConstructorReturnsPrimitive
 		return true;
 	}
+
 	var start = [(mins[0] + maxs[0]) * 0.5, (mins[1] + maxs[1]) * 0.5, mins[2]];
 	var stop = [start[0], start[1], start[2] - 36.0];
 	var trace = SV.Move(start, Vec.origin, Vec.origin, stop, 1, ent);
+
 	if (trace.fraction === 1.0) {
 		return;
 	}
+
 	var mid, bottom;
 	mid = bottom = trace.endpos[2];
 	var x, y;
+
 	for (x = 0; x <= 1; ++x) {
 		for (y = 0; y <= 1; ++y) {
 			start[0] = stop[0] = (x !== 0) ? maxs[0] : mins[0];
@@ -1012,6 +1033,8 @@ SV.CheckBottom = function(ent) {
 			}
 		}
 	}
+
+	// noinspection JSConstructorReturnsPrimitive
 	return true;
 };
 
@@ -1108,14 +1131,20 @@ SV.StepDirection = function(ent, yaw, dist) {
 	PF.changeyaw();
 	yaw *= Math.PI / 180.0;
 	var oldorigin = ED.Vector(ent, PR.entvars.origin);
+
 	if (SV.movestep(ent, [Math.cos(yaw) * dist, Math.sin(yaw) * dist], false) === 1) {
 		var delta = ent.v_float[PR.entvars.angles1] - ent.v_float[PR.entvars.ideal_yaw];
+
 		if ((delta > 45.0) && (delta < 315.0)) {
 			ED.SetVector(ent, PR.entvars.origin, oldorigin);
 		}
+
 		SV.LinkEdict(ent, true);
+
+		// noinspection JSConstructorReturnsPrimitive
 		return true;
 	}
+
 	SV.LinkEdict(ent, true);
 };
 
@@ -1196,6 +1225,8 @@ SV.CloseEnough = function(ent, goal, dist) {
 			return;
 		}
 	}
+
+	// noinspection JSConstructorReturnsPrimitive
 	return true;
 };
 
@@ -1245,17 +1276,23 @@ SV.CheckVelocity = function(ent) {
 
 SV.RunThink = function(ent) {
 	var thinktime = ent.v_float[PR.entvars.nextthink];
+
 	if ((thinktime <= 0.0) || (thinktime > (SV.server.time + Host.frametime))) {
+		// noinspection JSConstructorReturnsPrimitive
 		return true;
 	}
+
 	if (thinktime < SV.server.time) {
 		thinktime = SV.server.time;
 	}
+
 	ent.v_float[PR.entvars.nextthink] = 0.0;
 	PR.globals_float[PR.globalvars.time] = thinktime;
 	PR.globals_int[PR.globalvars.self] = ent.num;
 	PR.globals_int[PR.globalvars.other] = 0;
 	PR.ExecuteProgram(ent.v_int[PR.entvars.think]);
+
+	// noinspection JSConstructorReturnsPrimitive
 	return (ent.free !== true);
 };
 
@@ -1321,6 +1358,8 @@ SV.FlyMove = function(ent, time) {
 		trace = SV.Move(ED.Vector(ent, PR.entvars.origin), ED.Vector(ent, PR.entvars.mins), ED.Vector(ent, PR.entvars.maxs), end, 0, ent);
 		if (trace.allsolid === true) {
 			ED.SetVector(ent, PR.entvars.velocity, Vec.origin);
+
+			// noinspection JSConstructorReturnsPrimitive
 			return 3;
 		}
 		if (trace.fraction > 0.0) {
@@ -1351,6 +1390,7 @@ SV.FlyMove = function(ent, time) {
 		time_left -= time_left * trace.fraction;
 		if (numplanes >= 5) {
 			ED.SetVector(ent, PR.entvars.velocity, Vec.origin);
+			// noinspection JSConstructorReturnsPrimitive
 			return 3;
 		}
 		planes[numplanes++] = [trace.plane.normal[0], trace.plane.normal[1], trace.plane.normal[2]];
@@ -1373,6 +1413,7 @@ SV.FlyMove = function(ent, time) {
 		} else {
 			if (numplanes !== 2) {
 				ED.SetVector(ent, PR.entvars.velocity, Vec.origin);
+				// noinspection JSConstructorReturnsPrimitive
 				return 7;
 			}
 			dir = Vec.CrossProduct(planes[0], planes[1]);
@@ -1387,9 +1428,11 @@ SV.FlyMove = function(ent, time) {
 			ent.v_float[PR.entvars.velocity1] * primal_velocity[1] +
 			ent.v_float[PR.entvars.velocity2] * primal_velocity[2]) <= 0.0) {
 			ED.SetVector(ent, PR.entvars.velocity, Vec.origin);
+			// noinspection JSConstructorReturnsPrimitive
 			return blocked;
 		}
 	}
+	// noinspection JSConstructorReturnsPrimitive
 	return blocked;
 };
 
@@ -1611,6 +1654,8 @@ SV.CheckWater = function(ent) {
 			ent.v_float[PR.entvars.waterlevel] = 3.0;
 		}
 	}
+
+	// noinspection JSConstructorReturnsPrimitive
 	return ent.v_float[PR.entvars.waterlevel] > 1.0;
 };
 
@@ -1634,6 +1679,7 @@ SV.TryUnstick = function(ent, oldvel) {
 	var oldorg = ED.Vector(ent, PR.entvars.origin);
 	var dir = [2.0, 0.0, 0.0];
 	var i, clip;
+
 	for (i = 0; i <= 7; ++i) {
 		switch (i) {
 			case 1:
@@ -1664,18 +1710,23 @@ SV.TryUnstick = function(ent, oldvel) {
 				dir[0] = -2.0;
 				dir[1] = -2.0;
 		}
+
 		SV.PushEntity(ent, dir);
 		ent.v_float[PR.entvars.velocity] = oldvel[0];
 		ent.v_float[PR.entvars.velocity1] = oldvel[1];
 		ent.v_float[PR.entvars.velocity2] = 0.0;
 		clip = SV.FlyMove(ent, 0.1);
-		if ((Math.abs(oldorg[1] - ent.v_float[PR.entvars.origin1]) > 4.0)
-			|| (Math.abs(oldorg[0] - ent.v_float[PR.entvars.origin]) > 4.0)) {
+
+		if ((Math.abs(oldorg[1] - ent.v_float[PR.entvars.origin1]) > 4.0)  || (Math.abs(oldorg[0] - ent.v_float[PR.entvars.origin]) > 4.0)) {
 			return clip;
 		}
+
 		ED.SetVector(ent, PR.entvars.origin, oldorg);
 	}
+
 	ED.SetVector(ent, PR.entvars.velocity, Vec.origin);
+
+	// noinspection JSConstructorReturnsPrimitive
 	return 7;
 };
 
@@ -2171,38 +2222,51 @@ SV.ReadClientMessage = function() {
 		'give',
 		'ban'
 	];
+
 	do {
 		ret = NET.GetMessage(Host.client.netconnection);
+
 		if (ret === -1) {
 			Sys.Print('SV.ReadClientMessage: NET.GetMessage failed\n');
 			return;
 		}
+
 		if (ret === 0) {
+			// noinspection JSConstructorReturnsPrimitive
 			return true;
 		}
+
 		MSG.BeginReading();
+
 		for (; ;) {
 			if (Host.client.active !== true) {
 				return;
 			}
+
 			if (MSG.badread === true) {
 				Sys.Print('SV.ReadClientMessage: badread\n');
 				return;
 			}
+
 			cmd = MSG.ReadChar();
+
 			if (cmd === -1) {
 				ret = 1;
 				break;
 			}
+
 			if (cmd === Protocol.clc.nop) {
 				continue;
 			}
+
 			if (cmd === Protocol.clc.stringcmd) {
 				s = MSG.ReadString();
+
 				for (i = 0; i < cmds.length; ++i) {
 					if (s.substring(0, cmds[i].length).toLowerCase() !== cmds[i]) {
 						continue;
 					}
+
 					Cmd.ExecuteString(s, true);
 					break;
 				}
@@ -2499,14 +2563,18 @@ SV.HullPointContents = function(hull, num, p) {
 
 SV.PointContents = function(p) {
 	var cont = SV.HullPointContents(SV.server.worldmodel.hulls[0], 0, p);
+
 	if ((cont <= Mod.contents.current_0) && (cont >= Mod.contents.current_down)) {
+		// noinspection JSConstructorReturnsPrimitive
 		return Mod.contents.water;
 	}
+
 	return cont;
 };
 
 SV.TestEntityPosition = function(ent) {
 	var origin = ED.Vector(ent, PR.entvars.origin);
+	// noinspection JSConstructorReturnsPrimitive
 	return SV.Move(origin, ED.Vector(ent, PR.entvars.mins), ED.Vector(ent, PR.entvars.maxs), origin, 0, ent).startsolid;
 };
 
@@ -2514,6 +2582,7 @@ SV.RecursiveHullCheck = function(hull, num, p1f, p2f, p1, p2, trace) {
 	if (num < 0) {
 		if (num !== Mod.contents.solid) {
 			trace.allsolid = false;
+
 			if (num === Mod.contents.empty) {
 				trace.inopen = true;
 			} else {
@@ -2522,6 +2591,8 @@ SV.RecursiveHullCheck = function(hull, num, p1f, p2f, p1, p2, trace) {
 		} else {
 			trace.startsolid = true;
 		}
+
+		// noinspection JSConstructorReturnsPrimitive
 		return true;
 	}
 
@@ -2544,11 +2615,13 @@ SV.RecursiveHullCheck = function(hull, num, p1f, p2f, p1, p2, trace) {
 	if ((t1 >= 0.0) && (t2 >= 0.0)) {
 		return SV.RecursiveHullCheck(hull, node.children[0], p1f, p2f, p1, p2, trace);
 	}
+
 	if ((t1 < 0.0) && (t2 < 0.0)) {
 		return SV.RecursiveHullCheck(hull, node.children[1], p1f, p2f, p1, p2, trace);
 	}
 
 	var frac = (t1 + (t1 < 0.0 ? 0.03125 : -0.03125)) / (t1 - t2);
+
 	if (frac < 0.0) {
 		frac = 0.0;
 	} else if (frac > 1.0) {
@@ -2585,12 +2658,14 @@ SV.RecursiveHullCheck = function(hull, num, p1f, p2f, p1, p2, trace) {
 
 	while (SV.HullPointContents(hull, hull.firstclipnode, mid) === Mod.contents.solid) {
 		frac -= 0.1;
+
 		if (frac < 0.0) {
 			trace.fraction = midf;
 			trace.endpos = [mid[0], mid[1], mid[2]];
 			Con.DPrint('backup past 0\n');
 			return;
 		}
+
 		midf = p1f + (p2f - p1f) * frac;
 		mid[0] = p1[0] + frac * (p2[0] - p1[0]);
 		mid[1] = p1[1] + frac * (p2[1] - p1[1]);

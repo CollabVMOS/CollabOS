@@ -217,58 +217,75 @@ S.StartSound = function(entnum, entchannel, sfx, origin, vol, attenuation) {
 			gain1: S.context.createGainNode(),
 			merger2: S.context.createChannelMerger(2)
 		};
+
 		target_chan.nodes = nodes;
 		nodes.source.buffer = sfx.cache.data;
+
 		if (sfx.cache.loopstart != null) {
 			nodes.source.loop = true;
 			nodes.source.loopStart = sfx.cache.loopstart;
 			nodes.source.loopEnd = nodes.source.buffer.length;
 		}
+
 		nodes.source.connect(nodes.merger1);
 		nodes.source.connect(nodes.merger1, 0, 1);
 		nodes.merger1.connect(nodes.splitter);
 		nodes.splitter.connect(nodes.gain0, 0);
 		nodes.splitter.connect(nodes.gain1, 1);
 		volume = target_chan.leftvol;
+
 		if (volume > 1.0) {
 			volume = 1.0;
 		}
+
 		nodes.gain0.gain.value = volume * S.volume.value;
 		nodes.gain0.connect(nodes.merger2, 0, 0);
 		volume = target_chan.rightvol;
+
 		if (volume > 1.0) {
 			volume = 1.0;
 		}
+
 		nodes.gain1.gain.value = volume * S.volume.value;
 		nodes.gain1.connect(nodes.merger2, 0, 1);
 		nodes.merger2.connect(S.context.destination);
 		var i, check, skip;
+
 		for (i = 0; i < S.channels.length; ++i) {
 			check = S.channels[i];
+
 			if (check === target_chan) {
 				continue;
 			}
+
 			if ((check.sfx !== sfx) || (check.pos !== 0.0)) {
 				continue;
 			}
+
 			skip = Math.random() * 0.1;
+
 			if (skip >= sfx.cache.length) {
 				S.NoteOn(nodes.source);
 				break;
 			}
+
 			target_chan.pos += skip;
 			target_chan.end -= skip;
 			// noinspection JSUnresolvedFunction
 			nodes.source.noteGrainOn(0.0, skip, nodes.source.buffer.length - skip);
 			break;
 		}
+
 		S.NoteOn(nodes.source);
 	} else {
 		target_chan.audio = sfx.cache.data.cloneNode();
 		volume = (target_chan.leftvol + target_chan.rightvol) * 0.5;
+
 		if (volume > 1.0) {
+			// noinspection JSUnusedAssignment
 			volume = 1.0;
 		}
+
 		//target_chan.audio.volume = volume * S.volume.value;
 		target_chan.audio.play();
 	}
@@ -692,24 +709,30 @@ S.LoadSound = function(s) {
 	if (S.nosound.value !== 0) {
 		return;
 	}
+
 	if (s.cache != null) {
+		// noinspection JSConstructorReturnsPrimitive
 		return true;
 	}
 
 	var sc = {};
 
 	var data = COM.LoadFile('sound/' + s.name);
+
 	if (data == null) {
 		Con.Print('Couldn\'t load sound/' + s.name + '\n');
 		return;
 	}
 
 	var view = new DataView(data);
+
 	if ((view.getUint32(0, true) !== 0x46464952) || (view.getUint32(8, true) !== 0x45564157)) {
 		Con.Print('Missing RIFF/WAVE chunks\n');
 		return;
 	}
+
 	var p, fmt, dataofs, datalen, cue, loopstart, samples;
+
 	for (p = 12; p < data.byteLength;) {
 		switch (view.getUint32(p, true)) {
 			case 0x20746d66: // fmt
@@ -717,6 +740,7 @@ S.LoadSound = function(s) {
 					Con.Print('Microsoft PCM format only\n');
 					return;
 				}
+
 				fmt = {
 					channels: view.getUint16(p + 10, true),
 					samplesPerSec: view.getUint32(p + 12, true),
@@ -737,13 +761,17 @@ S.LoadSound = function(s) {
 				if (cue !== true) {
 					break;
 				}
+
 				cue = false;
+
 				if (view.getUint32(p + 28, true) === 0x6b72616d) {
 					samples = loopstart + view.getUint32(p + 24, true);
 				}
 				break;
 		}
+
 		p += view.getUint32(p + 4, true) + 8;
+
 		if ((p & 1) !== 0) {
 			++p;
 		}
@@ -753,13 +781,16 @@ S.LoadSound = function(s) {
 		Con.Print('Missing fmt chunk\n');
 		return;
 	}
+
 	if (dataofs == null) {
 		Con.Print('Missing data chunk\n');
 		return;
 	}
+
 	if (loopstart != null) {
 		sc.loopstart = loopstart * fmt.blockAlign / fmt.samplesPerSec;
 	}
+
 	if (samples != null) {
 		sc.length = samples / fmt.samplesPerSec;
 	} else {
@@ -767,9 +798,11 @@ S.LoadSound = function(s) {
 	}
 
 	sc.size = datalen + 44;
+
 	if ((sc.size & 1) !== 0) {
 		++sc.size;
 	}
+
 	var out = new ArrayBuffer(sc.size);
 	view = new DataView(out);
 	view.setUint32(0, 0x46464952, true); // RIFF
@@ -786,6 +819,7 @@ S.LoadSound = function(s) {
 	view.setUint32(36, 0x61746164, true); // data
 	view.setUint32(40, datalen, true);
 	(new Uint8Array(out, 44, datalen)).set(new Uint8Array(data, dataofs, datalen));
+
 	if (S.context != null) {
 		sc.data = S.context.createBuffer(out, true);
 	} else {
@@ -793,5 +827,6 @@ S.LoadSound = function(s) {
 	}
 
 	s.cache = sc;
+	// noinspection JSConstructorReturnsPrimitive
 	return true;
 };

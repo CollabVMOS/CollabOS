@@ -585,6 +585,7 @@ Host.SavegameComment = function() {
 	}
 	text += kills;
 
+	// noinspection JSConstructorReturnsPrimitive
 	return text + '____';
 };
 
@@ -1208,9 +1209,8 @@ Host.Give_f = function() {
 	switch (t) {
 		case 115:
 			// noinspection JSUnresolvedVariable
-			if (PR.entvars.ammo_shells1 != null)
-			// noinspection JSUnresolvedVariable
-			{
+			if (PR.entvars.ammo_shells1 != null) {
+				// noinspection JSUnresolvedVariable
 				ent.v_float[PR.entvars.ammo_shells1] = v;
 			}
 			ent.v_float[PR.entvars.ammo_shells] = v;
@@ -1220,6 +1220,7 @@ Host.Give_f = function() {
 			if (PR.entvars.ammo_nails1 != null) {
 				// noinspection JSUnresolvedVariable
 				ent.v_float[PR.entvars.ammo_nails1] = v;
+
 				if (ent.v_float[PR.entvars.weapon] <= Def.it.lightning) {
 					ent.v_float[PR.entvars.ammo_nails] = v;
 				}
@@ -1230,6 +1231,7 @@ Host.Give_f = function() {
 			if (PR.entvars.ammo_lava_nails != null) {
 				// noinspection JSUnresolvedVariable
 				ent.v_float[PR.entvars.ammo_lava_nails] = v;
+
 				if (ent.v_float[PR.entvars.weapon] > Def.it.lightning) {
 					ent.v_float[PR.entvars.ammo_nails] = v;
 				}
@@ -1240,6 +1242,7 @@ Host.Give_f = function() {
 			if (PR.entvars.ammo_rockets1 != null) {
 				// noinspection JSUnresolvedVariable
 				ent.v_float[PR.entvars.ammo_rockets1] = v;
+
 				if (ent.v_float[PR.entvars.weapon] <= Def.it.lightning) {
 					ent.v_float[PR.entvars.ammo_rockets] = v;
 				}
@@ -1250,6 +1253,7 @@ Host.Give_f = function() {
 			if (PR.entvars.ammo_multi_rockets != null) {
 				// noinspection JSUnresolvedVariable
 				ent.v_float[PR.entvars.ammo_multi_rockets] = v;
+
 				if (ent.v_float[PR.entvars.weapon] > Def.it.lightning) {
 					ent.v_float[PR.entvars.ammo_rockets] = v;
 				}
@@ -1260,6 +1264,7 @@ Host.Give_f = function() {
 			if (PR.entvars.ammo_cells1 != null) {
 				// noinspection JSUnresolvedVariable
 				ent.v_float[PR.entvars.ammo_cells1] = v;
+
 				if (ent.v_float[PR.entvars.weapon] <= Def.it.lightning) {
 					ent.v_float[PR.entvars.ammo_cells] = v;
 				}
@@ -1270,6 +1275,7 @@ Host.Give_f = function() {
 			if (PR.entvars.ammo_plasma != null) {
 				// noinspection JSUnresolvedVariable
 				ent.v_float[PR.entvars.ammo_plasma] = v;
+
 				if (ent.v_float[PR.entvars.weapon] > Def.it.lightning) {
 					ent.v_float[PR.entvars.ammo_cells] = v;
 				}

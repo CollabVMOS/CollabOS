@@ -56,13 +56,13 @@
 
 						Sys.Start();
 					}).catch(function(error) {
-						console.log(error);
+						console.error(error);
 					});
 				}).catch(function(error) {
-					console.log(error);
+					console.error(error);
 				});
 			}).catch(function(error) {
-				console.log(error);
+				console.error(error);
 			});
 		</script>
 
@@ -443,6 +443,7 @@
 			uniform mat3 uViewAngles;
 			uniform mat4 uPerspective;
 			attribute vec3 aPosition;
+
 			void main(void)
 			{
 				vec3 position = uViewAngles * (aPosition - uViewOrigin);
@@ -452,6 +453,7 @@
 
 		<script type="x-shader/x-fragment" id="fshSkyChain">
 			precision mediump float;
+
 			void main(void)
 			{
 			}

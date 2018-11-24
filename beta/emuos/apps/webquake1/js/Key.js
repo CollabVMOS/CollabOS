@@ -251,10 +251,13 @@ Key.Message = function(key) {
 
 Key.StringToKeynum = function(str) {
 	if (str.length === 1) {
+		// noinspection JSConstructorReturnsPrimitive
 		return str.charCodeAt(0);
 	}
+
 	str = str.toUpperCase();
 	var i;
+
 	for (i = 0; i < Key.names.length; ++i) {
 		if (Key.names[i].name === str) {
 			return Key.names[i].keynum;
@@ -264,14 +267,19 @@ Key.StringToKeynum = function(str) {
 
 Key.KeynumToString = function(keynum) {
 	if ((keynum > 32) && (keynum < 127)) {
+		// noinspection JSConstructorReturnsPrimitive
 		return String.fromCharCode(keynum);
 	}
+
 	var i;
+
 	for (i = 0; i < Key.names.length; ++i) {
 		if (Key.names[i].keynum === keynum) {
 			return Key.names[i].name;
 		}
 	}
+
+	// noinspection JSConstructorReturnsPrimitive
 	return '<UNKNOWN KEYNUM>';
 };
 
@@ -322,11 +330,14 @@ Key.Bind_f = function() {
 Key.WriteBindings = function() {
 	var f = [];
 	var i;
+
 	for (i = 0; i < Key.bindings.length; ++i) {
 		if (Key.bindings[i] != null) {
 			f[f.length] = 'bind "' + Key.KeynumToString(i) + '" "' + Key.bindings[i] + '"\n';
 		}
 	}
+
+	// noinspection JSConstructorReturnsPrimitive
 	return f.join('');
 };
 

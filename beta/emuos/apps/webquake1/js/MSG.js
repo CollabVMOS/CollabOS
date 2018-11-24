@@ -43,69 +43,100 @@ MSG.BeginReading = function() {
 MSG.ReadChar = function() {
 	if (MSG.readcount >= NET.message.cursize) {
 		MSG.badread = true;
+
+		// noinspection JSConstructorReturnsPrimitive
 		return -1;
 	}
 	var c = (new Int8Array(NET.message.data, MSG.readcount, 1))[0];
 	++MSG.readcount;
+
+	// noinspection JSConstructorReturnsPrimitive
 	return c;
 };
 
 MSG.ReadByte = function() {
 	if (MSG.readcount >= NET.message.cursize) {
 		MSG.badread = true;
+
+		// noinspection JSConstructorReturnsPrimitive
 		return -1;
 	}
+
 	var c = (new Uint8Array(NET.message.data, MSG.readcount, 1))[0];
 	++MSG.readcount;
+
+	// noinspection JSConstructorReturnsPrimitive
 	return c;
 };
 
 MSG.ReadShort = function() {
 	if ((MSG.readcount + 2) > NET.message.cursize) {
 		MSG.badread = true;
+
+		// noinspection JSConstructorReturnsPrimitive
 		return -1;
 	}
+
 	var c = (new DataView(NET.message.data)).getInt16(MSG.readcount, true);
 	MSG.readcount += 2;
+
+	// noinspection JSConstructorReturnsPrimitive
 	return c;
 };
 
 MSG.ReadLong = function() {
 	if ((MSG.readcount + 4) > NET.message.cursize) {
 		MSG.badread = true;
+
+		// noinspection JSConstructorReturnsPrimitive
 		return -1;
 	}
+
 	var c = (new DataView(NET.message.data)).getInt32(MSG.readcount, true);
 	MSG.readcount += 4;
+
+	// noinspection JSConstructorReturnsPrimitive
 	return c;
 };
 
 MSG.ReadFloat = function() {
 	if ((MSG.readcount + 4) > NET.message.cursize) {
 		MSG.badread = true;
+
+		// noinspection JSConstructorReturnsPrimitive
 		return -1;
 	}
+
 	var f = (new DataView(NET.message.data)).getFloat32(MSG.readcount, true);
 	MSG.readcount += 4;
+
+	// noinspection JSConstructorReturnsPrimitive
 	return f;
 };
 
 MSG.ReadString = function() {
 	var string = [], l, c;
+
 	for (l = 0; l < 2048; ++l) {
 		c = MSG.ReadByte();
+
 		if (c <= 0) {
 			break;
 		}
+
 		string[l] = String.fromCharCode(c);
 	}
+
+	// noinspection JSConstructorReturnsPrimitive
 	return string.join('');
 };
 
 MSG.ReadCoord = function() {
+	// noinspection JSConstructorReturnsPrimitive
 	return MSG.ReadShort() * 0.125;
 };
 
 MSG.ReadAngle = function() {
+	// noinspection JSConstructorReturnsPrimitive
 	return MSG.ReadChar() * 1.40625;
 };

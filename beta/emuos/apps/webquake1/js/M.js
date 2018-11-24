@@ -212,7 +212,7 @@ M.loadable = [];
 M.removable = [];
 
 M.ScanSaves = function() {
-	var searchpaths = COM.searchpaths, i, j, search = 'Quake.' + COM.gamedir[0].filename + '/s', f, version, name, j, c;
+	var searchpaths = COM.searchpaths, i, j, search = 'Quake.' + COM.gamedir[0].filename + '/s', f, version, name, c;
 	COM.searchpaths = COM.gamedir;
 	for (i = 0; i < M.max_savegames; ++i) {
 		f = localStorage.getItem(search + i + '.sav');
@@ -762,18 +762,23 @@ M.Keys_Draw = function() {
 	}
 
 	var i, y = 48, keys, name;
+
 	for (i = 0; i < M.bindnames.length; ++i) {
 		M.Print(16, y, M.bindnames[i][1]);
 		keys = M.FindKeysForCommand(M.bindnames[i][0]);
+
 		if (keys[0] == null) {
 			M.Print(140, y, '???');
 		} else {
 			name = Key.KeynumToString(keys[0]);
+
 			if (keys[1] != null) {
 				name += ' or ' + Key.KeynumToString(keys[1]);
 			}
+
 			M.Print(140, y, name);
 		}
+
 		y += 8;
 	}
 };
@@ -781,9 +786,11 @@ M.Keys_Draw = function() {
 M.Keys_Key = function(k) {
 	if (M.bind_grab === true) {
 		S.LocalSound(M.sfx_menu1);
+
 		if ((k !== Key.k.escape) && (k !== 96)) {
 			Cmd.text = 'bind "' + Key.KeynumToString(k) + '" "' + M.bindnames[M.keys_cursor][0] + '"\n' + Cmd.text;
 		}
+
 		M.bind_grab = false;
 		return;
 	}
@@ -795,23 +802,30 @@ M.Keys_Key = function(k) {
 		case Key.k.leftarrow:
 		case Key.k.uparrow:
 			S.LocalSound(M.sfx_menu1);
+
 			if (--M.keys_cursor < 0) {
 				M.keys_cursor = M.bindnames.length - 1;
 			}
+
 			return;
 		case Key.k.downarrow:
 		case Key.k.rightarrow:
 			S.LocalSound(M.sfx_menu1);
+
 			if (++M.keys_cursor >= M.bindnames.length) {
 				M.keys_cursor = 0;
 			}
+
 			return;
 		case Key.k.enter:
 			S.LocalSound(M.sfx_menu2);
+
 			if (M.FindKeysForCommand(M.bindnames[M.keys_cursor][0])[1] != null) {
 				M.UnbindCommand(M.bindnames[M.keys_cursor][0]);
 			}
+
 			M.bind_grab = true;
+
 			return;
 		case Key.k.backspace:
 		case Key.k.del:
@@ -838,22 +852,25 @@ M.Help_Key = function(k) {
 	switch (k) {
 		case Key.k.escape:
 			M.Menu_Main_f();
+
 			return;
 		case Key.k.uparrow:
 		case Key.k.rightarrow:
 			M.entersound = true;
+
 			if (++M.help_page >= M.num_help_pages) {
 				M.help_page = 0;
 			}
+
 			return;
 		case Key.k.downarrow:
 		case Key.k.leftarrow:
 			M.entersound = true;
+
 			if (--M.help_page < 0) {
 				M.help_page = M.num_help_pages - 1;
 			}
 	}
-	;
 };
 
 // Quit menu
@@ -872,6 +889,7 @@ M.Menu_Quit_f = function() {
 	if (M.state.value === M.state.quit) {
 		return;
 	}
+
 	M.wasInMenus = (Key.dest.value === Key.dest.menu);
 	Key.dest.value = Key.dest.menu;
 	M.quit_prevstate = M.state.value;
@@ -887,6 +905,7 @@ M.Quit_Draw = function() {
 		M.Draw();
 		M.state.value = M.state.quit;
 	}
+
 	M.DrawTextBox(56, 76, 24, 4);
 	M.Print(64, 84, M.quitMessage[M.msgNumber][0]);
 	M.Print(64, 92, M.quitMessage[M.msgNumber][1]);
@@ -963,10 +982,13 @@ M.Init = function() {
 	M.p_multi = Draw.CachePic('p_multi');
 	M.bigbox = Draw.CachePic('bigbox');
 	M.menuplyr = Draw.CachePic('menuplyr');
+
+	// noinspection JSUnusedLocalSymbols
 	var buf = COM.LoadFile('gfx/menuplyr.lmp');
 	var data = GL.ResampleTexture(M.menuplyr.data, M.menuplyr.width, M.menuplyr.height, 64, 64);
 	var trans = new Uint8Array(new ArrayBuffer(16384));
 	var i, p;
+
 	for (i = 0; i < 4096; ++i) {
 		p = data[i];
 		if ((p >> 4) === 1) {
@@ -977,6 +999,7 @@ M.Init = function() {
 			trans[(i << 2) + 3] = 255;
 		}
 	}
+
 	M.menuplyr.translate = gl.createTexture();
 	GL.Bind(0, M.menuplyr.translate);
 	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 64, 64, 0, gl.RGBA, gl.UNSIGNED_BYTE, trans);

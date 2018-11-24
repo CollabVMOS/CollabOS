@@ -11,10 +11,12 @@ GL.Bind = function(target, texnum, flushStream) {
 		if (flushStream === true) {
 			GL.StreamFlush();
 		}
+
 		if (GL.activetexture !== target) {
 			GL.activetexture = target;
 			gl.activeTexture(gl.TEXTURE0 + target);
 		}
+
 		GL.currenttextures[target] = texnum;
 		gl.bindTexture(gl.TEXTURE_2D, texnum);
 	}
@@ -22,6 +24,7 @@ GL.Bind = function(target, texnum, flushStream) {
 
 GL.TextureMode_f = function() {
 	var i;
+
 	if (Cmd.argv.length <= 1) {
 		for (i = 0; i < GL.modes.length; ++i) {
 			if (GL.filter_min === GL.modes[i][1]) {
@@ -29,21 +32,29 @@ GL.TextureMode_f = function() {
 				return;
 			}
 		}
+
 		Con.Print('current filter is unknown???\n');
+
 		return;
 	}
+
 	var name = Cmd.argv[1].toUpperCase();
+
 	for (i = 0; i < GL.modes.length; ++i) {
 		if (GL.modes[i][0] === name) {
 			break;
 		}
 	}
+
 	if (i === GL.modes.length) {
 		Con.Print('bad filter name\n');
+
 		return;
 	}
+
 	GL.filter_min = GL.modes[i][1];
 	GL.filter_max = GL.modes[i][2];
+
 	for (i = 0; i < GL.textures.length; ++i) {
 		GL.Bind(0, GL.textures[i].texnum);
 		gl.texParameterf(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, GL.filter_min);
@@ -61,17 +72,22 @@ GL.ortho = [
 GL.Set2D = function() {
 	gl.viewport(0, 0, (VID.width * SCR.devicePixelRatio) >> 0, (VID.height * SCR.devicePixelRatio) >> 0);
 	GL.UnbindProgram();
+
 	var i, program;
+
 	for (i = 0; i < GL.programs.length; ++i) {
 		program = GL.programs[i];
+
 		// noinspection JSUnresolvedVariable
 		if (program.uOrtho == null) {
 			continue;
 		}
+
 		gl.useProgram(program.program);
 		// noinspection JSUnresolvedVariable
 		gl.uniformMatrix4fv(program.uOrtho, false, GL.ortho);
 	}
+
 	gl.disable(gl.DEPTH_TEST);
 	gl.enable(gl.BLEND);
 };
@@ -82,18 +98,23 @@ GL.ResampleTexture = function(data, inwidth, inheight, outwidth, outheight) {
 	var xstep = inwidth / outwidth, ystep = inheight / outheight;
 	var src, dest = 0;
 	var i, j;
+
 	for (i = 0; i < outheight; ++i) {
 		src = Math.floor(i * ystep) * inwidth;
+
 		for (j = 0; j < outwidth; ++j) {
 			out[dest + j] = data[src + Math.floor(j * xstep)];
 		}
+
 		dest += outwidth;
 	}
+
 	return out;
 };
 
 GL.Upload = function(data, width, height) {
 	var scaled_width = width, scaled_height = height;
+
 	if (((width & (width - 1)) !== 0) || ((height & (height - 1)) !== 0)) {
 		--scaled_width;
 		scaled_width |= (scaled_width >> 1);
@@ -110,24 +131,31 @@ GL.Upload = function(data, width, height) {
 		scaled_height |= (scaled_height >> 16);
 		++scaled_height;
 	}
+
 	if (scaled_width > GL.maxtexturesize) {
 		scaled_width = GL.maxtexturesize;
 	}
+
 	if (scaled_height > GL.maxtexturesize) {
 		scaled_height = GL.maxtexturesize;
 	}
+
 	if ((scaled_width !== width) || (scaled_height !== height)) {
 		data = GL.ResampleTexture(data, width, height, scaled_width, scaled_height);
 	}
+
 	var trans = new ArrayBuffer((scaled_width * scaled_height) << 2);
 	var trans32 = new Uint32Array(trans);
 	var i;
+
 	for (i = scaled_width * scaled_height - 1; i >= 0; --i) {
 		trans32[i] = COM.LittleLong(VID.d_8to24table[data[i]] + 0xff000000);
+
 		if (data[i] >= 224) {
 			trans32[i] &= 0xffffff;
 		}
 	}
+
 	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, scaled_width, scaled_height, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(trans));
 	gl.generateMipmap(gl.TEXTURE_2D);
 	gl.texParameterf(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, GL.filter_min);
@@ -136,19 +164,23 @@ GL.Upload = function(data, width, height) {
 
 GL.LoadTexture = function(identifier, width, height, data) {
 	var glt, i;
+
 	if (identifier.length !== 0) {
 		for (i = 0; i < GL.textures.length; ++i) {
 			glt = GL.textures[i];
+
 			if (glt.identifier === identifier) {
 				if ((width !== glt.width) || (height !== glt.height)) {
 					Sys.Error('GL.LoadTexture: cache mismatch');
 				}
+
 				return glt;
 			}
 		}
 	}
 
 	var scaled_width = width, scaled_height = height;
+
 	if (((width & (width - 1)) !== 0) || ((height & (height - 1)) !== 0)) {
 		--scaled_width;
 		scaled_width |= (scaled_width >> 1);
@@ -165,20 +197,27 @@ GL.LoadTexture = function(identifier, width, height, data) {
 		scaled_height |= (scaled_height >> 16);
 		++scaled_height;
 	}
+
 	if (scaled_width > GL.maxtexturesize) {
 		scaled_width = GL.maxtexturesize;
 	}
+
 	if (scaled_height > GL.maxtexturesize) {
 		scaled_height = GL.maxtexturesize;
 	}
+
 	scaled_width >>= GL.picmip.value;
+
 	if (scaled_width === 0) {
 		scaled_width = 1;
 	}
+
 	scaled_height >>= GL.picmip.value;
+
 	if (scaled_height === 0) {
 		scaled_height = 1;
 	}
+
 	if ((scaled_width !== width) || (scaled_height !== height)) {
 		data = GL.ResampleTexture(data, width, height, scaled_width, scaled_height);
 	}
@@ -187,11 +226,13 @@ GL.LoadTexture = function(identifier, width, height, data) {
 	GL.Bind(0, glt.texnum);
 	GL.Upload(data, scaled_width, scaled_height);
 	GL.textures[GL.textures.length] = glt;
+
 	return glt;
 };
 
 GL.LoadPicTexture = function(pic) {
 	var data = pic.data, scaled_width = pic.width, scaled_height = pic.height;
+
 	if (((pic.width & (pic.width - 1)) !== 0) || ((pic.height & (pic.height - 1)) !== 0)) {
 		--scaled_width;
 		scaled_width |= (scaled_width >> 1);
@@ -208,12 +249,15 @@ GL.LoadPicTexture = function(pic) {
 		scaled_height |= (scaled_height >> 16);
 		++scaled_height;
 	}
+
 	if (scaled_width > GL.maxtexturesize) {
 		scaled_width = GL.maxtexturesize;
 	}
+
 	if (scaled_height > GL.maxtexturesize) {
 		scaled_height = GL.maxtexturesize;
 	}
+
 	if ((scaled_width !== pic.width) || (scaled_height !== pic.height)) {
 		data = GL.ResampleTexture(data, pic.width, pic.height, scaled_width, scaled_height);
 	}
@@ -223,14 +267,17 @@ GL.LoadPicTexture = function(pic) {
 	var trans = new ArrayBuffer((scaled_width * scaled_height) << 2);
 	var trans32 = new Uint32Array(trans);
 	var i;
+
 	for (i = scaled_width * scaled_height - 1; i >= 0; --i) {
 		if (data[i] !== 255) {
 			trans32[i] = COM.LittleLong(VID.d_8to24table[data[i]] + 0xff000000);
 		}
 	}
+
 	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, scaled_width, scaled_height, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(trans));
 	gl.texParameterf(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 	gl.texParameterf(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+
 	return texnum;
 };
 
@@ -385,12 +432,14 @@ GL.RotationMatrix = function(pitch, yaw, roll) {
 	pitch *= Math.PI / -180.0;
 	yaw *= Math.PI / 180.0;
 	roll *= Math.PI / 180.0;
+
 	var sp = Math.sin(pitch);
 	var cp = Math.cos(pitch);
 	var sy = Math.sin(yaw);
 	var cy = Math.cos(yaw);
 	var sr = Math.sin(roll);
 	var cr = Math.cos(roll);
+
 	return [
 		cy * cp, sy * cp, -sp,
 		-sy * cr + cy * sp * sr, cy * cr + sy * sp * sr, cp * sr,
@@ -402,35 +451,41 @@ GL.StreamFlush = function() {
 	if (GL.streamArrayVertexCount === 0) {
 		return;
 	}
+
 	var program = GL.currentProgram;
+
 	if (program != null) {
 		gl.bindBuffer(gl.ARRAY_BUFFER, GL.streamBuffer);
-		gl.bufferSubData(gl.ARRAY_BUFFER, GL.streamBufferPosition,
-			GL.streamArrayBytes.subarray(0, GL.streamArrayPosition));
+		gl.bufferSubData(gl.ARRAY_BUFFER, GL.streamBufferPosition, GL.streamArrayBytes.subarray(0, GL.streamArrayPosition));
 		var attribs = program.attribs;
+
 		for (var i = 0; i < attribs.length; ++i) {
 			var attrib = attribs[i];
-			gl.vertexAttribPointer(attrib.location,
-				attrib.components, attrib.type, attrib.normalized,
-				program.vertexSize, GL.streamBufferPosition + attrib.offset);
+			gl.vertexAttribPointer(attrib.location, attrib.components, attrib.type, attrib.normalized, program.vertexSize, GL.streamBufferPosition + attrib.offset);
 		}
+
 		gl.drawArrays(gl.TRIANGLES, 0, GL.streamArrayVertexCount);
 		GL.streamBufferPosition += GL.streamArrayPosition;
 	}
+
 	GL.streamArrayPosition = 0;
 	GL.streamArrayVertexCount = 0;
 };
 
 GL.StreamGetSpace = function(vertexCount) {
 	var program = GL.currentProgram;
+
 	if (program == null) {
 		return;
 	}
+
 	var length = vertexCount * program.vertexSize;
+
 	if ((GL.streamBufferPosition + GL.streamArrayPosition + length) > GL.streamArray.byteLength) {
 		GL.StreamFlush();
 		GL.streamBufferPosition = 0;
 	}
+
 	GL.streamArrayVertexCount += vertexCount;
 };
 
@@ -450,19 +505,23 @@ GL.StreamWriteFloat2 = function(x, y) {
 GL.StreamWriteFloat3 = function(x, y, z) {
 	var view = GL.streamArrayView;
 	var position = GL.streamArrayPosition;
+
 	view.setFloat32(position, x, true);
 	view.setFloat32(position + 4, y, true);
 	view.setFloat32(position + 8, z, true);
+
 	GL.streamArrayPosition += 12;
 };
 
 GL.StreamWriteFloat4 = function(x, y, z, w) {
 	var view = GL.streamArrayView;
 	var position = GL.streamArrayPosition;
+
 	view.setFloat32(position, x, true);
 	view.setFloat32(position + 4, y, true);
 	view.setFloat32(position + 8, z, true);
 	view.setFloat32(position + 12, w, true);
+
 	GL.streamArrayPosition += 16;
 };
 
@@ -473,11 +532,13 @@ GL.StreamWriteUByte4 = function(x, y, z, w) {
 	view.setUint8(position + 1, y);
 	view.setUint8(position + 2, z);
 	view.setUint8(position + 3, w);
+
 	GL.streamArrayPosition += 4;
 };
 
 GL.StreamDrawTexturedQuad = function(x, y, w, h, u, v, u2, v2) {
 	var x2 = x + w, y2 = y + h;
+
 	GL.StreamGetSpace(6);
 	GL.StreamWriteFloat4(x, y, u, v);
 	GL.StreamWriteFloat4(x, y2, u, v2);
@@ -489,6 +550,7 @@ GL.StreamDrawTexturedQuad = function(x, y, w, h, u, v, u2, v2) {
 
 GL.StreamDrawColoredQuad = function(x, y, w, h, r, g, b, a) {
 	var x2 = x + w, y2 = y + h;
+
 	GL.StreamGetSpace(6);
 	GL.StreamWriteFloat2(x, y);
 	GL.StreamWriteUByte4(r, g, b, a);

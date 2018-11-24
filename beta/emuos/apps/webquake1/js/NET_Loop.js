@@ -1,6 +1,7 @@
 Loop = {};
 
 Loop.Init = function() {
+	// noinspection JSConstructorReturnsPrimitive
 	return true;
 };
 
@@ -47,66 +48,88 @@ Loop.CheckNewConnections = function() {
 
 Loop.GetMessage = function(sock) {
 	if (sock.receiveMessageLength === 0) {
+		// noinspection JSConstructorReturnsPrimitive
 		return 0;
 	}
+
 	var ret = sock.receiveMessage[0];
 	var length = sock.receiveMessage[1] + (sock.receiveMessage[2] << 8);
+
 	if (length > NET.message.data.byteLength) {
 		Sys.Error('Loop.GetMessage: overflow');
 	}
+
 	NET.message.cursize = length;
 	(new Uint8Array(NET.message.data)).set(sock.receiveMessage.subarray(3, length + 3));
 	sock.receiveMessageLength -= length;
+
 	if (sock.receiveMessageLength >= 4) {
 		var i;
+
 		for (i = 0; i < sock.receiveMessageLength; ++i) {
 			sock.receiveMessage[i] = sock.receiveMessage[length + 3 + i];
 		}
 	}
+
 	sock.receiveMessageLength -= 3;
+
 	if ((sock.driverdata != null) && (ret === 1)) {
 		sock.driverdata.canSend = true;
 	}
+
 	return ret;
 };
 
 Loop.SendMessage = function(sock, data) {
 	if (sock.driverdata == null) {
+		// noinspection JSConstructorReturnsPrimitive
 		return -1;
 	}
+
 	var bufferLength = sock.driverdata.receiveMessageLength;
 	sock.driverdata.receiveMessageLength += data.cursize + 3;
+
 	if (sock.driverdata.receiveMessageLength > 8192) {
 		Sys.Error('Loop.SendMessage: overflow');
 	}
+
 	var buffer = sock.driverdata.receiveMessage;
 	buffer[bufferLength] = 1;
 	buffer[bufferLength + 1] = data.cursize & 0xff;
 	buffer[bufferLength + 2] = data.cursize >> 8;
 	buffer.set(new Uint8Array(data.data, 0, data.cursize), bufferLength + 3);
 	sock.canSend = false;
+
+	// noinspection JSConstructorReturnsPrimitive
 	return 1;
 };
 
 Loop.SendUnreliableMessage = function(sock, data) {
 	if (sock.driverdata == null) {
+		// noinspection JSConstructorReturnsPrimitive
 		return -1;
 	}
+
 	var bufferLength = sock.driverdata.receiveMessageLength;
 	sock.driverdata.receiveMessageLength += data.cursize + 3;
+
 	if (sock.driverdata.receiveMessageLength > 8192) {
 		Sys.Error('Loop.SendMessage: overflow');
 	}
+
 	var buffer = sock.driverdata.receiveMessage;
 	buffer[bufferLength] = 2;
 	buffer[bufferLength + 1] = data.cursize & 0xff;
 	buffer[bufferLength + 2] = data.cursize >> 8;
 	buffer.set(new Uint8Array(data.data, 0, data.cursize), bufferLength + 3);
+
+	// noinspection JSConstructorReturnsPrimitive
 	return 1;
 };
 
 Loop.CanSendMessage = function(sock) {
 	if (sock.driverdata != null) {
+		// noinspection JSConstructorReturnsPrimitive
 		return sock.canSend;
 	}
 };
@@ -115,8 +138,10 @@ Loop.Close = function(sock) {
 	if (sock.driverdata != null) {
 		sock.driverdata.driverdata = null;
 	}
+
 	sock.receiveMessageLength = 0;
 	sock.canSend = false;
+
 	if (sock === Loop.client) {
 		Loop.client = null;
 	} else {

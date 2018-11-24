@@ -248,6 +248,7 @@ PR.progheader_crc = 5927;
 
 PR.CheckEmptyString = function(s) {
 	var c = s.charCodeAt(0);
+
 	if ((isNaN(c) === true) || (c <= 32)) {
 		PR.RunError('Bad string');
 	}
@@ -258,31 +259,44 @@ PR.CheckEmptyString = function(s) {
 PR.ValueString = function(type, val, ofs) {
 	var val_float = new Float32Array(val);
 	var val_int = new Int32Array(val);
+
 	type &= 0x7fff;
+
 	switch (type) {
 		case PR.etype.ev_string:
 			return PR.GetString(val_int[ofs]);
 		case PR.etype.ev_entity:
+			// noinspection JSConstructorReturnsPrimitive
 			return 'entity ' + val_int[ofs];
 		case PR.etype.ev_function:
+			// noinspection JSConstructorReturnsPrimitive
 			return PR.GetString(PR.functions[val_int[ofs]].name) + '()';
 		case PR.etype.ev_field:
 			var def = ED.FieldAtOfs(val_int[ofs]);
 			if (def != null) {
+				// noinspection JSConstructorReturnsPrimitive
 				return '.' + PR.GetString(def.name);
 			}
+
+			// noinspection JSConstructorReturnsPrimitive
 			return '.';
 		case PR.etype.ev_void:
+			// noinspection JSConstructorReturnsPrimitive
 			return 'void';
 		case PR.etype.ev_float:
+			// noinspection JSConstructorReturnsPrimitive
 			return val_float[ofs].toFixed(1);
 		case PR.etype.ev_vector:
+			// noinspection JSConstructorReturnsPrimitive
 			return '\'' + val_float[ofs].toFixed(1) +
 				' ' + val_float[ofs + 1].toFixed(1) +
 				' ' + val_float[ofs + 2].toFixed(1) + '\'';
 		case PR.etype.ev_pointer:
+			// noinspection JSConstructorReturnsPrimitive
 			return 'pointer';
 	}
+
+	// noinspection JSConstructorReturnsPrimitive
 	return 'bad type ' + type;
 };
 
@@ -290,10 +304,12 @@ PR.UglyValueString = function(type, val, ofs) {
 	var val_float = new Float32Array(val);
 	var val_int = new Int32Array(val);
 	type &= 0x7fff;
+
 	switch (type) {
 		case PR.etype.ev_string:
 			return PR.GetString(val_int[ofs]);
 		case PR.etype.ev_entity:
+			// noinspection JSConstructorReturnsPrimitive
 			return val_int[ofs].toString();
 		case PR.etype.ev_function:
 			return PR.GetString(PR.functions[val_int[ofs]].name);
@@ -302,57 +318,73 @@ PR.UglyValueString = function(type, val, ofs) {
 			if (def != null) {
 				return PR.GetString(def.name);
 			}
+			// noinspection JSConstructorReturnsPrimitive
 			return '';
 		case PR.etype.ev_void:
+			// noinspection JSConstructorReturnsPrimitive
 			return 'void';
 		case PR.etype.ev_float:
+			// noinspection JSConstructorReturnsPrimitive
 			return val_float[ofs].toFixed(6);
 		case PR.etype.ev_vector:
+			// noinspection JSConstructorReturnsPrimitive
 			return val_float[ofs].toFixed(6) +
 				' ' + val_float[ofs + 1].toFixed(6) +
 				' ' + val_float[ofs + 2].toFixed(6);
 	}
+	// noinspection JSConstructorReturnsPrimitive
 	return 'bad type ' + type;
 };
 
 PR.GlobalString = function(ofs) {
 	var def = ED.GlobalAtOfs(ofs), line;
+
 	if (def != null) {
 		line = ofs + '(' + PR.GetString(def.name) + ')' + PR.ValueString(def.type, PR.globals, ofs);
 	} else {
 		line = ofs + '(???)';
 	}
+
 	for (; line.length <= 20;) {
 		line += ' ';
 	}
+	// noinspection JSConstructorReturnsPrimitive
 	return line;
 };
 
 PR.GlobalStringNoContents = function(ofs) {
 	var def = ED.GlobalAtOfs(ofs), line;
+
 	if (def != null) {
 		line = ofs + '(' + PR.GetString(def.name) + ')';
 	} else {
 		line = ofs + '(???)';
 	}
+
 	for (; line.length <= 20;) {
 		line += ' ';
 	}
+
+	// noinspection JSConstructorReturnsPrimitive
 	return line;
 };
 
 PR.LoadProgs = function() {
 	var progs = COM.LoadFile('progs.dat');
+
 	if (progs == null) {
 		Sys.Error('PR.LoadProgs: couldn\'t load progs.dat');
 	}
+
 	Con.DPrint('Programs occupy ' + (progs.byteLength >> 10) + 'K.\n');
 	var view = new DataView(progs);
 
 	var i = view.getUint32(0, true);
+
 	if (i !== PR.version) {
 		Sys.Error('progs.dat has wrong version number (' + i + ' should be ' + PR.version + ')');
 	}
+
 	if (view.getUint32(4, true) !== PR.progheader_crc) {
 		Sys.Error('progs.dat system vars have been modified, PR.js is out of date');
 	}
@@ -363,9 +395,11 @@ PR.LoadProgs = function() {
 	PR.depth = 0;
 
 	PR.localstack = [];
+
 	for (i = 0; i < PR.localstack_size; ++i) {
 		PR.localstack[i] = 0;
 	}
+
 	PR.localstack_used = 0;
 
 	var ofs, num;
@@ -373,6 +407,7 @@ PR.LoadProgs = function() {
 	ofs = view.getUint32(8, true);
 	num = view.getUint32(12, true);
 	PR.statements = [];
+
 	for (i = 0; i < num; ++i) {
 		PR.statements[i] = {
 			op: view.getUint16(ofs, true),
@@ -386,6 +421,7 @@ PR.LoadProgs = function() {
 	ofs = view.getUint32(16, true);
 	num = view.getUint32(20, true);
 	PR.globaldefs = [];
+
 	for (i = 0; i < num; ++i) {
 		PR.globaldefs[i] = {
 			type: view.getUint16(ofs, true),
@@ -398,6 +434,7 @@ PR.LoadProgs = function() {
 	ofs = view.getUint32(24, true);
 	num = view.getUint32(28, true);
 	PR.fielddefs = [];
+
 	for (i = 0; i < num; ++i) {
 		PR.fielddefs[i] = {
 			type: view.getUint16(ofs, true),
@@ -410,6 +447,7 @@ PR.LoadProgs = function() {
 	ofs = view.getUint32(32, true);
 	num = view.getUint32(36, true);
 	PR.functions = [];
+
 	for (i = 0; i < num; ++i) {
 		PR.functions[i] = {
 			first_statement: view.getInt32(ofs, true),
@@ -432,9 +470,11 @@ PR.LoadProgs = function() {
 	ofs = view.getUint32(40, true);
 	num = view.getUint32(44, true);
 	PR.strings = [];
+
 	for (i = 0; i < num; ++i) {
 		PR.strings[i] = view.getUint8(ofs + i);
 	}
+
 	PR.string_temp = PR.NewString('', 128);
 	PR.netnames = PR.NewString('', SV.svs.maxclients << 5);
 
@@ -443,6 +483,7 @@ PR.LoadProgs = function() {
 	PR.globals = new ArrayBuffer(num << 2);
 	PR.globals_float = new Float32Array(PR.globals);
 	PR.globals_int = new Int32Array(PR.globals);
+
 	for (i = 0; i < num; ++i) {
 		PR.globals_int[i] = view.getInt32(ofs + (i << 2), true);
 	}
@@ -461,6 +502,7 @@ PR.LoadProgs = function() {
 		'gravity',
 		'items2'
 	], field, def;
+
 	for (i = 0; i < fields.length; ++i) {
 		field = fields[i];
 		def = ED.FindField(field);
@@ -515,14 +557,17 @@ PR.opnames = [
 
 PR.PrintStatement = function(s) {
 	var text;
+
 	if (s.op < PR.opnames.length) {
 		text = PR.opnames[s.op] + ' ';
+
 		for (; text.length <= 9;) {
 			text += ' ';
 		}
 	} else {
 		text = '';
 	}
+
 	if ((s.op === PR.op.jnz) || (s.op === PR.op.jz)) {
 		text += PR.GlobalString(s.a) + 'branch ' + s.b;
 	} else if (s.op === PR.op.jump) {
@@ -533,13 +578,16 @@ PR.PrintStatement = function(s) {
 		if (s.a !== 0) {
 			text += PR.GlobalString(s.a);
 		}
+
 		if (s.b !== 0) {
 			text += PR.GlobalString(s.b);
 		}
+
 		if (s.c !== 0) {
 			text += PR.GlobalStringNoContents(s.c);
 		}
 	}
+
 	Con.Print(text + '\n');
 };
 
@@ -548,18 +596,24 @@ PR.StackTrace = function() {
 		Con.Print('<NO STACK>\n');
 		return;
 	}
+
 	PR.stack[PR.depth] = [PR.xstatement, PR.xfunction];
 	var f, file;
+
 	for (; PR.depth >= 0; --PR.depth) {
 		f = PR.stack[PR.depth][1];
+
 		if (f == null) {
 			Con.Print('<NO FUNCTION>\n');
 			continue;
 		}
+
 		file = PR.GetString(f.file);
+
 		for (; file.length <= 11;) {
 			file += ' ';
 		}
+
 		Con.Print(file + ' : ' + PR.GetString(f.name) + '\n');
 	}
 	PR.depth = 0;
@@ -569,27 +623,36 @@ PR.Profile_f = function() {
 	if (SV.server.active !== true) {
 		return;
 	}
+
 	var num = 0, max, best, i, f, profile;
+
 	for (; ;) {
 		max = 0;
 		best = null;
+
 		for (i = 0; i < PR.functions.length; ++i) {
 			f = PR.functions[i];
+
 			if (f.profile > max) {
 				max = f.profile;
 				best = f;
 			}
 		}
+
 		if (best == null) {
 			return;
 		}
+
 		if (num < 10) {
 			profile = best.profile.toString();
+
 			for (; profile.length <= 6;) {
 				profile = ' ' + profile;
 			}
+
 			Con.Print(profile + ' ' + PR.GetString(best.name) + '\n');
 		}
+
 		++num;
 		best.profile = 0;
 	}
@@ -605,21 +668,29 @@ PR.RunError = function(error) {
 PR.EnterFunction = function(f) {
 	PR.stack[PR.depth++] = [PR.xstatement, PR.xfunction];
 	var c = f.locals;
+
 	if ((PR.localstack_used + c) > PR.localstack_size) {
 		PR.RunError('PR.EnterFunction: locals stack overflow\n');
 	}
+
 	var i;
+
 	for (i = 0; i < c; ++i) {
 		PR.localstack[PR.localstack_used + i] = PR.globals_int[f.parm_start + i];
 	}
+
 	PR.localstack_used += c;
 	var o = f.parm_start, j;
+
 	for (i = 0; i < f.numparms; ++i) {
 		for (j = 0; j < f.parm_size[i]; ++j) {
 			PR.globals_int[o++] = PR.globals_int[4 + i * 3 + j];
 		}
 	}
+
 	PR.xfunction = f;
+
+	// noinspection JSConstructorReturnsPrimitive
 	return f.first_statement - 1;
 };
 
@@ -627,15 +698,20 @@ PR.LeaveFunction = function() {
 	if (PR.depth <= 0) {
 		Sys.Error('prog stack underflow');
 	}
+
 	var c = PR.xfunction.locals;
 	PR.localstack_used -= c;
+
 	if (PR.localstack_used < 0) {
 		PR.RunError('PR.LeaveFunction: locals stack underflow\n');
 	}
+
 	for (--c; c >= 0; --c) {
 		PR.globals_int[PR.xfunction.parm_start + c] = PR.localstack[PR.localstack_used + c];
 	}
+
 	PR.xfunction = PR.stack[--PR.depth][1];
+
 	return PR.stack[PR.depth][0];
 };
 
@@ -646,6 +722,7 @@ PR.ExecuteProgram = function(fnum) {
 		}
 		Host.Error('PR.ExecuteProgram: NULL function');
 	}
+
 	var runaway = 100000;
 	PR.trace = false;
 	var exitdepth = PR.depth;
@@ -655,14 +732,18 @@ PR.ExecuteProgram = function(fnum) {
 	for (; ;) {
 		++s;
 		st = PR.statements[s];
+
 		if (--runaway === 0) {
 			PR.RunError('runaway loop error');
 		}
+
 		++PR.xfunction.profile;
 		PR.xstatement = s;
+
 		if (PR.trace === true) {
 			PR.PrintStatement(st);
 		}
+
 		switch (st.op) {
 			case PR.op.add_f:
 				PR.globals_float[st.c] = PR.globals_float[st.a] + PR.globals_float[st.b];
@@ -684,9 +765,7 @@ PR.ExecuteProgram = function(fnum) {
 				PR.globals_float[st.c] = PR.globals_float[st.a] * PR.globals_float[st.b];
 				continue;
 			case PR.op.mul_v:
-				PR.globals_float[st.c] = PR.globals_float[st.a] * PR.globals_float[st.b] +
-					PR.globals_float[st.a + 1] * PR.globals_float[st.b + 1] +
-					PR.globals_float[st.a + 2] * PR.globals_float[st.b + 2];
+				PR.globals_float[st.c] = PR.globals_float[st.a] * PR.globals_float[st.b] + PR.globals_float[st.a + 1] * PR.globals_float[st.b + 1] + PR.globals_float[st.a + 2] * PR.globals_float[st.b + 2];
 				continue;
 			case PR.op.mul_fv:
 				PR.globals_float[st.c] = PR.globals_float[st.a] * PR.globals_float[st.b];
@@ -729,9 +808,7 @@ PR.ExecuteProgram = function(fnum) {
 				PR.globals_float[st.c] = (PR.globals_float[st.a] === 0.0) ? 1.0 : 0.0;
 				continue;
 			case PR.op.not_v:
-				PR.globals_float[st.c] = ((PR.globals_float[st.a] === 0.0) &&
-					(PR.globals_float[st.a + 1] === 0.0) &&
-					(PR.globals_float[st.a + 2] === 0.0)) ? 1.0 : 0.0;
+				PR.globals_float[st.c] = ((PR.globals_float[st.a] === 0.0) && (PR.globals_float[st.a + 1] === 0.0) && (PR.globals_float[st.a + 2] === 0.0)) ? 1.0 : 0.0;
 				continue;
 			case PR.op.not_s:
 				if (PR.globals_int[st.a] !== 0) {
@@ -748,9 +825,7 @@ PR.ExecuteProgram = function(fnum) {
 				PR.globals_float[st.c] = (PR.globals_float[st.a] === PR.globals_float[st.b]) ? 1.0 : 0.0;
 				continue;
 			case PR.op.eq_v:
-				PR.globals_float[st.c] = ((PR.globals_float[st.a] === PR.globals_float[st.b])
-					&& (PR.globals_float[st.a + 1] === PR.globals_float[st.b + 1])
-					&& (PR.globals_float[st.a + 2] === PR.globals_float[st.b + 2])) ? 1.0 : 0.0;
+				PR.globals_float[st.c] = ((PR.globals_float[st.a] === PR.globals_float[st.b]) && (PR.globals_float[st.a + 1] === PR.globals_float[st.b + 1]) && (PR.globals_float[st.a + 2] === PR.globals_float[st.b + 2])) ? 1.0 : 0.0;
 				continue;
 			case PR.op.eq_s:
 				PR.globals_float[st.c] = (PR.GetString(PR.globals_int[st.a]) === PR.GetString(PR.globals_int[st.b])) ? 1.0 : 0.0;
@@ -763,9 +838,7 @@ PR.ExecuteProgram = function(fnum) {
 				PR.globals_float[st.c] = (PR.globals_float[st.a] !== PR.globals_float[st.b]) ? 1.0 : 0.0;
 				continue;
 			case PR.op.ne_v:
-				PR.globals_float[st.c] = ((PR.globals_float[st.a] !== PR.globals_float[st.b])
-					|| (PR.globals_float[st.a + 1] !== PR.globals_float[st.b + 1])
-					|| (PR.globals_float[st.a + 2] !== PR.globals_float[st.b + 2])) ? 1.0 : 0.0;
+				PR.globals_float[st.c] = ((PR.globals_float[st.a] !== PR.globals_float[st.b]) || (PR.globals_float[st.a + 1] !== PR.globals_float[st.b + 1]) || (PR.globals_float[st.a + 2] !== PR.globals_float[st.b + 2])) ? 1.0 : 0.0;
 				continue;
 			case PR.op.ne_s:
 				PR.globals_float[st.c] = (PR.GetString(PR.globals_int[st.a]) !== PR.GetString(PR.globals_int[st.b])) ? 1.0 : 0.0;
@@ -845,18 +918,24 @@ PR.ExecuteProgram = function(fnum) {
 			case PR.op.call7:
 			case PR.op.call8:
 				PR.argc = st.op - PR.op.call0;
+
 				if (PR.globals_int[st.a] === 0) {
 					PR.RunError('NULL function');
 				}
+
 				newf = PR.functions[PR.globals_int[st.a]];
+
 				if (newf.first_statement < 0) {
 					ptr = -newf.first_statement;
+
 					if (ptr >= PF.builtin.length) {
 						PR.RunError('Bad builtin call number');
 					}
+
 					PF.builtin[ptr]();
 					continue;
 				}
+
 				s = PR.EnterFunction(newf);
 				continue;
 			case PR.op.done:
@@ -865,9 +944,11 @@ PR.ExecuteProgram = function(fnum) {
 				PR.globals_int[2] = PR.globals_int[st.a + 1];
 				PR.globals_int[3] = PR.globals_int[st.a + 2];
 				s = PR.LeaveFunction();
+
 				if (PR.depth === exitdepth) {
 					return;
 				}
+
 				continue;
 			case PR.op.state:
 				ed = SV.server.edicts[PR.globals_int[PR.globalvars.self]];
@@ -881,43 +962,58 @@ PR.ExecuteProgram = function(fnum) {
 };
 
 PR.GetString = function(num) {
-	var string = [], c;
+	var string = [];
+
 	for (; num < PR.strings.length; ++num) {
 		if (PR.strings[num] === 0) {
 			break;
 		}
+
 		string[string.length] = String.fromCharCode(PR.strings[num]);
 	}
+
+	// noinspection JSConstructorReturnsPrimitive
 	return string.join('');
 };
 
 PR.NewString = function(s, length) {
 	var ofs = PR.strings.length;
 	var i;
+
 	if (s.length >= length) {
 		for (i = 0; i < (length - 1); ++i) {
 			PR.strings[PR.strings.length] = s.charCodeAt(i);
 		}
+
 		PR.strings[PR.strings.length] = 0;
+		// noinspection JSConstructorReturnsPrimitive
 		return ofs;
 	}
+
 	for (i = 0; i < s.length; ++i) {
 		PR.strings[PR.strings.length] = s.charCodeAt(i);
 	}
+
 	length -= s.length;
+
 	for (i = 0; i < length; ++i) {
 		PR.strings[PR.strings.length] = 0;
 	}
+
+	// noinspection JSConstructorReturnsPrimitive
 	return ofs;
 };
 
 PR.TempString = function(string) {
 	var i;
+
 	if (string.length > 127) {
 		string = string.substring(0, 127);
 	}
+
 	for (i = 0; i < string.length; ++i) {
 		PR.strings[PR.string_temp + i] = string.charCodeAt(i);
 	}
+
 	PR.strings[PR.string_temp + string.length] = 0;
 };

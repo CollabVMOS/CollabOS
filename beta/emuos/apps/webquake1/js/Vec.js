@@ -18,6 +18,7 @@ Vec.Perpendicular = function(v) {
 
 	if (Math.abs(v[2]) < minelem) {
 		pos = 2;
+		// noinspection JSUnusedAssignment
 		minelem = Math.abs(v[2]);
 	}
 
