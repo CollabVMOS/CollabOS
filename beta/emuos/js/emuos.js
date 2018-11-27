@@ -36,7 +36,7 @@
 			icons: [{
 				name: 'Discord',
 				icon: 'vfat/apps/discord/favicon.png',
-				link: 'https://discordapp.com/widget?id=510149138491506688&theme=dark'
+				link: 'https://cl3.widgetbot.io/channels/510149138491506688/510149138491506690/'
 			} , {
 				name: 'Windows 93',
 				icon: 'https://www.windows93.net/favicon.ico',
