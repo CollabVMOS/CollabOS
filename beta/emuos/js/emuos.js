@@ -34,6 +34,10 @@
 				win9x: 'theme-win9x'
 			},
 			icons: [{
+				name: 'Discord',
+				icon: 'vfat/apps/discord/favicon.png',
+				link: 'https://discordapp.com/widget?id=510149138491506688&theme=dark'
+			} , {
 				name: 'Windows 93',
 				icon: 'https://www.windows93.net/favicon.ico',
 				link: 'https://v1.windows93.net/'
@@ -396,7 +400,7 @@
 		var icon	= typeof options.icon	!== 'undefined'	? options.icon	: '';
 		var src		= typeof options.src	!== 'undefined'	? options.src	: '';
 
-		var window	= $('<div class="iframe" data-title="'+ title +'"><iframe src="' + src + '" allowfullscreen></iframe></div>');
+		var window	= $('<div class="iframe" data-title="'+ title +'"><iframe src="' + src + '" frameborder="0" allowfullscreen allowtransparency></iframe></div>');
 
 		self.$body.append(window);
 
