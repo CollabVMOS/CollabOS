@@ -62,8 +62,8 @@
 				icon: 'apps/webquake1/favicon.ico',
 				link: 'apps/webquake1/index.html'
 			} , {
-				name: 'Webamp 2.9',
-				icon: 'apps/webamp2/favicon.ico'
+				name: 'Webamp Classic',
+				icon: 'apps/webamp-classic/favicon.ico'
 			}]
 		};
 
@@ -186,7 +186,7 @@
 					});
 				} else {
 					switch ($(this).data('name')) {
-						case 'Webamp 2.9':
+						case 'Webamp Classic':
 							// noinspection JSUnresolvedFunction
 							var webamp_content = self.options.apps.webamp.render();
 

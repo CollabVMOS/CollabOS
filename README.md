@@ -2,9 +2,22 @@
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/Emupedia/Lobby)
 # Emupedia
 
-The purpose of Emupedia is to serve as a meta-resource, hub and community for those interested in digital preservation and computer history and aims to digitally collect games and software from a wide variety of systems no longer in production and make them available online.
+The purpose of Emupedia is to serve as a meta-resource, hub and community for those interested mainly in [video game preservation](https://en.wikipedia.org/wiki/Video_game_preservation) and computer history and aims to digitally collect and archive games and software to make them available online accessible by a user-friendly [UI](https://en.wikipedia.org/wiki/User_interface) that [simulates](https://difference.guru/difference-between-simulator-and-emulator) several retro operating systems.
 
-More about [Video game preservation](https://en.wikipedia.org/wiki/Video_game_preservation) on Wikipedia
+We mainly collect content from:
+
+* a wide variety of systems no longer in production
+* [abandonware](https://en.wikipedia.org/wiki/Abandonware), [shareware](https://en.wikipedia.org/wiki/Shareware) or [freeware](https://en.wikipedia.org/wiki/Freeware) games websites
+* open source [ports of old games](https://en.wikipedia.org/wiki/Porting) that work in modern web browsers
+* new games and software developed in a retro-style with modern web technologies
+
+We revive old games and software by the use of [emulation software](https://en.wikipedia.org/wiki/Emulator).
+
+Similar organizations that do [digital preservation](https://en.wikipedia.org/wiki/Digital_preservation) and archiving:
+
+* [Internet Archive](https://archive.org)
+* [Archive Team](https://www.archiveteam.org)
+* more on [Wikipedia](https://en.wikipedia.org/wiki/List_of_digital_preservation_initiatives)
 
 ## Live Demo
 
@@ -15,6 +28,7 @@ More about [Video game preservation](https://en.wikipedia.org/wiki/Video_game_pr
 | Name                     | Website                                                                                                | Repository                                                                                                   | License                                                                                 |
 | :---                     | :---                                                                                                   | :---                                                                                                         | :---                                                                                    |
 | **Emulators**            |                                                                                                        |                                                                                                              |                                                                                         |
+| MAME                     | [mamedev.org](https://www.mamedev.org)                                                                 | [github.com/mamedev/mame](https://github.com/mamedev/mame)                                                   | [GPLv2](https://github.com/mamedev/mame/blob/master/LICENSE.md)                         |
 | DOSBox                   | [dosbox.com](https://www.dosbox.com)                                                                   | [sourceforge.net/projects/dosbox](https://sourceforge.net/projects/dosbox)                                   | [GPLv2](https://sourceforge.net/projects/dosbox)                                        |
 | Em-DOSBox                | ❌                                                                                                     | [github.com/dreamlayers/em-dosbox](https://github.com/dreamlayers/em-dosbox)                                 | [GPLv2](https://github.com/dreamlayers/em-dosbox/blob/em-dosbox-svn-sdl2/COPYING)       |
 | emularity                | [archiveteam.org/index.php?title=Emularity](https://www.archiveteam.org/index.php?title=Emularity)     | [github.com/db48x/emularity](https://github.com/db48x/emularity)                                             | [GPLv3](https://github.com/db48x/emularity/blob/master/LICENSE)                         |
@@ -44,8 +58,8 @@ More about [Video game preservation](https://en.wikipedia.org/wiki/Video_game_pr
 | jQueryUI Context Menu    | [wwwendt.de/tech/demo/jquery-contextmenu/demo](http://wwwendt.de/tech/demo/jquery-contextmenu/demo)    | [github.com/mar10/jquery-ui-contextmenu](https://github.com/mar10/jquery-ui-contextmenu)                     | [MIT](https://github.com/mar10/jquery-ui-contextmenu/blob/master/LICENSE.txt)           |
 | Simone                   | [cezarykluczynski.github.io/simone/docs](http://cezarykluczynski.github.io/simone/docs)                | [github.com/cezarykluczynski/simone](https://github.com/cezarykluczynski/simone)                             | [MIT](https://github.com/cezarykluczynski/simone/blob/master/LICENSE.txt)               |
 | **Canvas/WebGL**         |                                                                                                        |                                                                                                              |                                                                                         |
-| Impact                   | [impactjs.com](https://impactjs.com)                                                                   | [github.com/phoboslab/Impact](https://github.com/phoboslab/impact)                                           | [MIT](https://github.com/phoboslab/impact/blob/master/LICENSE)                          |
 | Phaser                   | [phaser.io](https://phaser.io)                                                                         | [github.com/photonstorm/phaser](https://github.com/photonstorm/phaser)                                       | [MIT](https://github.com/photonstorm/phaser/blob/master/license.txt)                    |
+| Impact                   | [impactjs.com](https://impactjs.com)                                                                   | [github.com/phoboslab/Impact](https://github.com/phoboslab/impact)                                           | [MIT](https://github.com/phoboslab/impact/blob/master/LICENSE)                          |
 | **Filesystem**           |                                                                                                        |                                                                                                              |                                                                                         |
 | Octokat.js               | [philschatz.com/2014/05/25/octokat](https://philschatz.com/2014/05/25/octokat)                         | [github.com/philschatz/octokat.js](https://github.com/philschatz/octokat.js)                                 | [MIT](https://github.com/philschatz/octokat.js/blob/master/LICENSE.md)                  |
 | BrowserFS                | [jvilk.com/browserfs/2.0.0-beta](https://jvilk.com/browserfs/2.0.0-beta)                               | [github.com/jvilk/BrowserFS](https://github.com/jvilk/BrowserFS)                                             | [MIT](https://github.com/jvilk/BrowserFS/blob/master/LICENSE)                           |
