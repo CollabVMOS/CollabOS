@@ -112,6 +112,7 @@
 	} , {
 		"id": "diablo1sw",
 		"name": "Diablo I",
+		"notes": "Hangs after intro movie",
 		"executable": "mem",
 		"args": ["-c", "imgmount c a:\\WIN95.IMG -size 512,63,16,101", "-c", "imgmount d b:\\DIABLO.IMG -size 512,63,16,132", "-c", "boot -l c"],
 		"files": ["win95.zip", "diablo1sw.zip"],
@@ -828,6 +829,7 @@
 	} , {
 		"id": "xcom1",
 		"name": "X-COM: UFO Defense",
+		"notes": "Bad crack, gives you Sectoid Soldier",
 		"description": "UFO: Enemy Unknown",
 		"executable": "./UFO.BAT",
 		"file": "xcom112.zip",
@@ -857,6 +859,7 @@
 	} , {
 		"id": "xcom2",
 		"name": "X-COM: Terror from the Deep",
+		"notes": "Hangs on mission start",
 		"description": "UFO: Enemy Unknown",
 		"executable": "./TERROR.COM",
 		"file": "xcom2.zip",
