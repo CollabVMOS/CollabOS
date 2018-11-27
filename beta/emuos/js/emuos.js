@@ -47,8 +47,12 @@
 				link: 'apps/wing/index.html'
 			} , {
 				name: 'Biolab Disaster',
-				icon: 'apps/biolab/favicon.png',
-				link: 'apps/biolab/index.html'
+				icon: 'apps/biolab-disaster/favicon.png',
+				link: 'apps/biolab-disaster/index.html'
+			} , {
+				name: 'Super Blob Blaster',
+				icon: 'apps/super-blob-blaster/favicon.png',
+				link: 'apps/super-blob-blaster/index.html'
 			} , {
 				name: 'DOSBox 0.74',
 				icon: 'apps/dosbox/favicon.ico',
