@@ -8,8 +8,8 @@ We mainly collect content from:
 
 * a wide variety of systems no longer in production
 * [abandonware](https://en.wikipedia.org/wiki/Abandonware), [shareware](https://en.wikipedia.org/wiki/Shareware) or [freeware](https://en.wikipedia.org/wiki/Freeware) games websites
-* open source [ports of old games](https://en.wikipedia.org/wiki/Porting) that work in modern web browsers
-* new games and software developed in a retro-style with modern web technologies
+* [open source](https://en.wikipedia.org/wiki/Free_and_open-source_software) [ports of old games](https://en.wikipedia.org/wiki/Porting) that work in [modern web browsers](https://en.wikipedia.org/wiki/List_of_web_browsers)
+* new games and software developed with [modern web technologies](https://en.wikipedia.org/wiki/HTML5) using [retro-style](https://en.wikipedia.org/wiki/Retrogaming) graphics 
 
 We revive old games and software by the use of [emulation software](https://en.wikipedia.org/wiki/Emulator).
 
