@@ -39,35 +39,35 @@
 				link: 'https://v1.windows93.net/'
 			} , {
 				name: 'Visual Studio Code',
-				icon: 'apps/monaco-editor/favicon.ico',
-				link: 'apps/monaco-editor/index.html'
+				icon: 'vfat/apps/monaco-editor/favicon.ico',
+				link: 'vfat/apps/monaco-editor/index.html'
 			} , {
 				name: 'Wing 2.0',
-				icon: 'apps/wing/favicon.ico',
-				link: 'apps/wing/index.html'
+				icon: 'vfat/games/wing/favicon.ico',
+				link: 'vfat/games/wing/index.html'
 			} , {
 				name: 'Biolab Disaster',
-				icon: 'apps/biolab-disaster/favicon.png',
-				link: 'apps/biolab-disaster/index.html'
+				icon: 'vfat/games/biolab-disaster/favicon.png',
+				link: 'vfat/games/biolab-disaster/index.html'
 			} , {
 				name: 'Super Blob Blaster',
-				icon: 'apps/super-blob-blaster/favicon.png',
-				link: 'apps/super-blob-blaster/index.html'
+				icon: 'vfat/games/super-blob-blaster/favicon.png',
+				link: 'vfat/games/super-blob-blaster/index.html'
 			} , {
 				name: 'DOSBox 0.74',
-				icon: 'apps/dosbox/favicon.ico',
-				link: 'apps/dosbox/index.html'
+				icon: 'vfat/apps/dosbox/favicon.ico',
+				link: 'vfat/apps/dosbox/index.html'
 			} , {
 				name: 'Wolfenstein 3D',
-				icon: 'apps/wolf3d-' + (SYSTEM_FEATURE_CANVAS ? 'canvas' : '') + '/favicon.gif',
-				link: 'apps/wolf3d-' + (SYSTEM_FEATURE_CANVAS ? 'canvas' : '') + '/index.html'
+				icon: 'vfat/games/wolf3d-' + (SYSTEM_FEATURE_CANVAS ? 'canvas' : '') + '/favicon.gif',
+				link: 'vfat/games/wolf3d-' + (SYSTEM_FEATURE_CANVAS ? 'canvas' : '') + '/index.html'
 			} , {
 				name: 'WebQuake 1',
-				icon: 'apps/webquake1/favicon.ico',
-				link: 'apps/webquake1/index.html'
+				icon: 'vfat/games/webquake1/favicon.ico',
+				link: 'vfat/games/webquake1/index.html'
 			} , {
 				name: 'Webamp Classic',
-				icon: 'apps/webamp-classic/favicon.ico'
+				icon: 'vfat/apps/webamp-classic/favicon.ico'
 			}]
 		};
 
