@@ -88,6 +88,12 @@ Similar organizations that do [digital preservation](https://en.wikipedia.org/wi
 | Rahul.io                 | [rahul.io](https://rahul.io)                                                                           | [github.com/lolstring/window98-html-css-js](https://github.com/lolstring/window98-html-css-js)               | [MIT](https://github.com/lolstring/window98-html-css-js/blob/master/LICENSE)            |
 | OS.js                    | [os-js.org](https://www.os-js.org)                                                                     | [github.com/os-js/OS.js](https://github.com/os-js/OS.js)                                                     | [BSD](https://github.com/os-js/OS.js/blob/master/LICENSE)                               |
 
+#### Honorable mentions (not included because a more faithfull alternative was used)
+
+| Name                     | Website                                                                                                | Repository                                                                                                   | License                                                                                 |
+| :---                     | :---                                                                                                   | :---                                                                                                         | :---                                                                                    |
+| minesweeper_js           | [minesweeper.zone](https://minesweeper.zone)                                                           | [github.com/reed-jones/minesweeper_js](https://github.com/reed-jones/minesweeper_js)                         | [CC BY-NC 4.0](https://github.com/reed-jones/minesweeper_js/blob/master/LICENSE)        |
+
 ## Legal issues
 
 In general, the copying and distribution of video games that are under copyright without authorization is considered a copyright violation (often called as software piracy).
