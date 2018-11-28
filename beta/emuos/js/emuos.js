@@ -400,7 +400,7 @@
 		var icon	= typeof options.icon	!== 'undefined'	? options.icon	: '';
 		var src		= typeof options.src	!== 'undefined'	? options.src	: '';
 
-		var window	= $('<div class="iframe" data-title="'+ title +'"><iframe src="' + src + '" frameborder="0" allowfullscreen allowtransparency></iframe></div>');
+		var window	= $('<div class="iframe" data-title="'+ title +'"><iframe src="' + src + '" frameborder="0" allowFullscreen="true" allowTransparency="true"></iframe></div>');
 
 		self.$body.append(window);
 
