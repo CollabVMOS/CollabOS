@@ -26,7 +26,7 @@
 			jquerymousewheel: 'libraries/jquery-mousewheel-3.1.13.min',
 			jqueryui: 'libraries/jquery-ui-1.11.4.min',
 			text: 'libraries/requirejs-text-2.0.15',
-			system: 'system'
+			system: '../../../../js/system'
 		}
 	});
 

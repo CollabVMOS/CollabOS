@@ -36,7 +36,8 @@
 			es6promise: 'polyfills/es6-promise-4.2.5.min',
 			es6fetch: 'polyfills/es6-fetch-3.0.0',
 			browserfs: 'libraries/browserfs-1.4.3.min',
-			dropbox: 'libraries/dropbox-sdk-4.0.12.min'
+			dropbox: 'libraries/dropbox-sdk-4.0.12.min',
+			system: '../../../../js/system'
 		}
 	});
 
