@@ -1,8 +1,8 @@
-;(function ($, undefined) {
-	"use strict";
+;(function($, undefined) {
+	'use strict';
 	/*jshint laxbreak:true,-W030,maxcomplexity:60,smarttabs:true,-W004,-W044*/
-	$.widget("emuos.taskbar", {
-		version: "@emuos-main-version",
+	$.widget('emuos.taskbar', {
+		version: '@emuos-main-version',
 		options: {
 			/* options */
 			autoHide: false,
@@ -23,60 +23,60 @@
 				buttonsTooltipsHide: true,
 				buttonsTooltipsShow: true,
 				autoHideDelay: 1200,
-				autoHideHide: "slow",
-				autoHideShow: "fast"
+				autoHideHide: 'slow',
+				autoHideShow: 'fast'
 			},
-			fallbackLanguage: "en",
+			fallbackLanguage: 'en',
 			icons: {
 				clock: null,
 				languageSelect: null,
-				menuWindowClose: "ui-icon-closethick",
-				minimizeAll: "ui-icon-minusthick",
-				networkMonitorOffline: "ui-icon-alert",
-				networkMonitorOnline: "ui-icon-signal",
+				menuWindowClose: 'ui-icon-closethick',
+				minimizeAll: 'ui-icon-minusthick',
+				networkMonitorOffline: 'ui-icon-alert',
+				networkMonitorOnline: 'ui-icon-signal',
 				startButton: null,
-				startButtonSet: "ui-icon-circle-triangle",
-				toggleFullscreenOff: "ui-icon-arrow-4-diag",
-				toggleFullscreenOn: "ui-icon-arrow-4-diag"
+				startButtonSet: 'ui-icon-circle-triangle',
+				toggleFullscreenOff: 'ui-icon-arrow-4-diag',
+				toggleFullscreenOn: 'ui-icon-arrow-4-diag'
 			},
-			horizontalRowHeight: "auto",
+			horizontalRowHeight: 'auto',
 			horizontalRows: 1,
 			horizontalRowsMin: 1,
 			horizontalRowsMax: 2,
-			horizontalStick: "bottom left",
-			horizontalWidth: "100%",
-			language: "en",
-			languages: ["en"],
+			horizontalStick: 'bottom left',
+			horizontalWidth: '100%',
+			language: 'en',
+			languages: ['en'],
 			languageSelect: false,
 			localization: {},
 			menuAutoOpenOnBrowse: true,
 			minimizeAll: true,
 			minimizeAllHoverOpaqueWindows: true,
 			networkMonitor: false,
-			orientation: "horizontal",
+			orientation: 'horizontal',
 			propagateWindowBlur: false,
 			resizable: false,
 			resizableHandleOffset: 0,
 			resizableHandleOverflow: 2,
 			resolveCollisions: true,
 			startButtons: true,
-			systemButtonsOrder: ["languageSelect", "networkMonitor", "toggleFullscreen", "clock", "minimizeAll"],
+			systemButtonsOrder: ['languageSelect', 'networkMonitor', 'toggleFullscreen', 'clock', 'minimizeAll'],
 			toggleFullscreen: false,
 			verticalColumns: 1,
 			verticalColumnsMax: 2,
 			verticalColumnsMin: 1,
 			verticalColumnWidth: 100,
-			verticalHeight: "100%",
-			verticalStick: "top right",
+			verticalHeight: '100%',
+			verticalStick: 'top right',
 			viewportMargins: {
-				top: [0, "correct"],
-				right: [0, "correct"],
-				bottom: [0, "correct"],
-				left: [0, "correct"]
+				top: [0, 'correct'],
+				right: [0, 'correct'],
+				bottom: [0, 'correct'],
+				left: [0, 'correct']
 			},
 			windowButtonsIconsOnly: false,
 			windowButtonsSortable: true,
-			windowsContainment: "viewport",
+			windowsContainment: 'viewport',
 			windowsInitialZIndex: 100,
 
 			/* events */
@@ -131,169 +131,169 @@
 		},
 
 		_cnst: {
-			dataPrefix: "emuos-",
-			eventPrefix: "taskbar",
-			naturalName: "EmuOS",
-			consolePrefix: "EmuOS message",
-			missingTranslation: "undefined",
+			dataPrefix: 'emuos-',
+			eventPrefix: 'taskbar',
+			naturalName: 'EmuOS',
+			consolePrefix: 'EmuOS message',
+			missingTranslation: 'undefined',
 			resizeDelay: 100,
 			autoHideRestartDelay: 100,
 			resizableHandleOverflowMax: 3
 		},
 
 		_systemButtons: [
-			"languageSelect",
-			"minimizeAll",
-			"toggleFullscreen",
-			"networkMonitor",
-			"clock"
+			'languageSelect',
+			'minimizeAll',
+			'toggleFullscreen',
+			'networkMonitor',
+			'clock'
 		],
 
 		_systemButtonsWithSingleIcons: [
-			"languageSelect",
-			"minimizeAll",
-			"clock"
+			'languageSelect',
+			'minimizeAll',
+			'clock'
 		],
 
 		_optionsPositiveIntegers: [
-			"horizontalWidth",
-			"resizableHandleOverflow",
-			"horizontalRows",
-			"horizontalRowsMin",
-			"verticalHeight",
-			"verticalColumns",
-			"verticalColumnsMin",
-			"verticalColumns",
-			"verticalColumnWidth"
+			'horizontalWidth',
+			'resizableHandleOverflow',
+			'horizontalRows',
+			'horizontalRowsMin',
+			'verticalHeight',
+			'verticalColumns',
+			'verticalColumnsMin',
+			'verticalColumns',
+			'verticalColumnWidth'
 		],
 
 		_optionsPossiblePercentages: [
-			"horizontalWidth",
-			"verticalHeight",
-			"verticalColumnWidth"
+			'horizontalWidth',
+			'verticalHeight',
+			'verticalColumnWidth'
 		],
 
 		classes: {
-			taskbar: "emuos-taskbar",
-			taskbarPrefix: "emuos-taskbar-",
-			taskbarHorizontal: "emuos-taskbar-horizontal",
-			taskbarVertical: "emuos-taskbar-vertical",
-			taskbarStickTop: "emuos-taskbar-stick-top",
-			taskbarStickBottom: "emuos-taskbar-stick-bottom",
-			taskbarStickRight: "emuos-taskbar-stick-right",
-			taskbarStickLeft: "emuos-taskbar-stick-left",
-			taskbarStickPrefix: "emuos-taskbar-stick-",
-			taskbarWithOpenElements: "emuos-taskbar-with-opened-elements",
-			container: "emuos-taskbar-container",
-			startButton: "emuos-taskbar-start-button",
-			windowButton: "emuos-taskbar-window-button",
-			separator: "emuos-taskbar-separator",
-			startButtonsContainer: "emuos-taskbar-start-container",
-			buttonsContainer: "emuos-taskbar-buttons-container",
-			systemButtonsContainer: "emuos-taskbar-system-buttons-container",
-			systemButtonsSeparator: "emuos-taskbar-system-buttons-separator",
-			windowButtonsContainer: "emuos-taskbar-window-buttons-container",
-			windowButtonsContainerFirstChild: "emuos-taskbar-window-buttons-container-first-child",
-			windowButtonsContainerOnlyChild: "emuos-taskbar-window-buttons-container-only-child",
-			droppableContainer: "emuos-taskbar-droppable-container",
-			droppable: "emuos-taskbar-droppable",
-			languageSelect: "emuos-taskbar-language-select",
-			minimizeAll: "emuos-taskbar-minimize-all",
-			toggleFullscreen: "emuos-taskbar-toggle-fullscreen",
-			networkMonitor: "emuos-taskbar-network-monitor",
-			clock: "emuos-taskbar-clock",
-			datepicker: "emuos-taskbar-datepicker",
-			draggableHelper: "emuos-taskbar-helper",
-			buttonDisabled: "emuos-taskbar-button-disabled",
-			draggableDragging: "emuos-taskbar-dragging",
-			resizable: "emuos-taskbar-resizable",
-			resizableMouseover: "emuos-taskbar-resizable-mouseover",
-			resizableResizing: "emuos-taskbar-resizing",
-			resizableDisabled: "emuos-taskbar-resizable-disabled",
-			empty: "emuos-taskbar-empty",
-			autoHide: "emuos-taskbar-autohide",
-			autoHideMouseOver: "emuos-taskbar-autohide-mouseover",
-			autoHideHidden: "emuos-taskbar-autohide-hidden",
-			autoHideHidding: "emuos-taskbar-autohide-hidding",
-			autoHidePending: "emuos-taskbar-autohide-pending",
-			autoHideShowing: "emuos-taskbar-autohide-showing",
-			window: "emuos-window",
-			windowContent: "emuos-window-content",
-			windowTitlebarButtonIcon: "emuos-window-titlebar-button-icon",
-			windowManipulationButton: "emuos-window-button",
-			windowsContainment: "emuos-taskbar-windows-containment",
-			windowCopy: "emuos-taskbar-window-copy",
-			windowGroupMenu: "emuos-taskbar-window-group-menu",
-			windowGroupMenuScroll: "emuos-taskbar-window-group-menu-scroll",
-			windowGroupElement: "emuos-taskbar-window-group-element",
-			windowGroupElementActive: "emuos-taskbar-window-group-element-active",
-			windowMinimizeAllHover: "emuos-taskbar-window-minimize-all-hover",
-			windowMinimizeAllUnhover: "emuos-taskbar-window-minimize-all-unhover",
-			windowTop: "emuos-window-top",
-			windowUnminimizable: "emuos-window-unminimizable",
-			resizeIframe: "emuos-taskbar-iframe",
-			resizeIframeHorizontal: "emuos-taskbar-iframe-horizontal",
-			resizeIframeVertical: "emuos-taskbar-iframe-vertical",
-			menuWindowClose: "emuos-taskbar-window-close",
-			windowButtonsIconsOnly: "emuos-taskbar-window-buttons-icons-only",
-			buttonTooltip: "emuos-taskbar-button-tooltip",
-			hidden: "emuos-hidden",
-			droppableOver: "emuos-taskbar-droppable-over",
-			droppablePending: "emuos-taskbar-droppable-pending",
-			taskbarIcon: "emuos-taskbar-icon",
-			taskbarContainter: "emuos-taskbar-container",
-			refreshPositionOnce: "emuos-taskbar-refresh-position-once",
-			buttonUserDefined: "emuos-taskbar-button-user-defined",
-			menuHidden: "emuos-menu-hidden",
+			taskbar: 'emuos-taskbar',
+			taskbarPrefix: 'emuos-taskbar-',
+			taskbarHorizontal: 'emuos-taskbar-horizontal',
+			taskbarVertical: 'emuos-taskbar-vertical',
+			taskbarStickTop: 'emuos-taskbar-stick-top',
+			taskbarStickBottom: 'emuos-taskbar-stick-bottom',
+			taskbarStickRight: 'emuos-taskbar-stick-right',
+			taskbarStickLeft: 'emuos-taskbar-stick-left',
+			taskbarStickPrefix: 'emuos-taskbar-stick-',
+			taskbarWithOpenElements: 'emuos-taskbar-with-opened-elements',
+			container: 'emuos-taskbar-container',
+			startButton: 'emuos-taskbar-start-button',
+			windowButton: 'emuos-taskbar-window-button',
+			separator: 'emuos-taskbar-separator',
+			startButtonsContainer: 'emuos-taskbar-start-container',
+			buttonsContainer: 'emuos-taskbar-buttons-container',
+			systemButtonsContainer: 'emuos-taskbar-system-buttons-container',
+			systemButtonsSeparator: 'emuos-taskbar-system-buttons-separator',
+			windowButtonsContainer: 'emuos-taskbar-window-buttons-container',
+			windowButtonsContainerFirstChild: 'emuos-taskbar-window-buttons-container-first-child',
+			windowButtonsContainerOnlyChild: 'emuos-taskbar-window-buttons-container-only-child',
+			droppableContainer: 'emuos-taskbar-droppable-container',
+			droppable: 'emuos-taskbar-droppable',
+			languageSelect: 'emuos-taskbar-language-select',
+			minimizeAll: 'emuos-taskbar-minimize-all',
+			toggleFullscreen: 'emuos-taskbar-toggle-fullscreen',
+			networkMonitor: 'emuos-taskbar-network-monitor',
+			clock: 'emuos-taskbar-clock',
+			datepicker: 'emuos-taskbar-datepicker',
+			draggableHelper: 'emuos-taskbar-helper',
+			buttonDisabled: 'emuos-taskbar-button-disabled',
+			draggableDragging: 'emuos-taskbar-dragging',
+			resizable: 'emuos-taskbar-resizable',
+			resizableMouseover: 'emuos-taskbar-resizable-mouseover',
+			resizableResizing: 'emuos-taskbar-resizing',
+			resizableDisabled: 'emuos-taskbar-resizable-disabled',
+			empty: 'emuos-taskbar-empty',
+			autoHide: 'emuos-taskbar-autohide',
+			autoHideMouseOver: 'emuos-taskbar-autohide-mouseover',
+			autoHideHidden: 'emuos-taskbar-autohide-hidden',
+			autoHideHidding: 'emuos-taskbar-autohide-hidding',
+			autoHidePending: 'emuos-taskbar-autohide-pending',
+			autoHideShowing: 'emuos-taskbar-autohide-showing',
+			window: 'emuos-window',
+			windowContent: 'emuos-window-content',
+			windowTitlebarButtonIcon: 'emuos-window-titlebar-button-icon',
+			windowManipulationButton: 'emuos-window-button',
+			windowsContainment: 'emuos-taskbar-windows-containment',
+			windowCopy: 'emuos-taskbar-window-copy',
+			windowGroupMenu: 'emuos-taskbar-window-group-menu',
+			windowGroupMenuScroll: 'emuos-taskbar-window-group-menu-scroll',
+			windowGroupElement: 'emuos-taskbar-window-group-element',
+			windowGroupElementActive: 'emuos-taskbar-window-group-element-active',
+			windowMinimizeAllHover: 'emuos-taskbar-window-minimize-all-hover',
+			windowMinimizeAllUnhover: 'emuos-taskbar-window-minimize-all-unhover',
+			windowTop: 'emuos-window-top',
+			windowUnminimizable: 'emuos-window-unminimizable',
+			resizeIframe: 'emuos-taskbar-iframe',
+			resizeIframeHorizontal: 'emuos-taskbar-iframe-horizontal',
+			resizeIframeVertical: 'emuos-taskbar-iframe-vertical',
+			menuWindowClose: 'emuos-taskbar-window-close',
+			windowButtonsIconsOnly: 'emuos-taskbar-window-buttons-icons-only',
+			buttonTooltip: 'emuos-taskbar-button-tooltip',
+			hidden: 'emuos-hidden',
+			droppableOver: 'emuos-taskbar-droppable-over',
+			droppablePending: 'emuos-taskbar-droppable-pending',
+			taskbarIcon: 'emuos-taskbar-icon',
+			taskbarContainter: 'emuos-taskbar-container',
+			refreshPositionOnce: 'emuos-taskbar-refresh-position-once',
+			buttonUserDefined: 'emuos-taskbar-button-user-defined',
+			menuHidden: 'emuos-menu-hidden',
 
 			// jQuery UI classes
-			uiMenu: "ui-menu",
-			uiWidgetContent: "ui-widget-content",
-			uiCornerPrefix: "ui-corner-",
-			uiCornerTl: "ui-corner-tl",
-			uiCornerTr: "ui-corner-tr",
-			uiCornerBl: "ui-corner-bl",
-			uiCornerBr: "ui-corner-br",
-			uiDatepickerHeader: "ui-datepicker-header",
-			uiDraggable: "ui-draggable",
-			uiDroppable: "ui-droppable",
-			uiDraggableDragging: "ui-draggable-dragging",
-			uiResizable: "ui-resizable",
-			uiResizableResizing: "ui-resizable-resizing",
-			uiResizableHandle: "ui-resizable-handle",
-			uiButton: "ui-button",
-			uiButtonText: "ui-button-text",
-			uiButtonIconPrimary: "ui-button-icon-primary",
-			uiMenuItem: "ui-menu-item",
-			uiDatepicker: "ui-datepicker",
-			uiDatepickerDaysCellOver: "ui-datepicker-days-cell-over",
-			uiStateActive: "ui-state-active",
-			uiStateFocus: "ui-state-focus",
-			uiStateHover: "ui-state-hover",
-			uiStateDisabled: "ui-state-disabled",
-			uiStateDefault: "ui-state-default",
-			uiSortable: "ui-sortable",
-			uiTooltip: "ui-tooltip",
-			uiDialogContent: "ui-dialog-content",
-			uiDialogTitlebar: "ui-dialog-titlebar",
-			uiHasDatepicker: "hasDatepicker",
-			uiIcon: "ui-icon",
-			uiIconBlank: "ui-icon-blank"
+			uiMenu: 'ui-menu',
+			uiWidgetContent: 'ui-widget-content',
+			uiCornerPrefix: 'ui-corner-',
+			uiCornerTl: 'ui-corner-tl',
+			uiCornerTr: 'ui-corner-tr',
+			uiCornerBl: 'ui-corner-bl',
+			uiCornerBr: 'ui-corner-br',
+			uiDatepickerHeader: 'ui-datepicker-header',
+			uiDraggable: 'ui-draggable',
+			uiDroppable: 'ui-droppable',
+			uiDraggableDragging: 'ui-draggable-dragging',
+			uiResizable: 'ui-resizable',
+			uiResizableResizing: 'ui-resizable-resizing',
+			uiResizableHandle: 'ui-resizable-handle',
+			uiButton: 'ui-button',
+			uiButtonText: 'ui-button-text',
+			uiButtonIconPrimary: 'ui-button-icon-primary',
+			uiMenuItem: 'ui-menu-item',
+			uiDatepicker: 'ui-datepicker',
+			uiDatepickerDaysCellOver: 'ui-datepicker-days-cell-over',
+			uiStateActive: 'ui-state-active',
+			uiStateFocus: 'ui-state-focus',
+			uiStateHover: 'ui-state-hover',
+			uiStateDisabled: 'ui-state-disabled',
+			uiStateDefault: 'ui-state-default',
+			uiSortable: 'ui-sortable',
+			uiTooltip: 'ui-tooltip',
+			uiDialogContent: 'ui-dialog-content',
+			uiDialogTitlebar: 'ui-dialog-titlebar',
+			uiHasDatepicker: 'hasDatepicker',
+			uiIcon: 'ui-icon',
+			uiIconBlank: 'ui-icon-blank'
 		},
 
-		_create: function () {
+		_create: function() {
 			// shortcut
 			this.$elem = this.element;
 
 			if (!this.$elem.parents().length) {
-				this.$elem.appendTo("body");
+				this.$elem.appendTo('body');
 			}
 
 			// tracks state of various elements of taskbar and holds
 			// a bunch of calculated values and options
 			this._cache = {
 				// cache inline styles so they can be reverted on widget destruction
-				inlineCSS: this.$elem.attr("style") || "",
+				inlineCSS: this.$elem.attr('style') || '',
 				// mutationObserers are instances of MutationObserver class
 				// https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver;
 				// they are stored so they could be later disconnected from DOM
@@ -372,13 +372,8 @@
 			this.$droppableBottom = $();
 			this.$droppableLeft = $();
 
-
 			// the basic classes, widget ID, and a unique id instante storage
-			this.$elem
-				.addClass(this.classes.taskbar + " " + this.classes.uiWidgetContent)
-				.attr("data-taskbar-uuid", this.uuid)
-				.uniqueId()
-				.data(this._cnst.dataPrefix + "taskbar", this);
+			this.$elem.addClass(this.classes.taskbar + ' ' + this.classes.uiWidgetContent).attr('data-taskbar-uuid', this.uuid).uniqueId().data(this._cnst.dataPrefix + 'taskbar', this);
 
 			// add taskbar ID to custom debug messages
 			this._consolePrefix(true);
@@ -402,17 +397,17 @@
 			// refresh position of windows binded to taskbars that are already present
 			this._refreshWindowsPosition();
 
-			this._trigger("create");
+			this._trigger('create');
 		},
 
 		// private function that suppresses events, used internally to refresh
-		_refresh: function () {
+		_refresh: function() {
 			this._cache.suppressEvents = true;
 			this.refresh();
 			this._cache.suppressEvents = false;
 		},
 
-		_initialize: function () {
+		_initialize: function() {
 			var refreshPositionOnce = this.$elem.hasClass(this.classes.refreshPositionOnce);
 
 			this._debug();
@@ -443,36 +438,36 @@
 			this._refreshSeparators();
 		},
 
-		_debug: function () {
+		_debug: function() {
 			this._debugEnvironment();  // 0
 			this._debugLocalization(); // 1
 			this._debugOptions();      // 2
 		},
 
-		_debugLogAdd: function (msg, level, type) {
+		_debugLogAdd: function(msg, level, type) {
 			var ui = {
 				message: msg,
 				level: level,
 				levelName: {
-					0: "error",
-					1: "warning",
-					2: "notice"
+					0: 'error',
+					1: 'warning',
+					2: 'notice'
 				}[level],
 				type: type,
 				typeName: {
-					0: "environment",
-					1: "localization",
-					2: "options"
+					0: 'environment',
+					1: 'localization',
+					2: 'options'
 				}[type]
 			};
 
 			var p = this._consolePrefix();
 
-			ui.$target = $("#" + this._cnst.consolePrefixIdReal);
+			ui.$target = $('#' + this._cnst.consolePrefixIdReal);
 
 			if (
 				// if debugLogAdd is prevented
-				this._trigger("debugLogAdd", {}, ui) === false
+				this._trigger('debugLogAdd', {}, ui) === false
 				// or window console is not available
 				// (changing order ot trigger( "debugLogAdd" ) and window.console
 				// will fail tests on IE9 due to the fact that window.console is not
@@ -494,106 +489,88 @@
 			}
 		},
 
-		_consolePrefix: function (set, widgetType) {
+		_consolePrefix: function(set, widgetType) {
 			// true reverts console prefix to contain taskbar name
 			if (set === true) {
-				this._cnst.consolePrefixId = " for taskbar #" + this.$elem[0].id;
+				this._cnst.consolePrefixId = ' for taskbar #' + this.$elem[0].id;
 				this._cnst.consolePrefixIdReal = this.$elem[0].id;
 
 				// passing string will change prefix to other widget (window, for now)
-			} else if (typeof set === "string" && set.length) {
-				this._cnst.consolePrefixId = " for " + widgetType + " #" + set;
+			} else if (typeof set === 'string' && set.length) {
+				this._cnst.consolePrefixId = ' for ' + widgetType + ' #' + set;
 				this._cnst.consolePrefixIdReal = set;
 
 				// act as getter
 			} else {
-				return this._cnst.consolePrefix + this._cnst.consolePrefixId + ": ";
+				return this._cnst.consolePrefix + this._cnst.consolePrefixId + ': ';
 			}
 		},
 
-		_debugEnvironment: function () {
+		_debugEnvironment: function() {
 			var o = this.options;
 
 			// position, dialog, button, and window are mandatory
 			if (!$.ui.position) {
 				this._debugLogAdd(
-					"jQuery UI Position is required for this plugin to work.", 0, 0
+					'jQuery UI Position is required for this plugin to work.', 0, 0
 				);
 			}
 
 			if (!$.ui.dialog) {
 				this._debugLogAdd(
-					"jQuery UI Dialog is required for taskbar windows to work.",
+					'jQuery UI Dialog is required for taskbar windows to work.',
 					0, 0
 				);
 			}
 
 			if (!$.emuos.window) {
 				this._debugLogAdd(
-					this._cnst.naturalName + " Window is required " +
-					"for taskbar windows to work.", 0, 0
+					this._cnst.naturalName + ' Window is required ' +
+					'for taskbar windows to work.', 0, 0
 				);
 			}
 
 			if (!$.ui.button) {
 				this._debugLogAdd(
-					"jQuery UI Button is required for taskbar buttons to work.",
+					'jQuery UI Button is required for taskbar buttons to work.',
 					0, 0
 				);
 			}
 
 			// ui-icon is meant to have background image - if it doesn't,
 			// jQuery UI Theme is likely not to be loaded
-			if (this._styleIndicator(this.classes.uiIcon, "backgroundImage")
-				.backgroundImage === "none") {
-				this._debugLogAdd("jQuery UI Theme is probably missing.", 1, 0);
+			if (this._styleIndicator(this.classes.uiIcon, 'backgroundImage').backgroundImage === 'none') {
+				this._debugLogAdd('jQuery UI Theme is probably missing.', 1, 0);
 			}
 
 			// taskbar and window default position is "fixed",
 			// and if it isn't, some or all of plugin's styleshet's are missing
 			if (
-				this._styleIndicator(this.classes.taskbar, "position")
-					.position !== "fixed"
-				|| this._styleIndicator(this.classes.window, "position")
-					.position !== "fixed"
+				this._styleIndicator(this.classes.taskbar, 'position').position !== 'fixed'
+				|| this._styleIndicator(this.classes.window, 'position').position !== 'fixed'
 			) {
 				this._debugLogAdd(
-					"Stylesheet for " + this._cnst.naturalName +
-					" is probably missing.", 1, 0);
+					'Stylesheet for ' + this._cnst.naturalName +
+					' is probably missing.', 1, 0);
 			}
 
 			// position: relative, set for example by Foundation framework,
 			// will not work with jQuery UI Draggable, see:
 			// http://bugs.jquery.com/ticket/4202
 			// http://foundation.zurb.com/forum/posts/17493-body-position-relative
-			if ($("body").css("position") === "relative") {
-				this._debugLogAdd("Body with position:relative will not work "
-					+ "with jQuery UI Draggable or jQuery UI Resizable.", 0, 0);
+			if ($('body').css('position') === 'relative') {
+				this._debugLogAdd('Body with position:relative will not work '
+									  + 'with jQuery UI Draggable or jQuery UI Resizable.', 0, 0);
 			}
 		},
 
 		// taskbar should not contain elements that are menus and it's
 		// subordinates, and if it does, a debug message will be generated
-		_debugCheckOrphans: function () {
-			var $orphans = this.$elem.children()
-				.not("." + this.classes.uiMenu)
-				.not("." + this.classes.container)
-				.not("." + this.classes.separator)
-				.not("." + this.classes.resizable)
-				.not("." + this.classes.menuHidden)
-				.filter(":visible");
+		_debugCheckOrphans: function() {
+			var $orphans = this.$elem.children().not('.' + this.classes.uiMenu).not('.' + this.classes.container).not('.' + this.classes.separator).not('.' + this.classes.resizable).not('.' + this.classes.menuHidden).filter(':visible');
 
 			if ($orphans.length) {
-				var result = this._debugLogAdd(
-					"There are elements presents in the taskbar "
-					+ "that are neither hidden or part of the taskbar. "
-					+ "Maybe you forgot to "
-					+ (this.options.startButtons
-					? "set \"startButtons\" option to true or "
-					: "")
-					+ "add \"." + this.classes.menuHidden +
-					"\" class to some menus.", 1, 0
-				);
+				var result = this._debugLogAdd('There are elements presents in the taskbar ' + 'that are neither hidden or part of the taskbar. ' + 'Maybe you forgot to ' + (this.options.startButtons ? 'set "startButtons" option to true or ' : '') + 'add ".' + this.classes.menuHidden + '" class to some menus.', 1, 0);
 				// if event was not prevented, log a list of orphaned
 				// element to the console
 				if (result !== false && this.options.debug.environment) {
@@ -606,32 +583,32 @@
 
 		// called when menu is about to be created;
 		// debug is generated when jQuery UI Menu is missing
-		_debugMenu: function () {
+		_debugMenu: function() {
 			if (!$.ui.menu) {
 				this._debugLogAdd(
-					"jQuery UI Menu is required for taskbar menus to work.", 1, 0
+					'jQuery UI Menu is required for taskbar menus to work.', 1, 0
 				);
 			}
 
 			return !!$.ui.menu;
 		},
 
-		_debugLocalization: function () {
+		_debugLocalization: function() {
 			var o = this.options,
 				lang;
 
 			// check is any localization files were loaded at all
 			if (this._isRealEmptyObject($.emuos.taskbar.prototype.options.localization)) {
-				this._debugLogAdd("Localization file is probably missing.", 1, 1);
+				this._debugLogAdd('Localization file is probably missing.', 1, 1);
 			} else if (!$.emuos.taskbar.prototype.options.localization) {
-				this._debugLogAdd("Localization file is missing.", 0, 1);
+				this._debugLogAdd('Localization file is missing.', 0, 1);
 			}
 
 			// check is localization option is non-empty and is an object
 			if (this._isRealEmptyObject(o.localization)) {
-				this._debugLogAdd("Localization object is empty.", 1, 1);
+				this._debugLogAdd('Localization object is empty.', 1, 1);
 			} else if (!o.localization) {
-				this._debugLogAdd("Localization option is not an object.", 0, 1);
+				this._debugLogAdd('Localization option is not an object.', 0, 1);
 			}
 
 			// check if all plugin localizations are loaded for languages that were
@@ -641,47 +618,28 @@
 			for (var i in o.languages) {
 				if (o.languages.hasOwnProperty(i)) {
 					lang = o.languages[i];
-					if ($.emuos.taskbar.prototype.options.localization
-						&& !$.emuos.taskbar.prototype.options.localization[lang]) {
-						this._debugLogAdd(
-							"Missing taskbar translations for language \"" +
-							lang + "\".", 1, 1
-						);
+
+					if ($.emuos.taskbar.prototype.options.localization && !$.emuos.taskbar.prototype.options.localization[lang]) {
+						this._debugLogAdd('Missing taskbar translations for language "' + lang + '".', 1, 1);
 					}
 
-					if (o.clock && o.clockShowDatepicker && $.ui.datepicker
-						&& (!$.datepicker
-							|| !$.datepicker.regional
-							|| !$.datepicker.regional[lang === "en" ? "" : lang])
-					) {
-						this._debugLogAdd(
-							"Missing jQuery UI Datepicker " +
-							"translations for language \"" + lang + "\".", 1, 1
-						);
+					if (o.clock && o.clockShowDatepicker && $.ui.datepicker && (!$.datepicker || !$.datepicker.regional || !$.datepicker.regional[lang === 'en' ? '' : lang])) {
+						this._debugLogAdd('Missing jQuery UI Datepicker ' + 'translations for language "' + lang + '".', 1, 1);
 					}
 				}
 			}
 		},
 
-		_debugOptions: function () {
-			var o = this.options,
-				i;
+		_debugOptions: function() {
+			var o = this.options, i;
 
 			// check and correct those taskbar options that should be positive integers
 			for (i in this._optionsPositiveIntegers) {
 				if (this._optionsPositiveIntegers.hasOwnProperty(i)) {
 					var key = this._optionsPositiveIntegers[i];
 					var val = parseInt(this.options[key], 10);
-					if (
-						(1 > val || isNaN(val))
-						&& (
-						!this._isPercent(val)
-						&& $.inArray(val, this._optionsPossiblePercentages))
-					) {
-						this._debugLogAdd(
-							key + " should not be lower than 1, setting to 1.",
-							1, 2
-						);
+					if ((1 > val || isNaN(val)) && (!this._isPercent(val) && $.inArray(val, this._optionsPossiblePercentages))) {
+						this._debugLogAdd(key + ' should not be lower than 1, setting to 1.', 1, 2);
 						this.options[key] = Math.max(this.options[key], 1);
 					}
 				}
@@ -690,44 +648,31 @@
 			// check if resizableHandleOverflow isn't to high, and correct
 			// it if needed, because otherwise it would cover resizable handle
 			// of window touching it
-			if (
-				this.options.resizableHandleOverflow
-				=== parseInt(this.options.resizableHandleOverflow, 10)
-			) {
-				if (
-					this.options.resizableHandleOverflow
-					> this._cnst.resizableHandleOverflowMax
-				) {
-					this._debugLogAdd(
-						"resizableHandleOverflow should not be higher than " +
-						this._cnst.resizableHandleOverflowMax + ", " +
-						"as it would damage resizable experience on windows " +
-						"touching taskbar.", 1, 2
-					);
+			if (this.options.resizableHandleOverflow === parseInt(this.options.resizableHandleOverflow, 10)) {
+				if (this.options.resizableHandleOverflow > this._cnst.resizableHandleOverflowMax) {
+					this._debugLogAdd('resizableHandleOverflow should not be higher than ' + this._cnst.resizableHandleOverflowMax + ', ' + 'as it would damage resizable experience on windows ' + 'touching taskbar.', 1, 2);
 				}
 			}
 
 			// check if custom buttons does not share names with native buttons
 			for (i in this.options.buttons) {
 				if ($.inArray(i, this._systemButtons) > -1) {
-					this._debugLogAdd("Custom button \"" + i + "\" detected. " +
-						"Custom button should not share names with native buttons.",
-						1, 2);
+					this._debugLogAdd('Custom button "' + i + '" detected. ' + 'Custom button should not share names with native buttons.', 1, 2);
 				}
 			}
 		},
 
-		_setDimensions: function (options) {
+		_setDimensions: function(options) {
 			// this function is also used by droppables, so we need to know
 			// what kind of element we dealing with; taskbar uses native options,
 			// droppables simulates them
-			var isTaskbar = !options,
-				options = options || this.options,
-				horizontal = options.orientation === "horizontal";
+			var isTaskbar = !options;
+			options = options || this.options;
+			var horizontal = options.orientation === 'horizontal';
 
 			// set height to auto so it could be calculated again
 			if (isTaskbar && horizontal && this.$elem && this.$elem.length) {
-				this.$elem.css("height", "auto");
+				this.$elem.css('height', 'auto');
 			}
 
 			// either a height of horizontal taskbar or width of vertival taskbar
@@ -735,31 +680,22 @@
 				// taskbar will later translated "auto" height to px,
 				// but when we dealing with droppable, that's already calculated
 				// and stored, so use this instead
-				? isTaskbar
-					? options.horizontalRowHeight
-					: this._cache.horizontalRowHeight
-				: isTaskbar
-					? options.verticalColumnWidth
-					: this._cache.verticalColumnWidth,
+									 ? isTaskbar ? options.horizontalRowHeight : this._cache.horizontalRowHeight : isTaskbar ? options.verticalColumnWidth : this._cache.verticalColumnWidth,
 				// determines whether an auto height should be applied
 				// to horizontal taskbar; note: auto width of vertical taskbar
 				// is not supported; this is a planned feature
-				auto = secondaryDimension === "auto",
+				auto = secondaryDimension === 'auto',
 				actualSize;
 
 			var _cache = {};
 
 			// to which edge of the window, right or left, should the taskbar stick,
 			// regardless of orientation
-			_cache.stickHorizontal = horizontal
-				? options.horizontalStick.indexOf("right") !== -1 ? "right" : "left"
-				: options.verticalStick.indexOf("right") !== -1 ? "right" : "left",
+			_cache.stickHorizontal = horizontal ? options.horizontalStick.indexOf('right') !== -1 ? 'right' : 'left' : options.verticalStick.indexOf('right') !== -1 ? 'right' : 'left',
 
 				// to which edge of the window, top or bottom, should the taskbar stick,
 				// regardless of orientation
-				_cache.stickVertical = !horizontal
-					? options.verticalStick.indexOf("top") !== -1 ? "top" : "bottom"
-					: options.horizontalStick.indexOf("top") !== -1 ? "top" : "bottom";
+				_cache.stickVertical = !horizontal ? options.verticalStick.indexOf('top') !== -1 ? 'top' : 'bottom' : options.horizontalStick.indexOf('top') !== -1 ? 'top' : 'bottom';
 
 			// copy setting (used by droppables)
 			_cache.horizontal = horizontal;
@@ -771,10 +707,12 @@
 				// previous settings of options.autoHide, therefore this has to
 				// be done every time
 				this._copyStyles({
-					to: this.$elem,
-					properties: ["top", "bottom", "left", "right", "width",
-						"marginTop", "marginBottom", "marginLeft", "marginRight"]
-				});
+									 to: this.$elem,
+									 properties: [
+										 'top', 'bottom', 'left', 'right', 'width',
+										 'marginTop', 'marginBottom', 'marginLeft', 'marginRight'
+									 ]
+								 });
 
 				// hides user-defined menus, later those that are needed
 				// for current language setting and are not defined by user
@@ -789,48 +727,35 @@
 
 			if (isTaskbar) {
 				// stores the window edge to which taskbar sticks
-				_cache.edge = horizontal
-					? this.options.horizontalStick.match(/bottom/) ? "bottom" : "top"
-					: this.options.verticalStick.match(/left/) ? "left" : "right";
+				_cache.edge = horizontal ? this.options.horizontalStick.match(/bottom/) ? 'bottom' : 'top' : this.options.verticalStick.match(/left/) ? 'left' : 'right';
 				// +
 				// to keep the original setting for getters,
 				// calculated height of horizontal taskbar
 				// will be kept internally
-				this._cache.horizontalRowHeight = !horizontal || auto
-					? this._computeAutoHeight({
-						edge: _cache.edge
-					})
-					: secondaryDimension;
+				this._cache.horizontalRowHeight = !horizontal || auto ? this._computeAutoHeight({edge: _cache.edge}) : secondaryDimension;
 
 				// to keep the original settings for getters,
 				// caluclated width of horizontal taskbar will be kept internally
-				this._cache.verticalColumnWidth = this._translateSize(
-					$.extend({}, options, {
-						orientation: "horizontal",
-						horizontalWidth: options.verticalColumnWidth
-					})
-				);
+				this._cache.verticalColumnWidth = this._translateSize($.extend({}, options, {orientation: 'horizontal', horizontalWidth: options.verticalColumnWidth}));
 
 				// data about the edge will be used later for decining whether
 				// draggable taskbar can be dropped on given droppable edge
-				this.$elem.data(
-					this._cnst.dataPrefix + "taskbarEdge", _cache.edge
-				);
+				this.$elem.data(this._cnst.dataPrefix + 'taskbarEdge', _cache.edge);
 			}
 
 			// either a number of rows for horizontal taskbar or number of columns
 			// for vertical taskbar
 			_cache.secondarySize = !horizontal
-				? (
-				isTaskbar
-					? this._getRealRowCol("vertical")
-					: options.verticalColumns
-			) * this._cache.verticalColumnWidth
-				: (
-				isTaskbar
-					? this._getRealRowCol("horizontal")
-					: options.horizontalRows
-			) * this._cache.horizontalRowHeight;
+								   ? (
+									   isTaskbar
+									   ? this._getRealRowCol('vertical')
+									   : options.verticalColumns
+								   ) * this._cache.verticalColumnWidth
+								   : (
+									   isTaskbar
+									   ? this._getRealRowCol('horizontal')
+									   : options.horizontalRows
+								   ) * this._cache.horizontalRowHeight;
 
 			_cache.actualSize = actualSize;
 
@@ -859,26 +784,26 @@
 			return _cache;
 		},
 
-		_setWidthAndHeight: function (_cache) {
+		_setWidthAndHeight: function(_cache) {
 			// width and height differs now from what was initially set by user
 			_cache.width = _cache.horizontal
-				? _cache.actualSize
-				: _cache.secondarySize,
+						   ? _cache.actualSize
+						   : _cache.secondarySize,
 				_cache.height = !_cache.horizontal
-					? _cache.actualSize
-					: _cache.secondarySize;
+								? _cache.actualSize
+								: _cache.secondarySize;
 
 			return _cache;
 		},
 
-		_translateSize: function (options) {
+		_translateSize: function(options) {
 			var containment = this._getContainmentInner(),
 
-				horizontal = options.orientation === "horizontal",
+				horizontal = options.orientation === 'horizontal',
 				// eihter width of horizontal taskbar or height of vertical taskbar
 				mainDimension = horizontal
-					? options.horizontalWidth
-					: options.verticalHeight,
+								? options.horizontalWidth
+								: options.verticalHeight,
 
 				// percentSize will be later translated to px
 				percentSize = this._isPercent(mainDimension),
@@ -888,7 +813,7 @@
 				// translates % to px
 				actualSize = parseFloat(mainDimension, 10) / 100 *
 					(horizontal ? containment.width : containment.height);
-			} else if (mainDimension === "auto" && horizontal) {
+			} else if (mainDimension === 'auto' && horizontal) {
 				// use actualSize
 			} else {
 				// assume it's a valid setting
@@ -899,21 +824,21 @@
 			return parseInt(actualSize, 10);
 		},
 
-		_isPercent: function (val) {
-			return typeof val === "string" && val.substr(-1) === "%";
+		_isPercent: function(val) {
+			return typeof val === 'string' && val.substr(-1) === '%';
 		},
 
 		// return the real row/column value, with "max" nad "min" values
 		// taken into account, and optionally generated a debug message
 		// if "max" value is lower than "min" value
-		_getRealRowCol: function (orientation) {
+		_getRealRowCol: function(orientation) {
 			var o = this.options;
 
-			if (orientation === "horizontal") {
+			if (orientation === 'horizontal') {
 				if (o.horizontalRowsMax < o.horizontalRowsMin) {
 					this._debugLogAdd(
-						"\"horizontalRowsMax\" should not be lower than "
-						+ "\"horizontalRowsMin\".", 1, 2
+						'"horizontalRowsMax" should not be lower than '
+						+ '"horizontalRowsMin".', 1, 2
 					);
 				}
 				return Math.max(
@@ -922,11 +847,11 @@
 				);
 			}
 
-			if (orientation === "vertical") {
+			if (orientation === 'vertical') {
 				if (o.verticalColumnsMax < o.verticalColumnsMin) {
 					this._debugLogAdd(
-						"\"verticalColumnsMax\" should not be lower than "
-						+ "\"verticalColumnsMin\".", 1, 2
+						'"verticalColumnsMax" should not be lower than '
+						+ '"verticalColumnsMin".', 1, 2
 					);
 				}
 				return Math.max(
@@ -936,85 +861,83 @@
 			}
 		},
 
-		_removeTaskbarPositionClasses: function (options) {
+		_removeTaskbarPositionClasses: function(options) {
 			// either remove classes from droppable or from taskbar
 			var $elem = options && options.elem ? options.elem : this.$elem;
 
 			// those are all the classes that tells us about taskbar position
-			$elem
-				.removeClass(
-					this.classes.taskbarHorizontal
-					+ " " + this.classes.taskbarVertical
-					+ " " + this.classes.taskbarStickTop
-					+ " " + this.classes.taskbarStickBottom
-					+ " " + this.classes.taskbarStickRight
-					+ " " + this.classes.taskbarStickLeft
-				);
+			$elem.removeClass(
+				this.classes.taskbarHorizontal
+				+ ' ' + this.classes.taskbarVertical
+				+ ' ' + this.classes.taskbarStickTop
+				+ ' ' + this.classes.taskbarStickBottom
+				+ ' ' + this.classes.taskbarStickRight
+				+ ' ' + this.classes.taskbarStickLeft
+			);
 		},
 
-		_setTaskbarPositionClasses: function (_cache, options) {
+		_setTaskbarPositionClasses: function(_cache, options) {
 			// either set classes to droppable or to taskbar
 			var $elem = options && options.elem ? options.elem : this.$elem;
 
 			// clean start with position
 			this._removeTaskbarPositionClasses(options);
 
-			$elem
-				.addClass(
-					// add classes telling whether it's a horizontal or vertical
-					// taskbar or droppable
-					" " + (_cache.horizontal
-					? this.classes.taskbarHorizontal
-					: this.classes.taskbarVertical)
-					+ " " + this.classes.taskbarStickPrefix + _cache.stickVertical
-					+ " " + this.classes.taskbarStickPrefix + _cache.stickHorizontal
-				);
+			$elem.addClass(
+				// add classes telling whether it's a horizontal or vertical
+				// taskbar or droppable
+				' ' + (_cache.horizontal
+					   ? this.classes.taskbarHorizontal
+					   : this.classes.taskbarVertical)
+					+ ' ' + this.classes.taskbarStickPrefix + _cache.stickVertical
+					+ ' ' + this.classes.taskbarStickPrefix + _cache.stickHorizontal
+			);
 		},
 
 		// clears and the setts rounded corners if they should apply
-		_setTaskbarRoundedCorners: function (options) {
+		_setTaskbarRoundedCorners: function(options) {
 			this._removeTaskbarRoundedCorners(options);
 			this._addTaskbarRoundedCorners(options);
 		},
 
 		// removes rounded corners from taskbar and it's resizable
-		_removeTaskbarRoundedCorners: function (options) {
+		_removeTaskbarRoundedCorners: function(options) {
 			var $elem = options && options.elem ? options.elem : this.$elem;
 
-			$elem.find("." + this.classes.resizable).addBack().removeClass(
+			$elem.find('.' + this.classes.resizable).addBack().removeClass(
 				this.classes.uiCornerTl
-				+ " " + this.classes.uiCornerTr
-				+ " " + this.classes.uiCornerBl
-				+ " " + this.classes.uiCornerBr
+				+ ' ' + this.classes.uiCornerTr
+				+ ' ' + this.classes.uiCornerBl
+				+ ' ' + this.classes.uiCornerBr
 			);
 		},
 
-		_addTaskbarRoundedCorners: function (settings) {
+		_addTaskbarRoundedCorners: function(settings) {
 			var self = this,
 				_cache = this._cache,
 				options = this.options,
-				horizontal = options.orientation === "horizontal",
+				horizontal = options.orientation === 'horizontal',
 				containment = this._getContainment(),
 				$elem = settings && settings.elem ? settings.elem : this.$elem;
 
 			// no rounded corners if a taskbar stretches through entire window
 			if (
 				horizontal && (
-					options.horizontalWidth === "100%"
+					options.horizontalWidth === '100%'
 					|| this._cache.horizontalRowHeight >= containment.width
 				)
 				|| !horizontal && (
-				options.verticalHeight === "100%"
+				options.verticalHeight === '100%'
 				|| this._cache.height >= containment.height)
 			) {
 				return false;
 			}
 
 			// shortcuts for switch
-			var top = _cache.stickVertical === "top",
-				bottom = _cache.stickVertical === "bottom",
-				left = _cache.stickHorizontal === "left",
-				right = _cache.stickHorizontal === "right",
+			var top = _cache.stickVertical === 'top',
+				bottom = _cache.stickVertical === 'bottom',
+				left = _cache.stickHorizontal === 'left',
+				right = _cache.stickHorizontal === 'right',
 				corner;
 
 			// those are suffixes for native jQuery Ui's classes used for
@@ -1023,35 +946,35 @@
 			// is rounded, etc.
 			switch (true) {
 				case (top && left):
-					corner = "br";
+					corner = 'br';
 					break;
 				case (top && right):
-					corner = "bl";
+					corner = 'bl';
 					break;
 				case (bottom && left):
-					corner = "tr";
+					corner = 'tr';
 					break;
 				case (bottom && right):
-					corner = "tl";
+					corner = 'tl';
 					break;
 			}
 
 			// the skipResizable settings tells us whether the resizable
 			// is at the initial position; if it's not, it should not receive
 			// rounded borders
-			var $target = settings && settings.skipResizable ? $elem : $elem.find("." + this.classes.resizable).addBack();
+			var $target = settings && settings.skipResizable ? $elem : $elem.find('.' + this.classes.resizable).addBack();
 
 			// adds proper class
 			$target.addClass(this.classes.uiCornerPrefix + corner);
 		},
 
-		_resolveCollisions: function (_cache) {
+		_resolveCollisions: function(_cache) {
 			var self = this,
-				horizontal = this.options.orientation === "horizontal",
+				horizontal = this.options.orientation === 'horizontal',
 				actualSize = _cache.actualSize,
 				secondarySize = _cache.secondarySize,
 				margins = this.$windowsContainment.data(
-					this._cnst.dataPrefix + "taskbar-margins"
+					this._cnst.dataPrefix + 'taskbar-margins'
 				),
 				edge = _cache.edge,
 				$taskbars = this._getTaskbarList(),
@@ -1069,18 +992,17 @@
 			// position relative to other taskbars, we use cached position
 			// instead of recalculation
 			var collisions = keep
-				? this._cache.collisions
-				: this._zeroDirections();
+							 ? this._cache.collisions
+							 : this._zeroDirections();
 
 			// margins variable could be undefined, which indicates it is initial run of first taskbar in this window,
 			// in which case there are no conflicts to resolve and initial css variable is enough
-			if (typeof margins === "object" && !keep) {
+			if (typeof margins === 'object' && !keep) {
 				// iterate over neighbouring edges
 				$.each(
 					neighbouringEdges[edge],
-					function (index, neighbouringEdge) {
-						var $collidingTaskbars = $taskbars[neighbouringEdge]
-							.not(this.$elem);
+					function(index, neighbouringEdge) {
+						var $collidingTaskbars = $taskbars[neighbouringEdge].not(this.$elem);
 
 						// margins needs to be > 0 and there has to be some taskbars;
 						// it could happen that there are only autohide taskbars
@@ -1089,7 +1011,7 @@
 							margins [neighbouringEdge] !== 0
 							&& $collidingTaskbars.length > 0
 						) {
-							$collidingTaskbars.each(function () {
+							$collidingTaskbars.each(function() {
 								var $this = $(this),
 									p = self._extendedPosition.call($this);
 
@@ -1105,11 +1027,11 @@
 								// that's a collision and CSS left of taskbar we want
 								// to move will likely be updated
 								if (
-									(edge === "left" && p.left < s.right)
-									|| (edge === "right" && p.right > s.left)
+									(edge === 'left' && p.left < s.right)
+									|| (edge === 'right' && p.right > s.left)
 								) {
 									if (
-										neighbouringEdge === "top"
+										neighbouringEdge === 'top'
 										&& p.bottom > s.top
 									) {
 										// we use Math.max because value larger than
@@ -1118,7 +1040,7 @@
 										css.top = Math.max(css.top, p.bottom);
 									}
 									if (
-										neighbouringEdge === "bottom"
+										neighbouringEdge === 'bottom'
 										&& p.top < s.bottom
 									) {
 										css.bottom = Math.max(css.bottom, p.height);
@@ -1128,17 +1050,17 @@
 								// that's just the code from above,
 								// except left = top, right = bottom, height = width
 								if (
-									(edge === "top" && p.top < s.bottom)
-									|| (edge === "bottom" && p.bottom > s.top)
+									(edge === 'top' && p.top < s.bottom)
+									|| (edge === 'bottom' && p.bottom > s.top)
 								) {
 									if (
-										neighbouringEdge === "left"
+										neighbouringEdge === 'left'
 										&& p.right > s.left
 									) {
 										css.left = Math.max(css.left, p.right);
 									}
 									if (
-										neighbouringEdge === "right"
+										neighbouringEdge === 'right'
 										&& p.left < s.right
 									) {
 										css.right = Math.max(css.right, p.width);
@@ -1155,8 +1077,8 @@
 
 			this._cache.collisions = css;
 
-			$.each($taskbars, function (index, $taskbars) {
-				$taskbars.each(function () {
+			$.each($taskbars, function(index, $taskbars) {
+				$taskbars.each(function() {
 					// update neighbours that needs refreshing
 					$refreshNeighbours = $refreshNeighbours.add($(this));
 				});
@@ -1166,8 +1088,8 @@
 
 			// change value of actual size by extracting margins
 			_cache.actualSize -= horizontal
-				? css.right + css.left
-				: css.top + css.bottom;
+								 ? css.right + css.left
+								 : css.top + css.bottom;
 
 			// this will be used to position taskbar
 			_cache.colissionCss = css;
@@ -1182,16 +1104,13 @@
 			) {
 				// refresh neighbours after refresh because current taskbar position
 				// is not changed at the moment
-				this._bindInternal("afterResolveCollisions", function () {
-					$refreshNeighbours.each(function () {
+				this._bindInternal('afterResolveCollisions', function() {
+					$refreshNeighbours.each(function() {
 						var $this = $(this);
 
 						if ($this.hasClass(self.classes.taskbar)
 							&& !$this.hasClass(self.classes.refreshPositionOnce)) {
-							$this
-								.addClass(self.classes.refreshPositionOnce)
-								.data(self._cnst.dataPrefix + "taskbar")
-								._refresh();
+							$this.addClass(self.classes.refreshPositionOnce).data(self._cnst.dataPrefix + 'taskbar')._refresh();
 						}
 					});
 				});
@@ -1200,49 +1119,47 @@
 			return _cache;
 		},
 
-		_tryAfterResolveCollisions: function () {
-			this._triggerInternal("afterResolveCollisions");
+		_tryAfterResolveCollisions: function() {
+			this._triggerInternal('afterResolveCollisions');
 
 			// remove class after internal callback - prevents intinite loop
 			this.$elem.removeClass(this.classes.refreshPositionOnce);
 		},
 
 		// used upon destruction
-		_refreshNeighbours: function () {
+		_refreshNeighbours: function() {
 			var self = this,
 				$taskbars = this._getTaskbarList(),
 				// a list of window edges and their neighbouring edges
 				neighbouringEdges = this._neighbouringEdges();
 
-			$.each(neighbouringEdges[this._cache.edge], function (index, edge) {
-				$taskbars[edge].each(function () {
-					$(this).data(self._cnst.dataPrefix + "taskbar")._refresh();
+			$.each(neighbouringEdges[this._cache.edge], function(index, edge) {
+				$taskbars[edge].each(function() {
+					$(this).data(self._cnst.dataPrefix + 'taskbar')._refresh();
 				});
 			});
 		},
 
 		// set position and dimensions for taskbar or droppable
-		_setTaskbarPositionDimensions: function (options) {
+		_setTaskbarPositionDimensions: function(options) {
 			var self = this,
 				_cache = options && options._cache
-					? options._cache
-					: this._cache,
+						 ? options._cache
+						 : this._cache,
 				isTaskbar = !options,
 				$elem = options && options.elem
-					? options.elem
-					: this.$elem,
+						? options.elem
+						: this.$elem,
 				class_ = options && options.addClass ?
-					options.addClass
-					: "";
+						 options.addClass
+													 : '';
 
-			$elem
-				.addClass(
-					class_
-				)
-				.css({
-					width: _cache.width,
-					height: _cache.height
-				});
+			$elem.addClass(
+				class_
+			).css({
+					  width: _cache.width,
+					  height: _cache.height
+				  });
 
 			// part of resolving collisions: set values higher than 0,
 			// from cache created last time collisions were resolved,
@@ -1257,39 +1174,37 @@
 		},
 
 		// compute row height for "orientation": "horizontal"
-		_computeAutoHeight: function (options) {
+		_computeAutoHeight: function(options) {
 			var self = this,
 				// create fake taskbar and prepend it
-				$elem = $("<div></div>")
-					.addClass(
-						this.classes.taskbar
-						+ " " + this.classes.taskbarHorizontal
-						+ " " + this.classes.taskbarStickPrefix + options.edge
-					)
-					.prependTo($("body"));
+				$elem = $('<div></div>').addClass(
+					this.classes.taskbar
+					+ ' ' + this.classes.taskbarHorizontal
+					+ ' ' + this.classes.taskbarStickPrefix + options.edge
+				).prependTo($('body'));
 
 			this._setTaskbarRoundedCorners({
-				skipResizable: true,
-				elem: $elem
-			});
+											   skipResizable: true,
+											   elem: $elem
+										   });
 
 			// create fake container
-			var $dummy = this._factory("startButtonsContainer");
+			var $dummy = this._factory('startButtonsContainer');
 
 			// copy a bunch of properties regarding height,
 			// so $().tasbkar( "refresh" ) could be more accurate
 			if (this.$elem && this.$elem.length) {
 				this._copyStyles({
-					from: this.$elem,
-					to: $dummy,
-					properties: ["fontSize", "lineHeight"]
-				});
+									 from: this.$elem,
+									 to: $dummy,
+									 properties: ['fontSize', 'lineHeight']
+								 });
 			}
 
 			// create fake start button
-			var $start = this._factory("startButton", {
-				text: "Placeholder",
-				name: "start"
+			var $start = this._factory('startButton', {
+				text: 'Placeholder',
+				name: 'start'
 			}).prependTo($dummy);
 
 			// prepend container to taskbar
@@ -1305,18 +1220,18 @@
 			return height;
 		},
 
-		_bindGlobalEvents: function () {
+		_bindGlobalEvents: function() {
 			var self = this;
 
 			// bindings taskbar refresh to the browser window resize
 			// allow it to get the right dimensions
-			$(window).on("resize." + this._cache.uep, function (event, params) {
+			$(window).on('resize.' + this._cache.uep, function(event, params) {
 				// prevents bubbling of other resize events
 				if (event.target !== window) {
 					return true;
 				}
 				// +
-				if (!params || params.caller !== "taskbar-iframe") {
+				if (!params || params.caller !== 'taskbar-iframe') {
 					// call handler from within itself with a delay,
 					// for those cases  where iframe fix is useless
 					// - for example, when the body has fixed width
@@ -1336,26 +1251,26 @@
 
 				// refresh windows position
 				self._refreshWindowsPosition({
-					skipFitting: true
-				});
+												 skipFitting: true
+											 });
 			});
 
-			$(window).on("mousedown." + this._cache.uep, function (event) {
+			$(window).on('mousedown.' + this._cache.uep, function(event) {
 				// cache the last mousedown target for use in "click" handler
 				self._cache.mousedownTarget = $(event.target);
 			});
 
 			//
-			$(window).on("blur." + this._cache.uep, function (event) {
+			$(window).on('blur.' + this._cache.uep, function(event) {
 				if (self.options.propagateWindowBlur) {
 					self._blurWindows();
 					self.hideSubordinates();
 				}
 			});
 
-			$(document).on("click." + this._cache.uep, function (event) {
+			$(document).on('click.' + this._cache.uep, function(event) {
 				var prevents = self.$windowsContainment.data(
-					self._cnst.dataPrefix + "preventClicks"
+					self._cnst.dataPrefix + 'preventClicks'
 				);
 
 				var preventGlobalWindowClick = false;
@@ -1364,76 +1279,69 @@
 				// in regard to bluring windows and window buttons
 				if (!isNaN(parseInt(prevents, 10)) && prevents > 0) {
 					self.$windowsContainment.data(
-						self._cnst.dataPrefix + "preventClicks", --prevents
+						self._cnst.dataPrefix + 'preventClicks', --prevents
 					);
 
 					preventGlobalWindowClick = true;
 				}
 
-				var $target = $(event.target),
 					// when target is body, click started on diffrent element
 					// that is finished, in which case we could have more luck
 					// with mousedown target
-					$target = $target.is("body")
-						? self._cache.mousedownTarget
-						: $target,
-					$datepickerHeader = $target.closest(
-						"." + self.classes.uiDatepickerHeader
-					),
-					s = self.$elem[0].nodeName.toLowerCase()
-						+ "#" + self.$elem[0].id + " ",
-					i = "[data-taskbar-uuid=" + self.uuid + "]",
+				var $target = $(event.target).is('body') ? self._cache.mousedownTarget : $(event.target),
+					$datepickerHeader = $target.closest('.' + self.classes.uiDatepickerHeader),
+					s = self.$elem[0].nodeName.toLowerCase() + '#' + self.$elem[0].id + ' ',
+					i = '[data-taskbar-uuid=' + self.uuid + ']',
 
 					// is the target current taskbar's subordinate menu
 					isMenu = ($target.is(
-						+"[data-menu-type], "
-						+ "[data-menu-type] *, "
-						+ "[data-menu-button], "
-						+ "[data-menu-button] *, "
-						+ "[data-group-name], "
-						+ "[data-group-name] *, "
-						+ "." + self.classes.windowGroupMenu + ", "
-						+ "." + self.classes.windowGroupMenu + " *, "
-						+ "." + self.classes.windowButton + ", "
-						+ " ." + self.classes.windowButton + " *"
+						+'[data-menu-type], '
+						+ '[data-menu-type] *, '
+						+ '[data-menu-button], '
+						+ '[data-menu-button] *, '
+						+ '[data-group-name], '
+						+ '[data-group-name] *, '
+						+ '.' + self.classes.windowGroupMenu + ', '
+						+ '.' + self.classes.windowGroupMenu + ' *, '
+						+ '.' + self.classes.windowButton + ', '
+						+ ' .' + self.classes.windowButton + ' *'
 					) || $target.parent().is(
-						"[data-group-name]"
+						'[data-group-name]'
 					)),
 
 					// is the target curent taskbar's datepicker
 					isDatepicker = $target.is(
-						s + "." + self.classes.datepicker + ", "
-						+ s + "." + self.classes.datepicker + " *, "
-						+ s + "." + self.classes.clock + ", "
-						+ s + "." + self.classes.clock + " *"
+						s + '.' + self.classes.datepicker + ', '
+						+ s + '.' + self.classes.datepicker + ' *, '
+						+ s + '.' + self.classes.clock + ', '
+						+ s + '.' + self.classes.clock + ' *'
 					),
 
 					// is this a datepicker header of current taskbar datepicker
-					isDatepickerHeader = $datepickerHeader
-						.attr("data-taskbar-uuid") === self.uuid,
+					isDatepickerHeader = $datepickerHeader.attr('data-taskbar-uuid') === self.uuid,
 
 					// is this a window or window button
 					isWindow = $target.is(
-						"." + self.classes.window + ", "
-						+ "." + self.classes.window + " *, "
-						+ "." + self.classes.windowManipulationButton + ", "
-						+ "." + self.classes.windowManipulationButton + " span, "
+						'.' + self.classes.window + ', '
+						+ '.' + self.classes.window + ' *, '
+						+ '.' + self.classes.windowManipulationButton + ', '
+						+ '.' + self.classes.windowManipulationButton + ' span, '
 						// target could be detached by now,
 						// so let's check it's class name set by window widget
-						+ "." + self.classes.windowTitlebarButtonIcon
+						+ '.' + self.classes.windowTitlebarButtonIcon
 					),
 
 					// is this a window button or window group menu item
 					isWindowTrigger = $target.is(
-						"." + self.classes.windowButton + ", "
-						+ "." + self.classes.windowButton + " *, "
-						+ "." + self.classes.windowGroupMenu + ", "
-						+ "." + self.classes.windowGroupMenu + " *"
+						'.' + self.classes.windowButton + ', '
+						+ '.' + self.classes.windowButton + ' *, '
+						+ '.' + self.classes.windowGroupMenu + ', '
+						+ '.' + self.classes.windowGroupMenu + ' *'
 					),
 
 					// is this a dialog overlay of window from current taskbar
 					isOverlay = $target.is(
-						"." + $.emuos.window.prototype.classes.dialogOverlay + i
+						'.' + $.emuos.window.prototype.classes.dialogOverlay + i
 					);
 
 				isDatepicker = isDatepicker || isDatepickerHeader;
@@ -1441,16 +1349,16 @@
 				// if that's not a menu, hide menus
 				if (!isMenu) {
 					self._hideMenus({
-						own: true
-					});
+										own: true
+									});
 				}
 
 				// if that's not a datepicker, hide other datepicker
 				if (!isDatepicker) {
 					self._hideDatepickers({
-						own: true,
-						blur: !isMenu
-					});
+											  own: true,
+											  blur: !isMenu
+										  });
 				}
 
 				// it that's not a subordinate, set openedElements state to false
@@ -1481,20 +1389,19 @@
 			// or empty jQuery object otherwise
 			function getWindowWithInteraction() {
 				var $windowDragging = $(
-					"." + self.classes.window +
-					"." + self.classes.uiDraggableDragging
+					'.' + self.classes.window +
+					'.' + self.classes.uiDraggableDragging
 					),
 					$windowResizing = $(
-						"." + self.classes.window +
-						"." + self.classes.uiResizableResizing
+						'.' + self.classes.window +
+						'.' + self.classes.uiResizableResizing
 					),
 					windowInstance;
 
 				if ($windowDragging.length || $windowResizing.length) {
 					var $elem = ($windowDragging.length
-						? $windowDragging
-						: $windowResizing)
-						.children("." + self.classes.windowContent);
+								 ? $windowDragging
+								 : $windowResizing).children('.' + self.classes.windowContent);
 
 					if ($elem.is(self.windows())) {
 						return $elem;
@@ -1504,14 +1411,14 @@
 				return $();
 			}
 
-			$(window).on("scroll." + this._cache.uep, function (event) {
+			$(window).on('scroll.' + this._cache.uep, function(event) {
 				self._setDraggableContainment();
 
 				// don't refresh window's position:
 				// it's too heavy to do on every scroll
 				self._refreshWindowsContainment({
-					refreshPosition: false
-				});
+													refreshPosition: false
+												});
 
 				if (self.$elem.hasClass(self.classes.draggableDragging)) {
 					// after scroll is done via mousewheel or any other means,
@@ -1521,7 +1428,7 @@
 					var draggable = self.$elem.data(self.classes.uiDraggable);
 					draggable._setContainment();
 
-					$("." + self.classes.droppable).each(function () {
+					$('.' + self.classes.droppable).each(function() {
 						var $this = $(this),
 							droppable = $this.data(self.classes.uiDroppable);
 						droppable.offset = $this.offset();
@@ -1531,18 +1438,15 @@
 				var $window = getWindowWithInteraction();
 
 				if ($window.length) {
-					var dragging = $window.parent()
-							.hasClass(self.classes.uiDraggableDragging),
-						windowInstance = $window
-							.data(self._cnst.dataPrefix + "window");
+					var dragging = $window.parent().hasClass(self.classes.uiDraggableDragging),
+						windowInstance = $window.data(self._cnst.dataPrefix + 'window');
 
 					// refresh draggable containment
 					if (dragging) {
 						var containment = windowInstance._getRealContainment();
-						if (containment === "visible") {
+						if (containment === 'visible') {
 							windowInstance._setContainment();
-							var draggableInstance = $window.parent()
-								.data(self.classes.uiDraggable);
+							var draggableInstance = $window.parent().data(self.classes.uiDraggable);
 
 							draggableInstance._setContainment();
 						}
@@ -1556,97 +1460,100 @@
 			// where it make no sense to scroll, and a lot of additional code
 			// woulde be required to deal with problems emerging from changing
 			// elements position relative to the window
-			$(document).on("mousewheel." + this._cache.uep, function (event) {
+			$(document).on('mousewheel.' + this._cache.uep, function(event) {
 				if (
 					self._cache.progress.windowButtonsSortable
 					|| self._cache.progress.taskbarResizable
-					|| getWindowWithInteraction()
-						.parent()
-						.hasClass(self.classes.uiResizableResizing)
+					|| getWindowWithInteraction().parent().hasClass(self.classes.uiResizableResizing)
 				) {
 					event.preventDefault();
 				}
 			});
 
-			var checkConnectivity = function (e) {
+			var checkConnectivity = function(e) {
 				self._setNetworkMonitorStatus();
 			};
 
 			// refresh network monitor status on online/offline events
-			$(window).on("online." + this._cache.uep, checkConnectivity);
-			$(window).on("offline." + this._cache.uep, checkConnectivity);
+			$(window).on('online.' + this._cache.uep, checkConnectivity);
+			$(window).on('offline.' + this._cache.uep, checkConnectivity);
 		},
 
-		_setDraggable: function () {
+		_setDraggable: function() {
+			options = this.options;
+
 			var self = this,
-				options = this.options,
 				_cache = this._cache,
 				draggable = options.draggable,
 				$elem = self.$elem,
 				isDraggable = $elem.hasClass(this.classes.uiDraggable);
 
 			if (!draggable && isDraggable) {
-				$elem.draggable("destroy");
+				$elem.draggable('destroy');
 			}
 
 			if (draggable && (!$.ui.draggable || !$.ui.droppable)) {
 				this._debugLogAdd(
-					"jQuery UI Draggable and Droppable are required " +
-					"for draggable taskbar to work.", 1, 0);
+					'jQuery UI Draggable and Droppable are required ' +
+					'for draggable taskbar to work.', 1, 0);
 			}
 
 			if (!draggable || !$.ui.draggable || !$.ui.droppable) {
 				return;
 			}
 
-			var helperCreator = function () {
+			var helperCreator = function() {
 				// build helper with a initial width of one-column vertical taskbar
 				// and a initial height of one-row horizontal taskbar
-				var $helper = self._factory("draggableHelper").css({
-					width: _cache.verticalColumnWidth,
-					height: _cache.horizontalRowHeight,
-					position: "fixed"
-				});
+				var $helper = self._factory('draggableHelper').css({
+																	   width: _cache.verticalColumnWidth,
+																	   height: _cache.horizontalRowHeight,
+																	   position: 'fixed'
+																   });
 
 				var thickestBorderWidth = 0,
 					thickestBorder;
 
 				// get the thickest border; helper border color will be taken
 				// from this one, as it is most notable to user
-				$.each(["borderTopWidth", "borderRightWidth",
-						"borderBottomWidth", "borderLeftWidth"],
-					function (index, value) {
-						var currentBorderWidth = parseInt($elem.css(value), 10);
+				$.each([
+						   'borderTopWidth', 'borderRightWidth',
+						   'borderBottomWidth', 'borderLeftWidth'
+					   ],
+					   function(index, value) {
+						   var currentBorderWidth = parseInt($elem.css(value), 10);
 
-						// if border in the current itteration is thicker than what we
-						// had to this point, select it so it could later be used
-						if (currentBorderWidth > thickestBorderWidth) {
-							thickestBorderWidth = currentBorderWidth;
-							thickestBorder = value.slice(0, -5);
-						}
-					});
+						   // if border in the current itteration is thicker than what we
+						   // had to this point, select it so it could later be used
+						   if (currentBorderWidth > thickestBorderWidth) {
+							   thickestBorderWidth = currentBorderWidth;
+							   thickestBorder = value.slice(0, -5);
+						   }
+					   });
 
 				// color of the thickest border
-				var color = $elem.css(thickestBorder + "Color");
+				var color = $elem.css(thickestBorder + 'Color');
 
 				// set color of the thickest border and 1px width
 				// for every border of the helper
-				$.each(["borderTop", "borderRight",
-						"borderBottom", "borderLeft"],
-					function (index, value) {
-						$helper
-							.css(value + "Width", "1px")
-							.css(value + "Color", color);
-					});
+				$.each([
+						   'borderTop', 'borderRight',
+						   'borderBottom', 'borderLeft'
+					   ],
+					   function(index, value) {
+						   $helper.css(value + 'Width', '1px').css(value + 'Color', color);
+					   });
 
 				// copy a bunch of properties from taskbar
 				self._copyStyles({
-					from: $elem,
-					to: $helper,
-					properties: ["boxSizing", "backgroundColor",
-						"borderTopStyle", "borderRightStyle",
-						"borderBottomStyle", "borderLeftStyle"]
-				});
+									 from: $elem,
+									 to: $helper,
+									 properties: [
+										 'boxSizing', 'backgroundColor',
+										 'borderTopStyle', 'borderRightStyle',
+										 'borderBottomStyle', 'borderLeftStyle'
+									 ]
+								 });
 
 				return $helper;
 			};
@@ -1662,23 +1569,23 @@
 			var options = {
 				scroll: false,
 				// prevents scrolling
-				containment: "window",
-				cursor: "move",
+				containment: 'window',
+				cursor: 'move',
 				distance: 1,
-				revert: "invalid",
+				revert: 'invalid',
 				iframeFix: true,
 				revertDuration: false,
-				cancel: "." + this.classes.uiButton
-					+ ", ." + this.classes.uiMenu
-					+ ", ." + this.classes.uiDatepicker
+				cancel: '.' + this.classes.uiButton
+					+ ', .' + this.classes.uiMenu
+					+ ', .' + this.classes.uiDatepicker
 					// Trident triggers mousedown event when scroll
 					// is being dragged, so draggable can't start
 					// on elements that potentially can have scroll
 					+ (
 						window.navigator.userAgent.match(/Trident/)
 						&& !this._cache.horizontal
-							? ", ." + self.classes.windowButtonsContainer
-							: ""
+						? ', .' + self.classes.windowButtonsContainer
+						: ''
 					),
 				// cursor will be at the center of helper
 				cursorAt: {
@@ -1686,17 +1593,20 @@
 					top: parseInt(_cache.horizontalRowHeight / 2, 10)
 				},
 				helper: helperCreator,
-				start: function (event, ui) {
+				start: function(event, ui) {
 					self._cache.progress.taskbarDraggable = true;
 
 					// show taskbar immediately
 					self._startShowing({
-						quick: true
-					});
+										   quick: true
+									   });
 
 					self.$elem.data(
-						self._cnst.dataPrefix + "window-scrolls",
-						{x: $(window).scrollLeft(), y: $(window).scrollTop()}
+						self._cnst.dataPrefix + 'window-scrolls',
+						{
+							x: $(window).scrollLeft(),
+							y: $(window).scrollTop()
+						}
 					);
 
 					originalOffset = self.$elem.offset();
@@ -1705,42 +1615,41 @@
 					self._hideAll();
 					self._showDroppable();
 
-					self._trigger("dragStart", event, draggableUi(ui));
+					self._trigger('dragStart', event, draggableUi(ui));
 				},
-				stop: function (event, ui) {
+				stop: function(event, ui) {
 					self._hideDroppable();
 					self.$elem.removeClass(self.classes.draggableDragging);
 
-					$("." + self.classes.droppablePending)
-						.removeClass(self.classes.droppablePending);
+					$('.' + self.classes.droppablePending).removeClass(self.classes.droppablePending);
 
 					self._cache.progress.taskbarDraggable = false;
 
-					self.$elem.removeData(self._cnst.dataPrefix + "window-scrolls");
+					self.$elem.removeData(self._cnst.dataPrefix + 'window-scrolls');
 
-					self.windows().window("refreshPosition", {
+					self.windows().window('refreshPosition', {
 						skipOnFit: true
 					});
 
-					self._trigger("dragStop", event, draggableUi(ui));
+					self._trigger('dragStop', event, draggableUi(ui));
 				},
-				drag: function (event, ui) {
+				drag: function(event, ui) {
 					if (parseFloat($.ui.dialog.prototype.version) >= 1.11) {
 						var scrolls = self.$elem.data(
-							self._cnst.dataPrefix + "window-scrolls"
+							self._cnst.dataPrefix + 'window-scrolls'
 						);
 
 						ui.position.left += scrolls.x - $(window).scrollLeft();
 						ui.position.top += scrolls.y - $(window).scrollTop();
 					}
 
-					self._trigger("drag", event, draggableUi(ui));
+					self._trigger('drag', event, draggableUi(ui));
 				},
 				disabled: !draggable
 			};
 
 			if (isDraggable) {
-				$elem.draggable("option", options);
+				$elem.draggable('option', options);
 			} else {
 				$elem.draggable(options);
 			}
@@ -1749,7 +1658,7 @@
 		},
 
 		// set's containment for draggable
-		_setDraggableContainment: function () {
+		_setDraggableContainment: function() {
 			if (!this.options.draggable || !$.ui.draggable || !$.ui.droppable
 				|| !this.$elem.hasClass(this.classes.uiDraggable)) {
 				return;
@@ -1773,22 +1682,22 @@
 					scroll.y + wc.height - db.height
 				];
 
-			this.$elem.draggable("option", "containment", containment);
+			this.$elem.draggable('option', 'containment', containment);
 		},
 
-		_setResizable: function (options) {
+		_setResizable: function(options) {
 			var self = this,
 				_cache = self._cache,
 				resizable = self.options.resizable,
-				horizontal = self.options.orientation === "horizontal",
+				horizontal = self.options.orientation === 'horizontal',
 				stick = !horizontal ? _cache.stickHorizontal : _cache.stickVertical,
 				orientation = self.options.orientation,
 				$elem = self.$elem,
-				$resizable = $elem.find("." + self.classes.resizable);
+				$resizable = $elem.find('.' + self.classes.resizable);
 
 			if (resizable && !$.ui.resizable) {
 				this._debugLogAdd(
-					"jQuery UI Resizable is required for resizable taskbar to work.",
+					'jQuery UI Resizable is required for resizable taskbar to work.',
 					1, 0
 				);
 			}
@@ -1801,7 +1710,7 @@
 			// so resizable has to be rebuilt every time
 			// http://bugs.jqueryui.com/ticket/3423
 			if ($resizable.hasClass(this.classes.uiResizable)) {
-				$resizable.resizable("destroy");
+				$resizable.resizable('destroy');
 			}
 
 			$resizable.remove();
@@ -1810,21 +1719,21 @@
 				return;
 			}
 
-			$resizable = self._factory("resizable").prependTo($elem);
+			$resizable = self._factory('resizable').prependTo($elem);
 
-			if (this.options.horizontalWidth === "auto" && horizontal) {
+			if (this.options.horizontalWidth === 'auto' && horizontal) {
 				var resizableCalculatedWidth = this.$elem.outerWidth();
-				$resizable.css("width", resizableCalculatedWidth);
+				$resizable.css('width', resizableCalculatedWidth);
 			}
 
 			var handles = {
 				horizontal: {
-					bottom: "n",
-					top: "s"
+					bottom: 'n',
+					top: 's'
 				},
 				vertical: {
-					left: "e",
-					right: "w"
+					left: 'e',
+					right: 'w'
 				}
 			};
 
@@ -1861,29 +1770,30 @@
 				}
 			};
 
-			var resizableUi = function (originalUi, eventType) {
+			var resizableUi = function(originalUi, eventType) {
 				var o = self.options,
-					sizeAxis, gridPosition,
+					sizeAxis,
+					gridPosition,
 					ui = {};
 
 				ui.helper = originalUi.helper;
 				ui.gridPosition = originalUi.gridPosition;
 				ui.originalGridPosition = originalUi.originalGridPosition;
 
-				ui.originalSizeAxis = o.orientation === "horizontal"
-					? _cache.horizontalRowHeight
-					: _cache.verticalColumnWidth;
+				ui.originalSizeAxis = o.orientation === 'horizontal'
+									  ? _cache.horizontalRowHeight
+									  : _cache.verticalColumnWidth;
 
-				ui.originalGridPosition = o.orientation === "horizontal"
-					? o.horizontalRows
-					: o.verticalColumns;
+				ui.originalGridPosition = o.orientation === 'horizontal'
+										  ? o.horizontalRows
+										  : o.verticalColumns;
 
-				if (o.orientation === "horizontal") {
+				if (o.orientation === 'horizontal') {
 					sizeAxis = originalUi.size.height;
 					gridPosition = sizeAxis / _cache.horizontalRowHeight;
 				}
 
-				if (o.orientation === "vertical") {
+				if (o.orientation === 'vertical') {
 					sizeAxis = originalUi.size.width;
 					gridPosition = sizeAxis / _cache.verticalColumnWidth;
 				}
@@ -1902,18 +1812,18 @@
 				first: false
 			};
 
-			var fixResizableMaskPosition = function (event, ui, eventType) {
+			var fixResizableMaskPosition = function(event, ui, eventType) {
 				var dimensionName = self._cache.horizontal
-					? "bottom"
-					: "right";
+									? 'bottom'
+									: 'right';
 
 				var invertedDimension = self._cache.horizontal
-					? "top"
-					: "left";
+										? 'top'
+										: 'left';
 
 				var size = self._cache.horizontal
-					? "height"
-					: "width";
+						   ? 'height'
+						   : 'width';
 
 				if (self._cache.edge !== dimensionName) {
 					return;
@@ -1921,7 +1831,7 @@
 
 				var uiGridPositionWasZero = false;
 
-				if (eventType === "resize" || eventType === "stop") {
+				if (eventType === 'resize' || eventType === 'stop') {
 					// right edge fix
 					if (!ui.gridPosition) {
 						uiGridPositionWasZero = true;
@@ -1948,9 +1858,7 @@
 							cssSize = rightDimension + diff;
 						}
 
-						ui.helper
-							.css(invertedDimension, cssDimension + diff)
-							.css(size, cssSize - diff);
+						ui.helper.css(invertedDimension, cssDimension + diff).css(size, cssSize - diff);
 
 						return true;
 					}
@@ -1958,99 +1866,99 @@
 			};
 
 			$resizable.resizable({
-				grid: grid[orientation][stick],
-				handles: handles[orientation][stick],
-				minWidth: min[orientation].width,
-				minHeight: min[orientation].height,
-				maxWidth: max[orientation].width,
-				maxHeight: max[orientation].height,
-				// when distance or delay are anything but 0, resizable mask change
-				// it's dimension before resize start; we don't want that because
-				// it's not the original element that get resized,
-				// but a palceholder sitting on top of taskbar, expanding
-				// to the size of taskbar when mouse is over resizable handle
-				distance: 0,
-				delay: 0,
-				start: function (event, ui) {
-					self._cache.progress.taskbarResizable = true;
+									 grid: grid[orientation][stick],
+									 handles: handles[orientation][stick],
+									 minWidth: min[orientation].width,
+									 minHeight: min[orientation].height,
+									 maxWidth: max[orientation].width,
+									 maxHeight: max[orientation].height,
+									 // when distance or delay are anything but 0, resizable mask change
+									 // it's dimension before resize start; we don't want that because
+									 // it's not the original element that get resized,
+									 // but a palceholder sitting on top of taskbar, expanding
+									 // to the size of taskbar when mouse is over resizable handle
+									 distance: 0,
+									 delay: 0,
+									 start: function(event, ui) {
+										 self._cache.progress.taskbarResizable = true;
 
-					ui = resizableUi(ui);
+										 ui = resizableUi(ui);
 
-					atStart.axis = ui.sizeAxis;
-					atStart.first = true;
-					atStart.gridPosition = ui.originalGridPosition;
+										 atStart.axis = ui.sizeAxis;
+										 atStart.first = true;
+										 atStart.gridPosition = ui.originalGridPosition;
 
-					self._startShowing({
-						quick: true
-					});
+										 self._startShowing({
+																quick: true
+															});
 
-					self.$elem.addClass(self.classes.resizableResizing);
+										 self.$elem.addClass(self.classes.resizableResizing);
 
-					$(event.target).css(
-						self._styleIndicator(
-							self.classes.uiWidgetContent
-							+ " " + self.classes.uiStateActive,
-							"borderColor"
-						)
-					);
+										 $(event.target).css(
+											 self._styleIndicator(
+												 self.classes.uiWidgetContent
+												 + ' ' + self.classes.uiStateActive,
+												 'borderColor'
+											 )
+										 );
 
-					self._trigger("resizeStart", event, ui);
-				},
-				resize: function (event, ui) {
-					ui = resizableUi(ui);
+										 self._trigger('resizeStart', event, ui);
+									 },
+									 resize: function(event, ui) {
+										 ui = resizableUi(ui);
 
-					var fixed;
+										 var fixed;
 
-					if (self._versionOf("resizable", ">=", "1.11.1")) {
-						fixed = fixResizableMaskPosition(event, ui, "resize");
-					}
+										 if (self._versionOf('resizable', '>=', '1.11.1')) {
+											 fixed = fixResizableMaskPosition(event, ui, 'resize');
+										 }
 
-					self._setTaskbarRoundedCorners({
-						skipResizable: ui.gridPosition !== ui.originalGridPosition
-					});
+										 self._setTaskbarRoundedCorners({
+																			skipResizable: ui.gridPosition !== ui.originalGridPosition
+																		});
 
-					// dont trigger event if size was corrected by
-					// fixResizableMaskPosition()
-					if (!atStart.first || !fixed) {
-						self._trigger("resize", event, ui);
-					}
+										 // dont trigger event if size was corrected by
+										 // fixResizableMaskPosition()
+										 if (!atStart.first || !fixed) {
+											 self._trigger('resize', event, ui);
+										 }
 
-					atStart.first = false;
-				},
-				stop: function (event, ui) {
-					var o = self.options;
+										 atStart.first = false;
+									 },
+									 stop: function(event, ui) {
+										 var o = self.options;
 
-					ui = resizableUi(ui);
+										 ui = resizableUi(ui);
 
-					if (self._versionOf("resizable", ">=", "1.11.1")) {
-						fixResizableMaskPosition(event, ui, "stop");
-					}
+										 if (self._versionOf('resizable', '>=', '1.11.1')) {
+											 fixResizableMaskPosition(event, ui, 'stop');
+										 }
 
-					if (o.orientation === "horizontal") {
-						o.horizontalRows = Math.round(ui.gridPosition);
-					}
+										 if (o.orientation === 'horizontal') {
+											 o.horizontalRows = Math.round(ui.gridPosition);
+										 }
 
-					if (o.orientation === "vertical") {
-						o.verticalColumns = Math.round(ui.gridPosition);
-					}
+										 if (o.orientation === 'vertical') {
+											 o.verticalColumns = Math.round(ui.gridPosition);
+										 }
 
-					self.$elem.removeClass(self.classes.resizableResizing);
+										 self.$elem.removeClass(self.classes.resizableResizing);
 
-					self._cache.keepCollidedPosition = true;
-					self._refresh();
-					self._cache.keepCollidedPosition = false;
+										 self._cache.keepCollidedPosition = true;
+										 self._refresh();
+										 self._cache.keepCollidedPosition = false;
 
-					self._cache.progress.taskbarResizable = false;
+										 self._cache.progress.taskbarResizable = false;
 
-					self._trigger("resizeStop", event, ui);
-				},
-				disabled: !resizable
-			});
+										 self._trigger('resizeStop', event, ui);
+									 },
+									 disabled: !resizable
+								 });
 
-			var resizableMouseEnterLeave = function (event) {
+			var resizableMouseEnterLeave = function(event) {
 				var $self = $(this),
-					$elem = $self.closest("." + self.classes.resizable),
-					horizontal = self.options.orientation === "horizontal",
+					$elem = $self.closest('.' + self.classes.resizable),
+					horizontal = self.options.orientation === 'horizontal',
 					vertical = !horizontal,
 					stick = horizontal ? self._cache.stickVertical : self._cache.stickHorizontal;
 
@@ -2067,48 +1975,48 @@
 					return true;
 				}
 
-				var $taskbar = $elem.closest("." + self.classes.taskbar),
-					$handle = $elem.find("." + self.classes.uiResizableHandle),
+				var $taskbar = $elem.closest('.' + self.classes.taskbar),
+					$handle = $elem.find('.' + self.classes.uiResizableHandle),
 
 					t = {
-						b: parseInt($taskbar.css("borderBottomWidth"), 10),
-						t: parseInt($taskbar.css("borderTopWidth"), 10),
-						r: parseInt($taskbar.css("borderRightWidth"), 10),
-						l: parseInt($taskbar.css("borderLeftWidth"), 10)
+						b: parseInt($taskbar.css('borderBottomWidth'), 10),
+						t: parseInt($taskbar.css('borderTopWidth'), 10),
+						r: parseInt($taskbar.css('borderRightWidth'), 10),
+						l: parseInt($taskbar.css('borderLeftWidth'), 10)
 					},
 
 					ho = self.options.resizableHandleOverflow,
 
 					elemCss = {
-						top: "auto",
-						bottom: "auto",
-						left: "auto",
-						right: "auto",
+						top: 'auto',
+						bottom: 'auto',
+						left: 'auto',
+						right: 'auto',
 						borderTopWidth: 0,
 						borderRightWidth: 0,
 						borderBottomWidth: 0,
 						borderLeftWidth: 0,
-						borderStyle: $taskbar.css("borderStyle")
+						borderStyle: $taskbar.css('borderStyle')
 					},
 
 					handleCss = {
-						top: "auto",
-						bottom: "auto",
-						left: "auto",
-						right: "auto"
+						top: 'auto',
+						bottom: 'auto',
+						left: 'auto',
+						right: 'auto'
 					};
 
 				/*if (resizable) {
-					// copy border color of default state
-					if (event.type === "mouseleave") {
-						$.extend(elemCss, self._styleIndicator(self.classes.uiWidgetContent, "borderColor"));
-					}
+				 // copy border color of default state
+				 if (event.type === "mouseleave") {
+				 $.extend(elemCss, self._styleIndicator(self.classes.uiWidgetContent, "borderColor"));
+				 }
 
-					// copy border color of focus state
-					if (event.type === "mouseenter") {
-						$.extend(elemCss, self._styleIndicator(self.classes.uiWidgetContent + " " + self.classes.uiStateFocus, "borderColor"));
-					}
-				}*/
+				 // copy border color of focus state
+				 if (event.type === "mouseenter") {
+				 $.extend(elemCss, self._styleIndicator(self.classes.uiWidgetContent + " " + self.classes.uiStateFocus, "borderColor"));
+				 }
+				 }*/
 
 				// minSize was initially set to 0 (technically, this variable
 				// was not present since it would do nothing), but Chrome failed to
@@ -2120,82 +2028,82 @@
 				var minSize = 1;
 
 				// handle horizontal top
-				if (horizontal && stick === "top") {
+				if (horizontal && stick === 'top') {
 					handleCss.height = ho * 2 + t.b;
 
-					if (event.type === "mouseenter") {
+					if (event.type === 'mouseenter') {
 						handleCss.bottom = handleCss.height * -1 + ho;
 					}
 
-					if (event.type === "mouseleave") {
+					if (event.type === 'mouseleave') {
 						handleCss.bottom = -ho + minSize;
 					}
 				}
 
 				// handle horizontal bottom
-				if (horizontal && stick === "bottom") {
+				if (horizontal && stick === 'bottom') {
 					handleCss.height = ho * 2 + t.t;
 
-					if (event.type === "mouseenter") {
+					if (event.type === 'mouseenter') {
 						handleCss.top = handleCss.height * -1 + ho + minSize;
 					}
 
-					if (event.type === "mouseleave") {
+					if (event.type === 'mouseleave') {
 						handleCss.top = -ho;
 					}
 				}
 
 				// handle vertical left
-				if (vertical && stick === "left") {
+				if (vertical && stick === 'left') {
 					handleCss.width = ho * 2 + t.r;
 
-					if (event.type === "mouseenter") {
+					if (event.type === 'mouseenter') {
 						handleCss.right = handleCss.width * -1 + ho;
 					}
 
-					if (event.type === "mouseleave") {
+					if (event.type === 'mouseleave') {
 						handleCss.right = -ho + minSize;
 					}
 				}
 
 				// handle vertical right
-				if (vertical && stick === "right") {
+				if (vertical && stick === 'right') {
 					handleCss.width = ho * 2 + t.l;
 
-					if (event.type === "mouseenter") {
+					if (event.type === 'mouseenter') {
 						handleCss.left = handleCss.width * -1 + ho + minSize;
 					}
 
-					if (event.type === "mouseleave") {
+					if (event.type === 'mouseleave') {
 						handleCss.left = -ho;
 					}
 				}
 
 				// element mouseenter
-				if (event.type === "mouseenter") {
+				if (event.type === 'mouseenter') {
 					elemCss.top = 0 - t.t;
 					elemCss.left = 0 - t.l;
 
 					// horizontal top
-					if (horizontal && stick === "top") {
+					if (horizontal && stick === 'top') {
 						elemCss.borderBottomWidth = resizable ? t.b : 0;
 						elemCss.top = 0 - t.t - t.b - self.options.resizableHandleOffset;
 					}
 
 					// horizontal bottom
-					if (horizontal && stick === "bottom") {
+					if (horizontal && stick === 'bottom') {
 						elemCss.borderTopWidth = resizable ? t.t : 0;
 						elemCss.top = 0 - t.t + self.options.resizableHandleOffset;
 					}
 
 					// vertical left
-					if (vertical && stick === "left") {
+					if (vertical && stick === 'left') {
 						elemCss.borderRightWidth = resizable ? t.r : 0;
 						elemCss.left = 0 - t.l - t.r - self.options.resizableHandleOffset;
 					}
 
 					// vertical right
-					if (vertical && stick === "right") {
+					if (vertical && stick === 'right') {
 						elemCss.borderLeftWidth = resizable ? t.l : 0;
 						elemCss.left = 0 - t.l + self.options.resizableHandleOffset;
 					}
@@ -2205,7 +2113,7 @@
 				}
 
 				// element mouseleave
-				if (event.type === "mouseleave") {
+				if (event.type === 'mouseleave') {
 					// horizontal
 					if (horizontal) {
 						elemCss.left = 0 - t.l;
@@ -2217,25 +2125,25 @@
 					}
 
 					// horizontal top
-					if (horizontal && stick === "top") {
+					if (horizontal && stick === 'top') {
 						elemCss.borderBottomWidth = resizable ? t.b : 0;
 						elemCss.top = self._cache.height - t.t - (self.options.resizableHandleOffset !== 0 ? self.options.resizableHandleOffset + 2 : self.options.resizableHandleOffset);
 					}
 
 					// horizontal bottom
-					if (horizontal && stick === "bottom") {
+					if (horizontal && stick === 'bottom') {
 						elemCss.borderTopWidth = resizable ? t.t : 0;
 						elemCss.top = 0 - t.t + self.options.resizableHandleOffset;
 					}
 
 					// vertical left
-					if (vertical && stick === "left") {
+					if (vertical && stick === 'left') {
 						elemCss.borderRightWidth = resizable ? t.r : 0;
 						elemCss.left = self._cache.width - t.l - (self.options.resizableHandleOffset !== 0 ? self.options.resizableHandleOffset + 2 : self.options.resizableHandleOffset);
 					}
 
 					// vertical right
-					if (vertical && stick === "right") {
+					if (vertical && stick === 'right') {
 						elemCss.borderLeftWidth = resizable ? t.l : 0;
 						elemCss.left = 0 - t.l + self.options.resizableHandleOffset;
 					}
@@ -2245,26 +2153,26 @@
 				}
 
 				$handle.css(handleCss);
-				$elem.css(elemCss).toggleClass(self.classes.resizableMouseover, event.type === "mouseenter");
+				$elem.css(elemCss).toggleClass(self.classes.resizableMouseover, event.type === 'mouseenter');
 			};
 
-			$resizable.find("." + this.classes.uiResizableHandle).on("mouseenter." + this._cnst.eventPrefix + "resizablehandle" + " mouseleave." + this._cnst.eventPrefix + "resizablehandle", resizableMouseEnterLeave).on("mousedown." + this._cache.uep, function () {
-					if (!self.options.resizable) {
-						return true;
-					}
+			$resizable.find('.' + this.classes.uiResizableHandle).on('mouseenter.' + this._cnst.eventPrefix + 'resizablehandle' + ' mouseleave.' + this._cnst.eventPrefix + 'resizablehandle', resizableMouseEnterLeave).on('mousedown.' + this._cache.uep, function() {
+				if (!self.options.resizable) {
+					return true;
+				}
 
-					self._hideAll();
-			}).trigger("mouseleave." + this._cnst.eventPrefix + "resizablehandle");
+				self._hideAll();
+			}).trigger('mouseleave.' + this._cnst.eventPrefix + 'resizablehandle');
 		},
 
-		_getContainment: function () {
+		_getContainment: function() {
 			return {
 				width: $(window).width(),
 				height: $(window).height()
 			};
 		},
 
-		_getContainmentInner: function () {
+		_getContainmentInner: function() {
 			return {
 				width: $(window).innerWidth(),
 				height: $(window).innerHeight()
@@ -2272,24 +2180,22 @@
 		},
 
 		// show droppable zones
-		_showDroppable: function () {
+		_showDroppable: function() {
 			var $elem = this.$elem;
 
-			$("." + this.classes.droppable +
-				"[data-taskbar-uuid= " + this.uuid + "]")
-				.removeClass(this.classes.hidden);
+			$('.' + this.classes.droppable +
+				  '[data-taskbar-uuid= ' + this.uuid + ']').removeClass(this.classes.hidden);
 		},
 
 		// hide droppable zones
-		_hideDroppable: function () {
-			$("." + this.classes.droppable +
-				"[data-taskbar-uuid= " + this.uuid + "]")
-				.addClass(this.classes.hidden);
+		_hideDroppable: function() {
+			$('.' + this.classes.droppable +
+				  '[data-taskbar-uuid= ' + this.uuid + ']').addClass(this.classes.hidden);
 		},
 
-		_setDroppable: function () {
-			$("." + this.classes.droppableContainer +
-				"[data-taskbar-uuid= " + this.uuid + "]").remove();
+		_setDroppable: function() {
+			$('.' + this.classes.droppableContainer +
+				  '[data-taskbar-uuid= ' + this.uuid + ']').remove();
 
 			if (!this.options.draggable) {
 				return;
@@ -2297,378 +2203,351 @@
 
 			var self = this,
 				options = this.options,
-				$container = self._factory("droppableContainer")
-					.insertAfter(self.$elem),
+				$container = self._factory('droppableContainer').insertAfter(self.$elem),
 				containment = this._getContainment(),
 				// default sticks for droppable edges
 				sticks = {
-					"top": "top left",
-					"right": "right top",
-					"bottom": "bottom left",
-					"left": "left top"
+					'top': 'top left',
+					'right': 'right top',
+					'bottom': 'bottom left',
+					'left': 'left top'
 				},
 				_cache = this._cache,
-				horizontal, $elem;
+				horizontal,
+				$elem;
 
-			$.each(["top", "right", "bottom", "left"],
-				function (index, position) {
-					horizontal = $.inArray(position, ["top", "bottom"]) > -1;
+			$.each(['top', 'right', 'bottom', 'left'],
+				   function(index, position) {
+					   horizontal = $.inArray(position, ['top', 'bottom']) > -1;
 
-					var upperKey = position
-						.charAt(0)
-						.toUpperCase() + position.slice(1);
+					   var upperKey = position.charAt(0).toUpperCase() + position.slice(1);
 
-					// create droppables and keep their jQuery objects
-					self["$droppable" + upperKey] = $elem = self
-						._factory("droppable")
-						.data(self._cnst.dataPrefix + "droppable-edge", position)
-						.uniqueId()
-						.appendTo($container);
+					   // create droppables and keep their jQuery objects
+					   self['$droppable' + upperKey] = $elem = self._factory('droppable').data(self._cnst.dataPrefix + 'droppable-edge', position).uniqueId().appendTo($container);
 
-					// use the same function that is used for
-					// calculating taskbar dimensions
-					_cache = self._setDimensions({
-						elem: $elem,
-						orientation: horizontal ? "horizontal" : "vertical",
+					   // use the same function that is used for
+					   // calculating taskbar dimensions
+					   _cache = self._setDimensions({
+														elem: $elem,
+														orientation: horizontal ? 'horizontal' : 'vertical',
 
-						horizontalWidth: "100%",
-						horizontalStick: sticks[position],
-						horizontalRows: 1,
-						horizontalRowHeight: _cache.horizontalRowHeight,
+														horizontalWidth: '100%',
+														horizontalStick: sticks[position],
+														horizontalRows: 1,
+														horizontalRowHeight: _cache.horizontalRowHeight,
 
-						verticalHeight: "100%",
-						verticalStick: sticks[position],
-						verticalColumns: 1,
-						verticalColumnWidth: _cache.verticalColumnWidth,
-					});
+														verticalHeight: '100%',
+														verticalStick: sticks[position],
+														verticalColumns: 1,
+														verticalColumnWidth: _cache.verticalColumnWidth
+													});
 
-					// set CSS to droppable
-					self._setTaskbarPositionDimensions({
-						elem: $elem,
-						_cache: _cache,
-						addClass: self.classes.hidden
-					});
+					   // set CSS to droppable
+					   self._setTaskbarPositionDimensions({
+															  elem: $elem,
+															  _cache: _cache,
+															  addClass: self.classes.hidden
+														  });
 
-					var droppableAccept = function ($draggable, $droppable, ee) {
-						var droppableEdge = $droppable
-								.data(self._cnst.dataPrefix + "droppable-edge"),
-							taskbarEdge = $draggable
-								.data(self._cnst.dataPrefix + "taskbarEdge"),
-							margins = self.$windowsContainment
-								.data(self._cnst.dataPrefix + "taskbar-margins");
+					   var droppableAccept = function($draggable, $droppable, ee) {
+						   var droppableEdge = $droppable.data(self._cnst.dataPrefix + 'droppable-edge'),
+							   taskbarEdge = $draggable.data(self._cnst.dataPrefix + 'taskbarEdge'),
+							   margins = self.$windowsContainment.data(self._cnst.dataPrefix + 'taskbar-margins');
 
-						var accept =
-							self.uuid === $draggable.data(
-							self._cnst.dataPrefix + "taskbar"
-							).uuid
-							&& (
-								self.options.dropOnExisting
-								|| margins[droppableEdge] === 0
-								|| taskbarEdge === droppableEdge
-							);
+						   var accept =
+							   self.uuid === $draggable.data(
+							   self._cnst.dataPrefix + 'taskbar'
+							   ).uuid
+							   && (
+								   self.options.dropOnExisting
+								   || margins[droppableEdge] === 0
+								   || taskbarEdge === droppableEdge
+							   );
 
-						return accept;
-					};
+						   return accept;
+					   };
 
-					var draggableDrop = function (event, ui) {
-						var $target = $(event.target),
-							o = self.options,
-							requestedStick;
+					   var draggableDrop = function(event, ui) {
+						   var $target = $(event.target),
+							   o = self.options,
+							   requestedStick;
 
-						// taskbar helper could be positioned over two droppables
-						// at the same time and two drop events will occur, but only
-						// the last droppable entered will have this class
-						if (
-							!$target.hasClass(self.classes.droppableOver)
-							&& event.type !== "dropover"
-						) {
-							return false;
-						}
+						   // taskbar helper could be positioned over two droppables
+						   // at the same time and two drop events will occur, but only
+						   // the last droppable entered will have this class
+						   if (
+							   !$target.hasClass(self.classes.droppableOver)
+							   && event.type !== 'dropover'
+						   ) {
+							   return false;
+						   }
 
-						var orientation,
-							containment = self._getContainment(),
-							prefix = self.classes.taskbarPrefix,
-							stickPrefix = prefix + "stick-",
-							stick = [];
+						   var orientation,
+							   containment = self._getContainment(),
+							   prefix = self.classes.taskbarPrefix,
+							   stickPrefix = prefix + 'stick-',
+							   stick = [];
 
-						var classes = $target
-							.attr("class")
-							.split(" ")
-							.map(function (className) {
-									// get droppable orientation
-									if ($.inArray(className,
-										[prefix + "horizontal", prefix + "vertical"]
-									) > -1) {
-										return orientation = className.replace(
-											self.classes.taskbarPrefix, ""
-										);
-									}
+						   var classes = $target.attr('class').split(' ').map(function(className) {
+																				  // get droppable orientation
+																				  if ($.inArray(className,
+																								[prefix + 'horizontal', prefix + 'vertical']
+																				  ) > -1) {
+																					  return orientation = className.replace(
+																						  self.classes.taskbarPrefix, ''
+																					  );
+																				  }
 
-									// get droppable stick
-									if (className.indexOf(stickPrefix) !== -1) {
-										return className.replace(stickPrefix, "");
-									}
-								}
-							);
+																				  // get droppable stick
+																				  if (className.indexOf(stickPrefix) !== -1) {
+																					  return className.replace(stickPrefix, '');
+																				  }
+																			  }
+						   );
 
-						// in those cases taskbar cannot be dropped on current droppable
-						if (
-							o.draggable === "orientation"
-							&& orientation !== o.orientation
-							||
-							o.draggable === "vertical"
-							&& orientation === "horizontal"
-							||
-							o.draggable === "horizontal"
-							&& orientation === "vertical"
-						) {
-							return false;
-						}
+						   // in those cases taskbar cannot be dropped on current droppable
+						   if (
+							   o.draggable === 'orientation'
+							   && orientation !== o.orientation
+							   ||
+							   o.draggable === 'vertical'
+							   && orientation === 'horizontal'
+							   ||
+							   o.draggable === 'horizontal'
+							   && orientation === 'vertical'
+						   ) {
+							   return false;
+						   }
 
-						// if it not false at this point, it's true for dropover:
-						// droppable can be highlighted
-						if (event.type === "dropover") {
-							return true;
-						}
+						   // if it not false at this point, it's true for dropover:
+						   // droppable can be highlighted
+						   if (event.type === 'dropover') {
+							   return true;
+						   }
 
-						for (var i in classes) {
-							if (
-								$.inArray(classes[i], ["right", "left"]) > -1
-								&& orientation === "horizontal"
-							) {
-								requestedStick = event.clientX > containment.width / 2
-									? "right"
-									: "left";
+						   for (var i in classes) {
+							   if (
+								   $.inArray(classes[i], ['right', 'left']) > -1
+								   && orientation === 'horizontal'
+							   ) {
+								   requestedStick = event.clientX > containment.width / 2
+													? 'right'
+													: 'left';
 
-								if (!options.draggableBetweenEdges) {
-									// if edge doesn't match, do nothing
-									if (o.horizontalStick
-										.indexOf(requestedStick) === -1) {
-										return false;
-									}
+								   if (!options.draggableBetweenEdges) {
+									   // if edge doesn't match, do nothing
+									   if (o.horizontalStick.indexOf(requestedStick) === -1) {
+										   return false;
+									   }
 
-									// if taskbar is not draggable between edges,
-									// take the original stick
-									classes[i] = options.horizontalStick
-										.replace(/(bottom|top)/, "");
-								} else {
-									// if taskbar is draggable between edges,
-									// rely on mouse position
-									classes[i] = requestedStick;
-								}
-							}
+									   // if taskbar is not draggable between edges,
+									   // take the original stick
+									   classes[i] = options.horizontalStick.replace(/(bottom|top)/, '');
+								   } else {
+									   // if taskbar is draggable between edges,
+									   // rely on mouse position
+									   classes[i] = requestedStick;
+								   }
+							   }
 
-							if (
-								$.inArray(classes[i], ["top", "bottom"]) > -1
-								&& orientation === "vertical"
-							) {
-								requestedStick = event.clientY > containment.height / 2
-									? "bottom"
-									: "top";
+							   if (
+								   $.inArray(classes[i], ['top', 'bottom']) > -1
+								   && orientation === 'vertical'
+							   ) {
+								   requestedStick = event.clientY > containment.height / 2
+													? 'bottom'
+													: 'top';
 
-								if (!options.draggableBetweenEdges) {
-									// if edge doesn't match, do nothing
-									if (o.verticalStick
-										.indexOf(requestedStick) === -1) {
-										return false;
-									}
+								   if (!options.draggableBetweenEdges) {
+									   // if edge doesn't match, do nothing
+									   if (o.verticalStick.indexOf(requestedStick) === -1) {
+										   return false;
+									   }
 
-									// if taskbar is not draggable between edges,
-									// take the original stick
-									classes[i] = options.verticalStick
-										.replace(/(left|right)/, "");
-								} else {
-									// if taskbar is draggable between edges,
-									// rely on mouse position
-									classes[i] = requestedStick;
-								}
-							}
-						}
+									   // if taskbar is not draggable between edges,
+									   // take the original stick
+									   classes[i] = options.verticalStick.replace(/(left|right)/, '');
+								   } else {
+									   // if taskbar is draggable between edges,
+									   // rely on mouse position
+									   classes[i] = requestedStick;
+								   }
+							   }
+						   }
 
-						// trim what's left
-						$.each(classes, function (index) {
-							classes[index] = $.trim(classes[index]);
-						});
+						   // trim what's left
+						   $.each(classes, function(index) {
+							   classes[index] = $.trim(classes[index]);
+						   });
 
-						// filter out anything that isn't stick
-						stick = $.grep(classes, function (cl) {
-							return $.inArray(
-								cl,
-								["right", "left", "bottom", "top"]
-							) > -1;
-						});
+						   // filter out anything that isn't stick
+						   stick = $.grep(classes, function(cl) {
+							   return $.inArray(
+								   cl,
+								   ['right', 'left', 'bottom', 'top']
+							   ) > -1;
+						   });
 
-						// make the collection unique
-						stick = $.unique(stick);
+						   // make the collection unique
+						   stick = $.unique(stick);
 
-						var edge;
+						   var edge;
 
-						if (orientation === "horizontal") {
-							edge = $.inArray("top", stick) > -1 ? "top" : "bottom";
-						}
+						   if (orientation === 'horizontal') {
+							   edge = $.inArray('top', stick) > -1 ? 'top' : 'bottom';
+						   }
 
-						if (orientation === "vertical") {
-							edge = $.inArray("left", stick) > -1 ? "left" : "right";
-						}
+						   if (orientation === 'vertical') {
+							   edge = $.inArray('left', stick) > -1 ? 'left' : 'right';
+						   }
 
-						var key = orientation + "Stick",
-							optionStick = stick.join(" ");
+						   var key = orientation + 'Stick',
+							   optionStick = stick.join(' ');
 
-						// jQuery 1.10.2 (and earlier probably) will shuffle
-						// elements in $.unique function differently
-						// than the later versions,
-						// so let's normalize this function result
-						optionStick = {
-							"left bottom": "bottom left",
-							"right bottom": "bottom right",
-							"left top": "top left",
-							"right top": "top right"
-						}[optionStick] || optionStick;
+						   // jQuery 1.10.2 (and earlier probably) will shuffle
+						   // elements in $.unique function differently
+						   // than the later versions,
+						   // so let's normalize this function result
+						   optionStick = {
+							   'left bottom': 'bottom left',
+							   'right bottom': 'bottom right',
+							   'left top': 'top left',
+							   'right top': 'top right'
+						   }[optionStick] || optionStick;
 
-						var noChange = o[key] === optionStick
-							&& o.orientation === orientation;
+						   var noChange = o[key] === optionStick
+							   && o.orientation === orientation;
 
-						ui.originalEdge = self._cache.edge;
-						ui.edge = edge;
+						   ui.originalEdge = self._cache.edge;
+						   ui.edge = edge;
 
-						ui.originalStick = o[key];
-						ui.stick = optionStick;
+						   ui.originalStick = o[key];
+						   ui.stick = optionStick;
 
-						ui.originalOrientation = o.orientation;
-						ui.orientation = orientation;
+						   ui.originalOrientation = o.orientation;
+						   ui.orientation = orientation;
 
-						delete ui.draggable;
+						   delete ui.draggable;
 
-						if (
-							self._trigger("beforeDrop", event, $.extend({}, ui))
-							=== false
-						) {
-							return false;
-						}
+						   if (
+							   self._trigger('beforeDrop', event, $.extend({}, ui))
+							   === false
+						   ) {
+							   return false;
+						   }
 
-						// don't refresh taskbar if stick and orientation
-						// stayed the same
-						if (!noChange) {
-							// for performance reasons, set one option internally,
-							// then set the seconde one via the pubic API,
-							// this will refresh taskbar position for both options
-							o[key] = optionStick;
-							self.$elem.taskbar("option", "orientation", orientation);
-						}
+						   // don't refresh taskbar if stick and orientation
+						   // stayed the same
+						   if (!noChange) {
+							   // for performance reasons, set one option internally,
+							   // then set the seconde one via the pubic API,
+							   // this will refresh taskbar position for both options
+							   o[key] = optionStick;
+							   self.$elem.taskbar('option', 'orientation', orientation);
+						   }
 
-						self._trigger("drop", event, $.extend({}, ui));
-					};
+						   self._trigger('drop', event, $.extend({}, ui));
+					   };
 
-					function extendDroppableUi(event, ui) {
-						var $this = $(this);
+					   function extendDroppableUi(event, ui) {
+						   var $this = $(this);
 
-						ui.originalEdge = self._cache.edge;
-						ui.edge = $this.data(
-							self._cnst.dataPrefix + "droppable-edge"
-						);
+						   ui.originalEdge = self._cache.edge;
+						   ui.edge = $this.data(
+							   self._cnst.dataPrefix + 'droppable-edge'
+						   );
 
-						var horizontal = ui.edge.match(/top|bottom/),
-							o = self.options;
+						   var horizontal = ui.edge.match(/top|bottom/),
+							   o = self.options;
 
-						ui.originalOrientation = o.orientation;
-						ui.orientation = horizontal
-							? "horizontal"
-							: "vertical";
+						   ui.originalOrientation = o.orientation;
+						   ui.orientation = horizontal
+											? 'horizontal'
+											: 'vertical';
 
-						delete ui.draggable;
+						   delete ui.draggable;
 
-						return ui;
-					}
+						   return ui;
+					   }
 
-					var droppableConfig = {
-						accept: function ($elem) {
-							// we only accept taskbar for which droppables were created
-							if ($elem.hasClass(self.classes.taskbar)) {
-								return droppableAccept($elem, $(this));
-							}
+					   var droppableConfig = {
+						   accept: function($elem) {
+							   // we only accept taskbar for which droppables were created
+							   if ($elem.hasClass(self.classes.taskbar)) {
+								   return droppableAccept($elem, $(this));
+							   }
 
-							return false;
-						},
-						drop: draggableDrop,
-						out: function (event, ui) {
-							var $this = $(this);
+							   return false;
+						   },
+						   drop: draggableDrop,
+						   out: function(event, ui) {
+							   var $this = $(this);
 
-							ui.highlighted = $this
-								.hasClass(self.classes.droppableOver);
+							   ui.highlighted = $this.hasClass(self.classes.droppableOver);
 
-							ui = extendDroppableUi.call(this, event, ui);
+							   ui = extendDroppableUi.call(this, event, ui);
 
-							self._trigger(
-								"beforeDroppableOut",
-								event,
-								$.extend({}, ui)
-							);
+							   self._trigger(
+								   'beforeDroppableOut',
+								   event,
+								   $.extend({}, ui)
+							   );
 
-							$this
-								.css("backgroundColor", "")
-								.removeClass(
-									self.classes.droppableOver
-									+ " " + self.classes.droppablePending
-								);
+							   $this.css('backgroundColor', '').removeClass(
+								   self.classes.droppableOver
+								   + ' ' + self.classes.droppablePending
+							   );
 
-							$("." + self.classes.droppablePending)
-								.css(
-									"backgroundColor",
-									self.$elem.css("backgroundColor")
-								)
-								.removeClass(self.classes.droppablePending)
-								.addClass(self.classes.droppableOver);
+							   $('.' + self.classes.droppablePending).css(
+								   'backgroundColor',
+								   self.$elem.css('backgroundColor')
+							   ).removeClass(self.classes.droppablePending).addClass(self.classes.droppableOver);
 
-							self._trigger("droppableOut", event, $.extend({}, ui));
-						},
-						over: function (event, ui) {
-							$("." + self.classes.droppableOver)
-								.css("backgroundColor", "")
-								.removeClass(self.classes.droppableOver)
-								.addClass(self.classes.droppablePending);
+							   self._trigger('droppableOut', event, $.extend({}, ui));
+						   },
+						   over: function(event, ui) {
+							   $('.' + self.classes.droppableOver).css('backgroundColor', '').removeClass(self.classes.droppableOver).addClass(self.classes.droppablePending);
 
-							ui = extendDroppableUi.call(this, event, ui);
+							   ui = extendDroppableUi.call(this, event, ui);
 
-							if (draggableDrop(event, $.extend({}, ui)) === false) {
-								return;
-							}
+							   if (draggableDrop(event, $.extend({}, ui)) === false) {
+								   return;
+							   }
 
-							if (self._trigger(
-								"beforeDroppableOver",
-								event,
-								$.extend(true, {}, ui)
-							) === false) {
-								return;
-							}
+							   if (self._trigger(
+								   'beforeDroppableOver',
+								   event,
+								   $.extend(true, {}, ui)
+							   ) === false) {
+								   return;
+							   }
 
-							$(this)
-								.addClass(self.classes.droppableOver)
-								.css(
-									"backgroundColor",
-									self.$elem.css("backgroundColor")
-								);
+							   $(this).addClass(self.classes.droppableOver).css(
+								   'backgroundColor',
+								   self.$elem.css('backgroundColor')
+							   );
 
-							self._trigger("droppableOver", event, $.extend({}, ui));
-						},
-						tolerance: "touch"
-					};
+							   self._trigger('droppableOver', event, $.extend({}, ui));
+						   },
+						   tolerance: 'touch'
+					   };
 
-					if (!$elem.hasClass(self.classes.uiDroppable)) {
-						$elem.droppable(droppableConfig);
-					} else {
-						$elem.droppable("option", droppableConfig);
-					}
-				});
+					   if (!$elem.hasClass(self.classes.uiDroppable)) {
+						   $elem.droppable(droppableConfig);
+					   } else {
+						   $elem.droppable('option', droppableConfig);
+					   }
+				   });
 		},
 
 		// get translations for current language, or for language
 		// passed as parameter, or empty object when no translations exist
-		_getDictionary: function (name) {
+		_getDictionary: function(name) {
 			var l = this.options.localization;
 
-			return typeof l === "object" && l !== null
-				? l [name || this.options.language] || {}
-				: {};
+			return typeof l === 'object' && l !== null
+				   ? l [name || this.options.language] || {}
+				   : {};
 		},
 
 		// main internationalization function;
@@ -2677,10 +2556,10 @@
 		// as a second parameter,
 		// and optionally language to be used instead of current language,
 		// as a third parameter
-		_i18n: function (translation, keys, language) {
+		_i18n: function(translation, keys, language) {
 			var primaryLanguage = language === undefined
-				? this.options.language
-				: language,
+								  ? this.options.language
+								  : language,
 				i18n = this._getDictionary(primaryLanguage);
 
 			if (!i18n[translation]) {
@@ -2691,10 +2570,10 @@
 				// window groups or buttons
 				if (!i18n [translation]) {
 					this._debugLogAdd(
-						"Missing translation key \"" + translation + "\" "
-						+ "in both language \"" + primaryLanguage + "\" "
-						+ "and fallback language \""
-						+ this.options.fallbackLanguage + "\".", 1, 1
+						'Missing translation key "' + translation + '" '
+						+ 'in both language "' + primaryLanguage + '" '
+						+ 'and fallback language "'
+						+ this.options.fallbackLanguage + '".', 1, 1
 					);
 
 					// we can't return undefined here because widget factory
@@ -2713,13 +2592,12 @@
 		},
 
 		// main function for replacing key-value pair in a given string
-		_i18n_replace_keys: function (translated, keys) {
-			if (keys && typeof(keys) === "object") {
+		_i18n_replace_keys: function(translated, keys) {
+			if (keys && typeof (keys) === 'object') {
 				for (var i in keys) {
 					// both ":key" and "key" are a valid keys
 					// for string like "Hello :key." to became "Hello world."
-					translated = translated
-						.replace(i.charAt(0) === ":" ? i : ":" + i, keys[i]);
+					translated = translated.replace(i.charAt(0) === ':' ? i : ':' + i, keys[i]);
 				}
 			}
 
@@ -2727,18 +2605,18 @@
 		},
 
 		// hides custom menus
-		_hideInternals: function () {
-			this.$elem.find("[data-menu-type=start]").hide();
+		_hideInternals: function() {
+			this.$elem.find('[data-menu-type=start]').hide();
 		},
 
 		// function for hiding some or all datepickers
-		_hideDatepickers: function (options) {
+		_hideDatepickers: function(options) {
 			var self = this,
 				// hide all datepickers or only the one from the current taskbar
 				$elem = options && options.own
-					? this.$elem
-					: $("." + this.classes.taskbar),
-				$datepickers = $elem.find("." + this.classes.datepicker);
+						? this.$elem
+						: $('.' + this.classes.taskbar),
+				$datepickers = $elem.find('.' + this.classes.datepicker);
 
 			// optionally don't hide some datepicker
 			if (options && options.not) {
@@ -2746,20 +2624,20 @@
 				$datepickers = $datepickers.not(options.not);
 			}
 
-			$datepickers.each(function () {
+			$datepickers.each(function() {
 				var $datepicker = $(this);
 
 				// retrieve instance of that datepicker
 				var taskbarInstance = self._taskbarInstance($datepicker);
 
 				// trigger close event on that datepicker and respect prevention
-				if ($datepicker.is(":visible")) {
+				if ($datepicker.is(':visible')) {
 					if (taskbarInstance._triggerBindedElementEvent({
-						type: "elementClose",
-						menu: $datepicker,
-						closeByOpen: true,
-						button: taskbarInstance.connectedElement($datepicker)
-					}) === false) {
+																	   type: 'elementClose',
+																	   menu: $datepicker,
+																	   closeByOpen: true,
+																	   button: taskbarInstance.connectedElement($datepicker)
+																   }) === false) {
 						return true;
 					}
 				}
@@ -2777,47 +2655,42 @@
 		// hides all menus, that includes start menus, language select,
 		// window groups and custom menus; a menu not to be hidden
 		// could be specified in form of jQuery object
-		_hideMenus: function (options) {
+		_hideMenus: function(options) {
 			var self = this,
 				// hide all menus or only the one from the current taskbar
-				$elem = options && options.own ? this.$elem : $("." + this.classes.taskbar),
-				$menus = $elem.find("[data-menu-type], ." + this.classes.windowGroupMenu),
-				$startButtons = $elem.find("." + this.classes.startButton);
+				$elem = options && options.own ? this.$elem : $('.' + this.classes.taskbar),
+				$menus = $elem.find('[data-menu-type], .' + this.classes.windowGroupMenu),
+				$startButtons = $elem.find('.' + this.classes.startButton);
 
 			if (options && options.not) {
 				self._openedElements(true);
 				$menus = $menus.not(options.not);
 			}
 
-			$menus.each(function () {
+			$menus.each(function() {
 				var $menu = $(this);
 
 				// collapse all menus so we won't have situation
 				// where opening a menu again will open it with opened submenus
-				var $collapse = $menu
-					.add($menu.find(self.classes.uiMenu))
-					.filter("." + self.classes.uiMenu);
+				var $collapse = $menu.add($menu.find(self.classes.uiMenu)).filter('.' + self.classes.uiMenu);
 
-				$collapse.menu("collapseAll").menu("blur");
+				$collapse.menu('collapseAll').menu('blur');
 
 				// retrieve instance of that menu
 				var taskbarInstance = self._taskbarInstance($menu);
 
 				// trigger close event on that menu and respect prevention
-				if ($menu.is(":visible")) {
+				if ($menu.is(':visible')) {
 					if (taskbarInstance._triggerBindedElementEvent({
-						type: "elementClose",
-						menu: $menu,
-						closeByOpen: true,
-						button: taskbarInstance.connectedElement($menu)
-					}) === false) {
+																	   type: 'elementClose',
+																	   menu: $menu,
+																	   closeByOpen: true,
+																	   button: taskbarInstance.connectedElement($menu)
+																   }) === false) {
 						return true;
 					}
 
-					$menu
-						.find("ul:visible")
-						.addBack()
-						.hide();
+					$menu.find('ul:visible').addBack().hide();
 				}
 			});
 
@@ -2828,7 +2701,7 @@
 			this._closeOtherTaskbarsOpenedElements(options);
 		},
 
-		_hideAll: function (options) {
+		_hideAll: function(options) {
 			this._hideDatepickers();
 			this._hideMenus();
 			this._hideTooltips();
@@ -2841,36 +2714,33 @@
 			this._closeOtherTaskbarsOpenedElements(options);
 		},
 
-		_closeOtherTaskbarsOpenedElements: function (options) {
+		_closeOtherTaskbarsOpenedElements: function(options) {
 			var self = this;
 
 			if (!options || !options.own) {
-				$("." + this.classes.taskbar)
-					.not(this.$elem)
-					.each(function () {
-						var $taskbar = $(this);
-						var instance = $taskbar
-							.data(self._cnst.dataPrefix + "taskbar");
+				$('.' + this.classes.taskbar).not(this.$elem).each(function() {
+					var $taskbar = $(this);
+					var instance = $taskbar.data(self._cnst.dataPrefix + 'taskbar');
 
-						instance._openedElements(false);
-					});
+					instance._openedElements(false);
+				});
 			}
 		},
 
 		// this function will blur those button that should not be active
-		blurConnectedButtons: function () {
+		blurConnectedButtons: function() {
 			var self = this,
 				$elem = $(this);
 
-			var filter = "[data-menu-type], " + "." + this.classes.datepicker;
+			var filter = '[data-menu-type], ' + '.' + this.classes.datepicker;
 
 			// go over all menus (and datepicker) connected to taskbar,
 			// blur those buttons for which menus (or datepicker) are not visible
-			$(filter, this.$elem).each(function () {
+			$(filter, this.$elem).each(function() {
 				var $this = $(this),
 					$button = self.connectedElement($this);
 
-				if ($button.length && !$this.is(":visible")) {
+				if ($button.length && !$this.is(':visible')) {
 					$button.removeClass(self.classes.uiStateActive);
 				}
 			});
@@ -2885,15 +2755,14 @@
 
 			// shortcut function, return group name or null
 			// if window is not in group
-			var getGroup = function ($elem) {
-				return $elem
-					.window("option", "group");
+			var getGroup = function($elem) {
+				return $elem.window('option', 'group');
 			};
 
 			// push windows that are in
 			// one will keep count on windows in this itteration,
 			// the other one in the next one;
-			$windows.each(function () {
+			$windows.each(function() {
 				var $window = $(this),
 					group = getGroup($window);
 
@@ -2910,7 +2779,7 @@
 				}
 			});
 
-			$windows.each(function () {
+			$windows.each(function() {
 				var $window = $(this),
 					group = getGroup($window);
 
@@ -2934,11 +2803,11 @@
 				}
 			});
 
-			$reduced.each(function () {
+			$reduced.each(function() {
 				var $window = $(this),
 					$button = self.connectedElement($window)
-					// we only need buttons
-						.filter("." + self.classes.uiButton);
+								   // we only need buttons
+								   .filter('.' + self.classes.uiButton);
 
 				// remove active class on buttons that has
 				// no connected window on top
@@ -2952,26 +2821,26 @@
 		},
 
 		// blur buttons on all taskbars
-		_blurAllConnectedButtons: function () {
-			$("." + this.classes.taskbar).taskbar("blurConnectedButtons");
+		_blurAllConnectedButtons: function() {
+			$('.' + this.classes.taskbar).taskbar('blurConnectedButtons');
 		},
 
 		// main function that build taskbar subordinates
-		_buildTaskbarContent: function (settings) {
+		_buildTaskbarContent: function(settings) {
 			var self = this,
 				o = this.options,
 				c = this.classes,
 				$elem = this.$elem,
-				horizontal = o.orientation === "horizontal";
+				horizontal = o.orientation === 'horizontal';
 
-			this.$startButtonsContainer = $elem.find("." + c.startButtonsContainer);
-			this.$buttonsContainer = $elem.find("." + c.buttonsContainer);
-			this.$windowButtonsContainer = $elem.find("." + c.windowButtonsContainer);
+			this.$startButtonsContainer = $elem.find('.' + c.startButtonsContainer);
+			this.$buttonsContainer = $elem.find('.' + c.buttonsContainer);
+			this.$windowButtonsContainer = $elem.find('.' + c.windowButtonsContainer);
 
-			this.$elem.children("[data-separator-for]").not("[data-separator-for=systemButtonsContainer]").remove();
+			this.$elem.children('[data-separator-for]').not('[data-separator-for=systemButtonsContainer]').remove();
 
 			this.$startButtonsContainer.remove();
-			this.$buttonsContainer.children(":not(." + c.buttonUserDefined + ")").remove();
+			this.$buttonsContainer.children(':not(.' + c.buttonUserDefined + ')').remove();
 
 			// act as a part of "destroy" method - destroy containers
 			// and don't create anything
@@ -2991,24 +2860,22 @@
 			this._buildTaskbarStartButtons();
 
 			this.$buttonsContainer = this.$buttonsContainer.length
-				? this.$buttonsContainer
-				: this._factory("buttonsContainer").appendTo($elem);
+									 ? this.$buttonsContainer
+									 : this._factory('buttonsContainer').appendTo($elem);
 
 			this._rebuildTaskbarButtons({
-				skipWindowButtonsContainerResize: true
-			});
+											skipWindowButtonsContainerResize: true
+										});
 
 			if (!this.$windowButtonsContainer.length) {
 				this.$windowButtonsContainer =
-					this
-						._factory("windowButtonsContainer")
-						.insertAfter(this.$buttonsContainer);
+					this._factory('windowButtonsContainer').insertAfter(this.$buttonsContainer);
 			}
 
 			this._initSortableWindowButtons();
 
 			// find all containers
-			this.$containers = this.$elem.find("." + c.container);
+			this.$containers = this.$elem.find('.' + c.container);
 
 			// empty taskbar will have no padding, and combined with
 			// "horizontalWidth": "auto" and  no icons, will became visible
@@ -3019,34 +2886,31 @@
 			this._refreshWindowButtonsContainer();
 		},
 
-		_setSortableWindowButtons: function () {
+		_setSortableWindowButtons: function() {
 			this.options.windowButtonsSortable
-				? this._initSortableWindowButtons()
-				: this._destroySortableWindowButtons();
+			? this._initSortableWindowButtons()
+			: this._destroySortableWindowButtons();
 		},
 
-		_initSortableWindowButtons: function () {
+		_initSortableWindowButtons: function() {
 			var self = this,
 				o = this.options,
 				c = this.classes,
-				horizontal = o.orientation === "horizontal";
+				horizontal = o.orientation === 'horizontal';
 
 			if (o.windowButtonsSortable) {
 				if ($.ui.sortable) {
-					var fixSortableContainment = function (event, ui) {
+					var fixSortableContainment = function(event, ui) {
 						if (horizontal) {
 							return;
 						}
 
-						var sortableInstance = self
-								.$windowButtonsContainer.data(c.uiSortable),
-							helperDimensions = self
-								._extendedPosition.call($(ui.helper), "offset"),
-							containerDimensions = self
-								._extendedPosition.call(
-									self.$windowButtonsContainer,
-									"offset"
-								);
+						var sortableInstance = self.$windowButtonsContainer.data(c.uiSortable),
+							helperDimensions = self._extendedPosition.call($(ui.helper), 'offset'),
+							containerDimensions = self._extendedPosition.call(
+								self.$windowButtonsContainer,
+								'offset'
+							);
 
 						// interfering on so deep level with widget we don't own
 						// will blow up in our face one day, but's it's not
@@ -3057,7 +2921,7 @@
 						sortableInstance.containment[3] =
 							containerDimensions.bottom
 							- helperDimensions.height
-							- parseFloat($(ui.item).css("marginBottom"));
+							- parseFloat($(ui.item).css('marginBottom'));
 					};
 
 					var atStart = {
@@ -3065,7 +2929,7 @@
 						position: {}
 					};
 
-					var sortableUi = function (originalUi) {
+					var sortableUi = function(originalUi) {
 						var ui = {};
 
 						// elements
@@ -3076,15 +2940,15 @@
 
 						// offset
 						ui.offset = $.extend({},
-							originalUi.offset
-							|| $(originalUi.placeholder).offset()
+											 originalUi.offset
+												 || $(originalUi.placeholder).offset()
 						);
 						ui.originalOffset = $.extend({}, atStart.offset);
 
 						// position
 						ui.position = $.extend({},
-							originalUi.position
-							|| $(originalUi.placeholder).position()
+											   originalUi.position
+												   || $(originalUi.placeholder).position()
 						);
 						ui.originalPosition = $.extend({}, atStart.position);
 
@@ -3094,112 +2958,109 @@
 					// initialize sortable once, that's a heavy plugin
 					if (!this.$windowButtonsContainer.hasClass(c.uiSortable)) {
 						this.$windowButtonsContainer.sortable({
-							disabled: !o.windowButtonsSortable,
-							containment: "parent",
-							forcePlaceholderSize: true,
-							cursor: "move",
-							tolerance: "pointer",
-							cancel: "." + c.uiMenu,
-							helper: "clone",
-							start: function (event, ui) {
-								self._cache.progress.windowButtonsSortable = true;
+																  disabled: !o.windowButtonsSortable,
+																  containment: 'parent',
+																  forcePlaceholderSize: true,
+																  cursor: 'move',
+																  tolerance: 'pointer',
+																  cancel: '.' + c.uiMenu,
+																  helper: 'clone',
+																  start: function(event, ui) {
+																	  self._cache.progress.windowButtonsSortable = true;
 
-								$(ui.placeholder)
-									.removeClass(
-										c.uiStateActive
-										+ " " + c.uiStateFocus
-									).addClass(c.uiStateHover);
+																	  $(ui.placeholder).removeClass(
+																		  c.uiStateActive
+																		  + ' ' + c.uiStateFocus
+																	  ).addClass(c.uiStateHover);
 
-								self._hideAll();
-								self._blurAllConnectedButtons();
+																	  self._hideAll();
+																	  self._blurAllConnectedButtons();
 
-								atStart.offset = $(ui.placeholder).offset();
-								atStart.position = $(ui.placeholder).position();
+																	  atStart.offset = $(ui.placeholder).offset();
+																	  atStart.position = $(ui.placeholder).position();
 
-								fixSortableContainment(event, ui);
+																	  fixSortableContainment(event, ui);
 
-								// fixes tests/functional/taskbarInteractions.html
-								// "Window buttons stay in place during sortable"
-								if (self._cache.horizontal) {
-									var computedWidth = $(ui.item)
-										.data(
-											self._cnst.dataPrefix
-											+ "taskbarButtonFloatWidth"
-										);
+																	  // fixes tests/functional/taskbarInteractions.html
+																	  // "Window buttons stay in place during sortable"
+																	  if (self._cache.horizontal) {
+																		  var computedWidth = $(ui.item).data(
+																			  self._cnst.dataPrefix
+																			  + 'taskbarButtonFloatWidth'
+																		  );
 
-									$(ui.placeholder)
-										.css("width", computedWidth);
-								}
+																		  $(ui.placeholder).css('width', computedWidth);
+																	  }
 
-								self._startShowing({
-									duration: false
-								});
+																	  self._startShowing({
+																							 duration: false
+																						 });
 
-								self._trigger(
-									"sortableStart", event, sortableUi(ui)
-								);
-							},
-							change: function (event, ui) {
-								self._trigger(
-									"sortableChange", event, sortableUi(ui)
-								);
-							},
-							sort: function (event, ui) {
+																	  self._trigger(
+																		  'sortableStart', event, sortableUi(ui)
+																	  );
+																  },
+																  change: function(event, ui) {
+																	  self._trigger(
+																		  'sortableChange', event, sortableUi(ui)
+																	  );
+																  },
+																  sort: function(event, ui) {
 
-								self._trigger(
-									"sortableSort", event, sortableUi(ui)
-								);
-							},
-							stop: function (event, ui) {
-								self._openedElements(false);
-								self._cache.progress.windowButtonsSortable = false;
+																	  self._trigger(
+																		  'sortableSort', event, sortableUi(ui)
+																	  );
+																  },
+																  stop: function(event, ui) {
+																	  self._openedElements(false);
+																	  self._cache.progress.windowButtonsSortable = false;
 
-								$(ui.placeholder).removeClass(c.uiStateHover);
+																	  $(ui.placeholder).removeClass(c.uiStateHover);
 
-								self._trigger(
-									"sortableStop", event, sortableUi(ui)
-								);
-							}
-						});
+																	  self._trigger(
+																		  'sortableStop', event, sortableUi(ui)
+																	  );
+																  }
+															  });
 					}
 
-					this.$windowButtonsContainer.sortable("option", {
+					this.$windowButtonsContainer.sortable('option', {
 						scroll: !horizontal,
 						axis: horizontal
-							? o.horizontalRows === 1 ? "x" : false
-							: "y",
+							  ? o.horizontalRows === 1 ? 'x' : false
+							  : 'y'
 					});
 				} else {
 					this._debugLogAdd(
-						"jQuery UI Sortable is required for " +
-						"sortable window buttons to work.", 1, 0
+						'jQuery UI Sortable is required for ' +
+						'sortable window buttons to work.', 1, 0
 					);
 				}
 			}
 		},
 
-		_destroySortableWindowButtons: function () {
+		_destroySortableWindowButtons: function() {
 			if (
 				!this.options.windowButtonsSortable
 				&& this.$windowButtonsContainer.hasClass(this.classes.uiSortable)) {
-				this.$windowButtonsContainer.sortable("destroy");
+				this.$windowButtonsContainer.sortable('destroy');
 			}
 		},
 
 		// check if the containers are empty
-		_filterNonEmptyContainers: function (self, checkPositionAbsolute) {
+		_filterNonEmptyContainers: function(self, checkPositionAbsolute) {
 			var $this = $(this);
 
 			// skip absolute and fixed positioned siblings
 			// if checkPositionAbsolute === false
 			if (
 				checkPositionAbsolute
-				&& $this.css("position").match(/absolute|fixed/)
+				&& $this.css('position').match(/absolute|fixed/)
 			) {
 				return false;
 			}
 
-			var $children = $this.children(":visible");
+			var $children = $this.children(':visible');
 
 			// skip empty containers
 			if (!$children.length) {
@@ -3208,12 +3069,12 @@
 
 			var nonEmpty = false;
 
-			$children.each(function () {
+			$children.each(function() {
 				var $this = $(this);
 
 				if (
 					$this.hasClass(self.classes.uiButton)
-					|| $this.attr("data-menu-type")
+					|| $this.attr('data-menu-type')
 				) {
 					nonEmpty = true;
 
@@ -3224,15 +3085,15 @@
 			return nonEmpty;
 		},
 
-		_buildSystemButtons: function (settings) {
+		_buildSystemButtons: function(settings) {
 			var self = this,
 				o = this.options;
 
-			this.$systemButtonsContainer = this.$elem.find("." + this.classes.systemButtonsContainer);
+			this.$systemButtonsContainer = this.$elem.find('.' + this.classes.systemButtonsContainer);
 
 			// remove all buttons except custom buttons
 			// - those could have event binded to them and we don't want them gone
-			this.$systemButtonsContainer.children(":not(." + this.classes.buttonUserDefined + ")").remove();
+			this.$systemButtonsContainer.children(':not(.' + this.classes.buttonUserDefined + ')').remove();
 
 			// stop clock for now
 			if (this._cache.intervals.clock > 0) {
@@ -3241,7 +3102,7 @@
 			}
 
 			// remove separator - we could deal with empty container
-			this.$systemButtonsContainer.siblings("[data-separator-for=systemButtonsContainer]").remove();
+			this.$systemButtonsContainer.siblings('[data-separator-for=systemButtonsContainer]').remove();
 
 			// act as a part of "destroy" method - destroy container,
 			// with user defined buttons this time, and don't create anything
@@ -3251,43 +3112,43 @@
 				return true;
 			}
 
-			this.$systemButtonsContainer = this.$systemButtonsContainer.length ? this.$systemButtonsContainer : this._factory("systemButtonsContainer").appendTo(this.$elem);
+			this.$systemButtonsContainer = this.$systemButtonsContainer.length ? this.$systemButtonsContainer : this._factory('systemButtonsContainer').appendTo(this.$elem);
 
 			// go over the list of system buttons and insert those
 			// that should be inserted
-			$.each(o.systemButtonsOrder, function (index, value) {
+			$.each(o.systemButtonsOrder, function(index, value) {
 				switch (value) {
-					case "languageSelect":
-						if (o.languageSelect && $.inArray("languageSelect", o.systemButtonsOrder) > -1) {
+					case 'languageSelect':
+						if (o.languageSelect && $.inArray('languageSelect', o.systemButtonsOrder) > -1) {
 							if (o.languages.length) {
 								self._buildTaskbarLanguageSelect();
 							} else {
 								// generate debug is menu would be empty
-								self._debugLogAdd("Language select menu wasn't build because the \"languages\" option is empty.",1, 1	);
+								self._debugLogAdd('Language select menu wasn\'t build because the "languages" option is empty.', 1, 1);
 							}
 						}
 						break;
-					case "minimizeAll":
-						if (o.minimizeAll && $.inArray("minimizeAll", o.systemButtonsOrder) > -1) {
+					case 'minimizeAll':
+						if (o.minimizeAll && $.inArray('minimizeAll', o.systemButtonsOrder) > -1) {
 							self._buildTaskbarMinimizeAll();
 						}
 						break;
-					case "toggleFullscreen":
+					case 'toggleFullscreen':
 						// this button will not be present if fullscreen API
 						// is not available in user's browser
-						if (o.toggleFullscreen && $.inArray("toggleFullscreen", o.systemButtonsOrder) > -1 && self._fullscreenAvailable()) {
+						if (o.toggleFullscreen && $.inArray('toggleFullscreen', o.systemButtonsOrder) > -1 && self._fullscreenAvailable()) {
 							self._buildTaskbarToggleFullscreen();
 						}
 						break;
-					case "networkMonitor":
+					case 'networkMonitor':
 						// this button will not be present if online/offline API
 						// is not available in user's browser
-						if (o.networkMonitor && $.inArray("networkMonitor", o.systemButtonsOrder) > -1 && typeof window.navigator.onLine !== "undefined") {
+						if (o.networkMonitor && $.inArray('networkMonitor', o.systemButtonsOrder) > -1 && typeof window.navigator.onLine !== 'undefined') {
 							self._buildTaskbarNetworkMonitor();
 						}
 						break;
-					case "clock":
-						if (o.clock && $.inArray("clock", o.systemButtonsOrder) > -1) {
+					case 'clock':
+						if (o.clock && $.inArray('clock', o.systemButtonsOrder) > -1) {
 							self._buildTaskbarClock();
 						}
 						break;
@@ -3298,9 +3159,9 @@
 							singleButton[value] = o.buttons [value];
 
 							self._buildTaskbarButtons({
-								buttons: singleButton,
-								container: self.$systemButtonsContainer
-							});
+														  buttons: singleButton,
+														  container: self.$systemButtonsContainer
+													  });
 						}
 						break;
 				}
@@ -3326,28 +3187,25 @@
 			}
 		},
 
-		_setSystemButtonsOrder: function () {
+		_setSystemButtonsOrder: function() {
 			var self = this;
 
 			// set elements in the right order after refresh
-			$.each(this.options.systemButtonsOrder, function (index, value) {
-				self.$systemButtonsContainer
-					.find("[data-button-name=" + value + "]")
-					.appendTo(self.$systemButtonsContainer);
+			$.each(this.options.systemButtonsOrder, function(index, value) {
+				self.$systemButtonsContainer.find('[data-button-name=' + value + ']').appendTo(self.$systemButtonsContainer);
 			});
 		},
 
-		_fixSystemButtonsSeparator: function () {
+		_fixSystemButtonsSeparator: function() {
 			if (!this._cache.horizontal) {
-				this.$elem
-					.find("[data-separator-for=systemButtonsContainer]").css({
-					position: "absolute",
-					bottom: this.$systemButtonsContainer.outerHeight()
-				});
+				this.$elem.find('[data-separator-for=systemButtonsContainer]').css({
+																					   position: 'absolute',
+																					   bottom: this.$systemButtonsContainer.outerHeight()
+																				   });
 			}
 		},
 
-		_positionSystemButtonConnectedElements: function () {
+		_positionSystemButtonConnectedElements: function() {
 			// last minute positioning of language select menu
 			if (this.options.languageSelect && this.options.languages.length) {
 				this._positionTaskbarLanguageSelect();
@@ -3370,20 +3228,18 @@
 			}
 		},
 
-		_rebuildTaskbarButtons: function (options) {
+		_rebuildTaskbarButtons: function(options) {
 			var buttons = this.options.buttons;
 
-			this.$elem
-				.find("[data-separator-for=buttonsContainer]")
-				.remove();
+			this.$elem.find('[data-separator-for=buttonsContainer]').remove();
 
 			if (buttons) {
 				this._buildTaskbarButtons({
-					buttons: this._extractObjectsByKey(
-						buttons, this.options.buttonsOrder
-					),
-					container: this.$buttonsContainer
-				});
+											  buttons: this._extractObjectsByKey(
+												  buttons, this.options.buttonsOrder
+											  ),
+											  container: this.$buttonsContainer
+										  });
 
 				// position container after first element has been inserted
 				this._positionTopContainersContent.call(
@@ -3406,36 +3262,30 @@
 
 		// users can create buttons, but not put them in buttonsOrder
 		// or systeButtonsOrder, so we only detach them to keep events
-		_detachUserDefinedButtons: function (self) {
-			this.find("." + self.classes.buttonUserDefined)
-				.each(function () {
-					var $this = $(this),
-						button = $this.data("button-name");
+		_detachUserDefinedButtons: function(self) {
+			this.find('.' + self.classes.buttonUserDefined).each(function() {
+				var $this = $(this),
+					button = $this.data('button-name');
 
-					if ($.inArray(button, self.options.systemButtonsOrder) === -1
-						&& $.inArray(button, self.options.buttonsOrder) === -1) {
-						$this.detach();
-					}
-				});
+				if ($.inArray(button, self.options.systemButtonsOrder) === -1
+					&& $.inArray(button, self.options.buttonsOrder) === -1) {
+					$this.detach();
+				}
+			});
 		},
 
 		// create separators for containers
-		_setSeparators: function ($elem) {
-			var containerName = $elem.attr("data-container-name"),
-				$separator = this._factory("separator")
-					.attr("data-separator-for", containerName);
+		_setSeparators: function($elem) {
+			var containerName = $elem.attr('data-container-name'),
+				$separator = this._factory('separator').attr('data-separator-for', containerName);
 
-			$elem.each(function () {
+			$elem.each(function() {
 				var $this = $(this);
 
-				$this
-					.siblings("[data-separator-for=" + containerName + "]")
-					.remove();
+				$this.siblings('[data-separator-for=' + containerName + ']').remove();
 
 				// set matching float
-				$separator
-					.insertAfter($this)
-					.css("float", $this.css("float"));
+				$separator.insertAfter($this).css('float', $this.css('float'));
 
 				// no children === no visible separator,
 				// as there is no content to separate
@@ -3447,7 +3297,7 @@
 			return $separator;
 		},
 
-		_refreshSeparators: function () {
+		_refreshSeparators: function() {
 			this._setSeparators(this.$buttonsContainer);
 			this._setSeparators(this.$systemButtonsContainer);
 			this._setSeparators(this.$startButtonsContainer);
@@ -3456,49 +3306,50 @@
 
 		// position menu or datepicker against taskbar or button,
 		// the subordinate is connected to
-		_menuPosition: function (settings) {
-			var self = this,
-				settings = settings instanceof $ ? {of: settings} : settings,
-				$taskbar = this.$elem,
-				$of = settings.of;
+		_menuPosition: function(settings) {
+			var self = this;
+
+			settings = settings instanceof $ ? {of: settings} : settings;
+
+			var $taskbar = this.$elem;
+
+			var $of = settings.of;
 
 			if (!settings || !settings.of || !settings.of.length) {
 				return;
 			}
 
 			var $elem = settings.elem || null,
-				horizontal = this.options.orientation === "horizontal",
-				top = this._cache.edge === "top",
-				left = this._cache.edge === "left",
-				$container = $of.closest("." + this.classes.container),
+				horizontal = this.options.orientation === 'horizontal',
+				top = this._cache.edge === 'top',
+				left = this._cache.edge === 'left',
+				$container = $of.closest('.' + this.classes.container),
 				// container float when in horizontal mode
-				floatValCSS = $container.css("float"),
-				floatVal = floatValCSS === "none" ? "center" : floatValCSS,
+				floatValCSS = $container.css('float'),
+				floatVal = floatValCSS === 'none' ? 'center' : floatValCSS,
 				// container stick when in vertical mode
-				posCSS = $container.css("position"),
-				edge = posCSS === "absolute" ? "bottom" : "top",
-				pos = posCSS === "absolute" ? "bottom" : "center",
-				cd = this._extendedPosition.call($container, "offset"),
-				od = this._extendedPosition.call($of, "offset"),
-				td = this._extendedPosition.call($taskbar, "offset"),
+				posCSS = $container.css('position'),
+				edge = posCSS === 'absolute' ? 'bottom' : 'top',
+				pos = posCSS === 'absolute' ? 'bottom' : 'center',
+				cd = this._extendedPosition.call($container, 'offset'),
+				od = this._extendedPosition.call($of, 'offset'),
+				td = this._extendedPosition.call($taskbar, 'offset'),
 				wc = this._extendedPosition.call(this.$windowsContainment),
-				floatMove = "",
+				floatMove = '',
 				position;
 
 			// nullify a bunch of properteis
 			this._copyStyles({
-				to: $elem,
-				properties: ["maxHeight", "bottom", "top", "left", "right"]
-			});
+								 to: $elem,
+								 properties: ['maxHeight', 'bottom', 'top', 'left', 'right']
+							 });
 
 			if ($elem && $elem.hasClass(this.classes.windowGroupMenu)) {
-				$elem
-					.removeClass(this.classes.windowGroupMenuScroll)
-					.css("maxHeight", "");
+				$elem.removeClass(this.classes.windowGroupMenuScroll).css('maxHeight', '');
 
-				var ed = this._extendedPosition.call($elem, "offset");
+				var ed = this._extendedPosition.call($elem, 'offset');
 
-				var diff = (parseFloat($elem.css("paddingTop")) + parseFloat($elem.css("paddingBottom")) + parseFloat($elem.css("borderTopWidth")) + parseFloat($elem.css("borderBottomWidth")));
+				var diff = (parseFloat($elem.css('paddingTop')) + parseFloat($elem.css('paddingBottom')) + parseFloat($elem.css('borderTopWidth')) + parseFloat($elem.css('borderBottomWidth')));
 
 				var actualHeight = ed.height - diff;
 				var maxHeight = wc.height - diff;
@@ -3507,31 +3358,31 @@
 					$elem.addClass(this.classes.windowGroupMenuScroll);
 				}
 
-				$elem.css("maxHeight", maxHeight);
+				$elem.css('maxHeight', maxHeight);
 			}
 
 			if (horizontal) {
 				position = {
 					of: $of,
-					my: floatVal + floatMove + " " + (top ? "top" : "bottom"),
-					at: floatVal + " " + (top ? "bottom" : "top"),
-					collision: "flip",
-					using: function (position, elems) {
+					my: floatVal + floatMove + ' ' + (top ? 'top' : 'bottom'),
+					at: floatVal + ' ' + (top ? 'bottom' : 'top'),
+					collision: 'flip',
+					using: function(position, elems) {
 						$(this).css(position);
 
-						var ep = self._extendedPosition.call($(this), "offset"),
-							t = parseFloat($(this).css("top"));
+						var ep = self._extendedPosition.call($(this), 'offset'),
+							t = parseFloat($(this).css('top'));
 
-						$(this).css("top", top ? t + (td.bottom - ep.top) : t - (ep.bottom - td.top));
+						$(this).css('top', top ? t + (td.bottom - ep.top) : t - (ep.bottom - td.top));
 					}
 				};
 			} else {
 				position = {
 					of: $taskbar,
-					my: (left ? "left" : "right") + floatMove + " " + pos + (edge === "top" ? "+" : "-") + Math.round(Math.abs(cd[edge] - od[edge])),
-					at: (left ? "right" : "left") + " " + pos,
-					collision: "flipfit",
-					using: function (position) {
+					my: (left ? 'left' : 'right') + floatMove + ' ' + pos + (edge === 'top' ? '+' : '-') + Math.round(Math.abs(cd[edge] - od[edge])),
+					at: (left ? 'right' : 'left') + ' ' + pos,
+					collision: 'flipfit',
+					using: function(position) {
 						var $this = $(this);
 						$this.css(position);
 
@@ -3539,23 +3390,23 @@
 							return;
 						}
 
-						var ep = self._extendedPosition.call($this, "offset"),
-							ed = self._extendedPosition.call(self.connectedElement(this).filter("." + self.classes.uiButton), "offset");
+						var ep = self._extendedPosition.call($this, 'offset'),
+							ed = self._extendedPosition.call(self.connectedElement(this).filter('.' + self.classes.uiButton), 'offset');
 
-						var floatTop = parseFloat($this.css("top"));
+						var floatTop = parseFloat($this.css('top'));
 
 						if (ed.top < ep.top) {
-							$this.css("top", floatTop + (ed.top - ep.top));
+							$this.css('top', floatTop + (ed.top - ep.top));
 						}
 
 						if (ed.bottom > ep.bottom) {
-							$this.css("top", floatTop + (ed.bottom - ep.bottom));
+							$this.css('top', floatTop + (ed.bottom - ep.bottom));
 						}
 
 						// fixes a bug where on vertical taskbar on right edge
 						// menu would have a 1px space between it and tkasbar
-						if (!self._cache.horizontal && self._cache.edge === "right" && $this.is(":visible")) {
-							$this.css("left", Math.round(parseFloat($this.css("left")) + td.left - self._extendedPosition.call($this, "offset").right));
+						if (!self._cache.horizontal && self._cache.edge === 'right' && $this.is(':visible')) {
+							$this.css('left', Math.round(parseFloat($this.css('left')) + td.left - self._extendedPosition.call($this, 'offset').right));
 						}
 					}
 				};
@@ -3564,22 +3415,22 @@
 			return position;
 		},
 
-		_buildTaskbarStartButtons: function (settings) {
+		_buildTaskbarStartButtons: function(settings) {
 			var self = this,
 				$elem = this.$elem,
 				// find menus that should be treated as start menus
 				$menus = $elem.find(
-					"[data-menu-type=start]" +
-					"[data-menu-lang=" + this.options.language + "]" +
-					":not(." + this.classes.menuHidden + "), " +
-					"[data-menu-type=start][data-menu-lang=\"\*\"]" +
-					":not(." + this.classes.menuHidden + ")"
+					'[data-menu-type=start]' +
+					'[data-menu-lang=' + this.options.language + ']' +
+					':not(.' + this.classes.menuHidden + '), ' +
+					'[data-menu-type=start][data-menu-lang="\*"]' +
+					':not(.' + this.classes.menuHidden + ')'
 				);
 
 			// destroy menus and return is there should be no menus or destoy
 			// is in progress
 			if (!this.options.startButtons || (settings && settings.destroy)) {
-				this._destroyMenus("[data-menu-type=start]");
+				this._destroyMenus('[data-menu-type=start]');
 				return;
 			}
 
@@ -3587,35 +3438,35 @@
 			// they are hidden by CSS, by we also need this
 			// because of using jQuery UI menu classes as indicators
 			// in other part of the code
-			this._destroyMenus("." + this.classes.menuHidden);
+			this._destroyMenus('.' + this.classes.menuHidden);
 
-			this.$startButtonsContainer = this._factory("startButtonsContainer");
+			this.$startButtonsContainer = this._factory('startButtonsContainer');
 
 			this.$buttonsContainer.length ? this.$startButtonsContainer.insertBefore(this.$buttonsContainer) : this.$startButtonsContainer.appendTo($elem);
 
 			var positioned = false;
 
 			// use the natural order of elements to decide order of buttons
-			$menus.each(function () {
+			$menus.each(function() {
 				var $menu = $(this),
-					name = $menu.attr("data-menu-name") || "start";
+					name = $menu.attr('data-menu-name') || 'start';
 
 				if (!self._debugMenu()) {
 					return true;
 				}
 
-				var title = self._i18n("startButton:title");
+				var title = self._i18n('startButton:title');
 
 				// create button
-				var $start = self._factory("startButton", {
+				var $start = self._factory('startButton', {
 					name: name
-				}).attr("data-title", typeof title !== "undefined" ? title : name).appendTo(self.$startButtonsContainer);
+				}).attr('data-title', typeof title !== 'undefined' ? title : name).appendTo(self.$startButtonsContainer);
 
 				// debug for missing translations
-				if (title === "undefined") {
+				if (title === 'undefined') {
 					self._debugLogAdd(
-						"Missing translation for start button named \"" + name
-						+ "\" in language \"" + self.options.language + "\".",
+						'Missing translation for start button named "' + name
+						+ '" in language "' + self.options.language + '".',
 						1, 1
 					);
 				}
@@ -3631,41 +3482,38 @@
 				}
 
 				var startPosition = self._menuPosition({
-					of: $start,
-					elem: $menu
-				});
+														   of: $start,
+														   elem: $menu
+													   });
 
-				var startFocusSelect = function (event, ui) {
+				var startFocusSelect = function(event, ui) {
 					var $item = $(ui.item),
-						$supmenu = $item.closest("." + self.classes.uiMenu),
-						$submenu = $item
-							.children("." + self.classes.uiMenu + ":eq(0)"),
-						$root = $submenu
-							.parents("." + self.classes.uiMenu)
-							.filter(":last"),
+						$supmenu = $item.closest('.' + self.classes.uiMenu),
+						$submenu = $item.children('.' + self.classes.uiMenu + ':eq(0)'),
+						$root = $submenu.parents('.' + self.classes.uiMenu).filter(':last'),
 						expand =
 							!self._cache.horizontal
-							&& self._cache.stickHorizontal === "right"
-								? "left"
-								: "right",
+							&& self._cache.stickHorizontal === 'right'
+							? 'left'
+							: 'right',
 						stick =
 							self._cache.horizontal
-							&& self._cache.stickVertical === "bottom"
-								? "bottom"
-								: "top",
+							&& self._cache.stickVertical === 'bottom'
+							? 'bottom'
+							: 'top',
 						floatMove = 0;
 
-					if (event.type === "menufocus") {
+					if (event.type === 'menufocus') {
 						self._triggerBindedElementEvent({
-							type: "menuItemFocus",
-							item: $item,
-							menu: $menu,
-							button: $start,
-							event: event
-						});
+															type: 'menuItemFocus',
+															item: $item,
+															menu: $menu,
+															button: $start,
+															event: event
+														});
 					}
 
-					if (event.type === "menuselect" && !$submenu.length) {
+					if (event.type === 'menuselect' && !$submenu.length) {
 						self._hideMenus();
 						self._hideTooltips();
 						self._openedElements(false);
@@ -3677,60 +3525,61 @@
 						// this function will take appering submenu and position it
 						// accordingly, either as high or as low as it could go
 						// without breaking usability
-						var fixSubmenuPosition = function () {
+						var fixSubmenuPosition = function() {
 							// shortcut function
-							var end = function ($elem) {
+							var end = function($elem) {
 									return $elem.offset().top + $elem.outerHeight();
 								},
 
 								// shortcut function
-								start = function ($elem) {
+								start = function($elem) {
 									return $elem.offset().top;
 								},
 
 								// those elements will matter when it comes to positioning
 								$subLast = $submenu.children(
-									"." + self.classes.uiMenuItem + ":last"
+									'.' + self.classes.uiMenuItem + ':last'
 								),
 								$subFirst = $submenu.children(
-									"." + self.classes.uiMenuItem + ":eq(0)"
+									'.' + self.classes.uiMenuItem + ':eq(0)'
 								),
 
 								supd = self._extendedPosition.call(
-									$supmenu, "offset"
+									$supmenu, 'offset'
 								),
 								subd = self._extendedPosition.call(
-									$submenu, "offset"
+									$submenu, 'offset'
 								),
 
 								pullHorizontal = (subd.left - supd.right) * -1,
 
 								// that's likely to be 1 in most of the themes
 								correction = parseFloat(self._styleIndicator(
-									"." + self.classes.uiMenu
-									+ " > ." + self.classes.uiMenuItem
-									+ " > a." + self.classes.uiStateActive,
-									"marginTop"
+									'.' + self.classes.uiMenu
+									+ ' > .' + self.classes.uiMenuItem
+									+ ' > a.' + self.classes.uiStateActive,
+									'marginTop'
 								).marginTop) * -1,
 
 								submenuPosition = {
 									of: $supmenu,
-									at: "right bottom"
+									at: 'right bottom'
 								},
 
-								pullVertical, overflow;
+								pullVertical,
+								overflow;
 
-							$submenu.removeAttr("data-fix-menu-position");
+							$submenu.removeAttr('data-fix-menu-position');
 
-							if (stick === "bottom") {
+							if (stick === 'bottom') {
 								// the diffrence between root element
 								// and the supmenu, so the element being positioned
 								// can go all the way down
 								pullVertical = end($root) - end($supmenu);
 
-								submenuPosition.my = "left-"
+								submenuPosition.my = 'left-'
 									+ Math.round(pullHorizontal)
-									+ " bottom+" + Math.round(pullVertical);
+									+ ' bottom+' + Math.round(pullVertical);
 							}
 
 							// we don't want double borders on menus next
@@ -3740,18 +3589,17 @@
 							// supmenu and submenu could have different border
 							// widths - which one should be taken into account then?
 							var pullLeftBorder = parseFloat(
-								window.getComputedStyle($supmenu[0])
-									.borderRightWidth
+								window.getComputedStyle($supmenu[0]).borderRightWidth
 							);
 
-							if (stick === "top") {
+							if (stick === 'top') {
 								// when expanding to the left, submenu
 								// has to be moved left by the width of supmenu
-								if (expand === "left") {
+								if (expand === 'left') {
 
 									pullHorizontal = $supmenu.outerWidth()
 										- parseFloat(
-											$supmenu.css("paddingRight")
+											$supmenu.css('paddingRight')
 										)
 										- pullLeftBorder;
 								}
@@ -3761,20 +3609,19 @@
 								// can go all the way up
 								pullVertical = start($root) - start($supmenu);
 
-								submenuPosition.at = "right top";
+								submenuPosition.at = 'right top';
 								submenuPosition.my = (
-										expand === "left" ? "right" : "left"
+										expand === 'left' ? 'right' : 'left'
 									)
-									+ "-" + Math.round(pullHorizontal)
-									+ " top+" + pullVertical;
+									+ '-' + Math.round(pullHorizontal)
+									+ ' top+' + pullVertical;
 							}
 
 							// set the initial position, either top or bottom
 							// of the root menu element
-							$submenu
-								.position(submenuPosition);
+							$submenu.position(submenuPosition);
 
-							if (stick === "bottom") {
+							if (stick === 'bottom') {
 								overflow = start($item) - start($subFirst);
 
 								// if positioning submenu at the bottom of root menu
@@ -3782,16 +3629,16 @@
 								// element of submenu if at the same offset as
 								// the element submenu is containted in
 								if (overflow < 0) {
-									submenuPosition.my = "left-"
+									submenuPosition.my = 'left-'
 										+ Math.round(pullHorizontal)
-										+ " bottom+"
+										+ ' bottom+'
 										+ Math.round(
 											pullVertical + correction + overflow
 										);
 								}
 							}
 
-							if (stick === "top") {
+							if (stick === 'top') {
 								overflow = start($item) - start($subLast);
 
 								// if positioning submenu at the top of root menu
@@ -3800,10 +3647,10 @@
 								// the element submenu is containted in
 								if (overflow > 0) {
 									submenuPosition.my = (
-											expand === "left" ? "right" : "left"
+											expand === 'left' ? 'right' : 'left'
 										)
-										+ "-" + Math.round(pullHorizontal)
-										+ " top+"
+										+ '-' + Math.round(pullHorizontal)
+										+ ' top+'
 										+ Math.round(
 											pullVertical + correction + overflow
 										);
@@ -3812,16 +3659,15 @@
 
 							// set the fixed position, or make no changes
 							// when there were no need for fix
-							$submenu
-								.position(submenuPosition);
+							$submenu.position(submenuPosition);
 
 							// do some last minute correction on horizontal taskbars
-							if (self.options.orientation === "horizontal") {
+							if (self.options.orientation === 'horizontal') {
 								var supdAfter = self._extendedPosition.call(
-									$supmenu, "offset"
+									$supmenu, 'offset'
 									),
 									subdAfter = self._extendedPosition.call(
-										$submenu, "offset"
+										$submenu, 'offset'
 									),
 									lastMinuteCorrection = Math.round(
 										supdAfter.right
@@ -3829,7 +3675,7 @@
 										- pullLeftBorder
 									),
 									lastMinuteCorrectionSupmenu = parseFloat(
-										$supmenu.attr("data-fix-menu-position")
+										$supmenu.attr('data-fix-menu-position')
 									),
 									// either take parent's correction
 									// or use what's calculated
@@ -3839,18 +3685,16 @@
 
 								if (realCorrection > 0) {
 									var lastMinutLeft = parseFloat(
-										$submenu.css("left")
+										$submenu.css('left')
 									);
 
-									$submenu
-										.css("left", Math.round(
-											lastMinutLeft + realCorrection
-										))
-										.attr(
-											"data-fix-menu-position",
-											lastMinuteCorrectionSupmenu
+									$submenu.css('left', Math.round(
+										lastMinutLeft + realCorrection
+									)).attr(
+										'data-fix-menu-position',
+										lastMinuteCorrectionSupmenu
 											|| lastMinuteCorrection
-										);
+									);
 								}
 							}
 
@@ -3858,7 +3702,7 @@
 							// as menu is not hidden again no additional fixes
 							// are needed; this also disconnects any observers
 							// created for submenus that has never been shown
-							self._disconnectObservers("submenus");
+							self._disconnectObservers('submenus');
 						};
 
 						var MutationObserver = self._MutationObserver();
@@ -3866,29 +3710,27 @@
 						// if MutationObserver is present, we'll use it to make
 						// the positioning smooth and inconspicuous for the user
 						if (MutationObserver) {
-							$submenu.each(function () {
+							$submenu.each(function() {
 								// disconnects observers from previous menus
-								self._disconnectObservers("submenus");
+								self._disconnectObservers('submenus');
 
 								var $this = $(this);
 
-								var observer = new MutationObserver(function () {
-									var ready = $this.css("display") === "block"
+								var observer = new MutationObserver(function() {
+									var ready = $this.css('display') === 'block'
 										// checks if css top and left has been
 										// set already
-										&& $this[0].style
-											.cssText
-											.match(/^(?=.*\btop\b)(?=.*\bleft).*$/);
+										&& $this[0].style.cssText.match(/^(?=.*\btop\b)(?=.*\bleft).*$/);
 
 									if (ready) {
 										fixSubmenuPosition();
 									}
 
 									if (
-										$supmenu.css("display") === "none"
-										|| $root.css("display") === "none"
+										$supmenu.css('display') === 'none'
+										|| $root.css('display') === 'none'
 									) {
-										self._disconnectObservers("submenus");
+										self._disconnectObservers('submenus');
 									}
 								});
 
@@ -3896,7 +3738,7 @@
 									// for performance reasons, we observe
 									// only the style attribute
 									attributes: true,
-									attributeFilter: ["style"]
+									attributeFilter: ['style']
 								});
 
 								self._cache.mutationObservers.submenus.push(
@@ -3915,36 +3757,36 @@
 				};
 
 				$menu.show().menu({
-						focus: startFocusSelect,
-						select: startFocusSelect,
-						blur: function (event, ui) {
-							self._triggerBindedElementEvent({
-								type: "menuItemBlur",
-								item: $(ui.item),
-								menu: $menu,
-								button: $start,
-								event: event
-							});
-						}
-					}).position(startPosition).hide();
+									  focus: startFocusSelect,
+									  select: startFocusSelect,
+									  blur: function(event, ui) {
+										  self._triggerBindedElementEvent({
+																			  type: 'menuItemBlur',
+																			  item: $(ui.item),
+																			  menu: $menu,
+																			  button: $start,
+																			  event: event
+																		  });
+									  }
+								  }).position(startPosition).hide();
 
-				$start.on("click." + self._cache.uep, function (event) {
+				$start.on('click.' + self._cache.uep, function(event) {
 					self._hideMenus({
-						not: $menu
-					});
+										not: $menu
+									});
 
 					self._hideTooltips();
 
 					self._stopOtherTaskbarsAutoOpenOnBrowse();
 
-					var visible = $menu.is(":visible");
+					var visible = $menu.is(':visible');
 
 					// trigger event and respect prevention
 					if (self._triggerBindedElementEvent({
-						type: visible ? "elementClose" : "elementOpen",
-						menu: $menu,
-						button: $start
-					}) === false) {
+															type: visible ? 'elementClose' : 'elementOpen',
+															menu: $menu,
+															button: $start
+														}) === false) {
 						return;
 					}
 
@@ -3956,8 +3798,7 @@
 						self._openedElements(true);
 						// last minute cleanup after previous time
 						// when menu was shown
-						$menu.find("." + self.classes.uiStateActive)
-							.removeClass(self.classes.uiStateActive);
+						$menu.find('.' + self.classes.uiStateActive).removeClass(self.classes.uiStateActive);
 					} else {
 						self._openedElements(false);
 					}
@@ -3965,9 +3806,9 @@
 
 				self._bindMenuAutoOpen($start, $menu);
 
-				$start.on("mouseup." + self._cache.uep + " mouseleave." + self._cache.uep, function () {
-						self._setConnectedButtonState.apply(this, [self]);
-					});
+				$start.on('mouseup.' + self._cache.uep + ' mouseleave.' + self._cache.uep, function() {
+					self._setConnectedButtonState.apply(this, [self]);
+				});
 			});
 
 			if ($menus.length) {
@@ -3975,20 +3816,20 @@
 			}
 		},
 
-		_rebuildTaskbarStartButtons: function () {
+		_rebuildTaskbarStartButtons: function() {
 			this.$startButtonsContainer.remove();
 			this._buildTaskbarStartButtons();
 			this._refreshWindowButtonsContainer();
 		},
 
-		_buildTaskbarButtons: function (options) {
+		_buildTaskbarButtons: function(options) {
 			var self = this;
 
-			$.each(options.buttons, function (index, value) {
+			$.each(options.buttons, function(index, value) {
 				// if value.labelLocalized is specified and the translation
 				// is present, it will be set to value.label and original label
 				// will no longer be accessible
-				if (typeof(value.labelLocalized) === "string") {
+				if (typeof (value.labelLocalized) === 'string') {
 					value.label = self._i18n(value.labelLocalized) || value.label;
 				}
 
@@ -3997,8 +3838,8 @@
 				if (!value.label) {
 					// throw a warning, this should not be happening
 					self._debugLogAdd(
-						"No label or labelLocalized providen for button \"" +
-						index + "\".", 2, 1
+						'No label or labelLocalized providen for button "' +
+						index + '".', 2, 1
 					);
 					value.label = index;
 				}
@@ -4008,9 +3849,7 @@
 					!options.buttons [index].$element
 					|| !options.buttons [index].$element.length
 				) {
-					options.buttons [index]
-						.$element = $("<div></div>")
-						.appendTo(options.container);
+					options.buttons [index].$element = $('<div></div>').appendTo(options.container);
 					// button could be already created, but has been moved outside
 					// of visible containers  due to buttonsOrder or systemButtonsOrder
 					// options - if that's the case, move it back from detach
@@ -4018,108 +3857,91 @@
 					options.buttons [index].$element
 					&& options.buttons [index].$element.length
 				) {
-					options.buttons [index].$element
-						.appendTo(options.container);
+					options.buttons [index].$element.appendTo(options.container);
 
 					return true;
 				}
 
-				options.buttons [index].$element
-					.button(value)
-					.attr("data-button-name", index)
-					.attr("title", value.label)
-					.addClass(self.classes.buttonUserDefined);
+				options.buttons [index].$element.button(value).attr('data-button-name', index).attr('title', value.label).addClass(self.classes.buttonUserDefined);
 			});
 		},
 
 		// creates language select and language select menu
-		_buildTaskbarLanguageSelect: function () {
+		_buildTaskbarLanguageSelect: function() {
 			var self = this;
 
 			if (!this._debugMenu()) {
 				return;
 			}
 
-			this.$languageSelect = this._factory("languageSelect")
-				.appendTo(this.$systemButtonsContainer)
-				.text(this._i18n("slug"))
-				.attr("title", this._i18n("languageSelect"))
-				.attr("data-button-name", "languageSelect")
-				.button();
+			this.$languageSelect = this._factory('languageSelect').appendTo(this.$systemButtonsContainer).text(this._i18n('slug')).attr('title', this._i18n('languageSelect')).attr('data-button-name', 'languageSelect').button();
 
 			this._refreshButtonIcon.call(this.$languageSelect, this);
 
 			this._afterSystemButtonCreate();
 
-			this.$languageSelectMenu = this._factory("languageSelectMenu");
+			this.$languageSelectMenu = this._factory('languageSelectMenu');
 
-			$.each(this.options.languages, function (index, value) {
+			$.each(this.options.languages, function(index, value) {
 				// don't insert languages that aren't supported
 				if (!self._translationsExists(value)) {
 					return true;
 				}
 
 				self.$languageSelectMenu.append(
-					$("<li></li>")
-						.attr("data-language-code", value)
-						.append(
-							$("<a></a>")
-								.attr("href", "#")
-								.text(self._i18n("name", null, value))
-						).on("click." + self._cache.uep, function (event) {
+					$('<li></li>').attr('data-language-code', value).append(
+						$('<a></a>').attr('href', '#').text(self._i18n('name', null, value))
+					).on('click.' + self._cache.uep, function(event) {
 						event.preventDefault();
 
 						// change language via public API
 						self.$elem.taskbar(
-							"option",
-							"language",
-							$(this).attr("data-language-code")
+							'option',
+							'language',
+							$(this).attr('data-language-code')
 						);
 						self._openedElements(false);
 					})
 				);
 			});
 
-			this.$languageSelectMenu
-				.appendTo(this.$systemButtonsContainer)
-				.show()
-				.menu({
-					focus: function (event, ui) {
-						self._triggerBindedElementEvent({
-							type: "menuItemFocus",
-							item: $(ui.item),
-							menu: self.$languageSelectMenu,
-							button: self.$languageSelect,
-							event: event
-						});
-					},
-					blur: function (event, ui) {
-						self._triggerBindedElementEvent({
-							type: "menuItemBlur",
-							item: $(ui.item),
-							menu: self.$languageSelectMenu,
-							button: self.$languageSelect,
-							event: event
-						});
-					}
-				});
+			this.$languageSelectMenu.appendTo(this.$systemButtonsContainer).show().menu({
+																							focus: function(event, ui) {
+																								self._triggerBindedElementEvent({
+																																	type: 'menuItemFocus',
+																																	item: $(ui.item),
+																																	menu: self.$languageSelectMenu,
+																																	button: self.$languageSelect,
+																																	event: event
+																																});
+																							},
+																							blur: function(event, ui) {
+																								self._triggerBindedElementEvent({
+																																	type: 'menuItemBlur',
+																																	item: $(ui.item),
+																																	menu: self.$languageSelectMenu,
+																																	button: self.$languageSelect,
+																																	event: event
+																																});
+																							}
+																						});
 
-			this.$languageSelect.on("click." + this._cache.uep, function () {
+			this.$languageSelect.on('click.' + this._cache.uep, function() {
 				self._hideMenus({
-					not: self.$languageSelectMenu
-				});
+									not: self.$languageSelectMenu
+								});
 				self._hideDatepickers();
 
 				self._hideTooltips();
 
-				var visible = self.$languageSelectMenu.is(":visible");
+				var visible = self.$languageSelectMenu.is(':visible');
 
 				// trigger event and respect prevention
 				if (self._triggerBindedElementEvent({
-					type: visible ? "elementClose" : "elementOpen",
-					menu: self.$languageSelectMenu,
-					button: self.$languageSelect
-				}) === false) {
+														type: visible ? 'elementClose' : 'elementOpen',
+														menu: self.$languageSelectMenu,
+														button: self.$languageSelect
+													}) === false) {
 					return;
 				}
 
@@ -4144,14 +3966,14 @@
 			);
 
 			this.$languageSelect.on(
-				"mouseup." + this._cache.uep
-				+ " mouseleave." + this._cache.uep, function () {
+				'mouseup.' + this._cache.uep
+				+ ' mouseleave.' + this._cache.uep, function() {
 					self._setConnectedButtonState.apply(this, [self]);
 				});
 		},
 
 		// shortcut for settings position the the language select menu
-		_positionTaskbarLanguageSelect: function () {
+		_positionTaskbarLanguageSelect: function() {
 			if (
 				!this.$languageSelect.length
 				|| !this.$languageSelectMenu.length
@@ -4159,20 +3981,19 @@
 				return;
 			}
 
-			this.$languageSelectMenu
-				.position(this._menuPosition({
-					of: this.$languageSelect,
-					elem: this.$languageSelectMenu
-				}));
+			this.$languageSelectMenu.position(this._menuPosition({
+																	 of: this.$languageSelect,
+																	 elem: this.$languageSelectMenu
+																 }));
 		},
 
 		// check if dictionary for given language exists,
 		// then generate debug message if it doesn't
-		_translationsExists: function (langCode) {
+		_translationsExists: function(langCode) {
 			if (!(langCode in this.options.localization)) {
 				this._debugLogAdd(
-					"Value \"" + langCode + "\" present in \languages\ option, "
-					+ "but not present in \"localization\".", 1, 1
+					'Value "' + langCode + '" present in \languages\ option, '
+					+ 'but not present in "localization".', 1, 1
 				);
 
 				return false;
@@ -4182,79 +4003,72 @@
 		},
 
 		// propagate language change to subordinates and windows
-		_languageChange: function () {
+		_languageChange: function() {
 			var self = this;
 
-			$.each(this._cache.windowButtons, function (index, elem) {
+			$.each(this._cache.windowButtons, function(index, elem) {
 				if (elem === undefined) {
 					return true;
 				}
 
-				if (elem.substr(0, 6) === "group:") {
-					var $group = self.$elem
-						.find("." + self.classes.windowButton +
-							"[data-group-name=" + elem.substr(6) + "]");
+				if (elem.substr(0, 6) === 'group:') {
+					var $group = self.$elem.find('.' + self.classes.windowButton +
+													 '[data-group-name=' + elem.substr(6) + ']');
 					self._groupSetTranslatedTitle.call($group, self);
 				}
 			});
 
 			// refresh windows translations
-			$.each(this._cache.windows, function (index, $elem) {
-				var instance = $(this).data(self._cnst.dataPrefix + "window");
+			$.each(this._cache.windows, function(index, $elem) {
+				var instance = $(this).data(self._cnst.dataPrefix + 'window');
 
 				instance._languageChange();
 			});
 		},
 
 		// function that performs minimize all action
-		_minimizeAll: function () {
+		_minimizeAll: function() {
 			var self = this,
-				$windows = $("." + this.classes.windowContent),
+				$windows = $('.' + this.classes.windowContent),
 				windowsLength = $windows.length;
 
 			// windows will act somewhat different when minimize all is in progress
 			this.$windowsContainment.data(
-				this._cnst.dataPrefix + "minimizeAllInProgress", true
+				this._cnst.dataPrefix + 'minimizeAllInProgress', true
 			);
 
 			// minimize all windows, not just those of current taskbar
-			$windows.each(function (index) {
+			$windows.each(function(index) {
 				var $window = $(this);
 
 				// only minimize non-minimized and minimizable windows
 				if (
-					!$window.window("minimized")
-					&& $window.window("option", "minimizable")
+					!$window.window('minimized')
+					&& $window.window('option', 'minimizable')
 				) {
-					var minimize = $window.window("option", "durations.minimize");
+					var minimize = $window.window('option', 'durations.minimize');
 
-					$window.window("option", "durations.minimize", false)
-						.window("minimize")
-						.window("option", "durations.minimize", minimize);
+					$window.window('option', 'durations.minimize', false).window('minimize').window('option', 'durations.minimize', minimize);
 				}
 
-				var instance = $window.data(self._cnst.dataPrefix + "window");
+				var instance = $window.data(self._cnst.dataPrefix + 'window');
 				instance._setConnectedButtonState();
 			});
 
 			self.$windowsContainment.data(
-				self._cnst.dataPrefix + "minimizeAllInProgress", false
+				self._cnst.dataPrefix + 'minimizeAllInProgress', false
 			);
 		},
 
 		// build button for minimize all
-		_buildTaskbarMinimizeAll: function () {
+		_buildTaskbarMinimizeAll: function() {
 			var self = this;
 
-			this.$minimizeAll = this._factory("minimizeAll")
-				.appendTo(this.$systemButtonsContainer)
-				.text(this._i18n("minimizeAll"))
-				.attr("data-button-name", "minimizeAll")
-				.button({
-					text: false
-				}).on("click." + this._cache.uep, function () {
-					self._minimizeAll();
-				});
+			this.$minimizeAll = this._factory('minimizeAll').appendTo(this.$systemButtonsContainer).text(this._i18n('minimizeAll')).attr('data-button-name', 'minimizeAll').button({
+																																													   text: false
+																																												   }).on('click.' + this._cache.uep, function() {
+				self._minimizeAll();
+			});
 
 			this._setMinimizeAllHoverOpaqueWindows();
 
@@ -4266,59 +4080,53 @@
 		// sets opacity to windows where user hovers over minimize all button,
 		// opacity is animated via CSS transitions, the animation
 		// would be pretty bad if it would be done via JS on like 30 windows
-		_setMinimizeAllHoverOpaqueWindows: function () {
+		_setMinimizeAllHoverOpaqueWindows: function() {
 			var self = this;
 			// just to be safe, remove classes that could be left last time
-			$("." + this.classes.window)
-				.removeClass(
-					this.classes.windowMinimizeAllHover
-					+ " " + this.classes.windowMinimizeAllUnhover
-				);
+			$('.' + this.classes.window).removeClass(
+				this.classes.windowMinimizeAllHover
+				+ ' ' + this.classes.windowMinimizeAllUnhover
+			);
 
 			// clear events bound last time
-			this.$minimizeAll
-				.off(
-					"mouseenter." + this._cache.uep
-					+ " mouseleave." + this._cache.uep
-				);
+			this.$minimizeAll.off(
+				'mouseenter.' + this._cache.uep
+				+ ' mouseleave.' + this._cache.uep
+			);
 
 			if (this.options.minimizeAllHoverOpaqueWindows) {
 				this.$minimizeAll.on(
-					"mouseenter." + this._cache.uep
-					+ " mouseleave." + this._cache.uep, function (e) {
-						$("." + self.classes.window)
-							.removeClass(
-								self.classes.windowMinimizeAllHover
-								+ " " + self.classes.windowMinimizeAllUnhover
-							);
+					'mouseenter.' + this._cache.uep
+					+ ' mouseleave.' + this._cache.uep, function(e) {
+						$('.' + self.classes.window).removeClass(
+							self.classes.windowMinimizeAllHover
+							+ ' ' + self.classes.windowMinimizeAllUnhover
+						);
 
 						// add class to all windows
-						if (e.type === "mouseenter") {
-							$("." + self.classes.window)
-								.not("." + self.classes.windowUnminimizable)
-								.addClass(self.classes.windowMinimizeAllHover)
-								.removeClass(self.classes.windowMinimizeAllUnhover);
+						if (e.type === 'mouseenter') {
+							$('.' + self.classes.window).not('.' + self.classes.windowUnminimizable).addClass(self.classes.windowMinimizeAllHover).removeClass(self.classes.windowMinimizeAllUnhover);
 
 							// clear revert, we don't want classes disappearing
 							clearTimeout(
 								self._cache.timeouts.minimizeAllHoverOpaqueWindowsRevert
 							);
 						} else {
-							$("." + self.classes.window)
-								.addClass(self.classes.windowMinimizeAllUnhover)
-								.removeClass(self.classes.windowMinimizeAllHover);
+							$('.' + self.classes.window).addClass(self.classes.windowMinimizeAllUnhover).removeClass(self.classes.windowMinimizeAllHover);
 
 							// try to find transition duration of unhover class
 							var styles = self._styleIndicator(
 								self.classes.windowMinimizeAllUnhover,
-								["transitionDuration", "mozTransitionDuration",
-									"webkitTransitionDuration", "oTransitionDuration"]
+								[
+									'transitionDuration', 'mozTransitionDuration',
+									'webkitTransitionDuration', 'oTransitionDuration'
+								]
 							);
 
 							// let's make this assumption if nothing better comes up
 							var delay = 1;
 
-							$.each(styles, function (index, value) {
+							$.each(styles, function(index, value) {
 								if (value) {
 									// multiply by 2; this class doesn't need
 									// to be removed immediately, and this way we're
@@ -4333,11 +4141,10 @@
 
 							// set timeouted revert
 							self._cache.timeouts.minimizeAllHoverOpaqueWindowsRevert =
-								setTimeout(function () {
-									$("." + self.classes.window)
-										.removeClass(
-											self.classes.windowMinimizeAllUnhover
-										);
+								setTimeout(function() {
+									$('.' + self.classes.window).removeClass(
+										self.classes.windowMinimizeAllUnhover
+									);
 								}, delay);
 						}
 					});
@@ -4349,42 +4156,39 @@
 		},
 
 		// build toggle fullscreen button
-		_buildTaskbarToggleFullscreen: function () {
+		_buildTaskbarToggleFullscreen: function() {
 			var self = this;
 
-			this.$toggleFullscreen = this._factory("toggleFullscreen")
-				.appendTo(this.$systemButtonsContainer)
-				.attr("data-button-name", "toggleFullscreen")
-				.button({
-					text: false
-				}).on("click." + this._cache.uep, function (event) {
-					var ui = {};
+			this.$toggleFullscreen = this._factory('toggleFullscreen').appendTo(this.$systemButtonsContainer).attr('data-button-name', 'toggleFullscreen').button({
+																																									  text: false
+																																								  }).on('click.' + this._cache.uep, function(event) {
+				var ui = {};
 
-					var enabled = self._fullscreenEnabled();
+				var enabled = self._fullscreenEnabled();
 
-					// save previous state
-					ui.fullscreenEnabled = enabled;
+				// save previous state
+				ui.fullscreenEnabled = enabled;
 
-					if (
-						self._trigger("beforeRequestFullscreen", event, ui)
-						=== false
-					) {
-						return;
-					}
+				if (
+					self._trigger('beforeRequestFullscreen', event, ui)
+					=== false
+				) {
+					return;
+				}
 
-					ui = {};
+				ui = {};
 
-					// leave fullscreen when in fullscreen,
-					// enter fullscreen when not in fullscreen
-					enabled ? self._fullscreenLeave() : self._fullscreenEnter();
-					self._setFullscreenToggleState();
+				// leave fullscreen when in fullscreen,
+				// enter fullscreen when not in fullscreen
+				enabled ? self._fullscreenLeave() : self._fullscreenEnter();
+				self._setFullscreenToggleState();
 
-					// add current state
-					ui.fullscreenEnabledBefore = enabled;
-					ui.fullscreenEnabled = self._fullscreenEnabled();
+				// add current state
+				ui.fullscreenEnabledBefore = enabled;
+				ui.fullscreenEnabled = self._fullscreenEnabled();
 
-					self._trigger("requestFullscreen", event, ui);
-				});
+				self._trigger('requestFullscreen', event, ui);
+			});
 
 			this._setFullscreenToggleState();
 			this._afterSystemButtonCreate();
@@ -4392,29 +4196,25 @@
 
 		// sets label for toggle fullscreen, based on whether
 		// browser is in fullscreen mode or not
-		_setFullscreenToggleState: function () {
-			this.$toggleFullscreen
-				.button("option", "label",
-					this._i18n(
-						this._fullscreenEnabled()
-							? "toggleFullscreenLeave"
-							: "toggleFullscreenEnter"
-					)
-				);
+		_setFullscreenToggleState: function() {
+			this.$toggleFullscreen.button('option', 'label',
+										  this._i18n(
+											  this._fullscreenEnabled()
+											  ? 'toggleFullscreenLeave'
+											  : 'toggleFullscreenEnter'
+										  )
+			);
 
 			this._refreshButtonIcon.call(this.$toggleFullscreen, this);
 		},
 
 		// build network monitor button
-		_buildTaskbarNetworkMonitor: function () {
-			this.$networkMonitor = this._factory("networkMonitor")
-				.appendTo(this.$systemButtonsContainer);
+		_buildTaskbarNetworkMonitor: function() {
+			this.$networkMonitor = this._factory('networkMonitor').appendTo(this.$systemButtonsContainer);
 
-			this.$networkMonitor
-				.attr("data-button-name", "networkMonitor")
-				.button({
-					text: false
-				});
+			this.$networkMonitor.attr('data-button-name', 'networkMonitor').button({
+																					   text: false
+																				   });
 
 			this._disableButton.call(this.$networkMonitor, this);
 
@@ -4424,20 +4224,20 @@
 		},
 
 		// get dictionary key, based on network status
-		_getNetworkMonitorKey: function () {
+		_getNetworkMonitorKey: function() {
 			var online = !!window.navigator.onLine;
 
-			return "networkMonitor" + (online ? "Online" : "Offline");
+			return 'networkMonitor' + (online ? 'Online' : 'Offline');
 		},
 
-		_setNetworkMonitorStatus: function () {
+		_setNetworkMonitorStatus: function() {
 			if (!this.$networkMonitor.length) {
 				return;
 			}
 
 			this.$networkMonitor.button(
-				"option",
-				"label",
+				'option',
+				'label',
 				this._i18n(this._getNetworkMonitorKey())
 			);
 
@@ -4445,13 +4245,10 @@
 		},
 
 		// build clock
-		_buildTaskbarClock: function () {
+		_buildTaskbarClock: function() {
 			var self = this;
 
-			this.$clock = this._factory("clock")
-				.appendTo(this.$systemButtonsContainer)
-				.attr("data-button-name", "clock")
-				.button();
+			this.$clock = this._factory('clock').appendTo(this.$systemButtonsContainer).attr('data-button-name', 'clock').button();
 
 			this._refreshButtonIcon.call(this.$clock, this);
 
@@ -4461,7 +4258,7 @@
 
 			// update clock every 1s - initial update if made
 			// by _setClockWidth()
-			this._cache.intervals.clock = setInterval(function () {
+			this._cache.intervals.clock = setInterval(function() {
 				self._clockUpdate();
 			}, 1000);
 
@@ -4469,13 +4266,11 @@
 		},
 
 		// build clock datepicker
-		_buildTaskbarClockDatepicker: function () {
+		_buildTaskbarClockDatepicker: function() {
 			var self = this;
 
-			var setHeaderTaskbarUuid = function () {
-				self.$datepicker
-					.find("." + self.classes.uiDatepickerHeader)
-					.attr("data-taskbar-uuid", self.uuid);
+			var setHeaderTaskbarUuid = function() {
+				self.$datepicker.find('.' + self.classes.uiDatepickerHeader).attr('data-taskbar-uuid', self.uuid);
 			};
 
 			// debug for when there's missing jQuery components:
@@ -4483,8 +4278,8 @@
 			if (this.options.clock && this.options.clockShowDatepicker
 				&& (!$.ui.datepicker || !$.datepicker)) {
 				this._debugLogAdd(
-					"jQuery UI Datepicker is required for " +
-					"clock datepicker to work.", 1, 0
+					'jQuery UI Datepicker is required for ' +
+					'clock datepicker to work.', 1, 0
 				);
 			}
 
@@ -4494,7 +4289,7 @@
 				&& $.ui.datepicker
 				&& $.datepicker
 			) {
-				var datepickerLang = this._i18n("code");
+				var datepickerLang = this._i18n('code');
 
 				// remove previous datepicker
 				if (this.$datepicker && this.$datepicker.length) {
@@ -4504,71 +4299,64 @@
 				// pickup translations
 				var datepickerTranslations =
 					$.datepicker && this._isRealObject($.datepicker.regional)
-						? $.datepicker.regional[
-						datepickerLang === "en"
-							? ""
-							: datepickerLang
+					? $.datepicker.regional[
+						datepickerLang === 'en'
+						? ''
+						: datepickerLang
 						] || {}
-						: {};
+					: {};
 
-				this.$datepicker = this._factory("datepicker")
-					.prependTo(this.$systemButtonsContainer)
-					.uniqueId()
-					.datepicker(datepickerTranslations)
-					.hide();
+				this.$datepicker = this._factory('datepicker').prependTo(this.$systemButtonsContainer).uniqueId().datepicker(datepickerTranslations).hide();
 
 				// refresh taskbar uuid - we'll need that in window click handler,
 				// when datepicker header is already detached by the time
 				// it's fired, so some other means of determining that clicked
 				// datapicker was of current taskbar is required
 				this.$datepicker.datepicker(
-					"option",
-					"onChangeMonthYear",
+					'option',
+					'onChangeMonthYear',
 					setHeaderTaskbarUuid
 				);
 
+				this.$clock.off('click.' + this._cache.uep).on('click.' + this._cache.uep, function() {
+					self._hideMenus();
+					self._hideTooltips();
+					self._hideDatepickers({
+											  not: self.$datepicker
+										  });
+					self._stopOtherTaskbarsAutoOpenOnBrowse();
 
-				this.$clock
-					.off("click." + this._cache.uep)
-					.on("click." + this._cache.uep, function () {
-						self._hideMenus();
-						self._hideTooltips();
-						self._hideDatepickers({
-							not: self.$datepicker
-						});
-						self._stopOtherTaskbarsAutoOpenOnBrowse();
+					var visible = self.$datepicker.is(':visible');
 
-						var visible = self.$datepicker.is(":visible");
+					// trigger event end respect prevention
+					if (self._triggerBindedElementEvent({
+															type: visible ? 'elementClose' : 'elementOpen',
+															menu: self.$datepicker,
+															button: self.$clock
+														}) === false) {
+						return;
+					}
 
-						// trigger event end respect prevention
-						if (self._triggerBindedElementEvent({
-							type: visible ? "elementClose" : "elementOpen",
-							menu: self.$datepicker,
-							button: self.$clock
-						}) === false) {
-							return;
-						}
+					self.$datepicker.toggle();
 
-						self.$datepicker.toggle();
-
-						if (!visible) {
-							setHeaderTaskbarUuid();
-							self._positionTaskbarDatepicker();
-							self._openedElements(true);
-						} else {
-							self._openedElements(false);
-						}
-					});
+					if (!visible) {
+						setHeaderTaskbarUuid();
+						self._positionTaskbarDatepicker();
+						self._openedElements(true);
+					} else {
+						self._openedElements(false);
+					}
+				});
 
 				this._bindMenuAutoOpen(this.$clock, this.$datepicker);
 				this._connectElements(this.$clock, this.$datepicker);
 
 				this.$clock.off(
-					"mouseup." + this._cache.uep
-					+ " mouseleave." + this._cache.uep
+					'mouseup.' + this._cache.uep
+					+ ' mouseleave.' + this._cache.uep
 				).on(
-					"mouseup." + this._cache.uep
-					+ " mouseleave." + this._cache.uep, function () {
+					'mouseup.' + this._cache.uep
+					+ ' mouseleave.' + this._cache.uep, function() {
 						self._setConnectedButtonState.apply(this, [self]);
 					});
 			} else if (this.$clock && this.$clock.length) {
@@ -4576,31 +4364,31 @@
 			}
 		},
 
-		_setClockWidth: function () {
+		_setClockWidth: function() {
 			if (!this.$clock.length) {
 				return;
 			}
 
 			var fakeTime = this._getFormattedTime({
-				hour: 11,
-				minute: 11,
-				second: 11,
-				millisec: 111,
-				timezone: 0
-			});
+													  hour: 11,
+													  minute: 11,
+													  second: 11,
+													  millisec: 111,
+													  timezone: 0
+												  });
 
 			var prevWidth = this.$clock.outerWidth();
 
-			this.$clock.css("width", "auto");
+			this.$clock.css('width', 'auto');
 
-			this.$clock.button("option", "label", fakeTime);
+			this.$clock.button('option', 'label', fakeTime);
 
 			// set clock width explicitly to the highest width possible,
 			// for the current time format, because clock
 			// shouldn't change it's container size when time passes;
 			// that would be a big problem for when people use
 			// time formats without leading zeros, like H:m:s
-			this.$clock.css("width", this.$clock.css("width"));
+			this.$clock.css('width', this.$clock.css('width'));
 
 			if (
 				prevWidth !== this.$clock.outerWidth()
@@ -4614,69 +4402,65 @@
 			this._clockUpdate();
 		},
 
-		_disableButton: function (self) {
-			this
-				.button("option", "disabled", true)
-				// don't want the visuals, just the behaviour
-				.removeClass(self.classes.uiStateDisabled)
-				// setts default cursor instead of text
-				.addClass(self.classes.buttonDisabled)
-				.on("click." + self._cache.uep, function () {
-					self._hideAll();
-				});
+		_disableButton: function(self) {
+			this.button('option', 'disabled', true)
+				 // don't want the visuals, just the behaviour
+				 .removeClass(self.classes.uiStateDisabled)
+				 // setts default cursor instead of text
+				 .addClass(self.classes.buttonDisabled).on('click.' + self._cache.uep, function() {
+				self._hideAll();
+			});
 		},
 
 		// shortcut for positioning datepicker
-		_positionTaskbarDatepicker: function () {
+		_positionTaskbarDatepicker: function() {
 			var self = this;
 
 			this._datepickerSetPosition();
 
-			this.$datepicker
-				.off("click." + this._cache.uep)
-				.on("click." + this._cache.uep, function () {
-					self._datepickerSetPosition();
-				});
+			this.$datepicker.off('click.' + this._cache.uep).on('click.' + this._cache.uep, function() {
+				self._datepickerSetPosition();
+			});
 		},
 
 		// when taskbar is horizontal and sticks to top edge,
 		// $buttonsContainer, $systemButtonsContainer and $startButtonsContainer
 		// buttons has to go to the bottom edge of the taskbar
-		_positionTopContainersContent: function (self) {
+		_positionTopContainersContent: function(self) {
 			var $this = $(this);
-			$this.css("marginTop", "");
+			$this.css('marginTop', '');
 
 			if (
 				self._cache.horizontal
-				&& self._cache.edge === "top"
+				&& self._cache.edge === 'top'
 				&& self.options.horizontalRows > 1
 			) {
-				$this.each(function () {
+				$this.each(function() {
 					var $this = $(this),
 						taskbarHeight = self.$elem.outerHeight(),
 						height = $this.outerHeight(),
-						paddings = parseFloat($this.css("paddingTop"))
-							+ parseFloat($this.css("paddingBottom")),
+						paddings = parseFloat($this.css('paddingTop'))
+							+ parseFloat($this.css('paddingBottom')),
 						borders = parseFloat(
-							self.$elem.css("borderTopWidth")
+							self.$elem.css('borderTopWidth')
 							)
 							+ parseFloat(
-								self.$elem.css("borderBottomWidth")
+								self.$elem.css('borderBottomWidth')
 							),
 						// taskbar height minus taskbar borders and elem padding
 						// it's what we need
 						val = taskbarHeight - height - borders;
 
-					$this.css("marginTop", val);
+					$this.css('marginTop', val);
 				});
 			}
 		},
 
 		// apply jQuery UI Tooltip if "buttonTooltips" is set to true
-		_setButtonsTooltips: function () {
+		_setButtonsTooltips: function() {
 			if (this.options.buttonsTooltips && !$.ui.tooltip) {
 				this._debugLogAdd(
-					"jQuery UI Tooltip is required for buttons tooltips to work.",
+					'jQuery UI Tooltip is required for buttons tooltips to work.',
 					1, 0
 				);
 			}
@@ -4688,60 +4472,53 @@
 			var self = this,
 				positions = {
 					top: {
-						my: "right top+2",
-						at: "right bottom",
-						collision: "flipfip"
+						my: 'right top+2',
+						at: 'right bottom',
+						collision: 'flipfip'
 					},
 					bottom: {
-						my: "right bottom-2",
-						at: "right top",
-						collision: "flipfip"
+						my: 'right bottom-2',
+						at: 'right top',
+						collision: 'flipfip'
 					},
 					left: {
-						my: "left bottom-2",
-						at: "left top",
-						collision: "flipfip"
+						my: 'left bottom-2',
+						at: 'left top',
+						collision: 'flipfip'
 					},
 					right: {
-						my: "right bottom-2",
-						at: "right top",
-						collision: "flipfip"
+						my: 'right bottom-2',
+						at: 'right top',
+						collision: 'flipfip'
 					}
 				};
 
-			var $elems = this.$elem
-				.find(
-					"." + this.classes.systemButtonsContainer +
-					" > ." + this.classes.uiButton
-				)
-				.add(this.$elem
-					.find(
-						"." + this.classes.windowButtonsContainer +
-						" > ." + this.classes.uiButton
-					)
-				)
-				.add(this.$elem
-					.find(
-						"." + this.classes.buttonsContainer +
-						" > ." + this.classes.uiButton
-					)
-				)
-				.add(this.$elem
-					.find(
-						"." + this.classes.startButtonsContainer +
-						" > ." + this.classes.uiButton
-					)
-				);
+			var $elems = this.$elem.find(
+				'.' + this.classes.systemButtonsContainer +
+				' > .' + this.classes.uiButton
+			).add(this.$elem.find(
+				'.' + this.classes.windowButtonsContainer +
+				' > .' + this.classes.uiButton
+				  )
+			).add(this.$elem.find(
+				'.' + this.classes.buttonsContainer +
+				' > .' + this.classes.uiButton
+				  )
+			).add(this.$elem.find(
+				'.' + this.classes.startButtonsContainer +
+				' > .' + this.classes.uiButton
+				  )
+			);
 
 			if (!this.options.buttonsTooltips) {
-				$elems.each(function () {
+				$elems.each(function() {
 					var $this = $(this);
 
 					var widget = self._getTooltipInstance.call($this);
 
 					if (widget) {
 						try {
-							$this.tooltip("destroy");
+							$this.tooltip('destroy');
 						} catch (e) {
 						}
 					}
@@ -4750,9 +4527,9 @@
 				return;
 			}
 
-			var horizontal = this.options.orientation === "horizontal";
+			var horizontal = this.options.orientation === 'horizontal';
 
-			$elems.each(function () {
+			$elems.each(function() {
 				var $this = $(this);
 
 				var widget = self._getTooltipInstance.call($this);
@@ -4776,13 +4553,13 @@
 					var horizontalLeftToRight = horizontal && parentIsInitialContainer;
 
 					if (horizontalLeftToRight) {
-						position.my = position.my.replace("right", "left");
-						position.at = position.at.replace("right", "left");
+						position.my = position.my.replace('right', 'left');
+						position.at = position.at.replace('right', 'left');
 					}
 
 					if (horizontal && $parents.is(self.$windowButtonsContainer)) {
-						position.my = position.my.replace("right", "center");
-						position.at = position.at.replace("right", "center");
+						position.my = position.my.replace('right', 'center');
+						position.at = position.at.replace('right', 'center');
 					}
 				}
 
@@ -4790,51 +4567,48 @@
 					var verticalTopToBottom = !horizontal && parentIsInitialContainer;
 
 					if (verticalTopToBottom) {
-						position.my = position.my.replace("bottom", "top");
-						position.at = position.at.replace("top", "bottom");
+						position.my = position.my.replace('bottom', 'top');
+						position.at = position.at.replace('top', 'bottom');
 					}
 				}
 
 				$this.tooltip({
-					position: position,
-					tooltipClass: self.classes.buttonTooltip,
-					show: self.options.durations.buttonsTooltipsShow,
-					hide: self.options.durations.buttonsTooltipsHide,
-					open: function (event, ui) {
-						var $tooltip = $(ui.tooltip);
-						var $target = $(event.target);
-						var tooltipId = $tooltip[0].id;
-						var targetId = $target[0].id;
+								  position: position,
+								  tooltipClass: self.classes.buttonTooltip,
+								  show: self.options.durations.buttonsTooltipsShow,
+								  hide: self.options.durations.buttonsTooltipsHide,
+								  open: function(event, ui) {
+									  var $tooltip = $(ui.tooltip);
+									  var $target = $(event.target);
+									  var tooltipId = $tooltip[0].id;
+									  var targetId = $target[0].id;
 
-						// hide other tooltips
-						self._hideTooltips({
-							not: $target
-						});
+									  // hide other tooltips
+									  self._hideTooltips({
+															 not: $target
+														 });
 
-						$tooltip.on("mouseenter." + self._cache.uep, function () {
-							self._hideTooltips();
-							self._hideToolTipNoAnimation.call(
-								$target, self, $tooltip
-							);
-						});
+									  $tooltip.on('mouseenter.' + self._cache.uep, function() {
+										  self._hideTooltips();
+										  self._hideToolTipNoAnimation.call(
+											  $target, self, $tooltip
+										  );
+									  });
 
-						var $connected = self.connectedElement($this)
-							.filter("." + self.classes.uiHasDatepicker)
-							.add(
-								self.connectedElement($this)
-									.filter("." + self.classes.uiMenu)
-							);
+									  var $connected = self.connectedElement($this).filter('.' + self.classes.uiHasDatepicker).add(
+										  self.connectedElement($this).filter('.' + self.classes.uiMenu)
+									  );
 
-						// some buttons with tooltips don't have connected elements
-						if ($connected.length && $connected.is(":visible")) {
-							self._hideTooltips();
-						}
-					},
-				});
+									  // some buttons with tooltips don't have connected elements
+									  if ($connected.length && $connected.is(':visible')) {
+										  self._hideTooltips();
+									  }
+								  }
+							  });
 			});
 		},
 
-		_hideTooltips: function (options) {
+		_hideTooltips: function(options) {
 			if (!$.ui.tooltip) {
 				return;
 			}
@@ -4844,11 +4618,9 @@
 			// hide all tooltips of elements of current taskbar
 			// that have tooltips opened
 			var $tooltipsHaving =
-				$("." + this.classes.taskbar)
-					.find("[aria-describedby^=\"" + this.classes.uiTooltip + "\"]")
-					.not(options && options.not ? options.not : null);
+				$('.' + this.classes.taskbar).find('[aria-describedby^="' + this.classes.uiTooltip + '"]').not(options && options.not ? options.not : null);
 
-			$tooltipsHaving.each(function () {
+			$tooltipsHaving.each(function() {
 				var $this = $(this);
 
 				var widget = self._getTooltipInstance.call($this);
@@ -4862,31 +4634,31 @@
 		// hide tooltips immediately, for example in cases
 		// where cursor if over tooltip and tooltip is blocking
 		// window menu group
-		_hideToolTipNoAnimation: function (self, $tooltip) {
+		_hideToolTipNoAnimation: function(self, $tooltip) {
 			if (!$tooltip) {
-				var describedBy = this.attr("aria-describedby");
-				$tooltip = $("#" + describedBy);
+				var describedBy = this.attr('aria-describedby');
+				$tooltip = $('#' + describedBy);
 			}
 
-			var cachedHide = this.tooltip("option", "hide");
-			this.tooltip("option", "hide", false);
-			this.tooltip("close");
-			$("div." + self.classes.uiTooltip).stop(true, true).hide();
-			this.tooltip("option", "hide", cachedHide);
+			var cachedHide = this.tooltip('option', 'hide');
+			this.tooltip('option', 'hide', false);
+			this.tooltip('close');
+			$('div.' + self.classes.uiTooltip).stop(true, true).hide();
+			this.tooltip('option', 'hide', cachedHide);
 		},
 
-		_getTooltipInstance: function () {
+		_getTooltipInstance: function() {
 			var widget = null;
 
 			try {
-				widget = this.tooltip("widget");
+				widget = this.tooltip('widget');
 			} catch (e) {
 			}
 
 			return widget;
 		},
 
-		_afterSystemButtonCreate: function () {
+		_afterSystemButtonCreate: function() {
 			// position container
 			this._positionTopContainersContent.call(
 				this.$systemButtonsContainer, this
@@ -4894,112 +4666,114 @@
 		},
 
 		// helper to determine if element inside of taskbar is native subordinate
-		_isNativeElement: function ($elem) {
+		_isNativeElement: function($elem) {
 			return $elem.hasClass(this.classes.separator)
 				|| $elem.hasClass(this.classes.container);
 		},
 
-		_refreshWindowButtonsContainer: function () {
+		_refreshWindowButtonsContainer: function() {
 			this._setwindowButtonsContainerSize();
 			this._setWindowButtonsSizes();
 		},
 
-		_setwindowButtonsContainerSize: function () {
+		_setwindowButtonsContainerSize: function() {
 			// reset width and height first,
 			// so they have no impact on neighbouring elements
 			this.$windowButtonsContainer.css({
-				width: 0,
-				height: 0
-			});
+												 width: 0,
+												 height: 0
+											 });
 
 			if (this._cache.horizontal) {
 				this.$windowButtonsContainer.scrollTop(0);
 			}
 
 			var self = this,
-				horizontal = this.options.orientation === "horizontal",
+				horizontal = this.options.orientation === 'horizontal',
 				$wins = this.$windowButtonsContainer,
 				computed = window.getComputedStyle($wins[0]),
 				// find prev element, visually, co don't count in non-natives,
 				// empty containers, unvisible elements (e.g. separators
 				// for empty containers), floats: right, and positions: absolute
-				$prev = this.$windowButtonsContainer
-					.prevAll(":not(:empty):visible:eq(0)")
-					.filter(function () {
-						var $this = $(this);
-
-						if (!self._isNativeElement($this)) {
-							return false;
-						}
-
-						if (
-							$this.css("float") === "right"
-							&& self._cache.horizontal
-						) {
-							return false;
-						}
-						if (
-							$this.css("position") === "absolute"
-							&& !self._cache.horizontal
-						) {
-							return false;
-						}
-
-						return true;
-					}),
-				$next,
-				farRight, farLeft, paddingsHorizontal,
-				farBottom, farTop, paddingsVertical;
-
-			if (horizontal) {
-				// remove classes used only for vertical taskbar
-				$wins.removeClass(
-					this.classes.windowButtonsContainerFirstChild
-					+ " " + this.classes.windowButtonsContainerOnlyChild
-				);
-
-				// find next element - it has to have float: right
-				$next = $wins.siblings().filter(function () {
+				$prev = this.$windowButtonsContainer.prevAll(':not(:empty):visible:eq(0)').filter(function() {
 					var $this = $(this);
 
 					if (!self._isNativeElement($this)) {
 						return false;
 					}
 
-					if ($this.css("float") === "right") {
+					if (
+						$this.css('float') === 'right'
+						&& self._cache.horizontal
+					) {
+						return false;
+					}
+					if (
+						$this.css('position') === 'absolute'
+						&& !self._cache.horizontal
+					) {
+						return false;
+					}
+
+					return true;
+				}),
+				$next,
+				farRight,
+				farLeft,
+				paddingsHorizontal,
+				farBottom,
+				farTop,
+				paddingsVertical;
+
+			if (horizontal) {
+				// remove classes used only for vertical taskbar
+				$wins.removeClass(
+					this.classes.windowButtonsContainerFirstChild
+					+ ' ' + this.classes.windowButtonsContainerOnlyChild
+				);
+
+				// find next element - it has to have float: right
+				$next = $wins.siblings().filter(function() {
+					var $this = $(this);
+
+					if (!self._isNativeElement($this)) {
+						return false;
+					}
+
+					if ($this.css('float') === 'right') {
 						return true;
 					}
 				});
 
-				$next = $next.filter(":not(:empty):eq(0)");
+				$next = $next.filter(':not(:empty):eq(0)');
 
 				// calculate far right position, far left position,
 				// and horizontal padding
 				farRight =
 					$next.length
-						? $next.position().left
-						: this.$elem.outerWidth() - $wins.position().left,
+					? $next.position().left
+					: this.$elem.outerWidth() - $wins.position().left,
 
 					farLeft =
 						$prev.length
-							? $prev.position().left + $prev.outerWidth()
-							: parseInt(this.$elem.css("left"), 10) || 0,
+						? $prev.position().left + $prev.outerWidth()
+						: parseInt(this.$elem.css('left'), 10) || 0,
 
 					paddingsHorizontal = parseFloat(
 						this._styleIndicator(
-							"$." + this.classes.windowButtonsContainer
-							+ " > div." + this.classes.windowButton, "paddingLeft"
+							'$.' + this.classes.windowButtonsContainer
+							+ ' > div.' + this.classes.windowButton, 'paddingLeft'
 						).paddingLeft
 					);
 			} else {
 				// find all previous containers that aren't empty
-				var $winsPrevAll = $wins.siblings().filter(function () {
+				var $winsPrevAll = $wins.siblings().filter(function() {
 					return self._filterNonEmptyContainers.call(
 						$(this), self, true
 					);
 				});
 				// find all next containers that aren't empty
-				var $winsNextAll = $wins.siblings().filter(function () {
+				var $winsNextAll = $wins.siblings().filter(function() {
 					return self._filterNonEmptyContainers.call($(this), self);
 				});
 
@@ -5016,40 +4790,33 @@
 				);
 
 				// get separator height, usually 1px
-				var separatorFixHeight = this.$systemButtonsContainer
-					.children("." + this.classes.uiButton)
-					.filter(":visible")
-					.length
-					? parseInt(
-					$("[data-separator-for=systemButtonsContainer]")
-						.css("borderTopWidth"),
+				var separatorFixHeight = this.$systemButtonsContainer.children('.' + this.classes.uiButton).filter(':visible').length
+										 ? parseInt(
+					$('[data-separator-for=systemButtonsContainer]').css('borderTopWidth'),
 					10
 				) || 0
-					: 0;
+										 : 0;
 
 				// find next element looking from the top
-				$next = this.$elem
-					.find("." + this.classes.systemButtonsSeparator)
-					.filter(":visible");
+				$next = this.$elem.find('.' + this.classes.systemButtonsSeparator).filter(':visible');
 
 				// calculate far bottom position, far top position,
 				// and vertical padding
 				farBottom = $next.length
-					? this._extendedPosition.call($next, "offset").top
-					: this.$elem.outerHeight() - $wins.position().top,
+							? this._extendedPosition.call($next, 'offset').top
+							: this.$elem.outerHeight() - $wins.position().top,
 
 					farTop = $prev.length
-						? this._extendedPosition.call($prev, "offset").bottom
-						: this._extendedPosition.call(this.$elem, "offset").top,
+							 ? this._extendedPosition.call($prev, 'offset').bottom
+							 : this._extendedPosition.call(this.$elem, 'offset').top,
 
-					paddingsVertical = $wins
-						.hasClass(this.classes.windowButtonsContainerOnlyChild)
-						? 0
-						: parseFloat(
+					paddingsVertical = $wins.hasClass(this.classes.windowButtonsContainerOnlyChild)
+									   ? 0
+									   : parseFloat(
 						this._styleIndicator(
-							"$." + this.classes.windowButtonsContainer
-							+ " > div." + this.classes.windowButton,
-							"paddingTop"
+							'$.' + this.classes.windowButtonsContainer
+							+ ' > div.' + this.classes.windowButton,
+							'paddingTop'
 						).paddingTop
 					) * 2 - separatorFixHeight;
 			}
@@ -5057,26 +4824,26 @@
 			// calculate height and width
 			var windowButtonsWidth = !this._cache.horizontal
 				// horizontal
-				? ""
+									 ? ''
 				// vertical
-				: farRight - farLeft - paddingsHorizontal * 2;
+									 : farRight - farLeft - paddingsHorizontal * 2;
 
 			var verticalHeight = ($next && $next.length
-					? $next.position().top + $next.outerHeight()
-					: this.$elem.innerWidth()
+								  ? $next.position().top + $next.outerHeight()
+								  : this.$elem.innerWidth()
 				)
 				- (
 					$prev.length
-						? ($prev.position().top + $prev.outerHeight())
-						: (this.$elem.outerHeight() + this.$elem.position().top)
+					? ($prev.position().top + $prev.outerHeight())
+					: (this.$elem.outerHeight() + this.$elem.position().top)
 				)
 				- parseFloat(computed.paddingTop) * 2;
 
 			var windowButtonsHeight = this._cache.horizontal
 				// horizontal
-				? this.$elem.innerHeight()
+									  ? this.$elem.innerHeight()
 				// vertical
-				: farBottom - farTop - paddingsVertical;
+									  : farBottom - farTop - paddingsVertical;
 
 			// if horizontal taskbar has only one row, set axis on sortable,
 			// so buttons won't bounce of the edges of container
@@ -5086,9 +4853,9 @@
 
 			if (this.options.windowButtonsSortable && $.ui.sortable) {
 				this.$windowButtonsContainer.sortable(
-					"option",
-					"axis",
-					singleHorizontalRow ? "x" : false
+					'option',
+					'axis',
+					singleHorizontalRow ? 'x' : false
 				);
 			}
 
@@ -5098,25 +4865,25 @@
 			}
 
 			this.$windowButtonsContainer.css({
-				width: windowButtonsWidth,
-				height: windowButtonsHeight
-			});
+												 width: windowButtonsWidth,
+												 height: windowButtonsHeight
+											 });
 		},
 
 		// set equal sizes to window buttons, in case when buttons with their
 		// natural sizes would overflow container
-		_setWindowButtonsSizes: function () {
+		_setWindowButtonsSizes: function() {
 			var self = this,
 				widths = {},
 				heights = {},
-				$buttons = this.$elem.find("." + this.classes.windowButton);
+				$buttons = this.$elem.find('.' + this.classes.windowButton);
 
 			if (!$buttons.length) {
 				return;
 			}
 
-			var $buttonFirst = $buttons.filter(":eq(0)"),
-				$buttonLast = $buttons.filter(":last"),
+			var $buttonFirst = $buttons.filter(':eq(0)'),
+				$buttonLast = $buttons.filter(':last'),
 				marginRight = parseFloat(
 					window.getComputedStyle($buttonFirst[0]).marginRight
 				),
@@ -5127,14 +4894,14 @@
 					$buttonFirst.outerWidth() - $buttonFirst.innerWidth();
 
 			// reset styles
-			$buttons.each(function () {
+			$buttons.each(function() {
 				var $this = $(this);
 
 				// clear button dimensions
 				self._copyStyles({
-					to: $this,
-					properties: ["maxWidth", "maxHeight", "display"]
-				});
+									 to: $this,
+									 properties: ['maxWidth', 'maxHeight', 'display']
+								 });
 
 				// gather buttons widts
 				widths [this.id] = $this.outerWidth() + marginRight;
@@ -5149,13 +4916,13 @@
 					+ this.$windowButtonsContainer.innerHeight()
 				) {
 					// buttons don't overflow container, nothing to do here
-					$.each(widths, function (index, value) {
+					$.each(widths, function(index, value) {
 						width += value;
 					});
 
 					// number of buttons expected to be container in each row
 					var inRow = Math.ceil(
-						$buttons.length / this._getRealRowCol("horizontal")
+						$buttons.length / this._getRealRowCol('horizontal')
 						),
 						// button max width to be applied
 						maxWidth = Math.floor(
@@ -5164,13 +4931,11 @@
 							- diff
 						);
 
-					$buttons.css("maxWidth", maxWidth);
+					$buttons.css('maxWidth', maxWidth);
 
 					// calculate smaller width for window buttons
-					$buttons = this
-						.$windowButtonsContainer
-						.children("." + this.classes.uiButton);
-					var $lastButton = $buttons.filter(":last");
+					$buttons = this.$windowButtonsContainer.children('.' + this.classes.uiButton);
+					var $lastButton = $buttons.filter(':last');
 
 					// there are no buttons, nothing to do here
 					if ($lastButton.length) {
@@ -5182,16 +4947,16 @@
 						}
 
 						var rowStart = this._extendedPosition.call(
-							$buttons.filter(":eq(0)"), "offset"
+							$buttons.filter(':eq(0)'), 'offset'
 							).top,
 							currentRow = 1;
 
 						// sort buttons to their rows
-						$buttons.each(function () {
+						$buttons.each(function() {
 							var $this = $(this);
 
 							var top = self._extendedPosition.call(
-								$this, "offset"
+								$this, 'offset'
 							).top;
 
 							if (
@@ -5207,10 +4972,10 @@
 						});
 
 						var lastButtonOffset = this._extendedPosition.call(
-							$lastButton, "offset"
+							$lastButton, 'offset'
 							),
 							containerOffset = this._extendedPosition.call(
-								this.$windowButtonsContainer, "offset"
+								this.$windowButtonsContainer, 'offset'
 							);
 
 						// if last button is over the bottom edge of container
@@ -5219,8 +4984,7 @@
 							> containerOffset.bottom + lastButtonOffset.height / 2
 						) {
 							var $allExceptLast =
-									rows[this._getRealRowCol("horizontal")]
-										.filter(":not(:last)"),
+									rows[this._getRealRowCol('horizontal')].filter(':not(:last)'),
 								iteration = 0;
 
 							while (
@@ -5228,10 +4992,10 @@
 								containerOffset.bottom + lastButtonOffset.height / 2
 								) {
 								// decrease max width by 1px
-								$allExceptLast.each(function () {
-									this.style.maxWidth = ""
+								$allExceptLast.each(function() {
+									this.style.maxWidth = ''
 										+ (parseInt(this.style.maxWidth, 10) - 1)
-										+ "px";
+										+ 'px';
 								});
 
 								iteration++;
@@ -5246,7 +5010,7 @@
 								// after max width change, refresh
 								// $lastButton offset for the while condition
 								lastButtonOffset = this._extendedPosition.call(
-									$lastButton, "offset"
+									$lastButton, 'offset'
 								);
 							}
 						}
@@ -5255,38 +5019,36 @@
 
 				// cache calculated button's widths
 				// - when sortable starts, it'll be too late to get to them
-				$buttons.each(function () {
+				$buttons.each(function() {
 					$(this).data(
-						self._cnst.dataPrefix + "taskbarButtonFloatWidth",
+						self._cnst.dataPrefix + 'taskbarButtonFloatWidth',
 						window.getComputedStyle(this).width
 					);
 				});
 			}
 
 			if (this.options.windowButtonsSortable && $.ui.sortable) {
-				this.$windowButtonsContainer.sortable("refreshPositions");
+				this.$windowButtonsContainer.sortable('refreshPositions');
 			}
 		},
 
-		_connectElements: function ($elem1, $elem2) {
+		_connectElements: function($elem1, $elem2) {
 			// force elements to have ID
 			// (ID won't be set if element already has ID)
-			var elem1 = $elem1.uniqueId().attr("id");
-			var elem2 = $elem2.uniqueId().attr("id");
+			var elem1 = $elem1.uniqueId().attr('id');
+			var elem2 = $elem2.uniqueId().attr('id');
 
 			// single element can have multiple connnected elements
-			this._cache.connectedElements[elem1] = this._cache
-				.connectedElements[elem1] || [];
+			this._cache.connectedElements[elem1] = this._cache.connectedElements[elem1] || [];
 			this._cache.connectedElements[elem1].push(elem2);
 
-			this._cache.connectedElements[elem2] = this._cache
-				.connectedElements[elem2] || [];
+			this._cache.connectedElements[elem2] = this._cache.connectedElements[elem2] || [];
 			this._cache.connectedElements[elem2].push(elem1);
 		},
 
 		// return connected element or empty jQuery object if no connected
 		// element can be found
-		connectedElement: function (item) {
+		connectedElement: function(item) {
 			var $empty = $(),
 				itemId;
 
@@ -5296,7 +5058,7 @@
 				itemId = item[0].id;
 			} else if (item.nodeName) {
 				itemId = item.id;
-			} else if (typeof item === "string") {
+			} else if (typeof item === 'string') {
 				itemId = item;
 			}
 
@@ -5314,9 +5076,8 @@
 			var $elems = $();
 
 			// build a set of connected elements
-			$.each(elems, function (index, id) {
-				$elems = $elems
-					.add($("#" + id));
+			$.each(elems, function(index, id) {
+				$elems = $elems.add($('#' + id));
 			});
 
 			return $elems.length ? $elems : $empty;
@@ -5325,18 +5086,13 @@
 		// find all elements that should participate
 		// that should autoOpen on hover when a taskbar
 		// subordinate is currently open, and bind appropiate handlers
-		_bindMenusAutoOpen: function () {
+		_bindMenusAutoOpen: function() {
 			var self = this,
-				$buttons = this.$elem
-					.find("." + this.classes.uiButton);
+				$buttons = this.$elem.find('.' + this.classes.uiButton);
 
-			var $elems = $()
-				.add($buttons.filter("[data-menu-button]"))
-				.add($buttons.filter("[data-group-name]"))
-				.add(this.$languageSelect)
-				.add(this.$clock);
+			var $elems = $().add($buttons.filter('[data-menu-button]')).add($buttons.filter('[data-group-name]')).add(this.$languageSelect).add(this.$clock);
 
-			$elems.each(function () {
+			$elems.each(function() {
 				var $connected = self.connectedElement(this);
 
 				if (!$connected.length) {
@@ -5351,10 +5107,10 @@
 		},
 
 		// bind auto open login to buttons
-		_bindMenuAutoOpen: function ($button, $elem) {
+		_bindMenuAutoOpen: function($button, $elem) {
 			var self = this;
 
-			var eventName = "mouseenter." + this._cache.uep + "menuautoopen";
+			var eventName = 'mouseenter.' + this._cache.uep + 'menuautoopen';
 
 			// unbind handler - act as destroyer
 			$button.off(eventName);
@@ -5366,7 +5122,7 @@
 				return;
 			}
 
-			$button.on(eventName, function () {
+			$button.on(eventName, function() {
 				if (
 					self._cache.progress.windowButtonsSortable
 					|| self._cache.progress.taskbarDraggable
@@ -5374,34 +5130,32 @@
 					return true;
 				}
 
-				if (self._openedElements() && !$elem.is(":visible")) {
+				if (self._openedElements() && !$elem.is(':visible')) {
 					self._cache.progress.menuAutoOpenOnBrowse = true;
 					// suppressSingleGroupClick will prevent window showing
 					// on group buttons that have only one window currently binded
 					self._cache.suppressSingleGroupClick = true;
-					$(this).trigger("click." + self._cache.uep);
+					$(this).trigger('click.' + self._cache.uep);
 					self._cache.suppressSingleGroupClick = false;
 				}
 			});
 		},
 
-		_stopOtherTaskbarsAutoOpenOnBrowse: function () {
+		_stopOtherTaskbarsAutoOpenOnBrowse: function() {
 			var self = this;
 
-			$("." + this.classes.taskbar)
-				.not(this.$elem)
-				.each(function () {
-					var $this = $(this),
-						instance = $this.data(self._cnst.dataPrefix + "taskbar");
+			$('.' + this.classes.taskbar).not(this.$elem).each(function() {
+				var $this = $(this),
+					instance = $this.data(self._cnst.dataPrefix + 'taskbar');
 
-					instance.hideSubordinates();
-					instance._openedElements(false);
-					instance._cache.progress.menuAutoOpenOnBrowse = false;
-				});
+				instance.hideSubordinates();
+				instance._openedElements(false);
+				instance._cache.progress.menuAutoOpenOnBrowse = false;
+			});
 		},
 
 		// setts state for a button
-		_setConnectedButtonState: function (self) {
+		_setConnectedButtonState: function(self) {
 			// connected element
 			var $connectedElems = self.connectedElement(this);
 
@@ -5413,13 +5167,13 @@
 				active = false,
 				activeClass = self.classes.uiStateActive;
 
-			$.each($elems, function () {
+			$.each($elems, function() {
 				var $elem = $(this);
 
 				// when connected element is window
 				if ($elem.hasClass(self.classes.windowContent)) {
 					// check if active class is present
-					active = $elem.window("widget").hasClass(
+					active = $elem.window('widget').hasClass(
 						self.classes.windowTop
 					);
 
@@ -5428,13 +5182,12 @@
 
 					// itterate through elems connected to button
 					// - in window groups there's more than one
-					$connectedElems.each(function () {
+					$connectedElems.each(function() {
 						var $connected = $(this);
-
 
 						// we deal with window menu group
 						if (!$connected.hasClass(self.classes.uiDialogContent)) {
-							if ($connected.is(":visible")) {
+							if ($connected.is(':visible')) {
 								// found opened window group, break here,
 								// active = true will be set after that loop
 								return false;
@@ -5447,8 +5200,7 @@
 
 						// check if active class is present
 						if (
-							$connected.window("widget")
-								.hasClass(self.classes.windowTop)
+							$connected.window('widget').hasClass(self.classes.windowTop)
 						) {
 							// found active window, break here
 							active = true;
@@ -5458,11 +5210,11 @@
 
 					// on no window is active, the menu itself could be visible
 					if (!active) {
-						active = $elem.is(":visible");
+						active = $elem.is(':visible');
 					}
 				} else {
 					// datepicker, language menu, start menu, etc.
-					active = $elem.is(":visible");
+					active = $elem.is(':visible');
 				}
 
 				// break if found
@@ -5476,49 +5228,44 @@
 		},
 
 		// set connected button state on all buttons
-		_setConnectedButtonsStates: function () {
+		_setConnectedButtonsStates: function() {
 			var self = this;
 
-			this.$systemButtonsContainer
-				.add(this.$windowButtonsContainer)
-				.add(this.$buttonsContainer)
-				.children("." + this.classes.uiButton).each(function () {
+			this.$systemButtonsContainer.add(this.$windowButtonsContainer).add(this.$buttonsContainer).children('.' + this.classes.uiButton).each(function() {
 				self._setConnectedButtonState.call(this, self);
 			});
 		},
 
 		// updates time button label and inserts current time
-		_clockUpdate: function () {
-			var $clock = this.$elem.find("." + this.classes.clock);
+		_clockUpdate: function() {
+			var $clock = this.$elem.find('.' + this.classes.clock);
 
-			$clock
-				.button("option", "label", this._getFormattedTime())
-				.attr("title", this._getFormattedDate());
+			$clock.button('option', 'label', this._getFormattedTime()).attr('title', this._getFormattedDate());
 		},
 
 		// use datepicker formatDate function to format date for clock tooltip
-		_getFormattedDate: function () {
-			var lang = this.options.language !== "en" ? this.options.language : "";
+		_getFormattedDate: function() {
+			var lang = this.options.language !== 'en' ? this.options.language : '';
 
 			// if datepicker is not present, use empty string,
 			// meaning tooltip will not show
 			if (!$.datepicker) {
-				return "";
+				return '';
 			}
 
 			// generate debug for missing translations
 			if (!$.datepicker.regional[lang]) {
 				this._debugLogAdd(
-					"Language \"" + lang + "\" required for formatting " +
-					"date for clock tooltip, but datepicker translations " +
-					"were not found.", 1, 1
+					'Language "' + lang + '" required for formatting ' +
+					'date for clock tooltip, but datepicker translations ' +
+					'were not found.', 1, 1
 				);
 
-				return "";
+				return '';
 			}
 
 			return $.datepicker.formatDate(
-				this._i18n("clockDateFormat"),
+				this._i18n('clockDateFormat'),
 				new Date(), {
 					dayNamesShort: $.datepicker.regional[lang].dayNamesShort,
 					dayNames: $.datepicker.regional[lang].dayNames,
@@ -5532,18 +5279,19 @@
 		// for this plugin
 		// Copyright (c) 2014 Trent Richardson; Licensed MIT
 		// usage: http://trentrichardson.com/examples/timepicker/#tp-formatting
-		_getFormattedTime: function (time) {
+		_getFormattedTime: function(time) {
 			var date = new Date(),
-				format = this._i18n("clockTimeFormat"),
-				time = time || {
-					hour: date.getHours(),
-					minute: date.getMinutes(),
-					second: date.getSeconds(),
-					millisec: date.getMilliseconds(),
-					timezone: date.getTimezoneOffset()
-				};
+				format = this._i18n('clockTimeFormat');
 
-			var convert24to12 = function (hour) {
+			time = time || {
+				hour: date.getHours(),
+				minute: date.getMinutes(),
+				second: date.getSeconds(),
+				millisec: date.getMilliseconds(),
+				timezone: date.getTimezoneOffset()
+			};
+
+			var convert24to12 = function(hour) {
 				hour %= 12;
 
 				if (hour === 0) {
@@ -5554,70 +5302,58 @@
 			};
 
 			var tmptime = format,
-				ampmName = this._i18n("clockAmSymbol"),
+				ampmName = this._i18n('clockAmSymbol'),
 				hour = parseInt(time.hour, 10);
 
 			if (hour > 11) {
-				ampmName = this._i18n("clockPmSymbol");
+				ampmName = this._i18n('clockPmSymbol');
 			}
 
-			tmptime = tmptime.replace(
-				/(?:HH?|hh?|mm?|ss?|[tT]{1,2}|[zZ]|[lc]|'.*?')/g,
-				function (match) {
-					switch (match) {
-						case "HH":
-							return ("0" + hour).slice(-2);
-						case "H":
-							return hour;
-						case "hh":
-							return ("0" + convert24to12(hour)).slice(-2);
-						case "h":
-							return convert24to12(hour);
-						case "mm":
-							return ("0" + time.minute).slice(-2);
-						case "m":
-							return time.minute;
-						case "ss":
-							return ("0" + time.second).slice(-2);
-						case "s":
-							return time.second;
-						case "l":
-							return ("00" + time.millisec).slice(-3);
-						case "c":
-							return ("00" + time.microsec).slice(-3);
-						case "z":
-							return $.timepicker.timezoneOffsetString(
-								time.timezone === null
-									? options.timezone
-									: time.timezone,
-								false
-							);
-						case "Z":
-							return $.timepicker.timezoneOffsetString(
-								time.timezone === null
-									? options.timezone
-									: time.timezone,
-								true
-							);
-						case "T":
-							return ampmName.charAt(0).toUpperCase();
-						case "TT":
-							return ampmName.toUpperCase();
-						case "t":
-							return ampmName.charAt(0).toLowerCase();
-						case "tt":
-							return ampmName.toLowerCase();
-						default:
-							return match.replace(/'/g, "");
-					}
-				});
+			tmptime = tmptime.replace(/(?:HH?|hh?|mm?|ss?|[tT]{1,2}|[zZ]|[lc]|'.*?')/g, function(match) {
+				switch (match) {
+					case 'HH':
+						return ('0' + hour).slice(-2);
+					case 'H':
+						return hour;
+					case 'hh':
+						return ('0' + convert24to12(hour)).slice(-2);
+					case 'h':
+						return convert24to12(hour);
+					case 'mm':
+						return ('0' + time.minute).slice(-2);
+					case 'm':
+						return time.minute;
+					case 'ss':
+						return ('0' + time.second).slice(-2);
+					case 's':
+						return time.second;
+					case 'l':
+						return ('00' + time.millisec).slice(-3);
+					case 'c':
+						return ('00' + time.microsec).slice(-3);
+					case 'z':
+						return $.timepicker.timezoneOffsetString(time.timezone === null ? options.timezone : time.timezone, false);
+					case 'Z':
+						return $.timepicker.timezoneOffsetString(time.timezone === null ? options.timezone : time.timezone, true);
+					case 'T':
+						return ampmName.charAt(0).toUpperCase();
+					case 'TT':
+						return ampmName.toUpperCase();
+					case 't':
+						return ampmName.charAt(0).toLowerCase();
+					case 'tt':
+						return ampmName.toLowerCase();
+					default:
+						return match.replace(/'/g, '');
+				}
+			});
 
 			return tmptime;
 		},
 
 		// blur all windows using window "moveToTop" method with additional params
-		_blurWindows: function () {
-			$("." + this.classes.window + ":eq(0) ." + this.classes.windowContent + ":eq(0)").window("moveToTop", {
+		_blurWindows: function() {
+			$('.' + this.classes.window + ':eq(0) .' + this.classes.windowContent + ':eq(0)').window('moveToTop', {
 				skipThis: true,
 				skipMinimizing: true,
 				blurModals: true
@@ -5625,11 +5361,11 @@
 		},
 
 		// returns all windows binded to this taskbar
-		_windows: function () {
+		_windows: function() {
 			var $collection = $();
 
-			$.each(this._cache.windows, function (index, elem) {
-				var $window = $("#" + index);
+			$.each(this._cache.windows, function(index, elem) {
+				var $window = $('#' + index);
 				if ($window.length) {
 					$collection = $collection.add($window);
 				}
@@ -5639,54 +5375,51 @@
 		},
 
 		// sets position of datepicker
-		_datepickerSetPosition: function () {
-			var $clock = this.$elem.find("." + this.classes.clock),
-				$datepicker = this.$elem.find("." + this.classes.datepicker);
+		_datepickerSetPosition: function() {
+			var $clock = this.$elem.find('.' + this.classes.clock),
+				$datepicker = this.$elem.find('.' + this.classes.datepicker);
 
 			if (!$clock.length || !$datepicker.length) {
 				return;
 			}
 
 			var datepickerMenuPosition = this._menuPosition({
-				of: $clock,
-				elem: $datepicker
-			});
+																of: $clock,
+																elem: $datepicker
+															});
 
-			$datepicker
-				.position(datepickerMenuPosition);
+			$datepicker.position(datepickerMenuPosition);
 		},
 
-		_parseDuration: function (speed) {
+		_parseDuration: function(speed) {
 			// copied from _normalizeArguments function of jQuery UI effects
-			return typeof speed === "number"
-				? speed
-				: speed in $.fx.speeds
-					? $.fx.speeds[speed]
-					: undefined;
+			return typeof speed === 'number'
+				   ? speed
+				   : speed in $.fx.speeds
+					 ? $.fx.speeds[speed]
+					 : undefined;
 		},
 
 		// initialize all autoHide functionality events
-		_initAutoHide: function (settings) {
+		_initAutoHide: function(settings) {
 			var $elem = this.$elem,
 				self = this,
 				_cache = this._cache,
 				elemWasHidden = $elem.hasClass(self.classes.autoHideHidden);
 
 			// destroy previous bindings
-			$elem
-				.off(
-					"mouseenter." + this._cache.uep + "autohide"
-					+ " mouseleave." + this._cache.uep + "autohide"
-					+ " autohide." + this._cache.uep + "start"
-					+ " autohide." + this._cache.uep + "restart"
-				)
-				.removeClass(
-					this.classes.autoHide
-					+ " " + this.classes.autoHideHidden
-					+ " " + this.classes.autoHideHidding
-					+ " " + this.classes.autoHidePending
-					+ " " + this.classes.autoHideShowing
-				);
+			$elem.off(
+				'mouseenter.' + this._cache.uep + 'autohide'
+				+ ' mouseleave.' + this._cache.uep + 'autohide'
+				+ ' autohide.' + this._cache.uep + 'start'
+				+ ' autohide.' + this._cache.uep + 'restart'
+			).removeClass(
+				this.classes.autoHide
+				+ ' ' + this.classes.autoHideHidden
+				+ ' ' + this.classes.autoHideHidding
+				+ ' ' + this.classes.autoHidePending
+				+ ' ' + this.classes.autoHideShowing
+			);
 
 			clearTimeout(self._cache.timeouts.autoHide);
 
@@ -5697,23 +5430,23 @@
 
 			$elem.addClass(this.classes.autoHide);
 
-			$elem.on("autohide." + this._cache.uep + "restart", function () {
+			$elem.on('autohide.' + this._cache.uep + 'restart', function() {
 				var speed = self.options.durations.autoHideDelay;
 
 				// if invalid value was passed, use the default
 				var timeout = self._parseDuration(speed);
 
-				if (typeof timeout === "undefined") {
+				if (typeof timeout === 'undefined') {
 					timeout = $.fx.speeds._default;
 				}
 
 				clearTimeout(self._cache.timeouts.autoHide);
 
-				var restartAutoHide = function () {
-					$elem.trigger("autohide." + self._cache.uep + "restart");
+				var restartAutoHide = function() {
+					$elem.trigger('autohide.' + self._cache.uep + 'restart');
 				};
 
-				var autoHideExecute = function () {
+				var autoHideExecute = function() {
 					if (!self._openedElements()
 						&& !$elem.hasClass(self.classes.autoHideHidden)
 						&& !$elem.hasClass(self.classes.autoHideHidding)
@@ -5724,11 +5457,11 @@
 						&& !self._cache.progress.taskbarResizable
 					) {
 						// if all requirements are met, let's start hiding
-						$elem.trigger("autohide." + self._cache.uep + "start");
+						$elem.trigger('autohide.' + self._cache.uep + 'start');
 					} else {
 						if (speed === false) {
 							// restart with timeout if it was trigger immediately
-							setTimeout(function () {
+							setTimeout(function() {
 								restartAutoHide();
 							}, self._cnst.autoHideRestartDelay);
 						} else {
@@ -5745,63 +5478,62 @@
 					// trigger restart handler not earlier than
 					// self._cnst.autoHideRestartDelay - otherwise
 					// it would be too heavy without real benefit to the user
-					self._cache.timeouts.autoHide = setTimeout(function () {
+					self._cache.timeouts.autoHide = setTimeout(function() {
 						autoHideExecute();
 					}, Math.max(self._cnst.autoHideRestartDelay, timeout));
 				}
 
 			});
 
-			$elem.on("autohide." + this._cache.uep + "start", function () {
+			$elem.on('autohide.' + this._cache.uep + 'start', function() {
 				self._startHidding();
 			});
 
-			var $handle = $elem.find("." + this.classes.uiResizableHandle);
+			var $handle = $elem.find('.' + this.classes.uiResizableHandle);
 
-			$elem.on("mouseenter." + this._cache.uep + "autohide",
-				function (event) {
-					// jQuery UI Datepicker is triggering mouseover event on one of
-					// it's subordinate elements - it bubbled here and caused false
-					// positive mouseenter on taskbar; we don't want that
-					if (event.isTrigger && $(event.target)
-						.is(
-							"." + self.classes.uiDatepickerDaysCellOver + " a"
-						)
-					) {
-						return;
-					}
+			$elem.on('mouseenter.' + this._cache.uep + 'autohide',
+					 function(event) {
+						 // jQuery UI Datepicker is triggering mouseover event on one of
+						 // it's subordinate elements - it bubbled here and caused false
+						 // positive mouseenter on taskbar; we don't want that
+						 if (event.isTrigger && $(event.target).is(
+							 '.' + self.classes.uiDatepickerDaysCellOver + ' a'
+						 )
+						 ) {
+							 return;
+						 }
 
-					$elem.addClass(self.classes.autoHideMouseOver);
+						 $elem.addClass(self.classes.autoHideMouseOver);
 
-					// if taskbar show didn't started already, start it now
-					if ($elem.hasClass(self.classes.autoHidePending)
-						|| $elem.hasClass(self.classes.autoHideHidding)) {
-						self._startShowing();
-					}
-				});
+						 // if taskbar show didn't started already, start it now
+						 if ($elem.hasClass(self.classes.autoHidePending)
+							 || $elem.hasClass(self.classes.autoHideHidding)) {
+							 self._startShowing();
+						 }
+					 });
 
-			$elem.on("mouseleave." + this._cache.uep + "autohide", function () {
+			$elem.on('mouseleave.' + this._cache.uep + 'autohide', function() {
 				$elem.removeClass(self.classes.autoHideMouseOver);
 
 				if (!$elem.hasClass(self.classes.autoHideHidden)) {
 					$elem.addClass(self.classes.autoHidePending);
 				}
 
-				$elem.trigger("autohide." + self._cache.uep + "restart");
+				$elem.trigger('autohide.' + self._cache.uep + 'restart');
 			});
 
-			$handle.on("mouseenter." + this._cache.uep + "autohide", function () {
+			$handle.on('mouseenter.' + this._cache.uep + 'autohide', function() {
 				if (!$elem.hasClass(self.classes.autoHideHidden)) {
 					return true;
 				}
 
 				var $windowDragging = $(
-					"." + self.classes.window
-					+ "." + self.classes.uiDraggableDragging
+					'.' + self.classes.window
+					+ '.' + self.classes.uiDraggableDragging
 				);
 				var $windowResizing = $(
-					"." + self.classes.window
-					+ "." + self.classes.uiResizableResizing
+					'.' + self.classes.window
+					+ '.' + self.classes.uiResizableResizing
 				);
 
 				// no showing if interaction is in progress
@@ -5814,14 +5546,14 @@
 
 			if (elemWasHidden) {
 				this._startHidding({
-					duration: false
-				});
+									   duration: false
+								   });
 			} else {
-				$elem.trigger("autohide." + this._cache.uep + "restart");
+				$elem.trigger('autohide.' + this._cache.uep + 'restart');
 			}
 		},
 
-		_startShowing: function (options) {
+		_startShowing: function(options) {
 			if (!this.$elem.hasClass(this.classes.autoHideHidden) && !this.$elem.hasClass(this.classes.autoHideHidding) && !this._openedElements()) {
 				return;
 			}
@@ -5842,12 +5574,12 @@
 
 			var ui = this._autoHideUi(false, options);
 
-			if (this._trigger("autoHideStart", {}, ui) === false) {
+			if (this._trigger('autoHideStart', {}, ui) === false) {
 				// respect prevention on autoHideStart
 				return false;
 			}
 
-			this.$elem.removeClass(this.classes.autoHideHidden + " " + this.classes.autoHideHidding + " " + this.classes.autoHidePending);
+			this.$elem.removeClass(this.classes.autoHideHidden + ' ' + this.classes.autoHideHidding + ' ' + this.classes.autoHidePending);
 
 			this.$elem.addClass(this.classes.autoHideShowing);
 
@@ -5859,25 +5591,25 @@
 
 			var uiProgress = this._autoHideUi(false, {
 				quick: options && options.duration === false,
-				trigger: options && options.trigger === "api" ? "api" : "user"
+				trigger: options && options.trigger === 'api' ? 'api' : 'user'
 			});
 
 			if ((!options || options.duration !== false) && this.options.durations.autoHideShow !== false) {
 				this.$elem.animate(props, {
 					duration: options ? this._parseDuration(options.duration) || this.options.durations.autoHideShow : this.options.durations.autoHideShow,
-					progress: function () {
+					progress: function() {
 						self._trigger(
-							"autoHideProgress",
+							'autoHideProgress',
 							{}, $.extend(true, {}, uiProgress)
 						);
 					},
-					complete: function () {
+					complete: function() {
 						self.$elem.removeClass(self.classes.autoHideShowing);
 
-						self._trigger("autoHideStop", {}, uiStop);
+						self._trigger('autoHideStop', {}, uiStop);
 
 						self.$elem.trigger(
-							"autohide." + self._cache.uep + "restart"
+							'autohide.' + self._cache.uep + 'restart'
 						);
 					}
 				});
@@ -5885,20 +5617,20 @@
 				// quick show
 				this.$elem.css(props).removeClass(this.classes.autoHideShowing);
 
-				this._trigger("autoHideStop", {}, uiStop);
+				this._trigger('autoHideStop', {}, uiStop);
 
-				this.$elem.trigger("autohide." + this._cache.uep + "restart");
+				this.$elem.trigger('autohide.' + this._cache.uep + 'restart');
 			}
 		},
 
-		_startHidding: function (options) {
+		_startHidding: function(options) {
 			if (this.$elem.hasClass(this.classes.draggableDragging) || this.$elem.hasClass(this.classes.resizableResizing)) {
 				return;
 			}
 
 			var ui = this._autoHideUi(true, options);
 
-			if (this._trigger("autoHideStart", {}, ui) === false) {
+			if (this._trigger('autoHideStart', {}, ui) === false) {
 				return false;
 			}
 
@@ -5907,7 +5639,7 @@
 
 			var uiProgress = this._autoHideUi(true, {
 				quick: null,
-				trigger: options && options.trigger === "api" ? "api" : "user"
+				trigger: options && options.trigger === 'api' ? 'api' : 'user'
 			});
 
 			var self = this,
@@ -5928,48 +5660,43 @@
 
 			props[
 				_cache.horizontal
-					? _cache.stickVertical
-					: _cache.stickHorizontal] = _cache.horizontal
-				? $elem.outerHeight() * -1
-				: $elem.outerWidth() * -1;
+				? _cache.stickVertical
+				: _cache.stickHorizontal] = _cache.horizontal
+											? $elem.outerHeight() * -1
+											: $elem.outerWidth() * -1;
 
 			// quick hide should not use stop()
 			if (
 				options && options.duration === false
 				|| this.options.durations.autoHideHide === false
 			) {
-				$elem
-					.css(props)
-					.removeClass(this.classes.autoHideHidding)
-					.addClass(this.classes.autoHideHidden);
+				$elem.css(props).removeClass(this.classes.autoHideHidding).addClass(this.classes.autoHideHidden);
 
-				this._trigger("autoHideStop", {}, uiStop);
+				this._trigger('autoHideStop', {}, uiStop);
 			} else {
 				$elem.stop(true, false).animate(props, {
 					duration: options
-						? this._parseDuration(options.duration)
-						|| this.options.durations.autoHideHide
-						: this.options.durations.autoHideHide,
-					progress: function () {
+							  ? this._parseDuration(options.duration)
+								  || this.options.durations.autoHideHide
+							  : this.options.durations.autoHideHide,
+					progress: function() {
 						self._trigger(
-							"autoHideProgress",
+							'autoHideProgress',
 							{},
 							$.extend(true, {}, uiStop)
 						);
 					},
-					complete: function () {
-						$elem
-							.removeClass(self.classes.autoHideHidding)
-							.addClass(self.classes.autoHideHidden);
+					complete: function() {
+						$elem.removeClass(self.classes.autoHideHidding).addClass(self.classes.autoHideHidden);
 
-						self._trigger("autoHideStop", {}, uiStop);
+						self._trigger('autoHideStop', {}, uiStop);
 					}
 				});
 			}
 		},
 
 		// construct ui object for autoHide events
-		_autoHideUi: function (hide, options) {
+		_autoHideUi: function(hide, options) {
 			var ui = {};
 
 			if (hide) {
@@ -5980,54 +5707,53 @@
 				ui.show = true;
 			}
 
-			ui.$handle = this.$elem.find("." + this.classes.resizable).find("." + this.classes.uiResizableHandle);
+			ui.$handle = this.$elem.find('.' + this.classes.resizable).find('.' + this.classes.uiResizableHandle);
 
 			if (options && options.quick !== null) {
 				ui.quick = options && options.duration === false;
 			}
 
-			ui.triggerApi = !!(options && options.trigger && options.trigger === "api");
+			ui.triggerApi = !!(options && options.trigger && options.trigger === 'api');
 
 			return ui;
 		},
 
 		// helper for autoHide
-		_autoHideStopAndReturnDestination: function () {
+		_autoHideStopAndReturnDestination: function() {
 			var css = {};
 
 			css[this._cache.horizontal
 				? this._cache.stickVertical
 				: this._cache.stickHorizontal] = 0;
 
-			this.$elem
-				.stop(true, false);
+			this.$elem.stop(true, false);
 
 			return css;
 		},
 
-		_show: function (duration) {
+		_show: function(duration) {
 			this._startShowing({
-				duration: duration,
-				trigger: "api"
-			});
+								   duration: duration,
+								   trigger: 'api'
+							   });
 
 			return this;
 		},
 
-		_hide: function (durations) {
+		_hide: function(durations) {
 			this._startHidding({
-				duration: durations,
-				trigger: "api"
-			});
+								   duration: durations,
+								   trigger: 'api'
+							   });
 
 			return this;
 		},
 
 		// this function will save the state of taskbar subordinates
 		// being open
-		_openedElements: function (opened) {
+		_openedElements: function(opened) {
 			// act as getter
-			if (typeof opened === "undefined") {
+			if (typeof opened === 'undefined') {
 				return this._cache.openedElements;
 			}
 
@@ -6035,149 +5761,132 @@
 
 			if (opened === false) {
 				this._cache.progress.menuAutoOpenOnBrowse = false;
-				this.$elem.trigger("autohide." + this._cache.uep + "restart");
+				this.$elem.trigger('autohide.' + this._cache.uep + 'restart');
 			} else {
 				this._startShowing({
-					duration: false
-				});
+									   duration: false
+								   });
 			}
 
 			this.$elem.toggleClass(this.classes.taskbarWithOpenElements, opened);
 		},
 
 		// this function will produce DOM elements wrapped in jQuery objects
-		_factory: function (elem, params) {
+		_factory: function(elem, params) {
 			var self = this,
 				// returns empty DIV
-				div = function () {
-					return $("<div></div>");
+				div = function() {
+					return $('<div></div>');
 				};
 
 			var elems = {
-				startButton: function () {
+				startButton: function() {
 					var startSettings = {icons: {}};
 
-					var title = self._i18n("startButton:" + params.name);
+					var title = self._i18n('startButton:' + params.name);
 
-					var $startButton = div()
-						.addClass(self.classes.startButton)
-						.text(
-							title !== "undefined" ? title :
-								params.name
-								|| params.text
-						)
-						.attr("data-menu-button-for", params.name)
-						.attr("data-menu-button", "true")
-						.button();
+					var $startButton = div().addClass(self.classes.startButton).text(
+						title !== 'undefined' ? title :
+						params.name
+							|| params.text
+					).attr('data-menu-button-for', params.name).attr('data-menu-button', 'true').button();
 
 					self._refreshButtonIcon.call($startButton, self);
 
 					return $startButton;
 				},
 
-				separator: function () {
-					return div()
-						.addClass(
-							self.classes.separator + " " +
-							self.classes.uiWidgetContent
-						);
+				separator: function() {
+					return div().addClass(
+						self.classes.separator + ' ' +
+						self.classes.uiWidgetContent
+					);
 				},
 
-				widgetContent: function () {
+				widgetContent: function() {
 					return div().addClass(self.classes.uiWidgetContent);
 				},
 
-				droppableContainer: function () {
-					return div()
-						.addClass(self.classes.droppableContainer)
-						.attr("data-taskbar-uuid", self.uuid);
+				droppableContainer: function() {
+					return div().addClass(self.classes.droppableContainer).attr('data-taskbar-uuid', self.uuid);
 				},
 
-				languageSelect: function () {
-					return div()
-						.addClass(
-							self.classes.languageSelect + " " +
-							self.classes.taskbarIcon
-						)
-						.attr("data-menu-button", "true");
+				languageSelect: function() {
+					return div().addClass(
+						self.classes.languageSelect + ' ' +
+						self.classes.taskbarIcon
+					).attr('data-menu-button', 'true');
 				},
 
-				languageSelectMenu: function () {
-					return $("<ul></div>")
-						.attr("data-menu-type", "languageSelect");
+				languageSelectMenu: function() {
+					return $('<ul></div>').attr('data-menu-type', 'languageSelect');
 				},
 
-				windowGroupMenu: function () {
-					return $("<ul></ul>")
-						.addClass(self.classes.windowGroupMenu);
+				windowGroupMenu: function() {
+					return $('<ul></ul>').addClass(self.classes.windowGroupMenu);
 				},
 
-				windowGroupElement: function () {
-					return $("<li></li>")
-						.addClass(self.classes.windowGroupElement)
-						.prepend(
-							$("<a></a>")
-								.attr("href", "#")
-								// placeholder will be replaced with group name
-								.append("taskbarPlaceholder")
-						);
+				windowGroupElement: function() {
+					return $('<li></li>').addClass(self.classes.windowGroupElement).prepend(
+						$('<a></a>').attr('href', '#')
+									 // placeholder will be replaced with group name
+									 .append('taskbarPlaceholder')
+					);
 				},
 
-				droppable: function () {
-					return div()
-						.addClass(self.classes.droppable)
-						.attr("data-taskbar-uuid", self.uuid);
+				droppable: function() {
+					return div().addClass(self.classes.droppable).attr('data-taskbar-uuid', self.uuid);
 				}
 			};
 
 			// simple elements
 			if ($.inArray(elem, [
-				"container",
-				"datepicker",
-				"draggableHelper",
-				"resizable",
-				"windowButton",
-				"windowCopy",
-				"windowsContainment"
+				'container',
+				'datepicker',
+				'draggableHelper',
+				'resizable',
+				'windowButton',
+				'windowCopy',
+				'windowsContainment'
 			]) > -1) {
 				return div().addClass(self.classes [elem]);
 			}
 
 			// buttons with icons
 			if ($.inArray(elem, [
-				"clock",
-				"minimizeAll",
-				"networkMonitor",
-				"toggleFullscreen"
+				'clock',
+				'minimizeAll',
+				'networkMonitor',
+				'toggleFullscreen'
 			]) > -1) {
 				return div().addClass(
 					self.classes [elem]
-					+ " " + self.classes.taskbarIcon
+					+ ' ' + self.classes.taskbarIcon
 				);
 			}
 
 			// containers
 			if ($.inArray(elem, [
-				"buttonsContainer",
-				"startButtonsContainer",
-				"systemButtonsContainer",
-				"windowButtonsContainer"
+				'buttonsContainer',
+				'startButtonsContainer',
+				'systemButtonsContainer',
+				'windowButtonsContainer'
 			]) > -1) {
 				return div().addClass(
 					self.classes [elem]
-					+ " " + self.classes.taskbarContainter
-				).attr("data-container-name", elem);
+					+ ' ' + self.classes.taskbarContainter
+				).attr('data-container-name', elem);
 			}
 
 			return elems [elem]();
 		},
 
 		// binds window to the taskbar
-		_bind: function ($elem) {
+		_bind: function($elem) {
 			var $taskbar;
 
 			try {
-				$taskbar = $elem.window("taskbar");
+				$taskbar = $elem.window('taskbar');
 			} catch (e) {
 				return false;
 			}
@@ -6191,7 +5900,7 @@
 
 			this._cache.windows[id] = $elem;
 
-			var group = $elem.window("option", "group");
+			var group = $elem.window('option', 'group');
 
 			var config = {
 				$elem: $elem,
@@ -6201,12 +5910,12 @@
 			if (group) {
 				if (!this._cache.groups[group]) {
 					this._cache.groups[group] = [];
-					this._cache.windowButtons.push("group:" + group);
+					this._cache.windowButtons.push('group:' + group);
 				}
 				this._cache.groups[group].push(id);
 				config.group = group;
 			} else {
-				this._cache.windowButtons.push("window:" + id);
+				this._cache.windowButtons.push('window:' + id);
 			}
 
 			this._appendWindowButton(config);
@@ -6222,40 +5931,40 @@
 				$window: $elem
 			};
 
-			this._trigger("bind", {}, ui);
+			this._trigger('bind', {}, ui);
 		},
 
 		// unbinds window from the taskbar
-		_unbind: function ($elem) {
+		_unbind: function($elem) {
 			this._windowButtonAction({
-				$elem: $elem,
-				action: "unbind"
-			});
+										 $elem: $elem,
+										 action: 'unbind'
+									 });
 
 			var ui = {
 				$window: $elem
 			};
 
-			this._trigger("unbind", {}, ui);
+			this._trigger('unbind', {}, ui);
 		},
 
 		// returns button for a window
-		_button: function ($elem) {
+		_button: function($elem) {
 			return this._windowButtonAction({
-				$elem: $elem,
-				action: "get"
-			});
+												$elem: $elem,
+												action: 'get'
+											});
 		},
 
-		_windowButtonAction: function (options) {
+		_windowButtonAction: function(options) {
 			var $elem = options.$elem,
 				buttonUnbindHappened = false;
 
-			if (options.action === "get" && !($elem instanceof $)) {
+			if (options.action === 'get' && !($elem instanceof $)) {
 				return $();
 			}
 
-			var id = ($elem.hasClass(this.classes.window) ? $elem.find("." + this.classes.uiDialogContent) : $elem)[0].id,
+			var id = ($elem.hasClass(this.classes.window) ? $elem.find('.' + this.classes.uiDialogContent) : $elem)[0].id,
 				b = this._cache.windowButtons,
 				g = this._cache.groups,
 				self = this,
@@ -6263,13 +5972,13 @@
 
 			// if window is not in group
 			for (i in b) {
-				if (b.hasOwnProperty(i) && b[i] === "window:" + id) {
-					var $button = this.$elem.find("." + this.classes.windowButton + "[data-window-id=" + id + "]");
+				if (b.hasOwnProperty(i) && b[i] === 'window:' + id) {
+					var $button = this.$elem.find('.' + this.classes.windowButton + '[data-window-id=' + id + ']');
 
-					if (options.action === "get") {
+					if (options.action === 'get') {
 						// getter
 						return $button;
-					} else if (options.action === "unbind") {
+					} else if (options.action === 'unbind') {
 						// unbind
 						self._removeWindowFromCache(id);
 						$button.remove();
@@ -6286,14 +5995,14 @@
 					// iterate over windows in group
 					for (var j in g[i]) {
 						if (g[i].hasOwnProperty(j) && g[i][j] === id) {
-							var $group = this.$elem.find("." + this.classes.windowButton + "[data-group-name=" + i + "]"),
-								$menu = this.$elem.find("." + this.classes.uiMenu + "[data-group-name=" + i + "]"),
-								$item = $menu.find("[data-window-id=" + id + "]");
+							var $group = this.$elem.find('.' + this.classes.windowButton + '[data-group-name=' + i + ']'),
+								$menu = this.$elem.find('.' + this.classes.uiMenu + '[data-group-name=' + i + ']'),
+								$item = $menu.find('[data-window-id=' + id + ']');
 
-							if (options.action === "get") {
+							if (options.action === 'get') {
 								// getter
 								return $group;
-							} else if (options.action === "unbind") {
+							} else if (options.action === 'unbind') {
 								// unbind
 								$item.remove();
 
@@ -6305,15 +6014,15 @@
 
 								var emptyGroup = true;
 
-								$.each(g[i], function (id, elem) {
-									if (typeof(elem) === "string") {
+								$.each(g[i], function(id, elem) {
+									if (typeof (elem) === 'string') {
 										emptyGroup = false;
 									}
 								});
 
 								if (emptyGroup) {
 									// remove group cause it's now empty
-									var needle = "group:" + i;
+									var needle = 'group:' + i;
 
 									for (var k = 0; k < b.length; k++) {
 										if (b[k] === needle) {
@@ -6324,19 +6033,19 @@
 
 									buttonUnbindHappened = true;
 
-									$menu.menu("destroy").remove();
+									$menu.menu('destroy').remove();
 									$group.remove();
 									break;
 								} else {
 									// refresh menu after $item was removed
-									$menu.menu("refresh");
+									$menu.menu('refresh');
 									this._groupSetTranslatedTitle.call($group, self);
 								}
 
 								self._positionTaskbarWindowGroup({
-									$group: $group,
-									$menu: $menu
-								});
+																	 $group: $group,
+																	 $menu: $menu
+																 });
 
 								break;
 							}
@@ -6346,7 +6055,7 @@
 			}
 
 			// button was not found, return empty jQuery object for consistency
-			if (options.action === "get") {
+			if (options.action === 'get') {
 				return $();
 			}
 
@@ -6358,47 +6067,42 @@
 			}
 		},
 
-		_removeWindowFromCache: function (id) {
+		_removeWindowFromCache: function(id) {
 			delete this._cache.windows[id];
 		},
 
 		// inserts window button to the container
-		_appendWindowButton: function (config) {
+		_appendWindowButton: function(config) {
 			var self = this,
 				title,
 				$button,
 				$group;
 
 			// handler for showing window
-			var showWindow = function (event) {
+			var showWindow = function(event) {
 				event.preventDefault();
 
-				var windowId = $(this).attr("data-window-id"),
-					$window = $("#" + windowId);
+				var windowId = $(this).attr('data-window-id'),
+					$window = $('#' + windowId);
 
 				self._hideMenus();
 				self._hideTooltips();
 
-				$window.window("show", event);
+				$window.window('show', event);
 
 				self._openedElements(false);
 			};
 
 			if (config.group) {
-				$group = this.$windowButtonsContainer
-					.find(
-						"." + this.classes.uiButton +
-						"[data-group-name=" + config.group + "]"
-					);
+				$group = this.$windowButtonsContainer.find(
+					'.' + this.classes.uiButton +
+					'[data-group-name=' + config.group + ']'
+				);
 
 				var $menu;
 
 				if (!$group.length) {
-					$group = this._factory("windowButton")
-						.uniqueId()
-						.appendTo(this.$windowButtonsContainer)
-						.attr("data-group-name", config.group)
-						.button();
+					$group = this._factory('windowButton').uniqueId().appendTo(this.$windowButtonsContainer).attr('data-group-name', config.group).button();
 
 					this._refreshGroupIcon.call($group, this);
 
@@ -6406,48 +6110,41 @@
 						return;
 					}
 
-					$menu = this._factory("windowGroupMenu")
-						.attr("data-group-name", config.group)
-						.insertAfter($group)
-						.menu({
-							focus: function (event, ui) {
-								$(ui.item).addClass(
-									self.classes.windowGroupElementActive
-								);
+					$menu = this._factory('windowGroupMenu').attr('data-group-name', config.group).insertAfter($group).menu({
+																																focus: function(event, ui) {
+																																	$(ui.item).addClass(
+																																		self.classes.windowGroupElementActive
+																																	);
 
-								self._triggerBindedElementEvent({
-									type: "menuItemFocus",
-									item: $(ui.item),
-									menu: $menu,
-									button: $group,
-									event: event
-								});
-							},
-							blur: function (event, ui) {
-								$(this)
-									.children("." + self.classes.uiMenuItem)
-									.removeClass(
-										self.classes.windowGroupElementActive
-									);
+																																	self._triggerBindedElementEvent({
+																																										type: 'menuItemFocus',
+																																										item: $(ui.item),
+																																										menu: $menu,
+																																										button: $group,
+																																										event: event
+																																									});
+																																},
+																																blur: function(event, ui) {
+																																	$(this).children('.' + self.classes.uiMenuItem).removeClass(
+																																		self.classes.windowGroupElementActive
+																																	);
 
-								self._triggerBindedElementEvent({
-									type: "menuItemBlur",
-									item: $(ui.item),
-									menu: $menu,
-									button: $group,
-									event: event
-								});
-							}
-						})
-						.hide();
+																																	self._triggerBindedElementEvent({
+																																										type: 'menuItemBlur',
+																																										item: $(ui.item),
+																																										menu: $menu,
+																																										button: $group,
+																																										event: event
+																																									});
+																																}
+																															}).hide();
 
 					this._connectElements($group, $menu);
 
 					$group.on(
-						"click." + this._cache.uep
-						+ " dblclick." + this._cache.uep, function (event) {
-							var $onlyItem = $menu.find("." + self.classes.uiMenuItem);
-
+						'click.' + this._cache.uep
+						+ ' dblclick.' + this._cache.uep, function(event) {
+							var $onlyItem = $menu.find('.' + self.classes.uiMenuItem);
 
 							// if one window is in group, show it instantly,
 							// withour showing menu first
@@ -6470,25 +6167,25 @@
 
 							self._stopOtherTaskbarsAutoOpenOnBrowse();
 
-							if (event.type === "dblclick") {
+							if (event.type === 'dblclick') {
 								return true;
 							}
 
 							self._blurWindows();
 
 							self._hideMenus({
-								not: $menu
-							});
+												not: $menu
+											});
 							self._hideTooltips();
 
-							var visible = $menu.is(":visible");
+							var visible = $menu.is(':visible');
 
 							// trigger event and respect prevention
 							if (self._triggerBindedElementEvent({
-								type: visible ? "elementClose" : "elementOpen",
-								menu: $menu,
-								button: $group
-							}) === false) {
+																	type: visible ? 'elementClose' : 'elementOpen',
+																	menu: $menu,
+																	button: $group
+																}) === false) {
 								return;
 							}
 
@@ -6498,9 +6195,9 @@
 
 							if (!visible) {
 								self._positionTaskbarWindowGroup({
-									$group: $group,
-									$menu: $menu
-								});
+																	 $group: $group,
+																	 $menu: $menu
+																 });
 							} else {
 								self._openedElements(false);
 							}
@@ -6511,79 +6208,64 @@
 					this._bindMenuAutoOpen($group, $menu);
 
 					$group.on(
-						"mouseup." + this._cache.uep
-						+ " mouseenter." + this._cache.uep
-						+ " mouseleave." + this._cache.uep, function () {
+						'mouseup.' + this._cache.uep
+						+ ' mouseenter.' + this._cache.uep
+						+ ' mouseleave.' + this._cache.uep, function() {
 							self._setConnectedButtonState.call(this, self);
 						});
 				} else {
 					// select menu if the group was already created
-					$menu = this.$windowButtonsContainer
-						.find(
-							"." + this.classes.uiMenu +
-							"[data-group-name=" + config.group + "]"
-						);
+					$menu = this.$windowButtonsContainer.find(
+						'.' + this.classes.uiMenu +
+						'[data-group-name=' + config.group + ']'
+					);
 				}
 
 				$button = $group;
 
 				// bind events ti menu item
-				var $elem = this._factory("windowGroupElement")
-					.attr("data-window-id", config.window)
-					.on(
-						"dblclick." + this._cache.uep
-						+ " click." + this._cache.uep,
-						showWindow
-					);
+				var $elem = this._factory('windowGroupElement').attr('data-window-id', config.window).on(
+					'dblclick.' + this._cache.uep
+					+ ' click.' + this._cache.uep,
+					showWindow
+				);
 
-				$elem
-					.append(
-						$("<div></div>")
-							.addClass(this.classes.menuWindowClose)
-							.text(this._i18n("close"))
-							.button({
-								text: false,
-								icons: {
-									primary: this.options.icons.menuWindowClose
-								}
-							}).on("click." + this._cache.uep, function (event) {
-							event.preventDefault();
+				$elem.append(
+					$('<div></div>').addClass(this.classes.menuWindowClose).text(this._i18n('close')).button({
+																												 text: false,
+																												 icons: {
+																													 primary: this.options.icons.menuWindowClose
+																												 }
+																											 }).on('click.' + this._cache.uep, function(event) {
+						event.preventDefault();
 
-							var windowId = $(this)
-								.closest("[data-window-id]")
-								.attr("data-window-id");
+						var windowId = $(this).closest('[data-window-id]').attr('data-window-id');
 
-							$("#" + windowId).window("close");
+						$('#' + windowId).window('close');
 
-							self._openedElements(false);
-						})
-					);
+						self._openedElements(false);
+					})
+				);
 
-				$elem
-					.appendTo($menu);
+				$elem.appendTo($menu);
 
 				this._connectElements(config.$elem, $button);
 				// +
-				$menu.menu("refresh");
+				$menu.menu('refresh');
 				// +
 				this._refreshWindowButtonIcon.call($elem, this);
 
 				this._groupSetTranslatedTitle.call($group, self);
 			} else {
-				$button = this._factory("windowButton")
-					.appendTo(this.$windowButtonsContainer);
+				$button = this._factory('windowButton').appendTo(this.$windowButtonsContainer);
 
-				title = config.$elem.window("option", "title");
+				title = config.$elem.window('option', 'title');
 
-				$button
-					.uniqueId()
-					.attr("data-window-id", config.window)
-					.on(
-						"click." + this._cache.uep
-						+ " dblclick." + this._cache.uep,
-						showWindow
-					)
-					.button();
+				$button.uniqueId().attr('data-window-id', config.window).on(
+					'click.' + this._cache.uep
+					+ ' dblclick.' + this._cache.uep,
+					showWindow
+				).button();
 
 				this._buttonSetTitle.call($button, title, this);
 
@@ -6593,89 +6275,82 @@
 
 			if ($button !== $group) {
 				$button.on(
-					"mouseup." + this._cache.uep
-					+ " mouseleave." + this._cache.uep, function () {
+					'mouseup.' + this._cache.uep
+					+ ' mouseleave.' + this._cache.uep, function() {
 						self._setConnectedButtonState.call(this, self);
 					});
 			}
 		},
 
-		_groupSetTranslatedTitle: function (self) {
-			var group = $(this).attr("data-group-name"),
-				menuItemsLength = self
-					.connectedElement(this)
-					.filter("." + self.classes.uiMenu)
-					.children()
-					.length,
-				groupTranslatedTitle = self._i18n("group:" + group),
+		_groupSetTranslatedTitle: function(self) {
+			var group = $(this).attr('data-group-name'),
+				menuItemsLength = self.connectedElement(this).filter('.' + self.classes.uiMenu).children().length,
+				groupTranslatedTitle = self._i18n('group:' + group),
 				groupTranslatedTitleSet =
 					groupTranslatedTitle !== self._cnst.missingTranslation,
 				titleBody = groupTranslatedTitleSet
-					? groupTranslatedTitle
-					: group,
+							? groupTranslatedTitle
+							: group,
 				title = menuItemsLength > 1
-					? self._i18n("multipleWindowButton", {
+						? self._i18n('multipleWindowButton', {
 						counter: menuItemsLength,
 						title: titleBody
 					})
-					: titleBody;
+						: titleBody;
 
 			if (!groupTranslatedTitleSet) {
 				self._debugLogAdd(
-					"Missing translation for windows group named \"" + group
-					+ "\" in language \"" + self.options.language + "\".", 1, 1
+					'Missing translation for windows group named "' + group
+					+ '" in language "' + self.options.language + '".', 1, 1
 				);
 			}
 
-			$(this)
-				.attr("title", title)
-				.button("option", "label", title);
+			$(this).attr('title', title).button('option', 'label', title);
 		},
 
-		_buttonSetTitle: function (title, self) {
+		_buttonSetTitle: function(title, self) {
 			var $this = $(this);
 
-			$this
-				.attr("title", title);
+			$this.attr('title', title);
 
 			if ($this.hasClass(self.classes.uiButton)) {
-				$this.button("option", "label", title);
+				$this.button('option', 'label', title);
 			}
 		},
 
 		// refresh icons of all window groups
-		_refreshGroupIcons: function () {
+		_refreshGroupIcons: function() {
 			var self = this;
 
 			this.$elem.find(
-				"[data-group-name]." + this.classes.uiButton
-			).each(function () {
+				'[data-group-name].' + this.classes.uiButton
+			).each(function() {
 				self._refreshGroupIcon.call($(this), self);
 			});
 		},
 
-		_refreshGroupIcon: function (self) {
+		_refreshGroupIcon: function(self) {
 			var $this = $(this),
-				group = $this.attr("data-group-name");
+				group = $this.attr('data-group-name');
 
 			// because of "icons.primary", single setter cannot be used
-			$this.button("option", "icons.primary",
-				self.options.icons["group:" + group] || null);
-			$this.button("option", "text",
-				self.options.windowButtonsIconsOnly ? false : true);
+			$this.button('option', 'icons.primary',
+						 self.options.icons['group:' + group] || null);
+			$this.button('option', 'text',
+						 self.options.windowButtonsIconsOnly ? false : true);
 		},
 
-		_refreshButtonIcons: function () {
+		_refreshButtonIcons: function() {
 			var self = this;
 
-			this.$elem.find("[data-button-name]." + this.classes.uiButton + ",[data-menu-button]." + this.classes.uiButton).each(function () {
+			this.$elem.find('[data-button-name].' + this.classes.uiButton + ',[data-menu-button].' + this.classes.uiButton).each(function() {
 				self._refreshButtonIcon.call($(this), self);
 			});
 		},
 
-		_refreshButtonIcon: function (self) {
+		_refreshButtonIcon: function(self) {
 			var $this = $(this),
-				button = $this.attr("data-button-name"),
+				button = $this.attr('data-button-name'),
 				icon = null;
 
 			// buttons with single icon only
@@ -6683,89 +6358,91 @@
 				icon = self.options.icons[button];
 
 				// toggleFullscreen: it's icon depends on fullscreen status
-			} else if (button === "toggleFullscreen") {
-				icon = self.options.icons["toggleFullscreen" + (self._fullscreenEnabled() ? "On" : "Off")];
+			} else if (button === 'toggleFullscreen') {
+				icon = self.options.icons['toggleFullscreen' + (self._fullscreenEnabled() ? 'On' : 'Off')];
 
 				// networkMonitor: it's icon depends on network connection status
-			} else if (button === "networkMonitor") {
+			} else if (button === 'networkMonitor') {
 				icon = self.options.icons[self._getNetworkMonitorKey()];
 
 				// start buttons
 			} else if ($this.hasClass(self.classes.startButton) && $this.hasClass(self.classes.uiButton)) {
 				// icons.startButton has higher priority than icons.startButtonSet
-				icon = self.options.icons.startButton ? self.options.icons.startButton : self.options.icons.startButtonSet ? self.options.icons.startButtonSet + "-" + self._translatePosition() : null;
+				icon = self.options.icons.startButton ? self.options.icons.startButton : self.options.icons.startButtonSet ? self.options.icons.startButtonSet + '-' + self._translatePosition() : null;
 			} else {
 				// try to get icon from button object passed in "buttons" option, fail silently
 				try {
 					icon = self.options.buttons[button].icons.primary;
-				} catch (e) {}
+				} catch (e) {
+				}
 			}
 
-			$this.button("option", "icons.primary", icon || null);
+			$this.button('option', 'icons.primary', icon || null);
 		},
 
-		_refreshwindowButtonsIcons: function () {
+		_refreshwindowButtonsIcons: function() {
 			var self = this;
 
-			this.$elem.find("[data-window-id]." + this.classes.uiButton).each(function () {
+			this.$elem.find('[data-window-id].' + this.classes.uiButton).each(function() {
 				self._refreshWindowButtonIcon.call($(this), self);
 			});
 		},
 
-		_refreshWindowButtonIcon: function (self) {
+		_refreshWindowButtonIcon: function(self) {
 			var $this = $(this),
-				button = $this.attr("data-window-id"),
-				group = $this.attr("data-group-name"),
-				icon, title;
+				button = $this.attr('data-window-id'),
+				group = $this.attr('data-group-name'),
+				icon,
+				title;
 
-			if ($this.is("." + self.classes.uiButton)) {
+			if ($this.is('.' + self.classes.uiButton)) {
 				// get icon and title from window
-				icon = $("#" + button).window("option", "icons.main");
-				title = $("#" + button).window("option", "title");
+				icon = $('#' + button).window('option', 'icons.main');
+				title = $('#' + button).window('option', 'title');
 
 				if (!$this.hasClass(self.classes.uiButton)) {
 					return;
 				}
 
-				$this.button("option", "text", !self.options.windowButtonsIconsOnly);
+				$this.button('option', 'text', !self.options.windowButtonsIconsOnly);
 
 				// because of "icons.primary", single setter cannot be used
 				if (icon.indexOf('/') !== -1 || icon.indexOf('.') !== -1) {
-					$this.button("option", "icons.primary", self.classes.uiIconBlank);
+					$this.button('option', 'icons.primary', self.classes.uiIconBlank);
 					$this.children('.' + self.classes.uiButtonIconPrimary).first().css({
-						'background-image': 'url(' + icon + ')',
-						'background-repeat': 'no-repeat',
-						'background-position': 'center',
-						'background-size': 'cover'
-					});
+																						   'background-image': 'url(' + icon + ')',
+																						   'background-repeat': 'no-repeat',
+																						   'background-position': 'center',
+																						   'background-size': 'cover'
+																					   });
 				} else {
-					$this.button("option", "icons.primary", self.options.windowButtonsIconsOnly ? icon || self.classes.uiIconBlank : icon);
+					$this.button('option', 'icons.primary', self.options.windowButtonsIconsOnly ? icon || self.classes.uiIconBlank : icon);
 				}
-			} else if ($this.is("." + self.classes.uiMenuItem)) {
-				var $window = $("#" + $this.attr("data-window-id"));
-				icon = $window.window("option", "icons.main");
+			} else if ($this.is('.' + self.classes.uiMenuItem)) {
+				var $window = $('#' + $this.attr('data-window-id'));
+				icon = $window.window('option', 'icons.main');
 
 				// replace text node with window title
-				$this.find("a").contents().filter(function () {
+				$this.find('a').contents().filter(function() {
 					return this.nodeType === 3;
-				}).first()[0].nodeValue = $window.window("title");
+				}).first()[0].nodeValue = $window.window('title');
 
-				$this.children("span." + self.classes.uiIcon).remove();
+				$this.children('span.' + self.classes.uiIcon).remove();
 
 				if (icon.indexOf('/') !== -1 || icon.indexOf('.') !== -1) {
-					$this.prepend($("<span></span>").css({
-						'background-image': 'url(' + icon + ')',
-						'background-repeat': 'no-repeat',
-						'background-position': 'center',
-						'background-size': 'cover'
-					}).addClass(this.classes.uiIcon));
+					$this.prepend($('<span></span>').css({
+															 'background-image': 'url(' + icon + ')',
+															 'background-repeat': 'no-repeat',
+															 'background-position': 'center',
+															 'background-size': 'cover'
+														 }).addClass(this.classes.uiIcon));
 				} else {
-					$this.prepend($("<span></span>").addClass(self.classes.uiIcon + " " + (icon ? icon : self.classes.uiIconBlank)));
+					$this.prepend($('<span></span>').addClass(self.classes.uiIcon + ' ' + (icon ? icon : self.classes.uiIconBlank)));
 				}
 			}
 		},
 
-		_setwindowButtonsIconsOnlyClass: function () {
+		_setwindowButtonsIconsOnlyClass: function() {
 			this.$elem.toggleClass(
 				this.classes.windowButtonsIconsOnly,
 				this.options.windowButtonsIconsOnly
@@ -6773,36 +6450,36 @@
 		},
 
 		// create custom styles for various subordinates
-		_createStyles: function (settings) {
+		_createStyles: function(settings) {
 			var destroy = settings && settings.destroy;
 
 			// select the old styles
-			var $oldStyles = $("style[type=\"text\/css\"]" + "[data-taskbar-uuid=\"" + this.uuid + "\"]");
+			var $oldStyles = $('style[type="text\/css"]' + '[data-taskbar-uuid="' + this.uuid + '"]');
 
 			if (!destroy) {
 				// create new element
-				var $styles = $("<style></style>").attr("type", "text/css").attr("data-taskbar-uuid", this.uuid).appendTo("body");
+				var $styles = $('<style></style>').attr('type', 'text/css').attr('data-taskbar-uuid', this.uuid).appendTo('body');
 
 				// get background-image for icons in default state
-				var bgUrl = this._styleIndicator("." + this.classes.uiStateDefault 	+ " > ." + this.classes.uiIcon, "backgroundImage").backgroundImage,
-					bg = "{background-image:" + bgUrl + ";}",
+				var bgUrl = this._styleIndicator('.' + this.classes.uiStateDefault + ' > .' + this.classes.uiIcon, 'backgroundImage').backgroundImage,
+					bg = '{background-image:' + bgUrl + ';}',
 					// because of html structure not anticipated by jQuery UI,
 					// we have to force some buttons to have default classes,
 					// because ther were inheriting active class from window on top
-					windowButtons = "." + this.classes.window + "[data-taskbar-uuid=\"" + this.uuid + "\"]" + " ." + this.classes.uiDialogTitlebar + "." + this.classes.uiStateActive + ":not(." + this.classes.uiStateDefault + ")" + " ." + this.classes.uiButton + " ." + this.classes.uiButtonIconPrimary + bg,
-					menuWindowClose = "";
+					windowButtons = '.' + this.classes.window + '[data-taskbar-uuid="' + this.uuid + '"]' + ' .' + this.classes.uiDialogTitlebar + '.' + this.classes.uiStateActive + ':not(.' + this.classes.uiStateDefault + ')' + ' .' + this.classes.uiButton + ' .' + this.classes.uiButtonIconPrimary + bg,
+					menuWindowClose = '';
 
 				// jQuery UI since version 1.11 would also need
 				// default styles for button in menus
 				if ($.ui.menu && parseFloat($.ui.menu.prototype.version) >= 1.11) {
-					menuWindowClose = "." + this.classes.taskbar + "[data-taskbar-uuid=\"" + this.uuid + "\"]" + " ." + this.classes.windowGroupElement + " ." + this.classes.uiButtonIconPrimary + ":not(:hover)" + bg;
+					menuWindowClose = '.' + this.classes.taskbar + '[data-taskbar-uuid="' + this.uuid + '"]' + ' .' + this.classes.windowGroupElement + ' .' + this.classes.uiButtonIconPrimary + ':not(:hover)' + bg;
 				}
 
-				var iframes = "";
+				var iframes = '';
 
 				var self = this;
 
-				var computed = window.getComputedStyle($("body")[0]);
+				var computed = window.getComputedStyle($('body')[0]);
 
 				var pf = parseFloat;
 
@@ -6818,22 +6495,22 @@
 				};
 
 				// create styles for iframes, and account for body margins
-				$.each([true, false], function (index, horizontal) {
-					iframes += "." + self.classes[
-					"resizeIframe" + (horizontal ? "Horizontal" : "Vertical")
-						] + "{";
+				$.each([true, false], function(index, horizontal) {
+					iframes += '.' + self.classes[
+					'resizeIframe' + (horizontal ? 'Horizontal' : 'Vertical')
+						] + '{';
 
-					$.each(["-webkit-", "-moz-", ""], function (index2, prefix) {
-						iframes += (horizontal ? "width:" : "height:")
+					$.each(['-webkit-', '-moz-', ''], function(index2, prefix) {
+						iframes += (horizontal ? 'width:' : 'height:')
 							+ prefix
-							+ "calc(100% - "
+							+ 'calc(100% - '
 							+ (horizontal
-									? bodyMargins.horizontal
-									: bodyMargins.vertical
-							) + "px);";
+							   ? bodyMargins.horizontal
+							   : bodyMargins.vertical
+							) + 'px);';
 					});
 
-					iframes += "}";
+					iframes += '}';
 				});
 
 				// apply new styles
@@ -6846,56 +6523,51 @@
 		},
 
 		// shortcut for positioning window groups
-		_positionTaskbarWindowGroup: function (options) {
+		_positionTaskbarWindowGroup: function(options) {
 			var position = this._menuPosition({
-				of: options.$group,
-				elem: options.$menu
-			});
+												  of: options.$group,
+												  elem: options.$menu
+											  });
 
-			options.$menu
-				.position(position);
+			options.$menu.position(position);
 		},
 
 		// create window containment and window copy - those are single dom objects,
 		// shared by all taskbars - they're created by the first taskbar widget
 		// initialized, and removed by the last taskbar widget destroyed
-		_createWindowsContainment: function () {
-			this.$windowsContainment = $("div." + this.classes.windowsContainment);
-			this.$windowCopy = $("div." + this.classes.windowCopy);
+		_createWindowsContainment: function() {
+			this.$windowsContainment = $('div.' + this.classes.windowsContainment);
+			this.$windowCopy = $('div.' + this.classes.windowCopy);
 
 			// create window containment if it wasn't found
 			if (!this.$windowsContainment.length) {
-				this.$windowsContainment = this
-					._factory("windowsContainment")
-					.appendTo("body");
+				this.$windowsContainment = this._factory('windowsContainment').appendTo('body');
 			}
 
 			// create window copy if it wasn't found
 			if (!this.$windowCopy.length) {
-				this.$windowCopy = this
-					._factory("windowCopy")
-					.appendTo("body");
+				this.$windowCopy = this._factory('windowCopy').appendTo('body');
 			}
 
 			// keep count of taskbar instances
 			var count = this.$windowsContainment.data(
-				this._cnst.dataPrefix + "taskbars"
+				this._cnst.dataPrefix + 'taskbars'
 			) || 0;
 
 			this.$windowsContainment.data(
-				this._cnst.dataPrefix + "taskbars",
+				this._cnst.dataPrefix + 'taskbars',
 				++count
 			);
 		},
 
-		_destroyWindowsContainment: function () {
+		_destroyWindowsContainment: function() {
 			var count = this.$windowsContainment.data(
-				this._cnst.dataPrefix + "taskbars"
+				this._cnst.dataPrefix + 'taskbars'
 			);
 
 			// decrease number if taskbar instances by 1
 			this.$windowsContainment.data(
-				this._cnst.dataPrefix + "taskbars", --count
+				this._cnst.dataPrefix + 'taskbars', --count
 			);
 
 			// destroy containment and window copy if there's no taskbar left
@@ -6906,27 +6578,27 @@
 		},
 
 		// return list of taskbars on each edge
-		_getTaskbarList: function () {
+		_getTaskbarList: function() {
 			return {
 				top: $(
-					"." + this.classes.taskbarHorizontal
-					+ "." + this.classes.taskbarStickTop
-					+ ":not(." + this.classes.droppable + ")"
+					'.' + this.classes.taskbarHorizontal
+					+ '.' + this.classes.taskbarStickTop
+					+ ':not(.' + this.classes.droppable + ')'
 				),
 				left: $(
-					"." + this.classes.taskbarVertical
-					+ "." + this.classes.taskbarStickLeft
-					+ ":not(." + this.classes.droppable + ")"
+					'.' + this.classes.taskbarVertical
+					+ '.' + this.classes.taskbarStickLeft
+					+ ':not(.' + this.classes.droppable + ')'
 				),
 				right: $(
-					"." + this.classes.taskbarVertical
-					+ "." + this.classes.taskbarStickRight
-					+ ":not(." + this.classes.droppable + ")"
+					'.' + this.classes.taskbarVertical
+					+ '.' + this.classes.taskbarStickRight
+					+ ':not(.' + this.classes.droppable + ')'
 				),
 				bottom: $(
-					"." + this.classes.taskbarHorizontal
-					+ "." + this.classes.taskbarStickBottom
-					+ ":not(." + this.classes.droppable + ")"
+					'.' + this.classes.taskbarHorizontal
+					+ '.' + this.classes.taskbarStickBottom
+					+ ':not(.' + this.classes.droppable + ')'
 				)
 			};
 		},
@@ -6934,7 +6606,7 @@
 		// calculates containment applied later to all windows;
 		// containment is shared along all taskbar instances
 		// because windows shouldn't overlay any taskbar that is visible to user
-		_resizeWindowsContainment: function () {
+		_resizeWindowsContainment: function() {
 			// inner window dimensions
 			var windowsContainment = this._getContainmentInner();
 
@@ -6949,14 +6621,12 @@
 			windowsContainment.height -= margins.y;
 
 			// cache the margins, they'll be used by other functions
-			this.$windowsContainment
-				.css(windowsContainment)
-				.data(this._cnst.dataPrefix + "taskbar-margins", margins);
+			this.$windowsContainment.css(windowsContainment).data(this._cnst.dataPrefix + 'taskbar-margins', margins);
 
 			this.$windowCopy.css(this._getContainmentInner());
 		},
 
-		_getMaxTaskbarsMargins: function () {
+		_getMaxTaskbarsMargins: function() {
 			var self = this,
 
 				// list of all taskbar
@@ -6965,20 +6635,20 @@
 				// object of empty zero's for every edge
 				taskbarsMargins = this._zeroDirections(),
 				viewportMargins = $.extend(true, {},
-					this.options.viewportMargins
+										   this.options.viewportMargins
 				),
 				margins = {};
 
 			// itterate over taskbars sticking to every edge of window
-			$.each($taskbarList, function (edge, $taskbars) {
+			$.each($taskbarList, function(edge, $taskbars) {
 				var dimensions = [];
 
 				// ignore autohiding taskbars
 				//- they overlay windows when they are visible
-				$taskbars = $taskbars.not("." + self.classes.autoHide);
+				$taskbars = $taskbars.not('.' + self.classes.autoHide);
 
-				$taskbars.each(function () {
-					var horizontal = $.inArray(edge, ["top", "bottom"]) > -1,
+				$taskbars.each(function() {
+					var horizontal = $.inArray(edge, ['top', 'bottom']) > -1,
 						$this = $(this);
 
 					// push dimensions to array, either height of horizontal
@@ -7002,31 +6672,31 @@
 			return margins;
 		},
 
-		_viewportMarginsRecalculate: function (viewportMargins, taskbarsMargins) {
+		_viewportMarginsRecalculate: function(viewportMargins, taskbarsMargins) {
 			var margins = {},
 				useTaskbarsViewportMargins;
 
-			$.each(viewportMargins, function (edge, config) {
+			$.each(viewportMargins, function(edge, config) {
 				// decide weather we should use options or rely on calculations
 				useTaskbarsViewportMargins =
-					config[1] === "correct"
+					config[1] === 'correct'
 					&& taskbarsMargins[edge] !== 0
 					||
 					taskbarsMargins[edge] < config[0]
 					&& taskbarsMargins[edge] !== 0
-					&& config[1] === "correctDown"
+					&& config[1] === 'correctDown'
 					||
 					taskbarsMargins[edge] > config[0]
-					&& config[1] === "correctUp";
+					&& config[1] === 'correctUp';
 
 				useTaskbarsViewportMargins =
 					useTaskbarsViewportMargins
-					&& config[1] !== "correctNone";
+					&& config[1] !== 'correctNone';
 
 				// apply margins
 				margins[edge] = useTaskbarsViewportMargins
-					? taskbarsMargins[edge]
-					: config[0];
+								? taskbarsMargins[edge]
+								: config[0];
 			});
 
 			margins.y = margins.top + margins.bottom;
@@ -7035,7 +6705,7 @@
 			return margins;
 		},
 
-		_trigger: function (name, event, ui) {
+		_trigger: function(name, event, ui) {
 			// extend ui by useful information
 			$.extend(ui, {
 				instance: this,
@@ -7047,8 +6717,8 @@
 
 		// triggers internal callback and set's it to null, because,
 		// as for now, only callbacks triggered once are needed
-		_triggerInternal: function (name) {
-			if (typeof this._cache.internalCallbacks[name] === "function") {
+		_triggerInternal: function(name) {
+			if (typeof this._cache.internalCallbacks[name] === 'function') {
 				this._cache.internalCallbacks[name]();
 				this._cache.internalCallbacks[name] = null;
 			}
@@ -7056,31 +6726,31 @@
 
 		// bind internal event to be triggered later,
 		// for example during refresh
-		_bindInternal: function (name, fn) {
+		_bindInternal: function(name, fn) {
 			this._cache.internalCallbacks[name] = fn;
 		},
 
 		// trigger events for subordinates
-		_triggerBindedElementEvent: function (options) {
+		_triggerBindedElementEvent: function(options) {
 			var ui = {};
 
 			ui.autoOpen = this._cache.progress.menuAutoOpenOnBrowse;
 
 			if (
-				options.type === "elementOpen"
-				|| options.type === "elementClose"
+				options.type === 'elementOpen'
+				|| options.type === 'elementClose'
 			) {
 				ui.$element = options.menu;
 				ui.$button = options.button;
 
-				if (options.type === "elementClose") {
+				if (options.type === 'elementClose') {
 					ui.closeByOpen = !!options.closeByOpen;
 				}
 			}
 
 			if (
-				options.type === "menuItemFocus"
-				|| options.type === "menuItemBlur"
+				options.type === 'menuItemFocus'
+				|| options.type === 'menuItemBlur'
 			) {
 				// ui.$item is an empty jQuery object
 				// if options.type === "menuItemBlur"
@@ -7091,23 +6761,23 @@
 
 			// this little trick allow us to have blured menu item in ui object,
 			// the item that jQuery UI Menu does not provide for some reason
-			if (options.type === "menuItemFocus") {
+			if (options.type === 'menuItemFocus') {
 				this._cache.lastMenuItemFocus = ui.$item;
 			}
 
-			if (options.type === "menuItemBlur") {
+			if (options.type === 'menuItemBlur') {
 				ui.$item = this._cache.lastMenuItemFocus;
 			}
 
 			return this._trigger(options.type, options.event, ui);
 		},
 
-		_refreshWindowsPosition: function (options) {
+		_refreshWindowsPosition: function(options) {
 			var $windows = options && options.own
 				// refresh position of windows binded only to current taskbar
-				? this.windows()
+						   ? this.windows()
 				// refresh position of all windows binded to all taskbars present
-				: $("." + this.classes.window + " ." + this.classes.windowContent);
+						   : $('.' + this.classes.window + ' .' + this.classes.windowContent);
 
 			// that's not really a likely case that $.emuos.window don't exists
 			// at this point, but some tests would fail without this fix
@@ -7121,10 +6791,10 @@
 
 			// use window prototype to sort by z-index
 			$windows = prototype._sortByZIndex.call({
-				_cnst: {
-					lowestPossibleZIndex: prototype._cnst.lowestPossibleZIndex
-				}
-			}, $windows.parent(), "asc").children("." + this.classes.windowContent);
+														_cnst: {
+															lowestPossibleZIndex: prototype._cnst.lowestPossibleZIndex
+														}
+													}, $windows.parent(), 'asc').children('.' + this.classes.windowContent);
 
 			var windowOptions = {};
 
@@ -7135,43 +6805,42 @@
 				windowOptions.skipOnFit = true;
 			}
 
-			$windows.each(function () {
-				$(this).window("refreshPosition", windowOptions);
+			$windows.each(function() {
+				$(this).window('refreshPosition', windowOptions);
 			});
 		},
 
 		// refresh data-taskbar-uuid when uuid changed
-		_refreshWindowsTaskbarId: function () {
+		_refreshWindowsTaskbarId: function() {
 			var self = this;
 
-			this.windows().each(function () {
+			this.windows().each(function() {
 				var $this = $(this);
 
-				var instance = $this.data(self._cnst.dataPrefix + "window");
+				var instance = $this.data(self._cnst.dataPrefix + 'window');
 
 				$this
 				// overlay could be null, but it doesn't hurt
-					.add(instance.overlay)
-					.attr("data-taskbar-uuid", this.uuid);
+				.add(instance.overlay).attr('data-taskbar-uuid', this.uuid);
 			});
 		},
 
 		// refresh position of window binded to current taskbar
-		_refreshOwnWindowsPosition: function (options) {
+		_refreshOwnWindowsPosition: function(options) {
 			if (!options) {
 				options = {};
 			}
 
 			this._refreshWindowsPosition($.extend({
-				own: true
-			}, options));
+													  own: true
+												  }, options));
 		},
 
 		// refresh containment of windows binded to current taskbar
-		_refreshWindowsContainment: function (options) {
+		_refreshWindowsContainment: function(options) {
 			var self = this;
-			$.each(this._cache.windows, function (index, $elem) {
-				var instance = $elem.data(self._cnst.dataPrefix + "window");
+			$.each(this._cache.windows, function(index, $elem) {
+				var instance = $elem.data(self._cnst.dataPrefix + 'window');
 
 				if (instance) {
 					instance._setContainment();
@@ -7185,16 +6854,16 @@
 
 		// translates current taskbar position to the direction in which start menu
 		// arrow should point, that is, to the center of the screen
-		_translatePosition: function (options) {
+		_translatePosition: function(options) {
 			var position = this._cache.horizontal
-				? this._cache.stickVertical === "top" ? "s" : "n"
-				: this._cache.stickHorizontal === "left" ? "e" : "w";
+						   ? this._cache.stickVertical === 'top' ? 's' : 'n'
+						   : this._cache.stickHorizontal === 'left' ? 'e' : 'w';
 
 			return position;
 		},
 
 		// helper function
-		_zeroDirections: function () {
+		_zeroDirections: function() {
 			return {
 				top: 0,
 				left: 0,
@@ -7204,12 +6873,12 @@
 		},
 
 		// array of edges and their neighbours
-		_neighbouringEdges: function () {
+		_neighbouringEdges: function() {
 			return {
-				top: ["left", "right"],
-				right: ["top", "bottom"],
-				bottom: ["right", "left"],
-				left: ["bottom", "top"]
+				top: ['left', 'right'],
+				right: ['top', 'bottom'],
+				bottom: ['right', 'left'],
+				left: ['bottom', 'top']
 			};
 		},
 
@@ -7218,7 +6887,7 @@
 		// are passed, with some code removed, and also reformatted
 		// source: http://phpjs.org/functions/levenshtein/
 		// license: https://github.com/kvz/phpjs/blob/master/LICENSE.txt
-		_levenshtein: function (s1, s2) {
+		_levenshtein: function(s1, s2) {
 			if (s1 === s2) {
 				return 0;
 			}
@@ -7233,14 +6902,18 @@
 				return l1 * 1;
 			}
 
-			s1 = s1.split("");
-			s2 = s2.split("");
-
+			s1 = s1.split('');
+			s2 = s2.split('');
 
 			var p1 = new Array(l2 + 1);
 			var p2 = new Array(l2 + 1);
 
-			var i1, i2, c0, c1, c2, tmp;
+			var i1,
+				i2,
+				c0,
+				c1,
+				c2,
+				tmp;
 
 			for (i2 = 0; i2 <= l2; i2++) {
 				p1[i2] = i2 * 1;
@@ -7278,20 +6951,20 @@
 
 		// test if particular widget from jQuery UI is in given version;
 		// used in deciding behaviour/hacks/flow
-		_versionOf: function (widget, operator, compare) {
-			var version = (widget ? $.ui[widget] : $.ui).version.split("."),
-				compareTo = compare.split("."),
+		_versionOf: function(widget, operator, compare) {
+			var version = (widget ? $.ui[widget] : $.ui).version.split('.'),
+				compareTo = compare.split('.'),
 				results = [];
 
-			$.each(compareTo, function (index, part) {
+			$.each(compareTo, function(index, part) {
 				var againsts = parseInt(part, 10),
 					current = parseInt(version[index], 10);
 
-				if (operator === ">=") {
+				if (operator === '>=') {
 					results.push(current >= againsts);
-				} else if (operator === "==" || operator === "===") {
+				} else if (operator === '==' || operator === '===') {
 					results.push(current === againsts);
-				} else if (operator === "<=") {
+				} else if (operator === '<=') {
 					results.push(current <= againsts);
 				} else {
 					results.push(false);
@@ -7302,14 +6975,14 @@
 		},
 
 		// return staskbar instance for a given item
-		_taskbarInstance: function ($item) {
-			var $taskbar = $item.closest("." + this.classes.taskbar);
-			return $taskbar.data(this._cnst.dataPrefix + "taskbar");
+		_taskbarInstance: function($item) {
+			var $taskbar = $item.closest('.' + this.classes.taskbar);
+			return $taskbar.data(this._cnst.dataPrefix + 'taskbar');
 		},
 
 		// extends native jQuery position/offset object
 		// by width, height, right and bottom
-		_extendedPosition: function (options) {
+		_extendedPosition: function(options) {
 			if (!this) {
 				return {};
 			}
@@ -7321,9 +6994,9 @@
 			}
 
 			// use offset or position, depending on setting
-			var position = options && (options.offset || options === "offset")
-				? $this.offset()
-				: $this.position();
+			var position = options && (options.offset || options === 'offset')
+						   ? $this.offset()
+						   : $this.position();
 
 			position.height = $this.outerHeight();
 			position.width = $this.outerWidth();
@@ -7336,11 +7009,11 @@
 		},
 
 		// http://www.2ality.com/2013/10/typeof-null.html
-		_isRealObject: function (obj) {
-			return typeof obj === "object" && obj !== null;
+		_isRealObject: function(obj) {
+			return typeof obj === 'object' && obj !== null;
 		},
 
-		_isRealEmptyObject: function (obj) {
+		_isRealEmptyObject: function(obj) {
 			return ($.isEmptyObject(obj) || (obj.length === 1 && obj.__proto__))
 				&& this._isRealObject(obj);
 		},
@@ -7353,18 +7026,21 @@
 		// of that element can be accessed; this is useful for getting colors
 		// and other properties from elements that are part of jQuery UI themes,
 		// but are not present in the DOM
-		_styleIndicator: function (className, keys) {
-			className = className.split(" > ");
+		_styleIndicator: function(className, keys) {
+			className = className.split(' > ');
 
 			var elems = [],
 				requestedStyles = {},
-				subject, parent, thisIsSubject, subjectSet;
+				subject,
+				parent,
+				thisIsSubject,
+				subjectSet;
 
-			$.each(className, function (index, value) {
+			$.each(className, function(index, value) {
 				// the default tag is div, but it can later be changed
-				var tagName = "div";
+				var tagName = 'div';
 
-				var dollarAt = value.indexOf("$");
+				var dollarAt = value.indexOf('$');
 
 				// is element start with a dollar, that's the element
 				// we want to process, threat this as selector subject similiar
@@ -7377,7 +7053,7 @@
 
 				// a classname without preceding dot is also acceptable,
 				// when no tag name is required
-				var dotAt = value.indexOf(".");
+				var dotAt = value.indexOf('.');
 				if (dotAt !== -1) {
 					// if tag was present before the dot, set it,
 					// otherwise stick to the default "div" tag
@@ -7418,20 +7094,24 @@
 			var computedStyles = window.getComputedStyle(subject);
 
 			// shortcut
-			if (keys === "borderColor") {
-				keys = ["borderTopColor", "borderRightColor",
-					"borderBottomColor", "borderLeftColor"];
+			if (keys === 'borderColor') {
+				keys = [
+					'borderTopColor', 'borderRightColor',
+					'borderBottomColor', 'borderLeftColor'
+				];
 			}
 
 			// make sure it's an array
-			if (typeof(keys) === "string") keys = [keys];
+			if (typeof (keys) === 'string') {
+				keys = [keys];
+			}
 
 			// return only particular properties
 			for (var i in keys) {
 				requestedStyles [keys [i]] = computedStyles [keys [i]];
 			}
 
-			if (typeof(keys) === "undefined") {
+			if (typeof (keys) === 'undefined') {
 				requestedStyles = computedStyles;
 			}
 
@@ -7441,10 +7121,10 @@
 			return requestedStyles;
 		},
 
-		_extractObjectsByKey: function (object, keys) {
+		_extractObjectsByKey: function(object, keys) {
 			var newObject = {};
 
-			$.each(keys, function (index, value) {
+			$.each(keys, function(index, value) {
 				if (object[value]) {
 					newObject[value] = object[value];
 				}
@@ -7456,100 +7136,100 @@
 		// functions for fullscreen API,
 		// taken almost witouth changes from http://davidwalsh.name/fullscreen
 		// detect if the fullscreen is available in user browser
-		_fullscreenAvailable: function () {
+		_fullscreenAvailable: function() {
 			var element = document.documentElement;
 
-			var request =	element.requestFullscreen ||		//W3C
-							element.requestFullScreen ||		//W3C
-							element.webkitRequestFullscreen ||	//Chrome etc.
-							element.webkitRequestFullScreen ||	//Chrome etc.
-							element.mozRequestFullscreen ||		//FireFox
-							element.mozRequestFullScreen ||		//FireFox
-							element.msRequestFullscreen ||		//IE11
-							element.msRequestFullScreen;		//IE11
+			var request = element.requestFullscreen ||		//W3C
+				element.requestFullScreen ||		//W3C
+				element.webkitRequestFullscreen ||	//Chrome etc.
+				element.webkitRequestFullScreen ||	//Chrome etc.
+				element.mozRequestFullscreen ||		//FireFox
+				element.mozRequestFullScreen ||		//FireFox
+				element.msRequestFullscreen ||		//IE11
+				element.msRequestFullScreen;		//IE11
 
 			return !!request;
 		},
 
 		// detect if the browser is in fullscreen mode now;
 		// this function will never fire if fullscreen is not available
-		_fullscreenEnabled: function () {
-			var fullscreenElement =	document.fullscreenEnabled ||
-									document.fullScreenEnabled ||
-									document.FullScreenEnabled ||
-									document.mozFullScreenElement ||
-									document.mozFullscreenElement ||
-									document.webkitFullScreenElement ||
-									document.webkitFullscreenElement ||
-									document.msFullScreenElement ||
-									document.msFullscreenElement;
+		_fullscreenEnabled: function() {
+			var fullscreenElement = document.fullscreenEnabled ||
+				document.fullScreenEnabled ||
+				document.FullScreenEnabled ||
+				document.mozFullScreenElement ||
+				document.mozFullscreenElement ||
+				document.webkitFullScreenElement ||
+				document.webkitFullscreenElement ||
+				document.msFullScreenElement ||
+				document.msFullscreenElement;
 
 			return !!fullscreenElement;
 		},
 
 		// request fullscreen
-		_fullscreenEnter: function () {
+		_fullscreenEnter: function() {
 			var element = document.documentElement;
 
-			var request =	element.requestFullscreen ||		//W3C
-							element.requestFullScreen ||		//W3C
-							element.webkitRequestFullscreen ||	//Chrome etc.
-							element.webkitRequestFullScreen ||	//Chrome etc.
-							element.mozRequestFullscreen ||		//FireFox
-							element.mozRequestFullScreen ||		//FireFox
-							element.msRequestFullscreen ||		//IE11
-							element.msRequestFullScreen;		//IE11
+			var request = element.requestFullscreen ||		//W3C
+				element.requestFullScreen ||		//W3C
+				element.webkitRequestFullscreen ||	//Chrome etc.
+				element.webkitRequestFullScreen ||	//Chrome etc.
+				element.mozRequestFullscreen ||		//FireFox
+				element.mozRequestFullScreen ||		//FireFox
+				element.msRequestFullscreen ||		//IE11
+				element.msRequestFullScreen;		//IE11
 
 			if (request) {
 				request.call(element);
-			} else if (typeof window.ActiveXObject !== "undefined") {
+			} else if (typeof window.ActiveXObject !== 'undefined') {
 				//for Internet Explorer
-				var wscript = new ActiveXObject("WScript.Shell");
-				if (wscript !== null){
-					wscript.SendKeys("{F11}");
+				var wscript = new ActiveXObject('WScript.Shell');
+				if (wscript !== null) {
+					wscript.SendKeys('{F11}');
 				}
 			}
 		},
 
 		// exits fullscreen
-		_fullscreenLeave: function () {
-			var exit =	document.exitFullscreen ||		//W3C
-						document.exitFullScreen ||		//W3C
-						document.webkitExitFullscreen ||	//Chrome etc.
-						document.webkitExitFullScreen ||	//Chrome etc.
-						document.webkitCancelFullscreen ||	//Chrome etc.
-						document.webkitCancelFullScreen ||	//Chrome etc.
-						document.mozCancelFullscreen ||		//FireFox
-						document.mozCancelFullScreen ||		//FireFox
-						document.mozExitFullscreen ||		//FireFox
-						document.mozExitFullScreen ||		//FireFox
-						document.msExitFullscreen ||		//IE11
-						document.msExitFullScreen;
+		_fullscreenLeave: function() {
+			var exit = document.exitFullscreen ||		//W3C
+				document.exitFullScreen ||		//W3C
+				document.webkitExitFullscreen ||	//Chrome etc.
+				document.webkitExitFullScreen ||	//Chrome etc.
+				document.webkitCancelFullscreen ||	//Chrome etc.
+				document.webkitCancelFullScreen ||	//Chrome etc.
+				document.mozCancelFullscreen ||		//FireFox
+				document.mozCancelFullScreen ||		//FireFox
+				document.mozExitFullscreen ||		//FireFox
+				document.mozExitFullScreen ||		//FireFox
+				document.msExitFullscreen ||		//IE11
+				document.msExitFullScreen;
 
 			if (exit) {
 				exit.call(document);
-			} else if (typeof window.ActiveXObject !== "undefined") {
+			} else if (typeof window.ActiveXObject !== 'undefined') {
 				//for Internet Explorer
-				var wscript = new ActiveXObject("WScript.Shell");
-				if (wscript !== null){
-					wscript.SendKeys("{F11}");
+				var wscript = new ActiveXObject('WScript.Shell');
+				if (wscript !== null) {
+					wscript.SendKeys('{F11}');
 				}
 			}
 		},
 
-		_resizeEvent: function (force) {
+		_resizeEvent: function(force) {
 			var self = this;
 
 			// clearing timeout prevents multiple events resizes called
 			// - we need only one
 			clearTimeout(this._cache.timeouts.windowResize);
 			// settings timeout prevents double resizes and boosts performance
-			this._cache.timeouts.windowResize = setTimeout(function () {
+			this._cache.timeouts.windowResize = setTimeout(function() {
 				self._resizeEventDelayed(force);
 			}, this._cnst.resizeDelay);
 		},
 
-		_resizeEventDelayed: function (force) {
+		_resizeEventDelayed: function(force) {
 			var self = this;
 			var c = this._cache.resizeContainment;
 			var cc = this._getContainment();
@@ -7560,11 +7240,11 @@
 			) {
 				self._cache.resizeContainment = cc;
 				self._cache.resizeCausesRefresh = true;
-				$(window).trigger("resize", {
+				$(window).trigger('resize', {
 					// pass and argument so only window resize events triggered here
 					// are passed to namespaced window resize event
 					// for current taskbar (see: _bindWindowsEvents)
-					caller: "taskbar-iframe"
+					caller: 'taskbar-iframe'
 				});
 				self._cache.resizeCausesRefresh = false;
 			}
@@ -7572,8 +7252,8 @@
 
 		// an idea borrowed from https://gist.github.com/OrganicPanda/8222636
 		// and rewritten for jQuery
-		_resizeIframeListener: function () {
-			if ($("." + this.classes.resizeIframeHorizontal).length) {
+		_resizeIframeListener: function() {
+			if ($('.' + this.classes.resizeIframeHorizontal).length) {
 				return;
 			}
 
@@ -7581,17 +7261,15 @@
 
 			self._cache.resizeContainment = self._getContainment();
 
-			$.each([true, false], function (index, horizontal) {
+			$.each([true, false], function(index, horizontal) {
 				// Create an invisible iframes
-				var $iframe = $("<iframe></iframe>")
-					.prependTo("body")
-					.addClass(self.classes.resizeIframe
-						+ " " + self.classes[
-						"resizeIframe" + (horizontal
-							? "Horizontal"
-							: "Vertical")
-							]
-					);
+				var $iframe = $('<iframe></iframe>').prependTo('body').addClass(self.classes.resizeIframe
+																					+ ' ' + self.classes[
+					'resizeIframe' + (horizontal
+									  ? 'Horizontal'
+									  : 'Vertical')
+						]
+				);
 
 				$iframe[0]
 				// original comment from
@@ -7599,15 +7277,14 @@
 				// "The trick here is that because this iframe has 100% width
 				// it should fire a window resize event when anything causes it
 				// to resize (even scrollbars on the outer document)"
-					.contentWindow
-					.addEventListener("resize", function () {
-						self._resizeEvent();
-					});
+				.contentWindow.addEventListener('resize', function() {
+					self._resizeEvent();
+				});
 
 				// Trident won't fire iframe resize event first time,
 				// so it has to be fired manually
 				if (window.navigator.userAgent.match(/Trident/)) {
-					self._bindInternal("afterRefresh", function () {
+					self._bindInternal('afterRefresh', function() {
 						// with true parameter the event is forced to fire,
 						// otherwise it would fire only
 						// if inner window size really changed
@@ -7620,11 +7297,11 @@
 		// https://gist.github.com/stucox/5231211
 		// returns MutationObserver or false if not MutationObserver
 		// is available in the browser
-		_MutationObserver: function () {
-			var prefixes = ["", "WebKit", "Moz", "O", "Ms"];
+		_MutationObserver: function() {
+			var prefixes = ['', 'WebKit', 'Moz', 'O', 'Ms'];
 			for (var i = 0; i < prefixes.length; i++) {
-				if (prefixes[i] + "MutationObserver" in window) {
-					return window[prefixes[i] + "MutationObserver"];
+				if (prefixes[i] + 'MutationObserver' in window) {
+					return window[prefixes[i] + 'MutationObserver'];
 				}
 			}
 
@@ -7633,7 +7310,7 @@
 
 		// MutationObserver is potentially a performance issue,
 		// so it's better to disconnect them once they job is done
-		_disconnectObservers: function (keyy) {
+		_disconnectObservers: function(keyy) {
 			for (var i in this._cache.mutationObservers [keyy]) {
 				this._cache.mutationObservers [keyy][i].disconnect();
 			}
@@ -7641,7 +7318,7 @@
 			this._cache.mutationObservers [keyy] = [];
 		},
 
-		_getWindowScroll: function () {
+		_getWindowScroll: function() {
 			return {
 				x: $(window).scrollLeft(),
 				y: $(window).scrollTop()
@@ -7650,11 +7327,11 @@
 
 		// copies css from one element into another;
 		// if no source element is present,  properties are nullified
-		_copyStyles: function (options) {
-			var string = typeof options.from === "string";
+		_copyStyles: function(options) {
+			var string = typeof options.from === 'string';
 
 			// make single property into an array
-			if (typeof options.properties === "string") {
+			if (typeof options.properties === 'string') {
 				options.properties = [options.properties];
 			}
 
@@ -7666,7 +7343,7 @@
 				);
 			}
 
-			$.each(options.properties, function (index, value) {
+			$.each(options.properties, function(index, value) {
 				// copy from created element
 				if (string) {
 					options.to.css(value, props [value]);
@@ -7675,65 +7352,65 @@
 					options.to.css(value, options.from.css(value));
 					// or nullify if no element was passed as source
 				} else {
-					options.to.css(value, "");
+					options.to.css(value, '');
 				}
 			});
 		},
 
 		// destroy menus matching the selector
-		_destroyMenus: function (selector) {
+		_destroyMenus: function(selector) {
 			var self = this;
 
-			this.$elem.find(selector).each(function () {
+			this.$elem.find(selector).each(function() {
 				var $this = $(this);
 
 				if ($this.hasClass(self.classes.uiMenu)) {
-					$this.menu("destroy");
+					$this.menu('destroy');
 				}
 
 				// nulify styles set previously
 				self._copyStyles({
-					to: $this,
-					properties: ["display", "top", "left"]
-				});
+									 to: $this,
+									 properties: ['display', 'top', 'left']
+								 });
 			});
 		},
 
 		/* public methods */
 		// blurs windows binded to this taskbar
-		blurWindows: function () {
+		blurWindows: function() {
 			this._blurWindows();
 		},
 
 		// return button for a passed element
-		button: function ($elem) {
+		button: function($elem) {
 			return this._button($elem);
 		},
 
 		// hide taskbar with "autoHide": true,
 		// with optional duration
-		hide: function (duration) {
+		hide: function(duration) {
 			this._hide(duration);
 		},
 
-		hideSubordinates: function () {
+		hideSubordinates: function() {
 			this._hideAll({
-				blurWindows: false
-			});
+							  blurWindows: false
+						  });
 		},
 
-		i18n: function (translation, keys, language) {
+		i18n: function(translation, keys, language) {
 			return this._i18n(translation, keys, language);
 		},
 
-		minimizeAll: function () {
+		minimizeAll: function() {
 			this._minimizeAll();
 		},
 
 		// public method that refreshes taskbar
-		refresh: function () {
+		refresh: function() {
 			if (this._cache.suppressEvents === false) {
-				if (this._trigger("beforeRefresh") === false) {
+				if (this._trigger('beforeRefresh') === false) {
 					return;
 				}
 			}
@@ -7743,60 +7420,60 @@
 
 			// this event is called once on creation, only on IE,
 			// and only when window internal size changes
-			this._triggerInternal("afterRefresh");
+			this._triggerInternal('afterRefresh');
 
 			if (this._cache.suppressEvents === false) {
-				this._trigger("refresh");
+				this._trigger('refresh');
 			}
 		},
 
 		// show taskbar with "autoHide": true,
 		// with optional duration
-		show: function (duration) {
+		show: function(duration) {
 			this._show(duration);
 		},
 
 		// public method returning windows as jQuery collection
-		windows: function () {
+		windows: function() {
 			return this._windows();
 		},
 
 		// return elem taskbar was build upon
-		widget: function () {
+		widget: function() {
 			return this.$elem;
 		},
 
 		// generate debug: there's no enable/disable methods for now,
 		// and there might never be, as it would probably make no sense;
 		// this method is implemented for compability with jQuery UI widgets API
-		enable: function () {
-			this._debugLogAdd("Method \"enable\" is not implemented.", 1, 2);
+		enable: function() {
+			this._debugLogAdd('Method "enable" is not implemented.', 1, 2);
 		},
 
 		// generate debug: there's no enable/disable methods for now,
 		// and there might never be, as it would probably make no sense;
 		// this method is implemented for compability with jQuery UI widgets API
-		disable: function () {
-			this._debugLogAdd("Method \"disabled\" is not implemented.", 1, 2);
+		disable: function() {
+			this._debugLogAdd('Method "disabled" is not implemented.', 1, 2);
 		},
 
 		// checks for invalid options and events
-		_checkForInvalidOptions: function (options, key, initialization) {
+		_checkForInvalidOptions: function(options, key, initialization) {
 			// use options prototype if set; undefined -use taskbar prototype
-			var proto = typeof options === "object"
-				? options
-				: $.emuos.taskbar.prototype.options;
+			var proto = typeof options === 'object'
+						? options
+						: $.emuos.taskbar.prototype.options;
 
 			var protoKeys = Object.keys(proto);
 
-			if (typeof key === "string" && $.inArray(protoKeys, key) > -1) {
+			if (typeof key === 'string' && $.inArray(protoKeys, key) > -1) {
 				return;
 			}
 
 			var keyKeys;
 
 			// either validate single option name or object of options
-			if (typeof key === "object") {
+			if (typeof key === 'object') {
 				keyKeys = Object.keys(key);
 			} else {
 				keyKeys = [key];
@@ -7807,12 +7484,12 @@
 			// compare lower-cased strings,
 			// so things like debuglogadd instead of debugLogAdd,
 			// don't generate errors
-			$.each(protoKeys, function (index, protoKey) {
+			$.each(protoKeys, function(index, protoKey) {
 				protoKeysCompare[index] = protoKey.toLowerCase();
 			});
 
 			// check for invalid options
-			var diff = keyKeys.filter(function (i) {
+			var diff = keyKeys.filter(function(i) {
 				return protoKeysCompare.indexOf(i.toLowerCase()) === -1;
 			});
 
@@ -7827,12 +7504,11 @@
 
 			// for every option/event name that wasn't recognized,
 			// calculate Levenshtein distance and prepend it to the list
-			$.each(diff, function (index, elem) {
+			$.each(diff, function(index, elem) {
 				levenshteins[index] = {};
 
-				$.each(protoKeys, function (index2, elem2) {
-					levenshteins[index][elem2] = self
-						._levenshtein(elem2, elem);
+				$.each(protoKeys, function(index2, elem2) {
+					levenshteins[index][elem2] = self._levenshtein(elem2, elem);
 					invalidNames[index] = elem;
 				});
 			});
@@ -7840,13 +7516,13 @@
 			var min = 100;
 
 			// itterate over calculated distances to find best matches
-			$.each(levenshteins, function (index, set) {
+			$.each(levenshteins, function(index, set) {
 				var matches = [],
 					bestMatches;
 
 				//
-				$.each(set, function (index2, elem2) {
-					var withPadding = "\"" + index2 + "\"";
+				$.each(set, function(index2, elem2) {
+					var withPadding = '"' + index2 + '"';
 
 					// if previous matches were not as good as current,
 					// delete them and start fresh with current match
@@ -7869,8 +7545,8 @@
 					// build list of matches
 					if (matches.length > 1) {
 						var last = matches.pop();
-						bestMatches = matches.join(", ");
-						bestMatches += ", or " + last;
+						bestMatches = matches.join(', ');
+						bestMatches += ', or ' + last;
 					} else {
 						// take single best match
 						bestMatches = matches[0];
@@ -7881,36 +7557,36 @@
 				// or later, and optionally, with findings of Levenshtein distance
 				// calculation
 				self._debugLogAdd(
-					"Unkown option or event \"" + invalidNames[index] + "\""
-					+ (initialization ? " set on initialization." : ".")
+					'Unkown option or event "' + invalidNames[index] + '"'
+					+ (initialization ? ' set on initialization.' : '.')
 					+ (
 						matches.length
-							? " Did you mean " + bestMatches + "?"
-							: ""
+						? ' Did you mean ' + bestMatches + '?'
+						: ''
 					), 1, 2
 				);
 			});
 		},
 
 		// cache previous option value
-		_beforeSetOption: function (key) {
+		_beforeSetOption: function(key) {
 			this._cache.optionSetter.previousValue = this.options [key];
 		},
 
-		_afterSetOption: function (key, value) {
+		_afterSetOption: function(key, value) {
 			var previousValue = this._cache.optionSetter.previousValue,
 				ui = {};
 
 			// trigger language change if language really changed
-			if (key === "language" && value !== previousValue) {
+			if (key === 'language' && value !== previousValue) {
 				ui.originalLanguage = previousValue;
 				ui.language = value;
 
-				this._trigger("languageChange", {}, ui);
+				this._trigger('languageChange', {}, ui);
 			}
 		},
 
-		_setOption: function (key, value) {
+		_setOption: function(key, value) {
 			var self = this;
 
 			this._checkForInvalidOptions(undefined, key);
@@ -7922,43 +7598,43 @@
 			this._debugOptions();
 
 			if (
-				key === "draggable"
-				|| key === "draggableBetweenEdges"
-				|| key === "dropOnExisting") {
+				key === 'draggable'
+				|| key === 'draggableBetweenEdges'
+				|| key === 'dropOnExisting') {
 				this._setDraggable();
 				this._setDroppable();
 
-			} else if (key === "windowButtonsSortable") {
+			} else if (key === 'windowButtonsSortable') {
 				this._setSortableWindowButtons();
 
 			} else if (
 				// refresh everything: there's no easy way to determine what
 			// has been affected by new localization, language,
 			// fallback language or by changing available languages list
-				key === "language"
-				|| key === "fallbackLanguage"
-				|| key === "languages"
-				|| key === "localization") {
+				key === 'language'
+				|| key === 'fallbackLanguage'
+				|| key === 'languages'
+				|| key === 'localization') {
 				this._debugLocalization();
 				this._languageChange();
 				this._refresh();
 
-			} else if (key === "icons") {
+			} else if (key === 'icons') {
 				// there's no easy way to determine which icons has changed,
 				// so the need to refresh everything
 				this._refreshGroupIcons();
 				this._refreshButtonIcons();
 				this._setClockWidth();
 
-			} else if (key === "windowButtonsIconsOnly") {
+			} else if (key === 'windowButtonsIconsOnly') {
 				this._setwindowButtonsIconsOnlyClass();
 				this._refreshGroupIcons();
 				this._refreshwindowButtonsIcons();
 
-			} else if (key === "buttonsTooltips") {
+			} else if (key === 'buttonsTooltips') {
 				this._setButtonsTooltips();
 
-			} else if (key === "windowsContainment") {
+			} else if (key === 'windowsContainment') {
 				this._refreshWindowsContainment();
 				this._refreshOwnWindowsPosition();
 
@@ -7966,73 +7642,73 @@
 				// those options potentially change everything on the page,
 			// so full refresh is probably required;
 			// although there sure is a potential for optimization
-				key === "orientation"
-				|| key === "horizontalWidth"
-				|| key === "horizontalStick"
-				|| key === "horizontalRows"
-				|| key === "horizontalRowHeight"
-				|| key === "horizontalRowsMin"
-				|| key === "horizontalRowsMax"
-				|| key === "verticalHeight"
-				|| key === "verticalStick"
-				|| key === "verticalColumns"
-				|| key === "verticalColumnWidth"
-				|| key === "verticalColumnsMin"
-				|| key === "verticalColumnsMax"
-				|| key === "viewportMargins") {
+				key === 'orientation'
+				|| key === 'horizontalWidth'
+				|| key === 'horizontalStick'
+				|| key === 'horizontalRows'
+				|| key === 'horizontalRowHeight'
+				|| key === 'horizontalRowsMin'
+				|| key === 'horizontalRowsMax'
+				|| key === 'verticalHeight'
+				|| key === 'verticalStick'
+				|| key === 'verticalColumns'
+				|| key === 'verticalColumnWidth'
+				|| key === 'verticalColumnsMin'
+				|| key === 'verticalColumnsMax'
+				|| key === 'viewportMargins') {
 				this._refresh();
 
-			} else if (key === "windowsInitialZIndex") {
+			} else if (key === 'windowsInitialZIndex') {
 				this._refreshWindowsPosition();
 
 			} else if (
-				key === "languageSelect"
-				|| key === "minimizeAll"
-				|| key === "toggleFullscreen"
-				|| key === "clock"
-				|| key === "networkMonitor"
-				|| key === "clockShowDatepicker"
-				|| key === "systemButtonsOrder") {
+				key === 'languageSelect'
+				|| key === 'minimizeAll'
+				|| key === 'toggleFullscreen'
+				|| key === 'clock'
+				|| key === 'networkMonitor'
+				|| key === 'clockShowDatepicker'
+				|| key === 'systemButtonsOrder') {
 				this._buildSystemButtons();
 
-			} else if (key === "menuAutoOpenOnBrowse") {
+			} else if (key === 'menuAutoOpenOnBrowse') {
 				this._bindMenusAutoOpen();
 
-			} else if (key === "minimizeAllHoverOpaqueWindows") {
+			} else if (key === 'minimizeAllHoverOpaqueWindows') {
 				this._setMinimizeAllHoverOpaqueWindows();
 
-			} else if (key === "buttons") {
+			} else if (key === 'buttons') {
 				this._refresh();
 				this._refreshButtonIcons();
 				this._refreshWindowButtonsContainer();
 
-			} else if (key === "buttonsOrder") {
+			} else if (key === 'buttonsOrder') {
 				this._rebuildTaskbarButtons();
 				this._refreshWindowButtonsContainer();
 
-			} else if (key === "startButtons") {
+			} else if (key === 'startButtons') {
 				this._rebuildTaskbarStartButtons();
 				this._refreshWindowButtonsContainer();
 
 			} else if (
-				key === "resizable"
-				|| key === "resizableHandleOverflow"
+				key === 'resizable'
+				|| key === 'resizableHandleOverflow'
 			) {
 				this._setResizable();
 
-			} else if (key === "resolveCollisions") {
+			} else if (key === 'resolveCollisions') {
 				this._refresh();
 
-			} else if (key === "autoHide") {
+			} else if (key === 'autoHide') {
 				this._refresh();
 
-			} else if (key === "durations") {
+			} else if (key === 'durations') {
 				// changing durations during animations is just not worth
 				// the trouble, so let's do nothing and apply new duration
 				// to animations that will start from now
 				this._setButtonsTooltips();
 
-			} else if (key === "debug") {
+			} else if (key === 'debug') {
 				// debug will affect future actions, but there's nothing to replay
 				// at the moment of settings this option
 			}
@@ -8040,7 +7716,7 @@
 			this._afterSetOption(key, value);
 		},
 
-		_destroy: function () {
+		_destroy: function() {
 			var destroy = {
 					destroy: true
 				},
@@ -8050,13 +7726,13 @@
 				$windows: this.windows()
 			};
 
-			this._trigger("beforeDestroy", {}, ui);
+			this._trigger('beforeDestroy', {}, ui);
 
 			var $windows = this.windows();
 
 			// refresh windows and generate debug warning if any windows are left
 			if ($windows.length) {
-				if (this._debugLogAdd("Windows were binbed upon calling \"destroy\".", 1, 0) !== false && this.options.debug.environment) {
+				if (this._debugLogAdd('Windows were binbed upon calling "destroy".', 1, 0) !== false && this.options.debug.environment) {
 					if (window.console) {
 						console.log($windows);
 					}
@@ -8082,47 +7758,41 @@
 			this._createStyles(destroy);
 
 			// general cleanup of classes, data, and attributes
-			this.$elem
-				.removeUniqueId()
-				.removeClass(
-					this.classes.taskbar
-					+ " " + this.classes.empty
-					+ " " + this.classes.uiWidgetContent
-				)
-				.removeAttr("data-taskbar-uuid")
-				.removeData(this._cnst.dataPrefix + "taskbarNewWindowsCount")
-				.removeData(this._cnst.dataPrefix + "taskbar")
-				.removeData(this._cnst.dataPrefix + "taskbarEdge")
-				// revert previous inline CSS
-				.attr("style", this._cache.inlineCSS);
+			this.$elem.removeUniqueId().removeClass(
+				this.classes.taskbar
+				+ ' ' + this.classes.empty
+				+ ' ' + this.classes.uiWidgetContent
+			).removeAttr('data-taskbar-uuid').removeData(this._cnst.dataPrefix + 'taskbarNewWindowsCount').removeData(this._cnst.dataPrefix + 'taskbar').removeData(this._cnst.dataPrefix + 'taskbarEdge')
+				 // revert previous inline CSS
+				 .attr('style', this._cache.inlineCSS);
 
 			// remove helper iframes if no taskbars are left
-			if ($("." + this.classes.taskbar).length === 0) {
-				$("." + this.classes.resizeIframe).remove();
+			if ($('.' + this.classes.taskbar).length === 0) {
+				$('.' + this.classes.resizeIframe).remove();
 			}
 
 			// we don't need those anymore
 			clearInterval(this._cache.timeouts.autoHide);
 			clearInterval(this._cache.timeouts.windowResize);
 
-			this._destroyMenus("[data-menu-type=start]");
+			this._destroyMenus('[data-menu-type=start]');
 
 			this._removeTaskbarPositionClasses();
 			// +
 			this._refreshNeighbours();
 
-			$("." + this.classes.taskbar).each(function () {
-				var instance = $(this).data(self._cnst.dataPrefix + "taskbar");
+			$('.' + this.classes.taskbar).each(function() {
+				var instance = $(this).data(self._cnst.dataPrefix + 'taskbar');
 				instance._refreshWindowsContainment();
 			});
 
 			this._destroyWindowsContainment();
 
-			$(window).add($(document)).off("." + this._cache.uep);
+			$(window).add($(document)).off('.' + this._cache.uep);
 
 			// remove empty attributes
-			$.each(["class", "style"], function (index, attr) {
-				if (self.$elem.attr(attr) === "") {
+			$.each(['class', 'style'], function(index, attr) {
+				if (self.$elem.attr(attr) === '') {
 					self.$elem.removeAttr(attr);
 				}
 			});
@@ -8132,10 +7802,10 @@
 	// allow extending prototype for all future instances at once,
 	// or if "propagateToInstances" is set to true, affect both prototype
 	// and the current instances
-	$.emuos.taskbarSetup = function (propagateToInstances, options) {
+	$.emuos.taskbarSetup = function(propagateToInstances, options) {
 		options = arguments.length === 1 ? propagateToInstances : options;
 		if (propagateToInstances === true && arguments.length > 1) {
-			$("." + $.emuos.taskbar.prototype.classes.taskbar).taskbar("option", options);
+			$('.' + $.emuos.taskbar.prototype.classes.taskbar).taskbar('option', options);
 		}
 		var o = $.emuos.taskbar.prototype.options;
 		return options ? $.extend(true, o, options) : o;

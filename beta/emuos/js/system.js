@@ -557,7 +557,8 @@ if (typeof console !== 'undefined') {
 	// noinspection JSUnresolvedVariable,JSUnusedLocalSymbols
 	var oscpu								= typeof navigator.oscpu !== 'undefined' ? navigator.oscpu : '';
 
-	console.log(browser);
+	global.console.log(browser);
+	// global.console.log(navigator);
 
 	global.isEdge							= browser.indexOf('Edge') !== -1;
 	global.isIE								= !global.isEdge && (browser.indexOf('MSIE') !== -1 || browser.indexOf('Trident') !== -1);
@@ -734,11 +735,11 @@ if (typeof console !== 'undefined') {
 	// noinspection JSUnresolvedVariable
 	global.SYSTEM_FEATURE_INDEXED_DB			= !!global.indexedDB ? true : !!global.webkitIndexedDB || !!global.mozIndexedDB || !!global.moz_indexedDB || !!global.oIndexedDB || !!global.msIndexedDB;
 	global.SYSTEM_FEATURE_WEBSQL				= !!global.openDatabase;
-	global.SYSYEM_FEATURE_ORIENTATION			= !!global.DeviceOrientationEvent;
-	global.SYSYEM_FEATURE_GEOLOCATION			= !!navigator.geolocation;
-	global.SYSYEM_FEATURE_MOTION				= !!global.DeviceMotionEvent;
+	global.SYSTEM_FEATURE_ORIENTATION			= !!global.DeviceOrientationEvent;
+	global.SYSTEM_FEATURE_GEOLOCATION			= !!navigator.geolocation;
+	global.SYSTEM_FEATURE_MOTION				= !!global.DeviceMotionEvent;
 	// noinspection JSUnresolvedVariable
-	global.SYSYEM_FEATURE_GYROSCOPE				= !!global.Gyroscope;
+	global.SYSTEM_FEATURE_GYROSCOPE				= !!global.Gyroscope;
 	global.SYSTEM_FEATURE_PROXIMITY				= 'ProximitySensor' in global;
 	// noinspection JSUnresolvedVariable
 	global.SYSTEM_FEATURE_AMBIENTLIGHT			= !!global.AmbientLightSensor;
@@ -1012,6 +1013,8 @@ if (typeof console !== 'undefined') {
 	global.SYSTEM_INFO_CPU_ENDIANNESS			= typeof SYSTEM_INFO_CPU_LITTLE_ENDIAN !== 'undefined' ? (SYSTEM_INFO_CPU_LITTLE_ENDIAN ? 'Little-endian' : 'Big-endian') : 'Little-endian';
 	// noinspection JSUnusedGlobalSymbols
 	global.SYSTEM_INFO_CPU_CORES				= !navigator.hardwareConcurrency ? '≥ 1' : navigator.hardwareConcurrency;
+	// noinspection JSUnusedGlobalSymbols
+	global.SYSTEM_INFO_CPU_ARCH					= is64 ? '64-bit' : '32-bit';
 	// noinspection JSUnresolvedVariable
 	global.SYSTEM_INFO_RAM						= !navigator.deviceMemory ? '≤ 1GB' : '≥' + navigator.deviceMemory + 'GB';
 	// noinspection JSUnusedGlobalSymbols
@@ -1119,13 +1122,16 @@ if (typeof console !== 'undefined') {
 			Value: SYSTEM_INFO_ENVIRONMENT
 		} , {
 			Feature: 'SYSTEM_INFO_BROWSER',
-			Value: SYSTEM_INFO_BROWSER + ' ' + SYSTEM_INFO_BROWSER_VERSION + ' ' + (is64 ? '(64-bit)' : '(32-bit)')
+			Value: SYSTEM_INFO_BROWSER + ' ' + SYSTEM_INFO_BROWSER_VERSION + ' (' + SYSTEM_INFO_CPU_ARCH + ')'
 		} , {
 			Feature: 'SYSTEM_INFO_CPU_ENDIANNESS',
 			Value: SYSTEM_INFO_CPU_ENDIANNESS
 		} , {
 			Feature: 'SYSTEM_INFO_CPU_CORES',
 			Value: SYSTEM_INFO_CPU_CORES
+		} , {
+			Feature: 'SYSTEM_INFO_CPU_ARCH',
+			Value: SYSTEM_INFO_CPU_ARCH
 		} , {
 			Feature: 'SYSTEM_INFO_RAM',
 			Value: SYSTEM_INFO_RAM
@@ -1283,17 +1289,17 @@ if (typeof console !== 'undefined') {
 			Feature: 'SYSTEM_FEATURE_WEBSQL',
 			Value: SYSTEM_FEATURE_WEBSQL ? 'TRUE' : 'FALSE'
 		} , {
-			Feature: 'SYSYEM_FEATURE_GEOLOCATION',
-			Value: SYSYEM_FEATURE_GEOLOCATION ? 'TRUE' : 'FALSE'
+			Feature: 'SYSTEM_FEATURE_GEOLOCATION',
+			Value: SYSTEM_FEATURE_GEOLOCATION ? 'TRUE' : 'FALSE'
 		} , {
-			Feature: 'SYSYEM_FEATURE_ORIENTATION',
-			Value: SYSYEM_FEATURE_ORIENTATION ? 'TRUE' : 'FALSE'
+			Feature: 'SYSTEM_FEATURE_ORIENTATION',
+			Value: SYSTEM_FEATURE_ORIENTATION ? 'TRUE' : 'FALSE'
 		} , {
-			Feature: 'SYSYEM_FEATURE_MOTION',
-			Value: SYSYEM_FEATURE_MOTION ? 'TRUE' : 'FALSE'
+			Feature: 'SYSTEM_FEATURE_MOTION',
+			Value: SYSTEM_FEATURE_MOTION ? 'TRUE' : 'FALSE'
 		} , {
-			Feature: 'SYSYEM_FEATURE_GYROSCOPE',
-			Value: SYSYEM_FEATURE_GYROSCOPE ? 'TRUE' : 'FALSE'
+			Feature: 'SYSTEM_FEATURE_GYROSCOPE',
+			Value: SYSTEM_FEATURE_GYROSCOPE ? 'TRUE' : 'FALSE'
 		} , {
 			Feature: 'SYSTEM_FEATURE_PROXIMITY',
 			Value: SYSTEM_FEATURE_PROXIMITY ? 'TRUE' : 'FALSE'
@@ -1312,19 +1318,21 @@ if (typeof console !== 'undefined') {
 		if (isEdge) {
 			var chunks = function(array, size) {
 				var results = [];
+
 				while (array.length) {
 					results.push(array.splice(0, size));
 				}
+
 				return results;
 			};
 
 			dump = chunks(dump, 50);
 
 			for (var d in dump) {
-				console.table(dump[d]);
+				global.console.table(dump[d]);
 			}
 		} else {
-			console.table(dump);
+			global.console.table(dump);
 		}
 	}
 

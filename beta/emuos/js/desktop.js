@@ -85,11 +85,7 @@
 			};
 
 			// the basic classes, widget ID, and a unique id instante storage
-			this.$elem
-				.addClass(this.classes.desktop)
-				.attr('data-desktop-uuid', this.uuid)
-				.uniqueId()
-				.data(this._cnst.dataPrefix + 'desktop', this);
+			this.$elem.addClass(this.classes.desktop).attr('data-desktop-uuid', this.uuid).uniqueId().data(this._cnst.dataPrefix + 'desktop', this);
 
 			this._cache.icons = this.$elem.children(this.options.iconClass);
 			this._cache.icons.addClass(this.classes.desktopIcon);
