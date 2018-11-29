@@ -22,6 +22,15 @@ Similar organizations that do [digital preservation](https://en.wikipedia.org/wi
 
 [EmuOS](https://emupedia.net/beta/emuos)
 
+
+## Browser support
+
+##### Simulated desktop environment
+
+| <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" /></br>IE / Edge | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" /></br>Firefox | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" /></br>Chrome | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" /></br>Safari | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" /></br>Opera |
+| :---                              | :---            | :--- | :---            | :---            |
+| IE9+, Edge 20+                    | 2+              | 1+   | 5.1.7+          | 12+             |
+
 ## Libraries used
 
 | Name                     | Website                                                                                                | Repository                                                                                                   | License                                                                                 |
