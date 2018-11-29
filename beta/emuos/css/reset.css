@@ -48,6 +48,7 @@ iframe {
 
 [data-title] {
 	position: relative;
+	text-decoration: none;
 }
 
 [data-title]:after {

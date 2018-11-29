@@ -292,59 +292,51 @@ if (typeof ArrayBuffer !== 'undefined') {
 
 if (typeof Int8Array !== 'undefined') {
 	// IE 11.345.17134.0
-	// noinspection JSUnresolvedVariable
-	if (typeof Int8Array.__proto__ !== 'undefined') {
-		// noinspection JSUnresolvedVariable
-		if (typeof Int8Array.__proto__.from === 'undefined') {
-			// noinspection JSUnresolvedVariable
-			if (!Int8Array.__proto__.from) {
-				(function() {
-					// noinspection JSUnresolvedVariable
-					Int8Array.__proto__.from = function (obj, func, thisObj) {
-						// noinspection JSUnresolvedVariable
-						var typedArrayClass = Int8Array.__proto__;
+	if (!Int8Array.prototype.from) {
+		Object.defineProperty(Int8Array.prototype, 'from', {
+			value: function (obj, func, thisObj) {
+				// noinspection JSUnresolvedVariable
+				var typedArrayClass = Int8Array.__proto__;
 
-						if (typeof this !== 'function') {
-							//throw new TypeError('# is not a constructor');
-						}
-						// noinspection JSUnresolvedVariable
-						if (this.__proto__ !== typedArrayClass) {
-							throw new TypeError('this is not a typed array.');
-						}
+				if (typeof this !== 'function') {
+					//throw new TypeError('# is not a constructor');
+				}
+				// noinspection JSUnresolvedVariable
+				if (this.__proto__ !== typedArrayClass) {
+					throw new TypeError('this is not a typed array.');
+				}
 
-						func = func || function (elem) {
-							return elem;
-						};
+				func = func || function (elem) {
+					return elem;
+				};
 
-						if (typeof func !== 'function') {
-							throw new TypeError('specified argument is not a function');
-						}
+				if (typeof func !== 'function') {
+					throw new TypeError('specified argument is not a function');
+				}
 
-						obj = Object(obj);
+				obj = Object(obj);
 
-						if (!obj['length']) {
-							return new this(0);
-						}
+				if (!obj['length']) {
+					return new this(0);
+				}
 
-						var copy_data = [];
+				var copy_data = [];
 
-						for (var i = 0; i < obj.length; i++) {
-							copy_data.push(obj[i]);
-						}
+				for (var i = 0; i < obj.length; i++) {
+					copy_data.push(obj[i]);
+				}
 
-						copy_data = copy_data.map(func, thisObj);
+				copy_data = copy_data.map(func, thisObj);
 
-						var typed_array = new this(copy_data.length);
+				var typed_array = new this(copy_data.length);
 
-						for (var j = 0; j < typed_array.length; j++) {
-							typed_array[j] = copy_data[j];
-						}
+				for (var j = 0; j < typed_array.length; j++) {
+					typed_array[j] = copy_data[j];
+				}
 
-						return typed_array;
-					}
-				})();
+				return typed_array;
 			}
-		}
+		});
 	}
 
 	// Safari 5.1.7 (7534.57.2)
