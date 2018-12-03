@@ -4,7 +4,7 @@
 
 	// noinspection JSFileReferences
 	require.config({
-		waitSeconds : 300,
+		waitSeconds: 300,
 		shim: {
 			jquerymousewheel: {
 				deps: ['jquery']
