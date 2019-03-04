@@ -549,7 +549,7 @@ if (typeof console !== 'undefined') {
 	// noinspection JSUnresolvedVariable,JSUnusedLocalSymbols
 	var oscpu								= typeof navigator.oscpu !== 'undefined' ? navigator.oscpu : '';
 
-	global.console.log(browser);
+	// global.console.log(browser);
 	// global.console.log(navigator);
 
 	global.isEdge							= browser.indexOf('Edge') !== -1;
@@ -570,8 +570,8 @@ if (typeof console !== 'undefined') {
 	global.isUNIX							= version.indexOf('X11') !== -1;
 	global.isLinux							= version.indexOf('Linux') !== -1;
 
-	global.is64								= (browser.indexOf('WOW64') || browser.indexOf('Win64') || browser.indexOf('amd64')  || browser.indexOf('x86_64')) !== -1;
-	global.is32								= !global.is64 ? ((browser.indexOf('WOW32') || browser.indexOf('Win32') || browser.indexOf('i386') || browser.indexOf('i686')) !== -1) : true;
+	global.is64								= (browser.indexOf('WOW64') !== -1 || browser.indexOf('Win64') !== -1 || browser.indexOf('amd64') !== -1 || browser.indexOf('x86_64')) !== -1;
+	global.is32								= !global.is64 ? ((browser.indexOf('WOW32') !== -1 || browser.indexOf('Win32') !== -1 || browser.indexOf('i386') !== -1 || browser.indexOf('i686')) !== -1) : true;
 
 	global.isMobile							= browser.indexOf('Mobi') !== -1;
 	global.isDesktop						= !global.isMobile;
@@ -611,7 +611,11 @@ if (typeof console !== 'undefined') {
 	global.SYSTEM_FEATURE_SIMD					= typeof SIMD !== 'undefined' ? typeof SIMD.Bool16x8 !== 'undefined' && typeof SIMD.Bool32x4 !== 'undefined' && typeof SIMD.Bool8x16 !== 'undefined' && typeof SIMD.Float32x4 !== 'undefined' && typeof SIMD.Int16x8 !== 'undefined' && typeof SIMD.Int32x4 !== 'undefined' && typeof SIMD.Int8x16 !== 'undefined' && typeof SIMD.Uint32x4 !== 'undefined' && typeof SIMD.Uint8x16 !== 'undefined' : false;
 	global.SYSTEM_FEATURE_ASMJS					= (function() {
 		try {
-			(function MyAsmModule() {"use asm"})();
+			(function MyAsmModule() {
+				'use asm';
+
+				return {};
+			})();
 			return true;
 		} catch(e) {}
 		return false;
@@ -827,12 +831,11 @@ if (typeof console !== 'undefined') {
 	// noinspection JSUnresolvedVariable
 	global.SYSTEM_FEATURE_ES6_CLASS				= (function() {
 		try {
-			eval('class C {}');
-			// noinspection JSUnresolvedVariable
-			return typeof C === 'function';
+			eval('class C{}');
 		} catch (e) {
 			return false;
 		}
+		return true;
 	})();
 	// noinspection JSUnresolvedVariable
 	global.SYSTEM_FEATURE_ES6_STRING			= !!(String.fromCodePoint && String.raw && String.prototype.codePointAt && String.prototype.repeat && String.prototype.startsWith && String.prototype.endsWith && (String.prototype.includes || String.prototype.contains));
@@ -854,7 +857,7 @@ if (typeof console !== 'undefined') {
 			return typeof resolve === 'function';
 		}());
 	})();
-	global.SYSTEM_FEATURE_ES6					= !!(SYSTEM_FEATURE_ES5 && SYSTEM_FEATURE_ES6_NUMBER && SYSTEM_FEATURE_ES6_MATH && SYSTEM_FEATURE_ES6_ARRAY && SYSTEM_FEATURE_ES6_FUNCTION && SYSTEM_FEATURE_ES6_OBJECT && SYSTEM_FEATURE_ES6_STRING && SYSTEM_FEATURE_ES6_COLLECTIONS && SYSTEM_FEATURE_ES6_GENERATORS && SYSTEM_FEATURE_ES6_PROMISES);
+	global.SYSTEM_FEATURE_ES6					= !!(SYSTEM_FEATURE_ES5 && SYSTEM_FEATURE_ES6_NUMBER && SYSTEM_FEATURE_ES6_MATH && SYSTEM_FEATURE_ES6_ARRAY && SYSTEM_FEATURE_ES6_FUNCTION && SYSTEM_FEATURE_ES6_OBJECT && SYSTEM_FEATURE_ES6_CLASS && SYSTEM_FEATURE_ES6_STRING && SYSTEM_FEATURE_ES6_COLLECTIONS && SYSTEM_FEATURE_ES6_GENERATORS && SYSTEM_FEATURE_ES6_PROMISES);
 
 	global.SYSTEM_INFO_OS						= global.isWindows ? 'Windows' : (global.isLinux ? 'Linux' : (global.isUNIX ? 'UNIX' : (global.isMacOS ? 'Mac OS' : undefined)));
 	global.SYSTEM_INFO_OS_VERSION				= (function() {
