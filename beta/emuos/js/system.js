@@ -611,7 +611,11 @@ if (typeof console !== 'undefined') {
 	global.SYSTEM_FEATURE_SIMD					= typeof SIMD !== 'undefined' ? typeof SIMD.Bool16x8 !== 'undefined' && typeof SIMD.Bool32x4 !== 'undefined' && typeof SIMD.Bool8x16 !== 'undefined' && typeof SIMD.Float32x4 !== 'undefined' && typeof SIMD.Int16x8 !== 'undefined' && typeof SIMD.Int32x4 !== 'undefined' && typeof SIMD.Int8x16 !== 'undefined' && typeof SIMD.Uint32x4 !== 'undefined' && typeof SIMD.Uint8x16 !== 'undefined' : false;
 	global.SYSTEM_FEATURE_ASMJS					= (function() {
 		try {
-			(function MyAsmModule() {"use asm"})();
+			(function MyAsmModule() {
+				'use asm';
+
+				return {};
+			})();
 			return true;
 		} catch(e) {}
 		return false;
