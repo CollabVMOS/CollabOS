@@ -50,7 +50,7 @@ customElements.define('x-frame-bypass', class extends HTMLIFrameElement {
 
 		this.fetchProxy(url, options, 0).then(res => res.text()).then(data => {
 			if (data) {
-				url = url.split('#')[0];
+				let base_url = url.split('#')[0];
 				// noinspection HtmlRequiredTitleElement,JSUnresolvedVariable
 				data = data.replace(/<head([^>]*)>/i, `<head$1>
 	<base href="${url}">
@@ -76,8 +76,8 @@ customElements.define('x-frame-bypass', class extends HTMLIFrameElement {
 		}
 	});
 	</script>`);
-			data = data.replace('href="/', 'href="' + url);
-			data = data.replace('src="/', 'src="' + url);
+			data = data.replace('href="/', 'href="' + base_url);
+			data = data.replace('src="/', 'src="' + base_url);
 			this.srcdoc = data;
 		}
 		}).catch(e => console.error('Cannot load X-Frame-Bypass:', e));
