@@ -3,4 +3,4 @@ image:
 ports:
   - port: 3000
 tasks:
-  - command: git config --global user.name "Emupedia" && git config --global user.email "admin@emupedia.net"
+  - init: git config --global user.name "Emupedia" && git config --global user.email "admin@emupedia.net"
