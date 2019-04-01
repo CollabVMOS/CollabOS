@@ -400,7 +400,8 @@
 		var icon	= typeof options.icon	!== 'undefined'	? options.icon	: '';
 		var src		= typeof options.src	!== 'undefined'	? options.src	: '';
 
-		var window	= $('<div class="iframe" data-title="'+ title +'"><iframe src="' + src + '" frameborder="0" allowFullscreen="true" allowTransparency="true"></iframe></div>');
+		// noinspection HtmlDeprecatedAttribute
+		var window	= $('<div class="iframe" data-title="'+ title +'"><iframe src="' + src + '" frameborder="0" allowFullscreen="true" allowTransparency="true" sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation"></iframe></div>');
 
 		self.$body.append(window);
 
@@ -451,6 +452,7 @@
 				cmd: 'next'
 			}],
 			select: function(e, ui) {
+				// noinspection JSRedundantSwitchStatement
 				switch (ui.cmd) {
 					case 'close':
 						$(e.target).children('.window, .iframe').first().window('close');
