@@ -1,6 +1,6 @@
 image:
-	file: Dockerfile
+  file: Dockerfile
 ports:
-	- port: 3000
+  - port: 3000
 tasks:
-	- init: git config --global user.email "admin@emupedia.net"
+  - command: git config --global user.email "admin@emupedia.net"
