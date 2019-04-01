@@ -53,7 +53,7 @@ customElements.define('x-frame-bypass', class extends HTMLIFrameElement {
 				let base_url = url.split('#')[0];
 				// noinspection HtmlRequiredTitleElement,JSUnresolvedVariable
 				data = data.replace(/<head([^>]*)>/i, `<head$1>
-	<base href="${url}">
+	<base href="${base_url}">
 	<script>
 	// X-Frame-Bypass navigation event handlers
 	document.addEventListener('click', function(e) {
@@ -76,8 +76,8 @@ customElements.define('x-frame-bypass', class extends HTMLIFrameElement {
 		}
 	});
 	</script>`);
-			data = data.replace(/href="\//ig, 'href="' + base_url);
-			data = data.replace(/src="\//ig, 'src="' + base_url);
+			data = data.replace(/href="\//ig, 'href="https://thingproxy.freeboard.io/fetch/' + base_url);
+			data = data.replace(/src="\//ig, 'src="https://thingproxy.freeboard.io/fetch/' + base_url);
 			this.srcdoc = data;
 		}
 		}).catch(e => console.error('Cannot load X-Frame-Bypass:', e));
