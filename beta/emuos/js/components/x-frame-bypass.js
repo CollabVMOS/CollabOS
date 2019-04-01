@@ -76,8 +76,8 @@ customElements.define('x-frame-bypass', class extends HTMLIFrameElement {
 		}
 	});
 	</script>`);
-			data = data.replace('href="/', 'href="' + base_url);
-			data = data.replace('src="/', 'src="' + base_url);
+			data = data.replace(/href="\//ig, 'href="' + base_url);
+			data = data.replace(/src="\//ig, 'src="' + base_url);
 			this.srcdoc = data;
 		}
 		}).catch(e => console.error('Cannot load X-Frame-Bypass:', e));
