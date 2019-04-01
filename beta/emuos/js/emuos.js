@@ -44,7 +44,7 @@
 			} , {
 				name: 'Visual Studio Code',
 				icon: 'vfat/apps/monaco-editor/favicon.ico',
-				link: 'https://gitpod.io#https://github.com/Emupedia/emupedia.github.io'
+				link: 'vfat/apps/gitpod/index.html'
 			} , {
 				name: 'Wing 2.0',
 				icon: 'vfat/games/wing/favicon.ico',
