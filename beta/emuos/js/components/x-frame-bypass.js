@@ -52,7 +52,7 @@ customElements.define('x-frame-bypass', class extends HTMLIFrameElement {
 			if (data) {
 				url = url.split('#')[0];
 				// noinspection HtmlRequiredTitleElement,JSUnresolvedVariable
-				this.srcdoc = data.replace(/<head([^>]*)>/i, `<head$1>
+				data = data.replace(/<head([^>]*)>/i, `<head$1>
 	<base href="${url}">
 	<script>
 	// X-Frame-Bypass navigation event handlers
@@ -76,8 +76,9 @@ customElements.define('x-frame-bypass', class extends HTMLIFrameElement {
 		}
 	});
 	</script>`);
-			this.srcdoc = data.replace('href="/', 'href="' + url);
-			this.srcdoc = data.replace('src="/', 'src="' + url);
+			data = data.replace('href="/', 'href="' + url);
+			data = data.replace('src="/', 'src="' + url);
+			this.srcdoc = data;
 		}
 		}).catch(e => console.error('Cannot load X-Frame-Bypass:', e));
 	}

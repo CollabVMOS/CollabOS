@@ -614,7 +614,9 @@ if (typeof console !== 'undefined') {
 			(function MyAsmModule() {
 				'use asm';
 
-				return {};
+				function dummy(){}
+
+				return {dummy: dummy};
 			})();
 			return true;
 		} catch(e) {}
