@@ -7,3 +7,10 @@ RUN apt-get update \
 && apt-get clean && rm -rf /var/cache/apt/* && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/* \
 && echo "gitpod ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/gitpod \
 && chmod 0440 /etc/sudoers.d/gitpod
+
+USER gitpod
+
+RUN git config --global user.name "Emupedia" \
+&& git config --global user.email "admin@emupedia.net"
+
+USER root
