@@ -39,7 +39,7 @@
 				link: 'https://cl3.widgetbot.io/channels/510149138491506688/510149138491506690/'
 			} , {
 				name: 'Windows 93',
-				icon: 'https://www.windows93.net/favicon.ico',
+				icon: 'vfat/apps/windows93/favicon.ico',
 				link: 'https://v1.windows93.net/'
 			} , {
 				name: 'Visual Studio Code',
