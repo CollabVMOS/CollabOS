@@ -96,80 +96,48 @@
 			}
 
 			function render_game_list(games) {
-				var html = '<table>';
-
-				html += '<thead>';
-				html += '<tr>';
-				// html += '<th>ID</th>';
-				html += '<th>Name</th>';
-				html += '<th>Year</th>';
-				html += '<th>Genre</th>';
-				html += '<th>Size</th>';
-				html += '<th>Developer</th>';
-				html += '<th>Publisher</th>';
-				html += '<th>Copyright</th>';
-				html += '<th>License</th>';
-				html += '</tr>';
-
-				html += '</thead>';
-				html += '<tbody>';
-
-
+				var html =	'<table>' +
+								'<thead>' +
+									'<tr>' +
+										//'<th>ID</th>' +
+										'<th>Name</th>' +
+										'<th>Version</th>' +
+										'<th>Year</th>' +
+										'<th>Genre</th>' +
+										'<th>Size</th>' +
+										'<th>Developer</th>' +
+										'<th>Publisher</th>' +
+										'<th>Copyright</th>' +
+										'<th>License</th>' +
+									'</tr>' +
+								'</thead>' +
+								'<tbody>';
 				for (var game in games['games']) {
+					// noinspection JSUnfilteredForInLoop
+					var list = 	//'<td>' + games['games'][game]['id'] + '</td>' +
+						'<td>' + games['games'][game]['name'] + '</td>' +
+						'<td>' + (typeof games['games'][game]['version'] !== 'undefined' ? games['games'][game]['version'] : '-') + '</td>' +
+						'<td>' + games['games'][game]['year'] + '</td>' +
+						'<td>' + games['games'][game]['genre'] + '</td>' +
+						'<td>' + format_bytes(parseInt(games['games'][game]['size'], 10)) + '</td>' +
+						'<td>' + games['games'][game]['developer'] + '</td>' +
+						'<td>' + games['games'][game]['publisher'] + '</td>' +
+						'<td>' + format_name(games['games'][game]['copyright']) + '</td>' +
+						'<td>' + games['games'][game]['license'] + '</td>';
+
 					// noinspection JSUnfilteredForInLoop
 					if (typeof games['games'][game]['enabled'] !== 'undefined') {
 						// noinspection JSUnfilteredForInLoop
 						if (games['games'][game]['enabled'] === true || games['games'][game]['enabled'] === 'true') {
-							html += '<tr>';
-							// noinspection JSUnfilteredForInLoop
-							// html += '<td>' + games['games'][game]['id'] + '</td>';
-							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + games['games'][game]['name'] + '</td>';
-							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + games['games'][game]['year'] + '</td>';
-							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + games['games'][game]['genre'] + '</td>';
-							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + format_bytes(parseInt(games['games'][game]['size'], 10)) + '</td>';
-							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + games['games'][game]['developer'] + '</td>';
-							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + games['games'][game]['publisher'] + '</td>';
-							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + format_name(games['games'][game]['copyright']) + '</td>';
-							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + games['games'][game]['license'] + '</td>';
-							html += '</tr>';
+							html += '<tr>' + list + '</tr>';
 						}
 					} else {
-						// noinspection JSUnfilteredForInLoop
-						if (typeof games['games'][game]['enabled'] === 'undefined') {
-							html += '<tr>';
-							// noinspection JSUnfilteredForInLoop
-							// html += '<td>' + games['games'][game]['id'] + '</td>';
-							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + games['games'][game]['name'] + '</td>';
-							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + games['games'][game]['year'] + '</td>';
-							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + games['games'][game]['genre'] + '</td>';
-							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + format_bytes(parseInt(games['games'][game]['size'], 10)) + '</td>';
-							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + games['games'][game]['developer'] + '</td>';
-							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + games['games'][game]['publisher'] + '</td>';
-							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + format_name(games['games'][game]['copyright']) + '</td>';
-							// noinspection JSUnfilteredForInLoop
-							html += '<td>' + games['games'][game]['license'] + '</td>';
-							html += '</tr>';
-						}
+						html += '<tr>' + list + '</tr>';
 					}
 				}
 
-				html += '</tbody>';
-				html += '</table>';
+				html += 	'</tbody>' +
+						'</table>';
 
 				return html;
 			}

@@ -4,7 +4,38 @@
 	},
 	"games": [{
 		"id": "abuse",
-		"name": "Abuse",
+		"name": "Abuse v1.05",
+		"notes": "Music not working",
+		"executable": "./ABUSE.EXE",
+		"file": "abuse.zip",
+		"size": 2855233,
+		"sync": false,
+		"hardware": {
+			"input": ["Keyboard", "Mouse"],
+			"video": {
+				"VGA": {
+					"resolutions": [
+						"320x200"
+					],
+					"colors": 256
+				}
+			},
+			"sound": ["PC Speaker", "Sound Blaster"]
+		},
+		"language": "English",
+		"year": 1995,
+		"release_date": "Sep 20, 1995",
+		"genre": "Platformer",
+		"developer": "Crack dot Com",
+		"publisher": "Electronic Arts GmbH / ORIGIN Systems, Inc.",
+		"copyright": "Crack dot Com",
+		"version": "1.05",
+		"license_initial": "Shareware",
+		"license": "Public Domain",
+		"license_notes": "Public Domain (excluding the sound effects)"
+	} , {
+		"id": "abuse",
+		"name": "Abuse v2.0",
 		"notes": "Music not working",
 		"executable": "./ABUSE.EXE",
 		"file": "abuse.zip",
@@ -24,12 +55,16 @@
 		},
 		"language": "English",
 		"year": 1996,
+		"release_date": "Feb 20, 1996",
 		"genre": "Platformer",
 		"developer": "Crack dot Com",
-		"publisher": "Electronic Arts",
+		"publisher": "Electronic Arts GmbH / ORIGIN Systems, Inc.",
 		"copyright": "Crack dot Com",
 		"version": "2.0",
-		"license": "Public Domain"
+		"retail": true,
+		"license_initial": "Commercial",
+		"license": "Public Domain",
+		"license_notes": "Public Domain (excluding the sound effects)"
 	} , {
 		"id": "aladdin",
 		"name": "Disney's Aladdin",
