@@ -4,43 +4,12 @@
 	},
 	"games": [{
 		"id": "abuse",
-		"name": "Abuse v1.05",
+		"name": "Abuse",
 		"notes": "Music not working",
 		"executable": "./ABUSE.EXE",
+		"sync": false,
 		"file": "abuse.zip",
 		"size": 2855233,
-		"sync": false,
-		"hardware": {
-			"input": ["Keyboard", "Mouse"],
-			"video": {
-				"VGA": {
-					"resolutions": [
-						"320x200"
-					],
-					"colors": 256
-				}
-			},
-			"sound": ["PC Speaker", "Sound Blaster"]
-		},
-		"language": "English",
-		"year": 1995,
-		"release_date": "Sep 20, 1995",
-		"genre": "Platformer",
-		"developer": "Crack dot Com",
-		"publisher": "Electronic Arts GmbH / ORIGIN Systems, Inc.",
-		"copyright": "Crack dot Com",
-		"version": "1.05",
-		"license_initial": "Shareware",
-		"license": "Public Domain",
-		"license_notes": "Public Domain (excluding the sound effects)"
-	} , {
-		"id": "abuse",
-		"name": "Abuse v2.0",
-		"notes": "Music not working",
-		"executable": "./ABUSE.EXE",
-		"file": "abuse.zip",
-		"size": 2855233,
-		"sync": false,
 		"hardware": {
 			"input": ["Keyboard", "Mouse"],
 			"video": {
@@ -64,14 +33,25 @@
 		"retail": true,
 		"license_initial": "Commercial",
 		"license": "Public Domain",
-		"license_notes": "Public Domain (excluding the sound effects)"
+		"license_notes": "Public Domain (excluding the sound effects)",
+		"status": "Playable",
+		"clones": [{
+			"executable": "./ABUSE.EXE",
+			"file": "abuse.zip",
+			"size": 2855233,
+			"sync": false,
+			"year": 1995,
+			"release_date": "Sep 20, 1995",
+			"version": "1.05",
+			"license_initial": "Shareware"
+		}]
 	} , {
 		"id": "aladdin",
 		"name": "Disney's Aladdin",
 		"executable": "./ALADDCRK.EXE",
+		"sync": false,
 		"file": "aladdin.zip",
 		"size": 1810424,
-		"sync": false,
 		"drm": ["Manual Lookup"],
 		"hardware": {
 			"input": ["Keyboard"],
@@ -91,14 +71,15 @@
 		"developer": "Virgin Interactive",
 		"publisher": "Virgin Interactive",
 		"copyright": "Walt Disney",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "lionking",
 		"name": "Disney's Lion King",
 		"executable": "./LIONKING.EXE",
+		"sync": false,
 		"file": "lionking.zip",
 		"size": 3234052,
-		"sync": false,
 		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
@@ -117,14 +98,15 @@
 		"developer": "Westwood Studios, East Point Software, Virgin Games",
 		"publisher": "Virgin Interactive",
 		"copyright": "Walt Disney",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "jungle",
 		"name": "Disney's The Jungle Book",
 		"executable": "./JUNGLE.EXE",
+		"sync": false,
 		"file": "jungle.zip",
 		"size": 2591699,
-		"sync": false,
 		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
@@ -143,7 +125,8 @@
 		"developer": "Eurocom Developments, East Point Software, Virgin Games",
 		"publisher": "Virgin Interactive",
 		"copyright": "Walt Disney",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "diablo1sw",
 		"name": "Diablo I",
@@ -152,7 +135,6 @@
 		"args": ["-c", "imgmount c a:\\WIN95.IMG -size 512,63,16,101", "-c", "imgmount d b:\\DIABLO.IMG -size 512,63,16,132", "-c", "boot -l c"],
 		"files": ["win95.zip", "diablo1sw.zip"],
 		"size": 51095535,
-		"enabled": true,
 		"hardware": {
 			"input": ["Keyboard", "Mouse"],
 			"video": {
@@ -171,14 +153,16 @@
 		"developer": "Blizzard North",
 		"publisher": "Blizzard Entertainment",
 		"copyright": "Activision Blizzard",
-		"license": "Shareware"
+		"license": "Shareware",
+		"status": "Loadable",
+		"enabled": true
 	} , {
 		"id": "dune2",
 		"name": "Dune II: The Building of a Dynasty",
 		"executable": "./DUNE2.EXE",
+		"sync": false,
 		"file": "dune2.zip",
 		"size": 4384799,
-		"sync": false,
 		"hardware": {
 			"input": ["Keyboard", "Mouse"],
 			"video": {
@@ -198,14 +182,15 @@
 		"publisher": "Virgin Games",
 		"copyright": "Virgin Interactive",
 		"version": "1.7eu",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "got",
 		"name": "God of Thunder",
 		"executable": "./GOT.EXE",
 		"sync": false,
 		"file": "got11.zip",
-		"size": 120404,
+		"size": 1030315,
 		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
@@ -226,14 +211,15 @@
 		"copyright": "CSE Games, Argo Games",
 		"url": "//www.adeptsoftware.com/got/",
 		"version": "1.1",
-		"license": "Freeware"
+		"license": "Freeware",
+		"status": "Playable"
 	} , {
 		"id": "jetpack",
 		"name": "Jetpack",
 		"executable": "./JETPACK.EXE",
+		"sync": false,
 		"file": "jetpack15.zip",
 		"size": 362680,
-		"sync": false,
 		"hardware": {
 			"input": ["Keyboard", "Gamepad/Joystick"],
 			"video": {
@@ -254,14 +240,15 @@
 		"copyright": "Adept Software (Adam Pedersen)",
 		"url": "//www.adeptsoftware.com/jetpack/",
 		"version": "1.5",
-		"license": "Freeware"
+		"license": "Freeware",
+		"status": "Playable"
 	} , {
 		"id": "loomega",
 		"name": "Loom",
 		"executable": "./LOOM.EXE",
+		"sync": false,
 		"file": "loomega.zip",
 		"size": 1201980,
-		"sync": false,
 		"drm": ["Manual Lookup"],
 		"hardware": {
 			"input": ["Keyboard", "Mouse"],
@@ -281,14 +268,15 @@
 		"developer": "Lucasfilm Games",
 		"publisher": "Lucasfilm Games",
 		"copyright": "The Walt Disney Company",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "mk1",
 		"name": "Mortal Kombat 1",
 		"executable": "./MK1.EXE",
+		"sync": false,
 		"file": "mk1.zip",
 		"size": 11007547,
-		"sync": false,
 		"drm": ["Manual Lookup"],
 		"hardware": {
 			"input": ["Keyboard"],
@@ -309,14 +297,15 @@
 		"publisher": "Acclaim Entertainment",
 		"copyright": "NetherRealm Studios, Warner Bros.",
 		"version": "CD",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "mk2",
 		"name": "Mortal Kombat 2",
 		"executable": "./MK2.EXE",
+		"sync": false,
 		"file": "mk2.zip",
 		"size": 9797146,
-		"sync": false,
 		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
@@ -335,14 +324,15 @@
 		"developer": "Midway Games",
 		"publisher": "Acclaim Entertainment",
 		"copyright": "NetherRealm Studios, Warner Bros.",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "mk3",
 		"name": "Mortal Kombat 3",
 		"executable": "./MK3CRK.EXE",
+		"sync": false,
 		"file": "mk3.zip",
 		"size": 19720043,
-		"sync": false,
 		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
@@ -361,14 +351,15 @@
 		"developer": "Midway Games, Atari Games, Williams Entertainment",
 		"publisher": "Midway Games",
 		"copyright": "NetherRealm Studios, Warner Bros.",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "omf2097",
 		"name": "One Must Fall: 2097",
 		"executable": "./FILE0001.EXE",
+		"sync": false,
 		"file": "omf209721.zip",
 		"size": 6417387,
-		"sync": false,
 		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
@@ -388,14 +379,15 @@
 		"publisher": "Epic MegaGames",
 		"copyright": "Diversions Entertainment",
 		"version": "2.1",
-		"license": "Freeware"
+		"license": "Freeware",
+		"status": "Playable"
 	} , {
 		"id": "pakupaku",
 		"name": "Paku Paku",
 		"executable": "./PAKU.EXE",
+		"sync": false,
 		"file": "pakupaku16.zip",
 		"size": 71507,
-		"sync": false,
 		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
@@ -416,14 +408,15 @@
 		"copyright": "Jason M. Knight",
 		"version": "1.6",
 		"url": "//deathshadow.com/pakuPaku",
-		"license": "Public Domain"
+		"license": "Public Domain",
+		"status": "Playable"
 	} , {
 		"id": "pre1",
 		"name": "Prehistorik 1",
 		"executable": "./HISTORIK.EXE",
+		"sync": false,
 		"file": "pre1.zip",
 		"size": 626070,
-		"sync": false,
 		"hardware": {
 			"input": ["Keyboard", "Gamepad/Joystick"],
 			"video": {
@@ -441,14 +434,15 @@
 		"genre": "Platformer",
 		"developer": "Titus France SA",
 		"publisher": "Titus France SA",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "pre2",
 		"name": "Prehistorik 2",
 		"executable": "./PRE2.EXE",
+		"sync": false,
 		"file": "pre2.zip",
 		"size": 1080103,
-		"sync": false,
 		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
@@ -466,14 +460,15 @@
 		"genre": "Platformer",
 		"developer": "Titus France SA",
 		"publisher": "Titus France SA",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "pop1",
 		"name": "Prince of Persia 1",
 		"executable": "./PRINCE.EXE",
+		"sync": false,
 		"file": "pop114.zip",
 		"size": 1988713,
-		"sync": false,
 		"drm": ["Manual Lookup"],
 		"hardware": {
 			"input": ["Keyboard"],
@@ -494,15 +489,16 @@
 		"publisher": "Brøderbund Software",
 		"copyright": "Ubisoft",
 		"version": "1.4",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "pop2",
 		"name": "Prince of Persia 2",
 		"description": "The Shadow and the Flame",
 		"executable": "./PRINCE.EXE",
+		"sync": false,
 		"file": "pop211.zip",
 		"size": 5129227,
-		"sync": false,
 		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
@@ -522,15 +518,16 @@
 		"publisher": "Brøderbund Software",
 		"copyright": "Ubisoft",
 		"version": "1.1",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "robbo",
 		"name": "Robbo",
 		"description": "The Adventures of Robbo, License Creative Commons BY-SA 2.5",
 		"executable": "./ROBBO.EXE",
+		"sync": false,
 		"file": "robbo.zip",
 		"size": 2004224,
-		"sync": false,
 		"hardware": {
 			"input": ["Keyboard"],
 			"video": {
@@ -549,14 +546,15 @@
 		"developer": "X LanD Computer Games",
 		"publisher": "Laboratorium Komputerowe Avalon, Epic MegaGames",
 		"copyright": "X LanD Computer Games",
-		"license": "Freeware"
+		"license": "Freeware",
+		"status": "Playable"
 	} , {
 		"id": "quake1",
 		"name": "Quake 1",
 		"executable": "./QUAKE.EXE -nocdaudio -stdvid",
+		"sync": false,
 		"file": "quake106.zip",
 		"size": 52260092,
-		"sync": false,
 		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
 			"video": {
@@ -597,7 +595,8 @@
 		"publisher": "GT Interactive",
 		"copyright": "Bethesda Softworks",
 		"version": "1.06",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "quake1mp1",
 		"name": "Quake 1: Scourge of Armagon",
@@ -646,7 +645,8 @@
 		"publisher": "id Software",
 		"copyright": "Bethesda Softworks",
 		"version": "1.06",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "quake1mp2",
 		"name": "Quake 1: Dissolution of Eternity",
@@ -695,7 +695,8 @@
 		"publisher": "id Software",
 		"copyright": "Bethesda Softworks",
 		"version": "1.06",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "squarez",
 		"name": "Squarez Deluxe",
@@ -723,7 +724,8 @@
 		"copyright": "Adept Software (Adam Pedersen)",
 		"url": "//www.adeptsoftware.com/squarez/",
 		"version": "1.5",
-		"license": "Freeware"
+		"license": "Freeware",
+		"status": "Playable"
 	} , {
 		"id": "tyrian2k",
 		"name": "Tyrian 2000",
@@ -750,11 +752,13 @@
 		"publisher": "XSIV Games",
 		"copyright": "Eclipse Software",
 		"version": "3.0",
-		"license": "Freeware"
+		"license": "Freeware",
+		"status": "Playable"
 	} , {
 		"id": "war2",
 		"name": "Warcraft II: Tides of Darkness",
 		"executable": "./WAR2.EXE",
+		"sync": false,
 		"args": ["-c", "mount d emulator/c -t cdrom"],
 		"file": "war2.zip",
 		"size": 82019801,
@@ -777,11 +781,14 @@
 		"publisher": "Davidson & Associates",
 		"copyright": "Activision Blizzard",
 		"version": "1.0",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "war2x",
 		"name": "Warcraft II: Beyond the Dark Portal",
+		"notes": "uncaught exception: SimulateInfiniteLoop",
 		"executable": "./WAR2.EXE",
+		"sync": false,
 		"args": ["-c", "mount d emulator/c -t cdrom"],
 		"file": "war2x.zip",
 		"size": 122526490,
@@ -804,14 +811,15 @@
 		"publisher": "Blizzard Entertainment",
 		"copyright": "Activision Blizzard",
 		"version": "1.3",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Nothing"
 	} , {
 		"id": "wolf3d",
 		"name": "Wolfenstein 3D",
 		"executable": "./WOLF3D.EXE",
+		"sync": false,
 		"file": "wolf3d.zip",
 		"size": 1075482,
-		"sync": false,
 		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
 			"video": {
@@ -832,14 +840,15 @@
 		"copyright": "Bethesda Softworks",
 		"url": "https://bethesda.net/en/games/WO1CSTPCBG01",
 		"version": "1.1",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "wolf3ds",
 		"name": "Wolfenstein 3D: Spear of Destiny",
 		"executable": "./SPEAR.EXE",
+		"sync": false,
 		"file": "wolf3ds.zip",
 		"size": 1542721,
-		"sync": false,
 		"drm": ["Manual Lookup"],
 		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
@@ -860,17 +869,18 @@
 		"publisher": "FormGen Corporation",
 		"copyright": "Bethesda Softworks",
 		"version": "1.0",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Playable"
 	} , {
 		"id": "xcom1",
 		"name": "X-COM: UFO Defense",
-		"notes": "Bad crack, gives you Sectoid Soldier",
+		"notes": "May hang on mission start",
 		"description": "UFO: Enemy Unknown",
 		"executable": "./UFO.BAT",
-		"file": "xcom112.zip",
-		"size": 3274320,
 		"sync": true,
 		"mode": "asm",
+		"file": "xcom112.zip",
+		"size": 3274320,
 		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
 			"video": {
@@ -890,17 +900,17 @@
 		"publisher": "MicroProse, Hasbro Interactive",
 		"copyright": "Take-Two Interactive",
 		"version": "1.2",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Ingame"
 	} , {
 		"id": "xcom2",
 		"name": "X-COM: Terror from the Deep",
-		"notes": "Hangs on mission start",
-		"description": "UFO: Enemy Unknown",
+		"notes": "May hang on mission start",
 		"executable": "./TERROR.COM",
-		"file": "xcom2.zip",
-		"size": 4586858,
 		"sync": true,
 		"mode": "asm",
+		"file": "xcom2.zip",
+		"size": 4586858,
 		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
 			"video": {
@@ -919,7 +929,8 @@
 		"developer": "MicroProse",
 		"publisher": "MicroProse",
 		"copyright": "Take-Two Interactive",
-		"license": "Commercial"
+		"license": "Commercial",
+		"status": "Ingame"
 	} , {
 		"id": "win95",
 		"name": "Windows 95",
@@ -946,6 +957,8 @@
 		"publisher": "Microsoft",
 		"copyright": "Microsoft",
 		"version": "4.00.950",
-		"license": "Commercial"
+		"retail": true,
+		"license": "Commercial",
+		"status": "Working"
 	}]
 }

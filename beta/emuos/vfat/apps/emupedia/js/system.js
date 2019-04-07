@@ -646,6 +646,7 @@ if (typeof console !== 'undefined') {
 	// noinspection JSUnresolvedVariable
 	global.SYSTEM_FEATURE_PERFORMANCE			= !!global.performance ? true : !!global.webkitPerformance || !!global.mozPerformance || !!global.msPerformance || !!global.oPerformance;
 	global.SYSTEM_FEATURE_TIMERS				= SYSTEM_FEATURE_ANIMATION_FRAME && SYSTEM_FEATURE_PERFORMANCE;
+	global.SYSTEM_FEATURE_SVG					= !!(document.createElementNS && document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect);
 	global.SYSTEM_FEATURE_CANVAS				= !!(context2D && context2D instanceof CanvasRenderingContext2D);
 	global.SYSTEM_FEATURE_WEBGL					= !!(contextWEBGL && contextWEBGL instanceof WebGLRenderingContext);
 	// noinspection JSUnresolvedVariable
@@ -1303,6 +1304,9 @@ if (typeof console !== 'undefined') {
 		} , {
 			Feature: 'SYSTEM_FEATURE_TIMERS',
 			Value: SYSTEM_FEATURE_TIMERS ? 'TRUE' : 'FALSE'
+		} , {
+			Feature: 'SYSTEM_FEATURE_SVG',
+			Value: SYSTEM_FEATURE_SVG ? 'TRUE' : 'FALSE'
 		} , {
 			Feature: 'SYSTEM_FEATURE_CANVAS',
 			Value: SYSTEM_FEATURE_CANVAS ? 'TRUE' : 'FALSE'
