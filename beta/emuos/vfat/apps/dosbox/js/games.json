@@ -4,6 +4,7 @@
 	},
 	"games": [{
 		"id": "abuse",
+		"group": "Abuse",
 		"name": "Abuse",
 		"notes": "Music not working",
 		"executable": "./ABUSE.EXE",
@@ -36,6 +37,7 @@
 		"license_notes": "Public Domain (excluding the sound effects)",
 		"status": "Playable",
 		"clones": [{
+			"id": "abusesw",
 			"executable": "./ABUSE.EXE",
 			"file": "abuse.zip",
 			"size": 2855233,
@@ -47,6 +49,7 @@
 		}]
 	} , {
 		"id": "aladdin",
+		"group": "Disney",
 		"name": "Disney's Aladdin",
 		"executable": "./ALADDCRK.EXE",
 		"sync": false,
@@ -72,16 +75,73 @@
 		"publisher": "Virgin Interactive",
 		"copyright": "Walt Disney",
 		"license": "Commercial",
-		"status": "Playable"
+		"status": "Playable",
+		"clones": [{
+			"id": "lionking",
+			"name": "Disney's Lion King",
+			"executable": "./LIONKING.EXE",
+			"sync": false,
+			"file": "lionking.zip",
+			"size": 3234052,
+			"hardware": {
+				"input": ["Keyboard"],
+				"video": {
+					"VGA": {
+						"resolutions": [
+							"320x200"
+						],
+						"colors": 256
+					}
+				},
+				"sound": ["PC Speaker", "Sound Blaster"]
+			},
+			"language": "English",
+			"year": 1994,
+			"genre": "Platformer",
+			"developer": "Westwood Studios, East Point Software, Virgin Games",
+			"publisher": "Virgin Interactive",
+			"copyright": "Walt Disney",
+			"license": "Commercial",
+			"status": "Playable"
+		} , {
+			"id": "jungle",
+			"name": "Disney's The Jungle Book",
+			"executable": "./JUNGLE.EXE",
+			"sync": false,
+			"file": "jungle.zip",
+			"size": 2591699,
+			"hardware": {
+				"input": ["Keyboard"],
+				"video": {
+					"VGA": {
+						"resolutions": [
+							"320x200"
+						],
+						"colors": 256
+					}
+				},
+				"sound": ["PC Speaker", "Sound Blaster"]
+			},
+			"language": "English",
+			"year": 1994,
+			"genre": "Platformer",
+			"developer": "Eurocom Developments, East Point Software, Virgin Games",
+			"publisher": "Virgin Interactive",
+			"copyright": "Walt Disney",
+			"license": "Commercial",
+			"status": "Playable"
+		}]
 	} , {
-		"id": "lionking",
-		"name": "Disney's Lion King",
-		"executable": "./LIONKING.EXE",
+		"id": "keen1sw",
+		"group": "Commander Keen",
+		"name": "Episode 1: Marooned on Mars",
+		"description": "Commander Keen: Invasion of the Vorticons",
+		"executable": "./KEEN1.EXE",
 		"sync": false,
-		"file": "lionking.zip",
-		"size": 3234052,
+		"file": "keen1sw.zip",
+		"size": 154033,
 		"hardware": {
-			"input": ["Keyboard"],
+			"input": ["Keyboard", "Joystick"],
 			"video": {
 				"VGA": {
 					"resolutions": [
@@ -90,43 +150,84 @@
 					"colors": 256
 				}
 			},
-			"sound": ["PC Speaker", "Sound Blaster"]
+			"sound": ["PC Speaker", "Adlib", "Sound Blaster"]
 		},
 		"language": "English",
-		"year": 1994,
+		"year": 1990,
 		"genre": "Platformer",
-		"developer": "Westwood Studios, East Point Software, Virgin Games",
-		"publisher": "Virgin Interactive",
-		"copyright": "Walt Disney",
-		"license": "Commercial",
-		"status": "Playable"
-	} , {
-		"id": "jungle",
-		"name": "Disney's The Jungle Book",
-		"executable": "./JUNGLE.EXE",
-		"sync": false,
-		"file": "jungle.zip",
-		"size": 2591699,
-		"hardware": {
-			"input": ["Keyboard"],
-			"video": {
-				"VGA": {
-					"resolutions": [
-						"320x200"
-					],
-					"colors": 256
-				}
-			},
-			"sound": ["PC Speaker", "Sound Blaster"]
-		},
-		"language": "English",
-		"year": 1994,
-		"genre": "Platformer",
-		"developer": "Eurocom Developments, East Point Software, Virgin Games",
-		"publisher": "Virgin Interactive",
-		"copyright": "Walt Disney",
-		"license": "Commercial",
-		"status": "Playable"
+		"developer": "id Software",
+		"publisher": "Apogee Software",
+		"copyright": "id Software",
+		"version": "1.31",
+		"license": "Shareware",
+		"status": "Playable",
+		"clones": [{
+			"id": "keen2",
+			"name": "Episode 2: The Earth Explodes",
+			"description": "Commander Keen: Invasion of the Vorticons",
+			"executable": "./KEEN2.EXE",
+			"file": "keen2.zip",
+			"size": 122004,
+			"retail": true,
+			"sync": false,
+			"license": "Commercial",
+			"status": "Playable"
+		} , {
+			"id": "keen3",
+			"name": "Episode 3: Keen Must Die!",
+			"description": "Commander Keen: Invasion of the Vorticons",
+			"executable": "./KEEN3.EXE",
+			"file": "keen3.zip",
+			"size": 134276,
+			"retail": true,
+			"sync": false,
+			"license": "Commercial",
+			"status": "Playable"
+		} , {
+			"id": "keen35",
+			"name": "Episode 3.5: Keen Dreams (The Lost Episode)",
+			"executable": "./KDREAMS.EXE",
+			"file": "keen35.zip",
+			"size": 134276,
+			"sync": false,
+			"license": "Shareware",
+			"status": "Playable"
+		} , {
+			"id": "keen4sw",
+			"name": "Episode 4: Secret of the Oracle",
+			"description": "Commander Keen: Goodbye Galaxy",
+			"executable": "./KEEN4E.EXE",
+			"sync": false,
+			"year": 1991,
+			"file": "keen4sw.zip",
+			"size": 588258,
+			"license": "Commercial",
+			"status": "Playable"
+		} , {
+			"id": "keen5",
+			"name": "Episode 5: The Armaggeddon Machine",
+			"description": "Commander Keen: Goodbye Galaxy",
+			"executable": "./KEEN5E.EXE",
+			"file": "keen5.zip",
+			"size": 628755,
+			"retail": true,
+			"sync": false,
+			"year": 1991,
+			"license": "Commercial",
+			"status": "Playable"
+		} , {
+			"id": "keen6",
+			"name": "Episode 6: Aliens Ate My Baby Sitter",
+			"description": "Commander Keen: Goodbye Galaxy",
+			"executable": "./KEEN6C.EXE",
+			"file": "keen6.zip",
+			"size": 522320,
+			"retail": true,
+			"sync": false,
+			"year": 1991,
+			"license": "Commercial",
+			"status": "Playable"
+		}]
 	} , {
 		"id": "diablo1sw",
 		"name": "Diablo I",
@@ -161,6 +262,7 @@
 		"name": "Dune II: The Building of a Dynasty",
 		"executable": "./DUNE2.EXE",
 		"sync": false,
+		"retail": true,
 		"file": "dune2.zip",
 		"size": 4384799,
 		"hardware": {
@@ -189,6 +291,7 @@
 		"name": "God of Thunder",
 		"executable": "./GOT.EXE",
 		"sync": false,
+		"retail": true,
 		"file": "got11.zip",
 		"size": 1030315,
 		"hardware": {
@@ -218,6 +321,7 @@
 		"name": "Jetpack",
 		"executable": "./JETPACK.EXE",
 		"sync": false,
+		"retail": true,
 		"file": "jetpack15.zip",
 		"size": 362680,
 		"hardware": {
@@ -247,6 +351,7 @@
 		"name": "Loom",
 		"executable": "./LOOM.EXE",
 		"sync": false,
+		"retail": true,
 		"file": "loomega.zip",
 		"size": 1201980,
 		"drm": ["Manual Lookup"],
@@ -272,9 +377,11 @@
 		"status": "Playable"
 	} , {
 		"id": "mk1",
+		"group": "Mortal Kombat",
 		"name": "Mortal Kombat 1",
 		"executable": "./MK1.EXE",
 		"sync": false,
+		"retail": true,
 		"file": "mk1.zip",
 		"size": 11007547,
 		"drm": ["Manual Lookup"],
@@ -298,66 +405,36 @@
 		"copyright": "NetherRealm Studios, Warner Bros.",
 		"version": "CD",
 		"license": "Commercial",
-		"status": "Playable"
-	} , {
-		"id": "mk2",
-		"name": "Mortal Kombat 2",
-		"executable": "./MK2.EXE",
-		"sync": false,
-		"file": "mk2.zip",
-		"size": 9797146,
-		"hardware": {
-			"input": ["Keyboard"],
-			"video": {
-				"VGA": {
-					"resolutions": [
-						"320x200"
-					],
-					"colors": 256
-				}
-			},
-			"sound": ["PC Speaker", "Sound Blaster"]
-		},
-		"language": "English",
-		"year": 1993,
-		"genre": "Fighting",
-		"developer": "Midway Games",
-		"publisher": "Acclaim Entertainment",
-		"copyright": "NetherRealm Studios, Warner Bros.",
-		"license": "Commercial",
-		"status": "Playable"
-	} , {
-		"id": "mk3",
-		"name": "Mortal Kombat 3",
-		"executable": "./MK3CRK.EXE",
-		"sync": false,
-		"file": "mk3.zip",
-		"size": 19720043,
-		"hardware": {
-			"input": ["Keyboard"],
-			"video": {
-				"VGA": {
-					"resolutions": [
-						"320x200"
-					],
-					"colors": 256
-				}
-			},
-			"sound": ["PC Speaker", "Sound Blaster"]
-		},
-		"language": "English",
-		"year": 1995,
-		"genre": "Fighting",
-		"developer": "Midway Games, Atari Games, Williams Entertainment",
-		"publisher": "Midway Games",
-		"copyright": "NetherRealm Studios, Warner Bros.",
-		"license": "Commercial",
-		"status": "Playable"
+		"status": "Playable",
+		"clones": [{
+			"id": "mk2",
+			"name": "Mortal Kombat 2",
+			"executable": "./MK2.EXE",
+			"sync": false,
+			"retail": true,
+			"file": "mk2.zip",
+			"size": 9797146,
+			"year": 1993,
+			"license": "Commercial",
+			"status": "Playable"
+		} , {
+			"id": "mk3",
+			"name": "Mortal Kombat 3",
+			"executable": "./MK3CRK.EXE",
+			"sync": false,
+			"retail": true,
+			"file": "mk3.zip",
+			"size": 19720043,
+			"year": 1995,
+			"license": "Commercial",
+			"status": "Playable"
+		}]
 	} , {
 		"id": "omf2097",
 		"name": "One Must Fall: 2097",
 		"executable": "./FILE0001.EXE",
 		"sync": false,
+		"retail": true,
 		"file": "omf209721.zip",
 		"size": 6417387,
 		"hardware": {
@@ -412,9 +489,11 @@
 		"status": "Playable"
 	} , {
 		"id": "pre1",
+		"group": "Prehistorik",
 		"name": "Prehistorik 1",
 		"executable": "./HISTORIK.EXE",
 		"sync": false,
+		"retail": true,
 		"file": "pre1.zip",
 		"size": 626070,
 		"hardware": {
@@ -435,38 +514,26 @@
 		"developer": "Titus France SA",
 		"publisher": "Titus France SA",
 		"license": "Commercial",
-		"status": "Playable"
-	} , {
-		"id": "pre2",
-		"name": "Prehistorik 2",
-		"executable": "./PRE2.EXE",
-		"sync": false,
-		"file": "pre2.zip",
-		"size": 1080103,
-		"hardware": {
-			"input": ["Keyboard"],
-			"video": {
-				"VGA": {
-					"resolutions": [
-						"320x200"
-					],
-					"colors": 256
-				}
-			},
-			"sound": ["PC Speaker", "Sound Blaster"]
-		},
-		"language": "English",
-		"year": 1993,
-		"genre": "Platformer",
-		"developer": "Titus France SA",
-		"publisher": "Titus France SA",
-		"license": "Commercial",
-		"status": "Playable"
+		"status": "Playable",
+		"clones": [{
+			"id": "pre2",
+			"name": "Prehistorik 2",
+			"executable": "./PRE2.EXE",
+			"sync": false,
+			"retail": true,
+			"file": "pre2.zip",
+			"size": 1080103,
+			"year": 1993,
+			"license": "Commercial",
+			"status": "Playable"
+		}]
 	} , {
 		"id": "pop1",
+		"group": "Prince of Persia",
 		"name": "Prince of Persia 1",
 		"executable": "./PRINCE.EXE",
 		"sync": false,
+		"retail": true,
 		"file": "pop114.zip",
 		"size": 1988713,
 		"drm": ["Manual Lookup"],
@@ -490,40 +557,25 @@
 		"copyright": "Ubisoft",
 		"version": "1.4",
 		"license": "Commercial",
-		"status": "Playable"
-	} , {
-		"id": "pop2",
-		"name": "Prince of Persia 2",
-		"description": "The Shadow and the Flame",
-		"executable": "./PRINCE.EXE",
-		"sync": false,
-		"file": "pop211.zip",
-		"size": 5129227,
-		"hardware": {
-			"input": ["Keyboard"],
-			"video": {
-				"VGA": {
-					"resolutions": [
-						"320x200"
-					],
-					"colors": 256
-				}
-			},
-			"sound": ["PC Speaker", "Sound Source", "Tandy", "Sound Blaster", "Sound Blaster Pro", "Roland MT-32"]
-		},
-		"language": "English",
-		"year": 1993,
-		"genre": "Platformer",
-		"developer": "Jordan Mechner",
-		"publisher": "Brøderbund Software",
-		"copyright": "Ubisoft",
-		"version": "1.1",
-		"license": "Commercial",
-		"status": "Playable"
+		"status": "Playable",
+		"clones": [{
+			"id": "pop2",
+			"name": "Prince of Persia 2",
+			"description": "Prince of Persia 2: The Shadow and the Flame",
+			"executable": "./PRINCE.EXE",
+			"sync": false,
+			"retail": true,
+			"file": "pop211.zip",
+			"size": 5129227,
+			"year": 1993,
+			"version": "1.1",
+			"license": "Commercial",
+			"status": "Playable"
+		}]
 	} , {
 		"id": "robbo",
 		"name": "Robbo",
-		"description": "The Adventures of Robbo, License Creative Commons BY-SA 2.5",
+		"description": "The Adventures of Robbo",
 		"executable": "./ROBBO.EXE",
 		"sync": false,
 		"file": "robbo.zip",
@@ -546,14 +598,18 @@
 		"developer": "X LanD Computer Games",
 		"publisher": "Laboratorium Komputerowe Avalon, Epic MegaGames",
 		"copyright": "X LanD Computer Games",
-		"license": "Freeware",
+		"license": "Freeware, Creative Commons BY-SA 2.5",
 		"status": "Playable"
 	} , {
 		"id": "quake1",
+		"group": "Quake 1",
 		"name": "Quake 1",
+		"notes": "RuntimeError: integer overflow",
+		"description": "Quake 1",
 		"executable": "./QUAKE.EXE -nocdaudio -stdvid",
 		"sync": false,
-		"file": "quake106.zip",
+		"retail": true,
+		"file": "quake108.zip",
 		"size": 52260092,
 		"hardware": {
 			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
@@ -596,107 +652,34 @@
 		"copyright": "Bethesda Softworks",
 		"version": "1.06",
 		"license": "Commercial",
-		"status": "Playable"
-	} , {
-		"id": "quake1mp1",
-		"name": "Quake 1: Scourge of Armagon",
-		"description": "Mission Pack No. 1",
-		"executable": "./QUAKE.EXE -nocdaudio -stdvid -game hipnotic",
-		"sync": false,
-		"file": "quake106.zip",
-		"size": 52260092,
-		"hardware": {
-			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
-			"video": {
-				"VGA": {
-					"resolutions": [
-						"320x200",
-						"320x240",
-						"320x350",
-						"320x400",
-						"320x480",
-						"360x200",
-						"360x240",
-						"360x350",
-						"360x400",
-						"360x480"
-					],
-					"colors": 256
-				},
-				"SVGA": {
-					"resolutions": [
-						"640x400",
-						"640x480",
-						"848x480",
-						"800x600",
-						"1024x768",
-						"1152x864",
-						"1280x1024"
-					],
-					"colors": 256
-				}
-			},
-			"sound": ["Sound Blaster", "UltraSound"]
-		},
-		"language": "English",
-		"year": 1997,
-		"genre": "FPS",
-		"developer": "Hipnotic Interactive",
-		"publisher": "id Software",
-		"copyright": "Bethesda Softworks",
-		"version": "1.06",
-		"license": "Commercial",
-		"status": "Playable"
-	} , {
-		"id": "quake1mp2",
-		"name": "Quake 1: Dissolution of Eternity",
-		"description": "Mission Pack No. 2",
-		"executable": "./QUAKE.EXE -nocdaudio -stdvid -game rogue",
-		"sync": false,
-		"file": "quake106.zip",
-		"size": 52260092,
-		"hardware": {
-			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
-			"video": {
-				"VGA": {
-					"resolutions": [
-						"320x200",
-						"320x240",
-						"320x350",
-						"320x400",
-						"320x480",
-						"360x200",
-						"360x240",
-						"360x350",
-						"360x400",
-						"360x480"
-					],
-					"colors": 256
-				},
-				"SVGA": {
-					"resolutions": [
-						"640x400",
-						"640x480",
-						"848x480",
-						"800x600",
-						"1024x768",
-						"1152x864",
-						"1280x1024"
-					],
-					"colors": 256
-				}
-			},
-			"sound": ["Sound Blaster", "UltraSound"]
-		},
-		"language": "English",
-		"year": 1997,
-		"genre": "FPS",
-		"developer": "Rogue Entertainment",
-		"publisher": "id Software",
-		"copyright": "Bethesda Softworks",
-		"version": "1.06",
-		"license": "Commercial",
-		"status": "Playable"
+		"status": "Ingame",
+		"clones": [{
+			"id": "quake1mp1",
+			"name": "Mission Pack 1: Scourge of Armagon",
+			"notes": "RuntimeError: integer overflow",
+			"executable": "./QUAKE.EXE -nocdaudio -stdvid -game hipnotic",
+			"sync": false,
+			"retail": true,
+			"year": 1997,
+			"developer": "Hipnotic Interactive",
+			"publisher": "id Software",
+			"copyright": "Bethesda Softworks",
+			"license": "Commercial",
+			"status": "Ingame"
+		} , {
+			"id": "quake1mp2",
+			"name": "Mission Pack 2: Dissolution of Eternity",
+			"notes": "RuntimeError: integer overflow",
+			"executable": "./QUAKE.EXE -nocdaudio -stdvid -game rogue",
+			"sync": false,
+			"retail": true,
+			"year": 1997,
+			"developer": "Rogue Entertainment",
+			"publisher": "id Software",
+			"copyright": "Bethesda Softworks",
+			"license": "Commercial",
+			"status": "Ingame"
+		}]
 	} , {
 		"id": "squarez",
 		"name": "Squarez Deluxe",
@@ -730,6 +713,7 @@
 		"id": "tyrian2k",
 		"name": "Tyrian 2000",
 		"executable": "./TYRIAN.EXE",
+		"retail": true,
 		"sync": false,
 		"file": "tyrian2k30.zip",
 		"size": 5180854,
@@ -756,8 +740,10 @@
 		"status": "Playable"
 	} , {
 		"id": "war2",
+		"group": "Warcraft II",
 		"name": "Warcraft II: Tides of Darkness",
 		"executable": "./WAR2.EXE",
+		"retail": true,
 		"sync": false,
 		"args": ["-c", "mount d emulator/c -t cdrom"],
 		"file": "war2.zip",
@@ -782,41 +768,31 @@
 		"copyright": "Activision Blizzard",
 		"version": "1.0",
 		"license": "Commercial",
-		"status": "Playable"
-	} , {
-		"id": "war2x",
-		"name": "Warcraft II: Beyond the Dark Portal",
-		"notes": "uncaught exception: SimulateInfiniteLoop",
-		"executable": "./WAR2.EXE",
-		"sync": false,
-		"args": ["-c", "mount d emulator/c -t cdrom"],
-		"file": "war2x.zip",
-		"size": 122526490,
-		"hardware": {
-			"input": ["Keyboard", "Mouse"],
-			"video": {
-				"VGA": {
-					"resolutions": [
-						"640x400"
-					],
-					"colors": 256
-				}
-			},
-			"sound": ["PC Speaker", "Adlib", "Sound Blaster"]
-		},
-		"language": "English",
-		"year": 1996,
-		"genre": "Strategy",
-		"developer": "Cyberlore Studios",
-		"publisher": "Blizzard Entertainment",
-		"copyright": "Activision Blizzard",
-		"version": "1.3",
-		"license": "Commercial",
-		"status": "Nothing"
+		"status": "Playable",
+		"clones": [{
+			"id": "war2x",
+			"name": "Warcraft II: Beyond the Dark Portal",
+			"notes": "uncaught exception: SimulateInfiniteLoop",
+			"executable": "./WAR2.EXE",
+			"retail": true,
+			"sync": false,
+			"args": ["-c", "mount d emulator/c -t cdrom"],
+			"file": "war2x.zip",
+			"size": 122526490,
+			"year": 1996,
+			"developer": "Cyberlore Studios",
+			"publisher": "Blizzard Entertainment",
+			"copyright": "Activision Blizzard",
+			"version": "1.3",
+			"license": "Commercial",
+			"status": "Nothing"
+		}]
 	} , {
 		"id": "wolf3d",
+		"group": "Wolfenstein 3D",
 		"name": "Wolfenstein 3D",
 		"executable": "./WOLF3D.EXE",
+		"retail": true,
 		"sync": false,
 		"file": "wolf3d.zip",
 		"size": 1075482,
@@ -841,44 +817,33 @@
 		"url": "https://bethesda.net/en/games/WO1CSTPCBG01",
 		"version": "1.1",
 		"license": "Commercial",
-		"status": "Playable"
-	} , {
-		"id": "wolf3ds",
-		"name": "Wolfenstein 3D: Spear of Destiny",
-		"executable": "./SPEAR.EXE",
-		"sync": false,
-		"file": "wolf3ds.zip",
-		"size": 1542721,
-		"drm": ["Manual Lookup"],
-		"hardware": {
-			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
-			"video": {
-				"VGA": {
-					"resolutions": [
-						"320x200"
-					],
-					"colors": 256
-				}
-			},
-			"sound": ["PC Speaker", "Sound Source", "Adlib", "Sound Blaster"]
-		},
-		"language": "English",
-		"year": 1992,
-		"genre": "FPS",
-		"developer": "id Software",
-		"publisher": "FormGen Corporation",
-		"copyright": "Bethesda Softworks",
-		"version": "1.0",
-		"license": "Commercial",
-		"status": "Playable"
+		"status": "Playable",
+		"clones": [{
+			"id": "wolf3ds",
+			"name": "Wolfenstein 3D: Spear of Destiny",
+			"executable": "./SPEAR.EXE",
+			"retail": true,
+			"sync": false,
+			"file": "wolf3ds.zip",
+			"size": 1542721,
+			"developer": "id Software",
+			"publisher": "FormGen Corporation",
+			"copyright": "Bethesda Softworks",
+			"drm": ["Manual Lookup"],
+			"version": "1.0",
+			"license": "Commercial",
+			"status": "Playable"
+		}]
 	} , {
 		"id": "xcom1",
+		"group": "X-COM",
 		"name": "X-COM: UFO Defense",
-		"notes": "May hang on mission start",
 		"description": "UFO: Enemy Unknown",
+		"notes": "May hang on mission start",
 		"executable": "./UFO.BAT",
 		"sync": true,
 		"mode": "asm",
+		"retail": true,
 		"file": "xcom112.zip",
 		"size": 3274320,
 		"hardware": {
@@ -901,38 +866,27 @@
 		"copyright": "Take-Two Interactive",
 		"version": "1.2",
 		"license": "Commercial",
-		"status": "Ingame"
-	} , {
-		"id": "xcom2",
-		"name": "X-COM: Terror from the Deep",
-		"notes": "May hang on mission start",
-		"executable": "./TERROR.COM",
-		"sync": true,
-		"mode": "asm",
-		"file": "xcom2.zip",
-		"size": 4586858,
-		"hardware": {
-			"input": ["Keyboard", "Mouse", "Gamepad/Joystick"],
-			"video": {
-				"VGA": {
-					"resolutions": [
-						"320x200"
-					],
-					"colors": 256
-				}
-			},
-			"sound": ["PC Speaker", "Sound Source", "Adlib", "Sound Blaster"]
-		},
-		"language": "English",
-		"year": 1995 ,
-		"genre": "Strategy",
-		"developer": "MicroProse",
-		"publisher": "MicroProse",
-		"copyright": "Take-Two Interactive",
-		"license": "Commercial",
-		"status": "Ingame"
+		"status": "Ingame",
+		"clones": [{
+			"id": "xcom2",
+			"name": "X-COM: Terror from the Deep",
+			"notes": "May hang on mission start",
+			"executable": "./TERROR.COM",
+			"sync": true,
+			"retail": true,
+			"mode": "asm",
+			"file": "xcom2.zip",
+			"size": 4586858,
+			"year": 1995 ,
+			"developer": "MicroProse",
+			"publisher": "MicroProse",
+			"copyright": "Take-Two Interactive",
+			"license": "Commercial",
+			"status": "Ingame"
+		}]
 	} , {
 		"id": "win95",
+		"group": "Operating System",
 		"name": "Windows 95",
 		"executable": "boot WIN95.IMG",
 		"args": ["-c", "imgmount a c:\\WIN95.IMG -size 512,63,16,101"],
@@ -959,6 +913,7 @@
 		"version": "4.00.950",
 		"retail": true,
 		"license": "Commercial",
-		"status": "Working"
+		"status": "Working",
+		"clones": []
 	}]
 }
