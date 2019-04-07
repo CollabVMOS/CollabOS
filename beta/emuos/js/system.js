@@ -750,18 +750,19 @@ if (typeof console !== 'undefined') {
 	global.SYSTEM_FEATURE_ES3					= SYSTEM_FEATURE_ES3_BASE64;
 
 	global.SYSTEM_FEATURE_ES5_STRICT_MODE		= (function() {'use strict'; return !this; })();
-	global.SYSYEM_FEATURE_ES5_XHR				= (function() {
-		if (!window.XMLHttpRequest) {
-			return false;
-		}
+	global.SYSTEM_FEATURE_ES5_XHR				= (function() {
+		if (typeof global.XMLHttpRequest === 'function') {
+			var req = new global.XMLHttpRequest();
 
-		var req = new window.XMLHttpRequest();
-		req.open('GET', window.location.href, false);
+			if (typeof req.open === 'function') {
+				req.open('GET', global.location.href, false);
 
-		try {
-			req.responseType = 'document';
-		} catch(e) {
-			return true;
+				try {
+					req.responseType = 'document';
+				} catch(e) {
+					return true;
+				}
+			}
 		}
 
 		return false;
@@ -829,7 +830,7 @@ if (typeof console !== 'undefined') {
 			return false;
 		}
 	})();
-	global.SYSTEM_FEATURE_ES5					= !!(SYSTEM_FEATURE_ES3 && SYSTEM_FEATURE_ES5_STRICT_MODE && SYSYEM_FEATURE_ES5_XHR && SYSTEM_FEATURE_ES5_JSON && SYSTEM_FEATURE_ES5_SYNTAX && SYSTEM_FEATURE_ES5_UNDEFINED && SYSTEM_FEATURE_ES5_ARRAY && SYSTEM_FEATURE_ES5_DATE && SYSTEM_FEATURE_ES5_FUNCTION && SYSTEM_FEATURE_ES5_OBJECT && SYSTEM_FEATURE_ES5_STRING);
+	global.SYSTEM_FEATURE_ES5					= !!(SYSTEM_FEATURE_ES3 && SYSTEM_FEATURE_ES5_STRICT_MODE && SYSTEM_FEATURE_ES5_XHR && SYSTEM_FEATURE_ES5_JSON && SYSTEM_FEATURE_ES5_SYNTAX && SYSTEM_FEATURE_ES5_UNDEFINED && SYSTEM_FEATURE_ES5_ARRAY && SYSTEM_FEATURE_ES5_DATE && SYSTEM_FEATURE_ES5_FUNCTION && SYSTEM_FEATURE_ES5_OBJECT && SYSTEM_FEATURE_ES5_STRING);
 
 	// noinspection JSUnresolvedVariable
 	global.SYSTEM_FEATURE_ES6_NUMBER			= !!(Number.isFinite && Number.isInteger && Number.isSafeInteger && Number.isNaN && Number.parseInt && Number.parseFloat && Number.isInteger(Number.MAX_SAFE_INTEGER) && Number.isInteger(Number.MIN_SAFE_INTEGER) && Number.isFinite(Number.EPSILON));
@@ -1164,8 +1165,8 @@ if (typeof console !== 'undefined') {
 			Feature: 'SYSTEM_FEATURE_ES5_STRICT_MODE',
 			Value: SYSTEM_FEATURE_ES5_STRICT_MODE ? 'TRUE' : 'FALSE'
 		} , {
-			Feature: 'SYSYEM_FEATURE_ES5_XHR',
-			Value: SYSYEM_FEATURE_ES5_XHR ? 'TRUE' : 'FALSE'
+			Feature: 'SYSTEM_FEATURE_ES5_XHR',
+			Value: SYSTEM_FEATURE_ES5_XHR ? 'TRUE' : 'FALSE'
 		} , {
 			Feature: 'SYSTEM_FEATURE_ES5_JSON',
 			Value: SYSTEM_FEATURE_ES5_JSON ? 'TRUE' : 'FALSE'
