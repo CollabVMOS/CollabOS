@@ -193,6 +193,7 @@
 						src: $(this).data('link')
 					});
 				} else {
+					// noinspection JSRedundantSwitchStatement
 					switch ($(this).data('name')) {
 						case 'Webamp Classic':
 							// noinspection JSUnresolvedFunction
@@ -370,6 +371,7 @@
 				cmd: 'next'
 			}],
 			select: function(e, ui) {
+				// noinspection JSRedundantSwitchStatement
 				switch (ui.cmd) {
 					case 'close':
 						// noinspection JSValidateTypes

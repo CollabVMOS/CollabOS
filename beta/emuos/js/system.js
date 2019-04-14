@@ -1,12 +1,62 @@
 // region Polyfills
 
+// region Console
+
+// IE 11.345.17134.0
+if (typeof console !== 'undefined') {
+	if (!console.table) {
+		console.table = function(arr) {
+			var i, obj, keys, arr_len = arr.length;
+
+			for (i = 0; i < arr_len; i++) {
+				obj = arr[i];
+				keys = Object.keys(obj);
+				console.log(obj[keys[0]] + ': ' + obj[keys[1]]);
+			}
+		};
+	}
+} else {
+	if (typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document) {
+		// Browser
+		// noinspection JSValidateTypes
+		console = {
+			log: function() {},
+			table: function() {}
+		};
+	} else if (typeof postMessage !== 'undefined') {
+		// Worker
+		// Safari 5.1.7 (7534.57.2)
+		// noinspection JSValidateTypes
+		console = {
+			log: function (str) {
+				//noinspection JSCheckFunctionSignatures
+				postMessage(str);
+			},
+			table: function (arr) {
+				var i, obj, keys, arr_len = arr.length;
+
+				for (i = 0; i < arr_len; i++) {
+					obj = arr[i];
+					keys = Object.keys(obj);
+					console.log(obj[keys[0]] + ': ' + obj[keys[1]]);
+				}
+			}
+		};
+	}
+}
+
+// endregion
+
 if (!('head' in document)) {
+	console.log('document.head polyfill loaded!');
 	// noinspection JSValidateTypes
 	document.head = document.getElementsByTagName('head')[0];
 }
 
+// region String
 // IE 11.345.17134.0
 if (!String.prototype.startsWith) {
+	console.log('String.prototype.startsWith polyfill loaded!');
 	String.prototype.startsWith = function(search, pos) {
 		return this.substr(!pos || pos < 0 ? 0 : +pos, search.length) === search;
 	};
@@ -14,6 +64,7 @@ if (!String.prototype.startsWith) {
 
 // IE 11.345.17134.0
 if (!String.prototype.endsWith) {
+	console.log('String.prototype.endsWith polyfill loaded!');
 	String.prototype.endsWith = function(search, this_len) {
 		if (this_len === undefined || this_len > this.length) {
 			this_len = this.length;
@@ -25,6 +76,7 @@ if (!String.prototype.endsWith) {
 
 // IE 11.345.17134.0
 if (!String.prototype.repeat) {
+	console.log('String.prototype.repeat polyfill loaded!');
 	String.prototype.repeat = function(count) {
 		'use strict';
 
@@ -69,6 +121,7 @@ if (!String.prototype.repeat) {
 
 // IE 11.345.17134.0
 if (!String.prototype.padStart) {
+	console.log('String.prototype.padStart polyfill loaded!');
 	String.prototype.padStart = function padStart(targetLength, padString) {
 		targetLength = targetLength >> 0;
 		padString = String((typeof padString !== 'undefined' ? padString : ' '));
@@ -87,9 +140,12 @@ if (!String.prototype.padStart) {
 		}
 	};
 }
+// endregion
 
+// region Array
 // IE 11.345.17134.0
 if (!Array.from) {
+	console.log('Array.from polyfill loaded!');
 	Array.from = (function() {
 		var toStr = Object.prototype.toString;
 		var isCallable = function (fn) {
@@ -170,6 +226,7 @@ if (!Array.from) {
 
 // IE 11.345.17134.0
 if (!Array.prototype.fill) {
+	console.log('Array.prototype.fill polyfill loaded!');
 	Object.defineProperty(Array.prototype, 'fill', {
 		value: function(value) {
 
@@ -208,9 +265,12 @@ if (!Array.prototype.fill) {
 		}
 	});
 }
+// endregion
 
+// region Object
 // IE 7/8
 if (!Object.keys) {
+	console.log('Object.keys polyfill loaded!');
 	Object.keys = (function() {
 		'use strict';
 		var hasOwnProperty = Object.prototype.hasOwnProperty,
@@ -250,6 +310,7 @@ if (!Object.keys) {
 		};
 	}());
 }
+// endregion
 
 // region Typed Array
 
@@ -490,51 +551,6 @@ if (typeof Float64Array !== 'undefined') {
 
 // endregion
 
-// IE 11.345.17134.0
-if (typeof console !== 'undefined') {
-	if (!console.table) {
-		console.table = function(arr) {
-			var i, obj, keys, arr_len = arr.length;
-
-			for (i = 0; i < arr_len; i++) {
-				obj = arr[i];
-				keys = Object.keys(obj);
-				console.log(obj[keys[0]] + ': ' + obj[keys[1]]);
-			}
-		};
-	}
-} else {
-	if (typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document) {
-		// Browser
-		// noinspection JSValidateTypes
-		console = {
-			log: function() {
-			},
-			table: function() {
-			}
-		};
-	} else if (typeof postMessage !== 'undefined') {
-		// Worker
-		// Safari 5.1.7 (7534.57.2)
-		// noinspection JSValidateTypes
-		console = {
-			log: function (str) {
-				//noinspection JSCheckFunctionSignatures
-				postMessage(str);
-			},
-			table: function (arr) {
-				var i, obj, keys, arr_len = arr.length;
-
-				for (i = 0; i < arr_len; i++) {
-					obj = arr[i];
-					keys = Object.keys(obj);
-					console.log(obj[keys[0]] + ': ' + obj[keys[1]]);
-				}
-			}
-		};
-	}
-}
-
 // endregion
 
 // noinspection ThisExpressionReferencesGlobalObjectJS
@@ -542,52 +558,53 @@ if (typeof console !== 'undefined') {
 	// region System
 
 	// noinspection JSUnusedLocalSymbols
-	var platform							= typeof navigator.platform !== 'undefined' ? navigator.platform : '';
-	var browser								= typeof navigator.userAgent !== 'undefined' ? navigator.userAgent : '';
-	var version								= typeof navigator.appVersion !== 'undefined' ? navigator.appVersion : '';
-	var vendor								= typeof navigator.vendor !== 'undefined' ? navigator.vendor : '';
+	var platform								= typeof navigator.platform !== 'undefined' ? navigator.platform : '';
+	var browser									= typeof navigator.userAgent !== 'undefined' ? navigator.userAgent : '';
+	var version									= typeof navigator.appVersion !== 'undefined' ? navigator.appVersion : '';
+	var vendor									= typeof navigator.vendor !== 'undefined' ? navigator.vendor : '';
 	// noinspection JSUnresolvedVariable,JSUnusedLocalSymbols
-	var oscpu								= typeof navigator.oscpu !== 'undefined' ? navigator.oscpu : '';
+	var oscpu									= typeof navigator.oscpu !== 'undefined' ? navigator.oscpu : '';
 
-	// global.console.log(browser);
-	// global.console.log(navigator);
+	global.isEdgeHTML							= browser.indexOf('Edge') !== -1;
+	global.isEdgeBlink							= browser.indexOf('Edg/') !== -1;
+	global.isEdge								= global.isEdgeHTML || global.isEdgeBlink;
+	global.isIE									= !global.isEdge && (browser.indexOf('MSIE') !== -1 || browser.indexOf('Trident') !== -1);
+	global.isNetscape							= browser.indexOf('Navigator') !== -1;
+	global.isKMeleon							= browser.indexOf('K-Meleon') !== -1;
+	global.isPaleMoon							= browser.indexOf('PaleMoon') !== -1;
+	global.isFirefox							= !global.isNetscape && !global.isPaleMoon && browser.indexOf('Firefox') !== -1;
+	global.isChrome								= browser.indexOf('Chrome') !== -1 || vendor === 'Google Inc.';
+	global.isChromium							= global.isChrome && !global.google;
+	global.isVivaldi							= browser.indexOf('Vivaldi') !== -1;
+	global.isOperaPresto						= browser.indexOf('Opera') !== -1;
+	global.isOperaBlink							= browser.indexOf('OPR') !== -1;
+	global.isOpera								= global.isOperaPresto || global.isOperaBlink;
+	global.isSafari								= browser.indexOf('Safari') !== -1 || vendor === 'Apple Computer, Inc.';
+	global.isOther								= !(global.isIE && global.isEdge && global.isFirefox && global.isChrome && global.isOpera && global.isSafari);
 
-	global.isEdge							= browser.indexOf('Edge') !== -1;
-	global.isIE								= !global.isEdge && (browser.indexOf('MSIE') !== -1 || browser.indexOf('Trident') !== -1);
-	global.isNetscape						= browser.indexOf('Navigator') !== -1;
-	global.isKMeleon						= browser.indexOf('K-Meleon') !== -1;
-	global.isPaleMoon						= browser.indexOf('PaleMoon') !== -1;
-	global.isFirefox						= !global.isNetscape && !global.isPaleMoon && browser.indexOf('Firefox') !== -1;
-	global.isChrome							= browser.indexOf('Chrome') !== -1 || vendor === 'Google Inc.';
-	global.isOperaPresto					= browser.indexOf('Opera') !== -1;
-	global.isOperaBlink						= browser.indexOf('OPR') !== -1;
-	global.isOpera							= global.isOperaPresto || global.isOperaBlink;
-	global.isSafari							= browser.indexOf('Safari') !== -1 || vendor === 'Apple Computer, Inc.';
-	global.isOther							= !(global.isSafari && global.isEdge && global.isIE && global.isChrome && global.isOpera);
+	global.isWindows							= version.indexOf('Win') !== -1;
+	global.isMacOS								= version.indexOf('Mac') !== -1;
+	global.isUNIX								= version.indexOf('X11') !== -1;
+	global.isLinux								= version.indexOf('Linux') !== -1;
 
-	global.isWindows						= version.indexOf('Win') !== -1;
-	global.isMacOS							= version.indexOf('Mac') !== -1;
-	global.isUNIX							= version.indexOf('X11') !== -1;
-	global.isLinux							= version.indexOf('Linux') !== -1;
+	global.is64									= browser.indexOf('WOW64') !== -1 || browser.indexOf('Win64') !== -1 || browser.indexOf('amd64') !== -1 || browser.indexOf('x86_64') !== -1;
+	global.is32									= !global.is64 ? (browser.indexOf('WOW32') !== -1 || browser.indexOf('Win32') !== -1 || browser.indexOf('i386') !== -1 || browser.indexOf('i686') !== -1) : true;
 
-	global.is64								= (browser.indexOf('WOW64') !== -1 || browser.indexOf('Win64') !== -1 || browser.indexOf('amd64') !== -1 || browser.indexOf('x86_64')) !== -1;
-	global.is32								= !global.is64 ? (browser.indexOf('WOW32') !== -1 || browser.indexOf('Win32') !== -1 || browser.indexOf('i386') !== -1 || browser.indexOf('i686') !== -1) : true;
+	global.isMobile								= browser.indexOf('Mobi') !== -1;
+	global.isDesktop							= !global.isMobile;
 
-	global.isMobile							= browser.indexOf('Mobi') !== -1;
-	global.isDesktop						= !global.isMobile;
+	global.isBrowser							= !!(typeof global === 'object' && typeof navigator === 'object' && document);
+	global.isWorker								= typeof importScripts === 'function' && typeof postMessage === 'function' && !global.isBrowser;
+	global.isNode								= typeof process === 'object' && typeof require === 'function' && !global.isBrowser && !global.isWorker;
+	global.isShell								= !(global.isBrowser && global.isWorker && global.isNode);
 
-	global.isBrowser						= !!(typeof global === 'object' && typeof navigator === 'object' && document);
-	global.isWorker							= typeof importScripts === 'function' && typeof postMessage === 'function' && !global.isBrowser;
-	global.isNode							= typeof process === 'object' && typeof require === 'function' && !global.isBrowser && !global.isWorker;
-	global.isShell							= !(global.isBrowser && global.isWorker && global.isNode);
-
-	var audio								= document.createElement('audio');
-	var canvas2D							= document.createElement('canvas');
-	var context2D							= typeof canvas2D !== 'undefined' ? (typeof canvas2D.getContext === 'function' ? canvas2D.getContext('2d') : false) : false;
-	var canvasWEBGL							= null;
-	var	contextWEBGL						= false;
-	var canvasWEBGL2						= null;
-	var	contextWEBGL2						= false;
+	var audio									= document.createElement('audio');
+	var canvas2D								= document.createElement('canvas');
+	var context2D								= typeof canvas2D !== 'undefined' ? (typeof canvas2D.getContext === 'function' ? canvas2D.getContext('2d') : false) : false;
+	var canvasWEBGL								= null;
+	var	contextWEBGL							= false;
+	var canvasWEBGL2							= null;
+	var	contextWEBGL2							= false;
 
 	if (context2D) {
 		try {
@@ -758,7 +775,7 @@ if (typeof console !== 'undefined') {
 	global.SYSTEM_FEATURE_ES5_XHR				= 'XMLHttpRequest' in global && 'prototype' in global.XMLHttpRequest && 'addEventListener' in global.XMLHttpRequest.prototype;
 	global.SYSTEM_FEATURE_ES5_JSON				= 'JSON' in global && 'parse' in JSON && 'stringify' in JSON;
 	global.SYSTEM_FEATURE_ES5_SYNTAX			= (function() {
-		var value, obj, stringAccess, getter, setter, reservedWords, zeroWidthChars;
+		var value, obj, stringAccess, getter, setter, reservedWords;//, zeroWidthChars;
 
 		try {
 			stringAccess = eval('"foobar"[3] === "b"');
@@ -769,9 +786,9 @@ if (typeof console !== 'undefined') {
 			eval('obj = ({ if: 1 })');
 			// noinspection JSUnusedAssignment
 			reservedWords = obj['if'] === 1;
-			zeroWidthChars = eval('_\u200c\u200d = true');
+			// zeroWidthChars = eval('_\u200c\u200d = true');
 
-			return stringAccess && getter && setter && reservedWords && zeroWidthChars;
+			return stringAccess && getter && setter && reservedWords; //&& zeroWidthChars;
 		} catch (e) {
 			return false;
 		}
@@ -940,7 +957,7 @@ if (typeof console !== 'undefined') {
 	})();
 
 	global.SYSTEM_INFO_ENVIRONMENT				= global.isBrowser ? 'Browser' : (global.isWorker ? 'Worker' : (global.isNode ? 'Node' : 'Shell'));
-	global.SYSTEM_INFO_BROWSER					= global.isEdge ? 'Microsoft Edge' : (global.isIE ? 'Microsoft Internet Explorer' : (global.isNetscape ? 'Netscape Navigator' : (global.isKMeleon ? 'K-Meleon' : (global.isPaleMoon ? 'PaleMoon' : (global.isFirefox ? 'Mozilla Firefox' : (global.isOpera ? 'Opera' : (global.isChrome ? 'Google Chrome' : (global.isSafari ? 'Apple Safari' : undefined))))))));
+	global.SYSTEM_INFO_BROWSER					= global.isEdge ? 'Microsoft Edge' : (global.isIE ? 'Microsoft Internet Explorer' : (global.isNetscape ? 'Netscape Navigator' : (global.isKMeleon ? 'K-Meleon' : (global.isPaleMoon ? 'PaleMoon' : (global.isFirefox ? 'Mozilla Firefox' : (global.isOpera ? 'Opera' : (global.isVivaldi ? 'Vivaldi' : (global.isChromium ? 'Chromium' : (global.isChrome ? 'Google Chrome' : (global.isSafari ? 'Apple Safari' : undefined))))))))));
 	global.SYSTEM_INFO_BROWSER_VERSION			= (function() {
 		var offset, version = undefined;
 
@@ -953,6 +970,9 @@ if (typeof console !== 'undefined') {
 				version = browser.substring(offset + 8);
 			}
 		} else if ((offset = browser.indexOf('OPR')) !== -1) {
+			// noinspection JSValidateTypes
+			version = browser.substring(offset + 4);
+		} else if ((offset = browser.indexOf('Edg/')) !== -1) {
 			// noinspection JSValidateTypes
 			version = browser.substring(offset + 4);
 		} else if ((offset = browser.indexOf('Edge')) !== -1) {
@@ -969,6 +989,9 @@ if (typeof console !== 'undefined') {
 				// noinspection JSValidateTypes
 				version = browser.substring(offset + 3);
 			}
+		} else if ((offset = browser.indexOf('Vivaldi')) !== -1) {
+			// noinspection JSValidateTypes
+			version = browser.substring(offset + 8);
 		} else if ((offset = browser.indexOf('Chrome')) !== -1) {
 			// noinspection JSValidateTypes
 			version = browser.substring(offset + 7);
@@ -1286,7 +1309,7 @@ if (typeof console !== 'undefined') {
 		}];
 
 		//Microsoft Edge <= 18.17763 (64-bit) cannot list more than 50 items in a table
-		if (isEdge) {
+		if (isEdgeHTML) {
 			var chunks = function(array, size) {
 				var results = [];
 
