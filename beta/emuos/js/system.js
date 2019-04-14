@@ -571,14 +571,14 @@ if (typeof console !== 'undefined') {
 	global.isLinux							= version.indexOf('Linux') !== -1;
 
 	global.is64								= (browser.indexOf('WOW64') !== -1 || browser.indexOf('Win64') !== -1 || browser.indexOf('amd64') !== -1 || browser.indexOf('x86_64')) !== -1;
-	global.is32								= !global.is64 ? ((browser.indexOf('WOW32') !== -1 || browser.indexOf('Win32') !== -1 || browser.indexOf('i386') !== -1 || browser.indexOf('i686')) !== -1) : true;
+	global.is32								= !global.is64 ? (browser.indexOf('WOW32') !== -1 || browser.indexOf('Win32') !== -1 || browser.indexOf('i386') !== -1 || browser.indexOf('i686') !== -1) : true;
 
 	global.isMobile							= browser.indexOf('Mobi') !== -1;
 	global.isDesktop						= !global.isMobile;
 
-	global.isBrowser						= !!(typeof window === 'object' && typeof navigator === 'object' && window.document);
+	global.isBrowser						= !!(typeof global === 'object' && typeof navigator === 'object' && document);
 	global.isWorker							= typeof importScripts === 'function' && typeof postMessage === 'function' && !global.isBrowser;
-	global.isNode							= typeof process === "object" && typeof require === "function" && !global.isBrowser && !global.isWorker;
+	global.isNode							= typeof process === 'object' && typeof require === 'function' && !global.isBrowser && !global.isWorker;
 	global.isShell							= !(global.isBrowser && global.isWorker && global.isNode);
 
 	var audio								= document.createElement('audio');
@@ -646,6 +646,14 @@ if (typeof console !== 'undefined') {
 	// noinspection JSUnresolvedVariable
 	global.SYSTEM_FEATURE_PERFORMANCE			= !!global.performance ? true : !!global.webkitPerformance || !!global.mozPerformance || !!global.msPerformance || !!global.oPerformance;
 	global.SYSTEM_FEATURE_TIMERS				= SYSTEM_FEATURE_ANIMATION_FRAME && SYSTEM_FEATURE_PERFORMANCE;
+
+	global.SYSTEM_FEATURE_CUSTOM_ELEMENTS		= 'customElements' in global || 'registerElement' in document;
+	// noinspection JSUnresolvedVariable
+	global.SYSTEM_FEATURE_SHADOW_DOM			= 'attachShadow' in document.createElement('div') ? true : 'createShadowRoot' in document.createElement('div') || 'webkitCreateShadowRoot' in document.createElement('div');
+	global.SYSTEM_FEATURE_TEMPLATES				= 'content' in document.createElement('template');
+	global.SYSTEM_FEATURE_IMPORTS				= 'import' in document.createElement('link');
+	global.SYSTEM_FEATURE_WEBCOMPONENTS			= SYSTEM_FEATURE_CUSTOM_ELEMENTS && SYSTEM_FEATURE_SHADOW_DOM && SYSTEM_FEATURE_TEMPLATES && SYSTEM_FEATURE_IMPORTS;
+
 	global.SYSTEM_FEATURE_SVG					= !!(document.createElementNS && document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect);
 	global.SYSTEM_FEATURE_CANVAS				= !!(context2D && context2D instanceof CanvasRenderingContext2D);
 	global.SYSTEM_FEATURE_WEBGL					= !!(contextWEBGL && contextWEBGL instanceof WebGLRenderingContext);
@@ -662,17 +670,7 @@ if (typeof console !== 'undefined') {
 		}
 	})();
 	// noinspection JSUnusedGlobalSymbols
-	global.SYSTEM_FEATURE_WEBAUDIO				= (function() {
-		try {
-			// noinspection JSUnresolvedVariable
-			var context = AudioContext || webkitAudioContext || mozAudioContext || oAudioContext || msAudioContext;
-			new context();
-
-			return true;
-		} catch(e) {
-			return false;
-		}
-	})();
+	global.SYSTEM_FEATURE_WEBAUDIO				= 'AudioContext' in global ? true : 'webkitAudioContext' in global || 'mozAudioContext' in global || 'oAudioContext' in global || 'msAudioContext' in global;
 	// noinspection JSUnresolvedVariable
 	global.SYSTEM_FEATURE_WEBMIDI				= !!navigator.requestMIDIAccess;
 	// noinspection JSUnresolvedVariable
@@ -706,13 +704,19 @@ if (typeof console !== 'undefined') {
 	global.SYSTEM_FEATURE_SESSION_STORAGE		= (function() {
 		var mod = 'test';
 
-		try {
-			sessionStorage.setItem(mod, mod);
-			sessionStorage.removeItem(mod);
-			return true;
-		} catch (e) {
-			return false;
+		if (typeof sessionStorage !== 'undefined') {
+			if (typeof sessionStorage.setItem === 'function' && typeof sessionStorage.removeItem === 'function') {
+				try {
+					sessionStorage.setItem(mod, mod);
+					sessionStorage.removeItem(mod);
+					return true;
+				} catch (e) {
+					return false;
+				}
+			}
 		}
+
+		return false;
 	})();
 	global.SYSTEM_FEATURE_LOCAL_STORAGE			= (function() {
 		var mod = 'test';
@@ -751,23 +755,7 @@ if (typeof console !== 'undefined') {
 	global.SYSTEM_FEATURE_ES3					= SYSTEM_FEATURE_ES3_BASE64;
 
 	global.SYSTEM_FEATURE_ES5_STRICT_MODE		= (function() {'use strict'; return !this; })();
-	global.SYSTEM_FEATURE_ES5_XHR				= (function() {
-		if (typeof global.XMLHttpRequest === 'function') {
-			var req = new global.XMLHttpRequest();
-
-			if (typeof req.open === 'function') {
-				req.open('GET', global.location.href, false);
-
-				try {
-					req.responseType = 'document';
-				} catch(e) {
-					return true;
-				}
-			}
-		}
-
-		return false;
-	})();
+	global.SYSTEM_FEATURE_ES5_XHR				= 'XMLHttpRequest' in global && 'prototype' in global.XMLHttpRequest && 'addEventListener' in global.XMLHttpRequest.prototype;
 	global.SYSTEM_FEATURE_ES5_JSON				= 'JSON' in global && 'parse' in JSON && 'stringify' in JSON;
 	global.SYSTEM_FEATURE_ES5_SYNTAX			= (function() {
 		var value, obj, stringAccess, getter, setter, reservedWords, zeroWidthChars;
@@ -877,7 +865,17 @@ if (typeof console !== 'undefined') {
 			return typeof resolve === 'function';
 		}());
 	})();
-	global.SYSTEM_FEATURE_ES6					= !!(SYSTEM_FEATURE_ES5 && SYSTEM_FEATURE_ES6_NUMBER && SYSTEM_FEATURE_ES6_MATH && SYSTEM_FEATURE_ES6_ARRAY && SYSTEM_FEATURE_ES6_FUNCTION && SYSTEM_FEATURE_ES6_OBJECT && SYSTEM_FEATURE_ES6_CLASS && SYSTEM_FEATURE_ES6_STRING && SYSTEM_FEATURE_ES6_COLLECTIONS && SYSTEM_FEATURE_ES6_GENERATORS && SYSTEM_FEATURE_ES6_PROMISES);
+	global.SYSTEM_FEATURE_ES6_STATIC_MODULES	= (function() {
+		try {
+			new Function('import("")');
+			return true;
+		} catch (err) {
+			return false;
+		}
+	})();
+	global.SYSTEM_FEATURE_ES6_DYNAMIC_MODULES	= 'noModule' in document.createElement('script');
+	global.SYSTEM_FEATURE_ES6_MODULES			= SYSTEM_FEATURE_ES6_STATIC_MODULES && SYSTEM_FEATURE_ES6_DYNAMIC_MODULES;
+	global.SYSTEM_FEATURE_ES6					= SYSTEM_FEATURE_ES5 && SYSTEM_FEATURE_ES6_NUMBER && SYSTEM_FEATURE_ES6_MATH && SYSTEM_FEATURE_ES6_ARRAY && SYSTEM_FEATURE_ES6_FUNCTION && SYSTEM_FEATURE_ES6_OBJECT && SYSTEM_FEATURE_ES6_CLASS && SYSTEM_FEATURE_ES6_STRING && SYSTEM_FEATURE_ES6_COLLECTIONS && SYSTEM_FEATURE_ES6_GENERATORS && SYSTEM_FEATURE_ES6_PROMISES && (SYSTEM_FEATURE_ES6_STATIC_MODULES || SYSTEM_FEATURE_ES6_DYNAMIC_MODULES);
 
 	global.SYSTEM_INFO_OS						= global.isWindows ? 'Windows' : (global.isLinux ? 'Linux' : (global.isUNIX ? 'UNIX' : (global.isMacOS ? 'Mac OS' : undefined)));
 	global.SYSTEM_INFO_OS_VERSION				= (function() {
@@ -1055,80 +1053,8 @@ if (typeof console !== 'undefined') {
 
 	// region Functions
 
-	// Poor's man requirejs :)
-	if (!global.importScripts) {
-		global.importScripts = function (url, callback) {
-			if (url) {
-				// noinspection JSUnresolvedFunction
-				if (!url.startsWith('js/')) {
-					url = 'js/' + url;
-				}
-
-				// noinspection JSUnresolvedFunction
-				if (!url.endsWith('.js')) {
-					url += '.js';
-				}
-
-				var script = document.createElement('script');
-				script.type = 'text/javascript';
-				script.src = url;
-
-				callback = typeof callback === 'function' ? callback : function() {};
-
-				if (script.addEventListener) {
-					script.addEventListener('load', callback, false);
-				} else if (script.readyState) {
-					script.onreadystatechange = function() {
-						if (script.readyState === 'loaded') {
-							callback();
-						}
-					};
-				}
-
-				// Polyfilled
-				document.head.appendChild(script);
-			}
-		}
-	}
-
-	// Poor's man requirejs :)
-	if (!global.importStyles) {
-		global.importStyles = function(url, callback) {
-			if (url) {
-				// noinspection JSUnresolvedFunction
-				if (!url.startsWith('css/')) {
-					url = 'css/' + url;
-				}
-
-				// noinspection JSUnresolvedFunction
-				if (!url.endsWith('.css')) {
-					url += '.css';
-				}
-
-				var style = document.createElement('link');
-				style.type = 'text/css';
-				style.rel = 'stylesheet';
-				style.href = url;
-
-				callback = typeof callback === 'function' ? callback : function() {};
-
-				if (style.addEventListener) {
-					style.addEventListener('load', callback, false);
-				} else if (style.readyState) {
-					style.onreadystatechange = function() {
-						if (style.readyState === 'loaded') {
-							callback();
-						}
-					};
-				}
-
-				// Polyfilled
-				document.head.appendChild(style);
-			}
-		}
-	}
-
-	function dumpSystem() {
+	// noinspection JSUnusedLocalSymbols
+	var dumpSystem = function() {
 		var dump = [{
 			Feature: 'SYSTEM_INFO_OS',
 			Value: SYSTEM_INFO_OS + ' ' + SYSTEM_INFO_OS_VERSION
@@ -1229,6 +1155,15 @@ if (typeof console !== 'undefined') {
 			Feature: 'SYSTEM_FEATURE_ES6_CLASS',
 			Value: SYSTEM_FEATURE_ES6_CLASS ? 'TRUE' : 'FALSE'
 		} , {
+			Feature: 'SYSTEM_FEATURE_ES6_STATIC_MODULES',
+			Value: SYSTEM_FEATURE_ES6_STATIC_MODULES ? 'TRUE' : 'FALSE'
+		} , {
+			Feature: 'SYSTEM_FEATURE_ES6_DYNAMIC_MODULES',
+			Value: SYSTEM_FEATURE_ES6_DYNAMIC_MODULES ? 'TRUE' : 'FALSE'
+		} , {
+			Feature: 'SYSTEM_FEATURE_ES6_MODULES',
+			Value: SYSTEM_FEATURE_ES6_MODULES ? 'TRUE' : 'FALSE'
+		} , {
 			Feature: 'SYSTEM_FEATURE_ES6',
 			Value: SYSTEM_FEATURE_ES6 ? 'TRUE' : 'FALSE'
 		} , {
@@ -1261,6 +1196,21 @@ if (typeof console !== 'undefined') {
 		} , {
 			Feature: 'SYSTEM_FEATURE_TIMERS',
 			Value: SYSTEM_FEATURE_TIMERS ? 'TRUE' : 'FALSE'
+		} , {
+			Feature: 'SYSTEM_FEATURE_CUSTOM_ELEMENTS',
+			Value: SYSTEM_FEATURE_CUSTOM_ELEMENTS ? 'TRUE' : 'FALSE'
+		} , {
+			Feature: 'SYSTEM_FEATURE_SHADOW_DOM',
+			Value: SYSTEM_FEATURE_SHADOW_DOM ? 'TRUE' : 'FALSE'
+		} , {
+			Feature: 'SYSTEM_FEATURE_TEMPLATES',
+			Value: SYSTEM_FEATURE_TEMPLATES ? 'TRUE' : 'FALSE'
+		} , {
+			Feature: 'SYSTEM_FEATURE_IMPORTS',
+			Value: SYSTEM_FEATURE_IMPORTS ? 'TRUE' : 'FALSE'
+		} , {
+			Feature: 'SYSTEM_FEATURE_WEBCOMPONENTS',
+			Value: SYSTEM_FEATURE_WEBCOMPONENTS ? 'TRUE' : 'FALSE'
 		} , {
 			Feature: 'SYSTEM_FEATURE_CANVAS',
 			Value: SYSTEM_FEATURE_CANVAS ? 'TRUE' : 'FALSE'
@@ -1335,7 +1285,7 @@ if (typeof console !== 'undefined') {
 			Value: SYSTEM_FEATURE_BATTERY ? 'TRUE' : 'FALSE'
 		}];
 
-		//Microsoft Edge 17.17134 (64-bit) cannot list more than 50 items in a table
+		//Microsoft Edge <= 18.17763 (64-bit) cannot list more than 50 items in a table
 		if (isEdge) {
 			var chunks = function(array, size) {
 				var results = [];
@@ -1355,11 +1305,9 @@ if (typeof console !== 'undefined') {
 		} else {
 			global.console.table(dump);
 		}
-	}
+	}();
 
 	// endregion
-
-	dumpSystem();
 
 	onerror = function(message, url, lineNumber) {
 		global.console.log('Error: ' + message + ' in ' + url + ' at line ' + lineNumber);
