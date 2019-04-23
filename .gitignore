@@ -2,6 +2,7 @@
 
 # compiled output
 /dist
+/beta/emuos2/dist
 /tmp
 /out-tsc
 # Only exists if Bazel was run
@@ -32,6 +33,7 @@ speed-measure-plugin.json
 .history/*
 
 # misc
+/.cache
 /.sass-cache
 /connect.lock
 /coverage

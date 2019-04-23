@@ -565,19 +565,22 @@ if (typeof Float64Array !== 'undefined') {
 	// noinspection JSUnresolvedVariable,JSUnusedLocalSymbols
 	var oscpu									= typeof navigator.oscpu !== 'undefined' ? navigator.oscpu : '';
 
-	global.isEdgeHTML							= browser.indexOf('Edge') !== -1;
-	global.isEdgeBlink							= browser.indexOf('Edg/') !== -1;
-	global.isEdge								= global.isEdgeHTML || global.isEdgeBlink;
+	global.console.log(browser);
+
 	global.isIE									= !global.isEdge && (browser.indexOf('MSIE') !== -1 || browser.indexOf('Trident') !== -1);
 	global.isNetscape							= browser.indexOf('Navigator') !== -1;
 	global.isKMeleon							= browser.indexOf('K-Meleon') !== -1;
 	global.isPaleMoon							= browser.indexOf('PaleMoon') !== -1;
 	global.isFirefox							= !global.isNetscape && !global.isPaleMoon && browser.indexOf('Firefox') !== -1;
 	global.isChrome								= browser.indexOf('Chrome') !== -1 || vendor === 'Google Inc.';
+	global.isEdgeHTML							= browser.indexOf('Edge') !== -1;
+	global.isEdgeBlink							= global.isChrome && browser.indexOf('Edg/') !== -1;
+	global.isEdge								= global.isEdgeHTML || global.isEdgeBlink;
 	global.isChromium							= global.isChrome && !global.google;
-	global.isVivaldi							= browser.indexOf('Vivaldi') !== -1;
+	global.isVivaldi							= global.isChrome && browser.indexOf('Vivaldi') !== -1;
+	global.isElectron							= global.isChrome && browser.indexOf('Electron') !== -1;
 	global.isOperaPresto						= browser.indexOf('Opera') !== -1;
-	global.isOperaBlink							= browser.indexOf('OPR') !== -1;
+	global.isOperaBlink							= global.isChrome && browser.indexOf('OPR') !== -1;
 	global.isOpera								= global.isOperaPresto || global.isOperaBlink;
 	global.isSafari								= browser.indexOf('Safari') !== -1 || vendor === 'Apple Computer, Inc.';
 	global.isOther								= !(global.isIE && global.isEdge && global.isFirefox && global.isChrome && global.isOpera && global.isSafari);
@@ -957,7 +960,7 @@ if (typeof Float64Array !== 'undefined') {
 	})();
 
 	global.SYSTEM_INFO_ENVIRONMENT				= global.isBrowser ? 'Browser' : (global.isWorker ? 'Worker' : (global.isNode ? 'Node' : 'Shell'));
-	global.SYSTEM_INFO_BROWSER					= global.isEdge ? 'Microsoft Edge' : (global.isIE ? 'Microsoft Internet Explorer' : (global.isNetscape ? 'Netscape Navigator' : (global.isKMeleon ? 'K-Meleon' : (global.isPaleMoon ? 'PaleMoon' : (global.isFirefox ? 'Mozilla Firefox' : (global.isOpera ? 'Opera' : (global.isVivaldi ? 'Vivaldi' : (global.isChromium ? 'Chromium' : (global.isChrome ? 'Google Chrome' : (global.isSafari ? 'Apple Safari' : undefined))))))))));
+	global.SYSTEM_INFO_BROWSER					= global.isEdge ? 'Microsoft Edge' : (global.isIE ? 'Microsoft Internet Explorer' : (global.isNetscape ? 'Netscape Navigator' : (global.isKMeleon ? 'K-Meleon' : (global.isPaleMoon ? 'PaleMoon' : (global.isFirefox ? 'Mozilla Firefox' : (global.isOpera ? 'Opera' : (global.isElectron ? 'Electron' : (global.isVivaldi ? 'Vivaldi' : (global.isChromium ? 'Chromium' : (global.isChrome ? 'Google Chrome' : (global.isSafari ? 'Apple Safari' : undefined)))))))))));
 	global.SYSTEM_INFO_BROWSER_VERSION			= (function() {
 		var offset, version = undefined;
 
@@ -1443,11 +1446,9 @@ if (typeof Float64Array !== 'undefined') {
 		} else {
 			global.console.table(dump);
 		}
-	}
+	}();
 
 	// endregion
-
-	dumpSystem();
 
 	importScripts($('#system').getAttribute('data-main'));
 
