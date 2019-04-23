@@ -1,5 +1,6 @@
 /*! (c) Andrea Giammarchi - ISC */
-var templateLiteral = (function () {'use strict';
+var templateLiteral = (function () {
+	'use strict';
 	var UA, RAW = 'raw';
 	var isNoOp = typeof document !== 'object';
 	var templateLiteral = function (tl) {
@@ -33,8 +34,10 @@ var templateLiteral = (function () {'use strict';
 		return TL(tl);
 	};
 	return TL;
+
 	function TL(tl) {
 		return isNoOp ? tl : templateLiteral(tl);
 	}
 }());
+
 export default templateLiteral;

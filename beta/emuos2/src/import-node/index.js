@@ -40,4 +40,5 @@ var importNode = (function (
 	'createTextNode',
 	'importNode'
 ));
+
 export default importNode;

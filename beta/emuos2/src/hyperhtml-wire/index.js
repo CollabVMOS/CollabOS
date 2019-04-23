@@ -45,4 +45,5 @@ var Wire = (function (slice, proto) {
 	}
 
 }([].slice));
+
 export default Wire;

@@ -1,7 +1,8 @@
 /*! (c) Andrea Giammarchi - ISC */
 var self = this || /* istanbul ignore next */ {};
-try { self.Map = Map; }
-catch (Map) {
+try {
+	self.Map = Map;
+} catch (Map) {
 	self.Map = function Map() {
 		var i = 0;
 		var k = [];
@@ -26,10 +27,12 @@ catch (Map) {
 				return this;
 			}
 		};
+
 		function contains(v) {
 			i = k.indexOf(v);
 			return -1 < i;
 		}
 	};
 }
+
 export default self.Map;

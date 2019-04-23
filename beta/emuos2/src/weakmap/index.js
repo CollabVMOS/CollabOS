@@ -1,10 +1,12 @@
 /*! (c) Andrea Giammarchi - ISC */
 var self = this || /* istanbul ignore next */ {};
-try { self.WeakMap = WeakMap; }
-catch (WeakMap) {
+try {
+	self.WeakMap = WeakMap;
+} catch (WeakMap) {
 	// this could be better but 90% of the time
 	// it's everything developers need as fallback
-	self.WeakMap = (function (id, Object) {'use strict';
+	self.WeakMap = (function (id, Object) {
+		'use strict';
 		var dP = Object.defineProperty;
 		var hOP = Object.hasOwnProperty;
 		var proto = WeakMap.prototype;
@@ -22,14 +24,17 @@ catch (WeakMap) {
 			return this;
 		};
 		return WeakMap;
+
 		function WeakMap(iterable) {
 			dP(this, '_', {value: '_@ungap/weakmap' + id++});
 			if (iterable)
 				iterable.forEach(add, this);
 		}
+
 		function add(pair) {
 			this.set(pair[0], pair[1]);
 		}
 	}(Math.random(), Object));
 }
+
 export default self.WeakMap;

@@ -1,14 +1,17 @@
 /*! (c) Andrea Giammarchi - ISC */
-var hyperStyle = (function (){'use strict';
+var hyperStyle = (function () {
+	'use strict';
 	// from https://github.com/developit/preact/blob/33fc697ac11762a1cb6e71e9847670d047af7ce5/src/varants.js
 	var IS_NON_DIMENSIONAL = /acit|ex(?:s|g|n|p|$)|rph|ows|mnc|ntw|ine[ch]|zoo|^ord/i;
 	var hyphen = /([^A-Z])([A-Z]+)/g;
 	return function hyperStyle(node, original) {
 		return 'ownerSVGElement' in node ? svg(node, original) : update(node.style, false);
 	};
+
 	function ized($0, $1, $2) {
 		return $1 + '-' + $2.toLowerCase();
 	}
+
 	function svg(node, original) {
 		var style;
 		if (original)
@@ -21,12 +24,14 @@ var hyperStyle = (function (){'use strict';
 		node.setAttributeNode(style);
 		return update(style, true);
 	}
+
 	function toStyle(object) {
 		var key, css = [];
 		for (key in object)
 			css.push(key.replace(hyphen, ized), ':', object[key], ';');
 		return css.join('');
 	}
+
 	function update(style, isSVG) {
 		var oldType, oldValue;
 		return function (newValue) {
@@ -82,4 +87,5 @@ var hyperStyle = (function (){'use strict';
 		};
 	}
 }());
+
 export default hyperStyle;
