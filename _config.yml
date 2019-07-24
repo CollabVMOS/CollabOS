@@ -36,3 +36,4 @@ gems:
   - jekyll-mentions
   - jekyll-sitemap
   - jemoji
+theme: jekyll-theme-cayman
