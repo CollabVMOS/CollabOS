@@ -72,10 +72,16 @@
 			} , {
 				name: 'Webamp Classic',
 				icon: 'vfat/apps/webamp-classic/favicon.ico'
-				} , {
+			} , {
 				name: 'Original Website',
-				icon: 'vfat/apps/discord/favicon.png',
-				link: 'emupedia.net/beta/emuos'
+				icon: 'vfat/apps/emuos/favicon.png',
+				link: 'https://emupedia.net/beta/emuos/'
+			} , {
+				name: 'xpOS Browser',
+				icon: 'vfat/apps/browser/favicon.png',
+				link: 'https://google.com'
+				
+				
 			}]
 		};
 
