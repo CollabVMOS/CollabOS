@@ -72,6 +72,10 @@
 			} , {
 				name: 'Webamp Classic',
 				icon: 'vfat/apps/webamp-classic/favicon.ico'
+				} , {
+				name: 'Original Website',
+				icon: 'vfat/apps/discord/favicon.png',
+				link: 'emupedia.net/beta/emuos'
 			}]
 		};
 
