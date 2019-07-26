@@ -79,7 +79,7 @@
 			} , {
 				name: 'xpOS Browser',
 				icon: 'vfat/apps/browser/favicon.png',
-				link: 'https://google.com'
+				link: 'https://duckduckgo.com'
 				
 				
 			}]
