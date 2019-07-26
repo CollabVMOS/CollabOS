@@ -36,7 +36,7 @@
 			icons: [{
 				name: 'Discord',
 				icon: 'vfat/apps/discord/favicon.png',
-				link: 'https://disweb.deploys.io/channels/603709038236008544/604105908309721098/'
+				link: 'https://cl3.widgetbot.io/channels/510149138491506688/510149138491506690/'
 			} , {
 				name: 'Windows 93',
 				icon: 'vfat/apps/windows93/favicon.ico',
@@ -77,11 +77,7 @@
 				name: 'Webamp Classic',
 				icon: 'vfat/apps/webamp-classic/favicon.ico'
 			} , {
-				name: 'Original Website',
-				icon: 'vfat/apps/emuos/favicon.png',
-				link: 'https://emupedia.net/beta/emuos/'
-			} , {
-				name: 'xpOS Browser',
+				name: 'Browser',
 				icon: 'vfat/apps/browser/favicon.png',
 				link: 'https://ecosia.org'
 				
