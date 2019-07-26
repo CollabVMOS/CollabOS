@@ -79,7 +79,7 @@
 			} , {
 				name: 'xpOS Browser',
 				icon: 'vfat/apps/browser/favicon.png',
-				link: 'https://duckduckgo.com'
+				link: 'https://ecosia.org'
 				
 				
 			}]
