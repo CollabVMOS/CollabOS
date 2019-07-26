@@ -44,7 +44,11 @@
 			} , {
 				name: 'Visual Studio Code',
 				icon: 'vfat/apps/monaco-editor/favicon.ico',
-				link: 'https://gitpod.io#https://github.com/Emupedia/emupedia.github.io'
+				link: 'https://gitpod.io'
+			} , {
+				name: 'Glitch Editor',
+				icon: 'vfat/apps/monaco-editor/favicon.ico',
+				link: 'https://glitch.com'
 			} , {
 				name: 'Wing 2.0',
 				icon: 'vfat/games/wing/favicon.ico',
